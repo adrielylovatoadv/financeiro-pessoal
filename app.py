@@ -999,23 +999,19 @@ with tab_p:
 
             # ── Modo normal ──
             else:
+                _parc_txt  = f"{a}/{t} parcelas"
+                _falta_txt = f"Falta {fmt(val_rest)}" if restam > 0 else "✓ Quitada"
+                _falta_cor = "#e53e3e" if restam > 0 else "#276749"
                 st.markdown(f"""
-<div class='card-sm'>
-  <div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'>
-    <div>
-      <div style='font-weight:700;color:#2D3748;font-size:14px;'>{desc}</div>
-      <div style='font-size:11px;color:#a0aec0;'>{info['cat']}</div>
-    </div>
-    <div style='text-align:right;'>
-      <div style='font-weight:700;color:#2D3748;'>{fmt(info['valor'])}/mês</div>
-      <div style='font-size:11px;color:#e53e3e;'>Restam {restam}x = {fmt(val_rest)}</div>
-    </div>
+<div style='background:white;border-radius:12px;padding:13px 16px;
+     margin-bottom:2px;box-shadow:0 1px 4px rgba(0,0,0,0.06);'>
+  <div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;'>
+    <div style='font-weight:700;color:#2D3748;font-size:15px;'>📦 {desc}</div>
+    <div style='font-size:12px;color:#718096;'>{_parc_txt}</div>
   </div>
-  <div style='display:flex;align-items:center;gap:8px;'>
-    <div class='prog-bg' style='flex:1;'>
-      <div class='prog-fill' style='width:{pct:.0f}%;'></div>
-    </div>
-    <div style='font-size:11px;color:#718096;white-space:nowrap;'>{a}/{t}</div>
+  <div style='display:flex;justify-content:space-between;align-items:center;margin-top:5px;flex-wrap:wrap;gap:4px;'>
+    <div style='font-size:13px;color:#718096;'>{info['cat']} &nbsp;·&nbsp; {fmt(info['valor'])}/mês</div>
+    <div style='font-size:13px;font-weight:700;color:{_falta_cor};'>{_falta_txt}</div>
   </div>
 </div>""", unsafe_allow_html=True)
 
