@@ -1,5 +1,6 @@
 """
-Controle Financeiro Pessoal – Adriely Lovato
+Meu Dinheiro – Controle Financeiro Pessoal
+Adriely Lovato · 2025
 """
 
 import streamlit as st
@@ -9,67 +10,66 @@ import base64
 import uuid
 import urllib.request
 import urllib.error
-from datetime import date as _date, datetime
+from datetime import date as _date
 from pathlib import Path
-import streamlit.components.v1 as _components
+import streamlit.components.v1 as _comp
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PAGE CONFIG
-# ─────────────────────────────────────────────────────────────────────────────
+# ─── Config ──────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Financeiro Pessoal – Adriely",
-    page_icon="💰",
-    layout="wide",
+    page_title="Meu Dinheiro",
+    page_icon="🌿",
+    layout="centered",
     initial_sidebar_state="collapsed",
 )
 
-# ─── PWA icon ────────────────────────────────────────────────────────────────
-_components.html("""<script>
+# ─── PWA ─────────────────────────────────────────────────────────────────────
+_comp.html("""<script>
 (function(){
-  var d = window.parent.document;
-  if (d.querySelector('link[rel="apple-touch-icon"]')) return;
-  var cv = document.createElement('canvas');
-  cv.width = cv.height = 192;
-  var ctx = cv.getContext('2d');
-  ctx.fillStyle = '#7b1d2e';
-  if (ctx.roundRect){ctx.roundRect(0,0,192,192,38);}else{ctx.rect(0,0,192,192);}
+  var d=window.parent.document;
+  if(d.querySelector('link[rel="apple-touch-icon"]'))return;
+  var cv=document.createElement('canvas'); cv.width=cv.height=192;
+  var ctx=cv.getContext('2d');
+  ctx.fillStyle='#2D6A4F';
+  if(ctx.roundRect){ctx.roundRect(0,0,192,192,48);}else{ctx.rect(0,0,192,192);}
   ctx.fill();
-  ctx.fillStyle = '#C4973A';
-  ctx.font = 'bold 80px Georgia, serif';
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText('AL', 96, 104);
-  var png = cv.toDataURL('image/png');
-  var lnk = d.createElement('link');
-  lnk.rel = 'apple-touch-icon'; lnk.sizes = '192x192'; lnk.href = png;
+  ctx.fillStyle='#fff'; ctx.font='bold 100px serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('🌿',96,100);
+  var png=cv.toDataURL('image/png');
+  var lnk=d.createElement('link');
+  lnk.rel='apple-touch-icon'; lnk.sizes='192x192'; lnk.href=png;
   d.head.appendChild(lnk);
-  var manifest = {name:'Financeiro Pessoal',short_name:'Pessoal',
-    display:'standalone',background_color:'#7b1d2e',theme_color:'#7b1d2e',
+  var manifest={name:'Meu Dinheiro',short_name:'Dinheiro',
+    display:'standalone',background_color:'#F7F3EE',theme_color:'#2D6A4F',
     icons:[{src:png,sizes:'192x192',type:'image/png'}]};
-  var blob = new Blob([JSON.stringify(manifest)],{type:'application/json'});
-  var ml = d.createElement('link'); ml.rel='manifest'; ml.href=URL.createObjectURL(blob);
-  d.head.appendChild(ml);
+  var blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+  var ml=d.createElement('link'); ml.rel='manifest';
+  ml.href=URL.createObjectURL(blob); d.head.appendChild(ml);
 })();
 </script>""", height=0)
 
 # ─── Login ────────────────────────────────────────────────────────────────────
-_senha_ok = st.secrets.get("SENHA", "adriely2025") if hasattr(st, "secrets") else "adriely2025"
+_senha_ok = st.secrets.get("SENHA","adriely2025") if hasattr(st,"secrets") else "adriely2025"
 if "logado" not in st.session_state:
     st.session_state["logado"] = False
 if not st.session_state["logado"]:
-    st.markdown("""<div style="max-width:360px;margin:80px auto;background:white;border-radius:14px;
-        padding:36px;box-shadow:0 4px 24px rgba(0,0,0,0.12);text-align:center;">
-        <h2 style="color:#7b1d2e;margin-bottom:6px;">💰 Financeiro Pessoal</h2>
-        <p style="color:#718096;margin-bottom:24px;">Adriely Lovato</p>
-    </div>""", unsafe_allow_html=True)
-    with st.form("login_pessoal"):
-        st.markdown("### 🔐 Acesso")
-        _s = st.text_input("Senha", type="password")
-        if st.form_submit_button("Entrar", use_container_width=True):
-            if _s == _senha_ok:
+    st.markdown("""
+<div style="max-width:340px;margin:60px auto 0;text-align:center;">
+  <div style="font-size:52px;margin-bottom:8px;">🌿</div>
+  <h2 style="color:#2D6A4F;font-weight:700;margin:0;">Meu Dinheiro</h2>
+  <p style="color:#718096;margin:6px 0 28px;font-size:14px;">Controle pessoal com propósito</p>
+</div>""", unsafe_allow_html=True)
+    with st.form("login_p"):
+        senha_i = st.text_input("Senha", type="password", placeholder="Digite sua senha")
+        if st.form_submit_button("Entrar →", use_container_width=True):
+            if senha_i == _senha_ok:
                 st.session_state["logado"] = True
                 st.rerun()
             else:
                 st.error("Senha incorreta.")
+    st.markdown("""<p style="text-align:center;color:#a0aec0;font-size:12px;margin-top:40px;">
+    "Porque onde estiver o seu tesouro, aí estará também o seu coração." — Mt 6:21</p>""",
+    unsafe_allow_html=True)
     st.stop()
 
 # ─── CSS ─────────────────────────────────────────────────────────────────────
@@ -77,66 +77,153 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 html,body,[class*="css"]{font-family:'Inter',sans-serif;}
+.stApp { background:#F7F3EE !important; }
+.block-container { padding-top:1rem !important; max-width:640px; }
 
+/* Cards */
 .card {
-    background:white; border-radius:12px; padding:18px 22px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:12px; text-align:center;
+    background:white; border-radius:16px;
+    padding:20px; margin-bottom:14px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.07);
 }
-.card-val { font-size:26px; font-weight:700; margin:4px 0; }
-.card-lbl { font-size:11px; color:#718096; text-transform:uppercase; letter-spacing:0.5px; }
-.card-sub { font-size:12px; color:#a0aec0; margin-top:2px; }
-
-.row-item {
-    background:#f7fafc; border-radius:8px; padding:10px 14px;
-    margin:4px 0; border-left:4px solid #e2e8f0;
+.card-sm {
+    background:white; border-radius:12px;
+    padding:14px 18px; margin-bottom:10px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.06);
 }
-.row-pago   { border-left-color:#38a169; }
-.row-pend   { border-left-color:#e53e3e; }
 
-.tag-pago    { display:inline-block; padding:2px 8px; border-radius:20px;
-               font-size:10px; font-weight:700; background:#c6f6d5; color:#276749; }
-.tag-pendente{ display:inline-block; padding:2px 8px; border-radius:20px;
-               font-size:10px; font-weight:700; background:#fed7d7; color:#9b2c2c; }
-.tag-parcela { display:inline-block; padding:2px 8px; border-radius:20px;
-               font-size:10px; font-weight:600; background:#e9d8fd; color:#553c9a; }
-
-.secao-titulo {
-    font-size:13px; font-weight:700; color:#4a5568;
-    text-transform:uppercase; letter-spacing:1px;
-    border-bottom:2px solid #e2e8f0; padding-bottom:6px; margin:16px 0 10px 0;
+/* Versículo */
+.versiculo {
+    background:linear-gradient(135deg,#2D6A4F 0%,#40916C 100%);
+    border-radius:16px; padding:22px 24px; margin-bottom:14px;
+    color:white;
 }
-.barra-bg { background:#e2e8f0; border-radius:4px; height:10px; overflow:hidden; }
-.barra-fill { height:100%; border-radius:4px;
-              background:linear-gradient(90deg,#7b1d2e,#C4973A); }
+.versiculo-texto {
+    font-size:15px; line-height:1.65; font-style:italic;
+    color:rgba(255,255,255,0.95); margin:0 0 10px 0;
+}
+.versiculo-ref {
+    font-size:11px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:rgba(255,255,255,0.65);
+}
 
-.stButton>button { border-radius:8px; font-weight:500; }
-.stButton>button:hover { opacity:0.9; }
+/* Dica */
+.dica {
+    background:#FFFBF0; border:1px solid #F6D860;
+    border-left:4px solid #D4A853;
+    border-radius:12px; padding:14px 18px; margin-bottom:14px;
+}
+.dica-titulo { font-size:11px; font-weight:700; color:#B7791F;
+    text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.dica-texto { font-size:13px; color:#744210; line-height:1.5; margin:0; }
+
+/* Valores */
+.valor-grande { font-size:32px; font-weight:700; color:#1A202C; line-height:1; }
+.valor-label  { font-size:11px; color:#A0AEC0; text-transform:uppercase;
+    letter-spacing:1px; margin-bottom:4px; }
+.valor-verde  { color:#276749; }
+.valor-vermelho { color:#9B2C2C; }
+.valor-azul   { color:#2B6CB0; }
+
+/* Tags */
+.tag-pago    { background:#C6F6D5; color:#276749; border-radius:20px;
+    padding:3px 10px; font-size:11px; font-weight:700; }
+.tag-pend    { background:#FED7D7; color:#9B2C2C; border-radius:20px;
+    padding:3px 10px; font-size:11px; font-weight:700; }
+.tag-cat     { background:#EBF4FF; color:#2B6CB0; border-radius:20px;
+    padding:3px 8px; font-size:11px; font-weight:600; }
+
+/* Barra de progresso */
+.prog-bg   { background:#EDF2F7; border-radius:8px; height:8px; overflow:hidden; }
+.prog-fill { background:linear-gradient(90deg,#2D6A4F,#D4A853);
+    height:100%; border-radius:8px; }
+
+/* Linha de item */
+.item-row {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:12px 0; border-bottom:1px solid #F0EDE8;
+}
+.item-row:last-child { border-bottom:none; }
+.item-desc { font-weight:600; color:#2D3748; font-size:14px; }
+.item-sub  { font-size:11px; color:#A0AEC0; margin-top:2px; }
+.item-val  { font-weight:700; font-size:15px; color:#2D3748; white-space:nowrap; }
+
+/* Seção título */
+.sec { font-size:12px; font-weight:700; color:#A0AEC0;
+    text-transform:uppercase; letter-spacing:1.5px; margin:20px 0 10px; }
+
+/* Botões */
+.stButton>button {
+    border-radius:12px !important; font-weight:600 !important;
+    border:none !important; padding:10px 20px !important;
+}
+div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+    background:#ECDDC8; border-radius:12px; padding:4px; gap:2px;
+}
+div[data-testid="stTabs"] [data-baseweb="tab"] {
+    border-radius:10px; font-size:13px; font-weight:500; color:#744210;
+}
+div[data-testid="stTabs"] [aria-selected="true"] {
+    background:white !important; color:#2D6A4F !important;
+    font-weight:700 !important; box-shadow:0 1px 4px rgba(0,0,0,0.1) !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
-# ─── Constantes ───────────────────────────────────────────────────────────────
-CATEGORIAS = [
-    "💳 Cartão", "🏦 Banco/Financ.", "🏠 Moradia",
-    "🚗 Carro", "💊 Saúde", "💪 Academia/Esporte",
-    "⚖️ Profissional", "📱 Serviços", "🛡️ Seguro",
-    "🛒 Compras", "💄 Beleza", "🎾 Lazer", "🎯 Outros",
+# ─── Conteúdo: versículos e dicas ────────────────────────────────────────────
+VERSICULO = [
+    ("Provérbios 21:20", "Na casa do sábio há precioso tesouro e azeite, mas o homem tolo os desperdiça."),
+    ("Provérbios 13:11", "A riqueza obtida às pressas diminui, mas quem a ajunta pouco a pouco a aumenta."),
+    ("Lucas 14:28", "Pois qual de vós, desejando edificar uma torre, não se assenta primeiro e calcula a despesa?"),
+    ("Provérbios 22:7", "O rico domina os pobres, e o devedor é servo do credor."),
+    ("Provérbios 3:9-10", "Honra ao Senhor com os teus bens e com as primícias de toda a tua renda, e os teus celeiros se encherão com abundância."),
+    ("Filipenses 4:19", "O meu Deus, segundo as suas riquezas em glória, suprirá todas as vossas necessidades em Cristo Jesus."),
+    ("Mateus 6:33", "Buscai, pois, em primeiro lugar o reino de Deus e a sua justiça, e todas essas coisas vos serão acrescentadas."),
+    ("Eclesiastes 5:10", "Quem ama o dinheiro nunca se satisfaz com dinheiro; nem quem ama a abundância colhe renda dele."),
+    ("Provérbios 6:6-8", "Vai ter com a formiga, ó preguiçoso, considera os seus caminhos e sê sábio. Ela, sem ter guia, nem inspetor, nem senhor, prepara no verão o seu pão."),
+    ("I Timóteo 6:6", "A piedade com contentamento é grande ganho. Porque nada trouxemos para este mundo e é certo que nada podemos levar."),
+    ("Provérbios 27:12", "O avisado vê o mal e esconde-se, mas os simples passam e sofrem a pena."),
+    ("Deuteronômio 8:18", "Lembra-te do Senhor teu Deus, porque é ele que te dá força para adquirir riqueza."),
+    ("Provérbios 22:26-27", "Não sejas dos que batem as palmas, nem dos que são fiadores de dívidas. Se não tens com que pagar, por que hão de tomar a tua cama debaixo de ti?"),
+    ("Eclesiastes 11:2", "Reparte com sete, e ainda com oito, pois não sabes que mal poderá vir sobre a terra."),
+    ("Provérbios 28:20", "O homem fiel terá muitas bênçãos, mas o que se apressa a ficar rico não ficará impune."),
+    ("Mateus 6:21", "Porque onde estiver o seu tesouro, aí estará também o seu coração."),
+    ("Provérbios 13:22", "O homem bom deixa herança para os filhos dos seus filhos."),
+    ("I Coríntios 16:2", "No primeiro dia da semana, cada um de vós ponha de parte, segundo a sua prosperidade, para não se fazerem coletas quando eu for."),
+    ("Romanos 13:8", "A ninguém devais coisa alguma, exceto o amor mutuo."),
+    ("Provérbios 11:24", "Há quem distribua, e ainda lhe aumenta a riqueza; e há quem retenha mais do que é justo, mas empobrecerá."),
 ]
 
-CAT_CORES = {
-    "💳 Cartão":         "#9f7aea",
-    "🏦 Banco/Financ.":  "#4299e1",
-    "🏠 Moradia":        "#ed8936",
-    "🚗 Carro":          "#48bb78",
-    "💊 Saúde":          "#f56565",
-    "💪 Academia/Esporte":"#38b2ac",
-    "⚖️ Profissional":   "#667eea",
-    "📱 Serviços":       "#ecc94b",
-    "🛡️ Seguro":         "#a0aec0",
-    "🛒 Compras":        "#fc8181",
-    "💄 Beleza":         "#f687b3",
-    "🎾 Lazer":          "#68d391",
-    "🎯 Outros":         "#cbd5e0",
-}
+DICAS = [
+    ("Regra dos 50/30/20", "Destine 50% para necessidades, 30% para desejos e 20% para poupança e dívidas. Automatize essa separação todo mês."),
+    ("Pague-se primeiro", "Assim que receber, transfira o valor de poupança antes de pagar qualquer outra conta. Guarde o que sobrar."),
+    ("Fundo de emergência", "Construa uma reserva de 3 a 6 meses de despesas. Ela evita que imprevistos virem dívidas."),
+    ("Cuidado com parcelamentos", "Parcelas pequenas parecem inofensivas, mas somadas podem comprometer boa parte da renda. Revise os seus compromissos futuros."),
+    ("Liste antes de comprar", "Antes de ir ao mercado ou abrir um app de compras, escreva o que precisa. Evita impulso."),
+    ("Espere 48h", "Sentiu vontade de comprar algo não essencial? Espere 48 horas. Muitas compras por impulso não sobrevivem à reflexão."),
+    ("Negocie com fornecedores", "Planos de telefone, internet, seguros — renegocie anualmente. Empresas têm ofertas especiais para quem pede."),
+    ("Revise assinaturas", "Confira todos os débitos automáticos. Serviços esquecidos são dinheiro desperdiçado todo mês."),
+    ("Cozinhe mais em casa", "Reduzir pedidos de delivery em 2x por semana pode economizar centenas de reais por mês."),
+    ("Compare preços", "Antes de comprar qualquer item acima de R$ 100, compare em pelo menos 3 lugares. Minutos de pesquisa economizam muito."),
+    ("Anote todo gasto", "Pequenos gastos invisíveis (cafés, lanches, aplicativos) somam mais do que parece. Registre tudo."),
+    ("Defina uma meta visual", "Quer fazer uma viagem? Reformar um cômodo? Cole uma imagem que inspire. Objetivos concretos motivam mais."),
+    ("Dívidas: bola de neve ou avalanche?", "Na bola de neve, quite a menor primeiro. Na avalanche, a de maior juros. Escolha uma estratégia e seja consistente."),
+    ("Evite o mínimo do cartão", "Pagar o mínimo da fatura é o caminho mais caro. Se não consegue pagar o total, revise os gastos urgentemente."),
+    ("Um ano depois...", "Antes de uma compra grande, pergunte-se: em um ano, vou me arrepender de ter comprado? Ou de não ter poupado esse dinheiro?"),
+]
+
+def conteudo_do_dia():
+    hoje = _date.today()
+    idx_v = hoje.timetuple().tm_yday % len(VERSICULO)
+    idx_d = (hoje.timetuple().tm_yday + 7) % len(DICAS)
+    return VERSICULO[idx_v], DICAS[idx_d]
+
+# ─── Constantes ───────────────────────────────────────────────────────────────
+CATEGORIAS = [
+    "💳 Cartão","🏦 Banco/Financ.","🏠 Moradia","🚗 Carro",
+    "💊 Saúde","💪 Academia/Esporte","⚖️ Profissional","📱 Serviços",
+    "🛡️ Seguro","🛒 Compras","💄 Beleza","🎾 Lazer","🎯 Outros",
+]
 
 MESES_PT = {
     "01":"Janeiro","02":"Fevereiro","03":"Março","04":"Abril",
@@ -149,7 +236,8 @@ def nome_mes(key):
     return f"{MESES_PT[m]}/{y}"
 
 def fmt(v):
-    return f"R$ {v:,.2f}".replace(",","X").replace(".",",").replace("X",".")
+    s = f"{v:,.2f}".replace(",","X").replace(".",",").replace("X",".")
+    return f"R$ {s}"
 
 # ─── Dados iniciais ───────────────────────────────────────────────────────────
 INITIAL_DATA = {
@@ -258,13 +346,13 @@ INITIAL_DATA = {
     ],
 }
 
-# ─── Storage / GitHub sync ────────────────────────────────────────────────────
-BASE_DIR   = Path(__file__).parent
-DATA_FILE  = BASE_DIR / "dados.json"
-GITHUB_TOKEN = (st.secrets.get("GITHUB_TOKEN","") if hasattr(st,"secrets") else "")
+# ─── Storage ──────────────────────────────────────────────────────────────────
+BASE_DIR  = Path(__file__).parent
+DATA_FILE = BASE_DIR / "dados.json"
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN","") if hasattr(st,"secrets") else ""
 GITHUB_REPO  = "adrielylovatoadv/financeiro-pessoal"
 GITHUB_FILE  = "dados.json"
-_GH_API      = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE}"
+_GH_API = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE}"
 
 def _gh_headers():
     return {"Authorization":f"token {GITHUB_TOKEN}",
@@ -283,10 +371,11 @@ def _gh_get():
 def _gh_put(data, sha):
     if not GITHUB_TOKEN: return
     try:
-        content = base64.b64encode(json.dumps(data,ensure_ascii=False,indent=2).encode()).decode()
+        content = base64.b64encode(
+            json.dumps(data,ensure_ascii=False,indent=2).encode()).decode()
         payload = json.dumps({"message":"atualiza dados","content":content,"sha":sha}).encode()
         req = urllib.request.Request(_GH_API,data=payload,headers=_gh_headers(),method="PUT")
-        urllib.request.urlopen(req, timeout=15)
+        urllib.request.urlopen(req,timeout=15)
     except: pass
 
 def load_data():
@@ -303,332 +392,266 @@ def save_data(data):
     DATA_FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2))
     _gh_put(data, st.session_state.get("gh_sha",""))
 
-# ─── Init ─────────────────────────────────────────────────────────────────────
 if "dados" not in st.session_state:
     st.session_state["dados"] = load_data()
     st.session_state.setdefault("gh_sha","")
 
 d = st.session_state["dados"]
 
-# ─── Header ───────────────────────────────────────────────────────────────────
-_lp = BASE_DIR / "logo.png"
-if _lp.exists():
-    with open(_lp,"rb") as _f:
-        _lb64 = base64.b64encode(_f.read()).decode()
-    st.markdown(f"""
-<div style='display:flex;align-items:center;gap:16px;
-    background:linear-gradient(135deg,#7b1d2e 0%,#9b2335 100%);
-    border-radius:12px;padding:18px 24px;margin-bottom:20px;color:white;'>
-  <img src='data:image/png;base64,{_lb64}' style='width:60px;border-radius:8px;
-       box-shadow:0 2px 10px rgba(0,0,0,0.35);flex-shrink:0;'>
-  <div>
-    <div style='font-size:9px;letter-spacing:3px;color:#fbd38d;font-weight:600;'>ADRIELY LOVATO</div>
-    <h1 style='margin:3px 0 2px;color:white;font-size:20px;'>💰 CONTROLE FINANCEIRO PESSOAL</h1>
-    <p style='margin:0;color:#fbd38d;font-size:12px;'>Gestão de gastos mensais · 2025</p>
-  </div>
-</div>""", unsafe_allow_html=True)
-
-# ─── Sidebar: seletor de mês ──────────────────────────────────────────────────
-meses_keys = sorted(d["meses"].keys())
+# ─── Cabeçalho ────────────────────────────────────────────────────────────────
+meses_keys  = sorted(d["meses"].keys())
 mes_labels  = [nome_mes(k) for k in meses_keys]
 
-with st.sidebar:
-    st.markdown("### 📅 Mês")
-    idx_atual = len(meses_keys) - 1  # padrão = último mês
-    idx_sel = st.selectbox("", mes_labels, index=idx_atual, label_visibility="collapsed")
-    mes_key = meses_keys[mes_labels.index(idx_sel)]
+col_t, col_s = st.columns([3, 2])
+col_t.markdown("### 🌿 Meu Dinheiro")
+mes_sel = col_s.selectbox("", mes_labels,
+    index=len(mes_labels)-1, label_visibility="collapsed")
+mes_key = meses_keys[mes_labels.index(mes_sel)]
 
-    st.markdown("---")
-    st.markdown("### ➕ Novo mês")
-    # Calcula próximo mês
-    uy, um = int(mes_key.split("-")[0]), int(mes_key.split("-")[1])
-    nm, ny = (um % 12) + 1, uy + (1 if um == 12 else 0)
-    prox_key = f"{ny}-{nm:02d}"
-    prox_nome = nome_mes(prox_key)
-    if prox_key not in d["meses"]:
-        if st.button(f"Criar {prox_nome}", use_container_width=True):
-            d["meses"][prox_key] = {
-                "lancamentos": [],
-                "fixas": [
-                    {"id": str(uuid.uuid4()), "descricao": t["descricao"],
-                     "valor": t["valor"], "categoria": t["categoria"], "pago": False}
-                    for t in d.get("template_fixas", [])
-                ],
-            }
-            save_data(d)
-            st.rerun()
-    else:
-        st.caption(f"✅ {prox_nome} já existe")
+# ─── Versículo + Dica do dia ──────────────────────────────────────────────────
+ver, dic = conteudo_do_dia()
+st.markdown(f"""
+<div class="versiculo">
+  <p class="versiculo-texto">"{ver[1]}"</p>
+  <div class="versiculo-ref">📖 {ver[0]}</div>
+</div>
+<div class="dica">
+  <div class="dica-titulo">💡 Dica · {dic[0]}</div>
+  <p class="dica-texto">{dic[1]}</p>
+</div>
+""", unsafe_allow_html=True)
 
-# ─── Dados do mês selecionado ─────────────────────────────────────────────────
-mes = d["meses"][mes_key]
-lanc  = mes.get("lancamentos", [])
-fixas = mes.get("fixas", [])
+# ─── Dados do mês ─────────────────────────────────────────────────────────────
+mes    = d["meses"][mes_key]
+lanc   = mes.get("lancamentos", [])
+fixas  = mes.get("fixas", [])
+todos  = lanc + fixas
 
-total_lanc  = sum(l["valor"] for l in lanc)
-total_fixas = sum(f["valor"] for f in fixas)
-total_geral = total_lanc + total_fixas
-total_pago  = sum(l["valor"] for l in lanc if l["pago"]) + sum(f["valor"] for f in fixas if f["pago"])
-total_pend  = total_geral - total_pago
+total  = sum(i["valor"] for i in todos)
+pago   = sum(i["valor"] for i in todos if i.get("pago"))
+pend   = total - pago
+
+# ─── Cards de resumo ──────────────────────────────────────────────────────────
+c1, c2, c3 = st.columns(3)
+c1.markdown(f"""<div class='card' style='text-align:center;'>
+  <div class='valor-label'>Total</div>
+  <div class='valor-grande'>{fmt(total)}</div>
+</div>""", unsafe_allow_html=True)
+c2.markdown(f"""<div class='card' style='text-align:center;'>
+  <div class='valor-label'>Pago</div>
+  <div class='valor-grande valor-verde'>{fmt(pago)}</div>
+</div>""", unsafe_allow_html=True)
+c3.markdown(f"""<div class='card' style='text-align:center;'>
+  <div class='valor-label'>A pagar</div>
+  <div class='valor-grande valor-vermelho'>{fmt(pend)}</div>
+</div>""", unsafe_allow_html=True)
 
 # ─── Abas ─────────────────────────────────────────────────────────────────────
-tab_res, tab_lanc, tab_fix, tab_parc, tab_add = st.tabs([
-    "📊 Resumo", "📋 Lançamentos", "🔁 Contas Fixas", "📅 Parcelas", "➕ Novo Gasto"
+tab_g, tab_f, tab_p, tab_add, tab_r = st.tabs([
+    "💸 Gastos", "🔁 Fixas", "📅 Parcelas", "➕ Novo", "📊 Resumo"
 ])
 
-# ════════════════════════════════════════════════════════════════════════════════
-# ABA: RESUMO
-# ════════════════════════════════════════════════════════════════════════════════
-with tab_res:
-    c1, c2, c3, c4 = st.columns(4)
-    c1.markdown(f"""<div class='card'>
-        <div class='card-lbl'>Total do mês</div>
-        <div class='card-val' style='color:#7b1d2e;'>{fmt(total_geral)}</div>
-    </div>""", unsafe_allow_html=True)
-    c2.markdown(f"""<div class='card'>
-        <div class='card-lbl'>Pago</div>
-        <div class='card-val' style='color:#38a169;'>{fmt(total_pago)}</div>
-    </div>""", unsafe_allow_html=True)
-    c3.markdown(f"""<div class='card'>
-        <div class='card-lbl'>A pagar</div>
-        <div class='card-val' style='color:#e53e3e;'>{fmt(total_pend)}</div>
-    </div>""", unsafe_allow_html=True)
-    c4.markdown(f"""<div class='card'>
-        <div class='card-lbl'>Fixas</div>
-        <div class='card-val' style='color:#4299e1;'>{fmt(total_fixas)}</div>
-        <div class='card-sub'>Variáveis: {fmt(total_lanc)}</div>
-    </div>""", unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    # Breakdown por categoria
-    cat_totais = {}
-    for item in lanc + fixas:
-        cat = item.get("categoria","🎯 Outros")
-        cat_totais[cat] = cat_totais.get(cat, 0) + item["valor"]
-    cat_totais = dict(sorted(cat_totais.items(), key=lambda x: x[1], reverse=True))
-
-    st.markdown("<div class='secao-titulo'>Gastos por categoria</div>", unsafe_allow_html=True)
-
-    for cat, val in cat_totais.items():
-        if val <= 0: continue
-        pct = val / total_geral * 100 if total_geral > 0 else 0
-        cor = CAT_CORES.get(cat, "#cbd5e0")
-        c_l, c_v, c_b = st.columns([3, 1.5, 4])
-        c_l.markdown(f"**{cat}**")
-        c_v.markdown(f"<div style='text-align:right;font-weight:600;color:{cor};'>{fmt(val)}</div>", unsafe_allow_html=True)
-        c_b.markdown(
-            f"<div class='barra-bg'><div class='barra-fill' style='width:{pct:.0f}%;background:{cor};'></div></div>",
-            unsafe_allow_html=True
-        )
-
-    st.markdown("---")
-
-    # Comparativo meses anteriores
-    if len(meses_keys) > 1:
-        st.markdown("<div class='secao-titulo'>Comparativo mensal</div>", unsafe_allow_html=True)
-        cols_hist = st.columns(min(len(meses_keys), 4))
-        for i, mk in enumerate(sorted(meses_keys)[-4:]):
-            ml = d["meses"][mk].get("lancamentos",[])
-            mf = d["meses"][mk].get("fixas",[])
-            mt = sum(x["valor"] for x in ml) + sum(x["valor"] for x in mf)
-            destaque = "7b1d2e" if mk == mes_key else "4a5568"
-            cols_hist[i].markdown(f"""<div class='card'>
-                <div class='card-lbl'>{nome_mes(mk)}</div>
-                <div class='card-val' style='font-size:18px;color:#{destaque};'>{fmt(mt)}</div>
-            </div>""", unsafe_allow_html=True)
-
-# ════════════════════════════════════════════════════════════════════════════════
-# ABA: LANÇAMENTOS
-# ════════════════════════════════════════════════════════════════════════════════
-with tab_lanc:
+# ═══════════════════════════════════════════════════════════════
+# GASTOS (lançamentos variáveis)
+# ═══════════════════════════════════════════════════════════════
+with tab_g:
     if not lanc:
-        st.info("Nenhum lançamento neste mês. Use a aba ➕ Novo Gasto.")
+        st.markdown("<div class='card' style='text-align:center;color:#a0aec0;padding:30px;'>"
+                    "Nenhum gasto registrado.<br>Use a aba <b>➕ Novo</b> para adicionar.</div>",
+                    unsafe_allow_html=True)
     else:
-        # Ordenar por dia
-        lanc_ord = sorted(lanc, key=lambda x: (x.get("data",0), x.get("descricao","")))
+        lanc_ord = sorted(lanc, key=lambda x: x.get("data", 0))
+        pend_lanc = [l for l in lanc_ord if not l.get("pago")]
+        pago_lanc = [l for l in lanc_ord if l.get("pago")]
 
-        # Cabeçalho
-        h1,h2,h3,h4,h5,h6 = st.columns([1,4,2,2,2,2])
-        for h,t in zip([h1,h2,h3,h4,h5,h6],["Dia","Descrição","Valor","Parcela","Status","Ação"]):
-            h.markdown(f"<div style='font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;'>{t}</div>", unsafe_allow_html=True)
-        st.markdown("<hr style='margin:4px 0 8px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+        def _render_lanc(items, collapsed=False):
+            rows_html = ""
+            for item in items:
+                parc = item.get("parcela","")
+                obs  = item.get("obs","")
+                sub  = " · ".join(filter(None, [
+                    f"Dia {int(item['data'])}" if item.get('data') else "",
+                    parc, obs
+                ]))
+                tag_class = "tag-pago" if item["pago"] else "tag-pend"
+                tag_txt   = "✓ pago" if item["pago"] else "pendente"
+                rows_html += f"""
+<div class='item-row'>
+  <div>
+    <div class='item-desc'>{item['descricao']}</div>
+    <div class='item-sub'>{sub}</div>
+  </div>
+  <div style='text-align:right;'>
+    <div class='item-val'>{fmt(item['valor'])}</div>
+    <span class='{tag_class}'>{tag_txt}</span>
+  </div>
+</div>"""
+            return f"<div class='card'>{rows_html}</div>"
 
-        for item in lanc_ord:
-            c1,c2,c3,c4,c5,c6 = st.columns([1,4,2,2,2,2])
-            c1.markdown(f"**{int(item.get('data',0)) if item.get('data') else '—'}**")
-            desc = item["descricao"]
-            obs  = item.get("obs","")
-            _obs_html = f'  <span style="color:#a0aec0;font-size:11px;">{obs}</span>' if obs else ''
-            c2.markdown(f"**{desc}**{_obs_html}", unsafe_allow_html=True)
-            c3.markdown(f"**{fmt(item['valor'])}**")
-            parc = item.get("parcela","")
-            c4.markdown(f"<span class='tag-parcela'>{parc}</span>" if parc else "—", unsafe_allow_html=True)
-            pago = item.get("pago", False)
-            c5.markdown(
-                f"<span class='tag-pago'>✓ pago</span>" if pago else "<span class='tag-pendente'>● pendente</span>",
-                unsafe_allow_html=True
-            )
-            btn_label = "✓ Pagar" if not pago else "↩ Desfazer"
-            if c6.button(btn_label, key=f"lbtn_{item['id']}", use_container_width=True):
-                item["pago"] = not pago
+        if pend_lanc:
+            st.markdown("<div class='sec'>● A pagar</div>", unsafe_allow_html=True)
+            st.markdown(_render_lanc(pend_lanc), unsafe_allow_html=True)
+            for item in pend_lanc:
+                if st.button(f"✓ Marcar pago: {item['descricao']} ({fmt(item['valor'])})",
+                             key=f"pg_{item['id']}", use_container_width=True):
+                    item["pago"] = True
+                    save_data(d)
+                    st.rerun()
+
+        if pago_lanc:
+            with st.expander(f"✓ Pagos ({len(pago_lanc)})"):
+                st.markdown(_render_lanc(pago_lanc), unsafe_allow_html=True)
+                for item in pago_lanc:
+                    if st.button(f"↩ Desfazer: {item['descricao']}",
+                                 key=f"dpg_{item['id']}", use_container_width=True):
+                        item["pago"] = False
+                        save_data(d)
+                        st.rerun()
+
+        with st.expander("🗑️ Excluir gasto"):
+            opcoes = {f"Dia {l.get('data','?')} – {l['descricao']} ({fmt(l['valor'])})": l["id"]
+                      for l in lanc_ord}
+            sel = st.selectbox("", list(opcoes.keys()), label_visibility="collapsed")
+            if st.button("Excluir", key="del_l", type="primary"):
+                mes["lancamentos"] = [l for l in lanc if l["id"] != opcoes[sel]]
                 save_data(d)
                 st.rerun()
 
-        st.markdown("---")
-        st.markdown(f"**Total lançamentos:** {fmt(total_lanc)}")
-
-        # Excluir lançamento
-        with st.expander("🗑️ Excluir lançamento"):
-            opcoes_del = {f"Dia {l.get('data','?')} – {l['descricao']} ({fmt(l['valor'])})": l["id"] for l in lanc_ord}
-            sel_del = st.selectbox("Selecione", list(opcoes_del.keys()), key="del_lanc")
-            if st.button("Excluir", key="btn_del_lanc", type="primary"):
-                mes["lancamentos"] = [l for l in lanc if l["id"] != opcoes_del[sel_del]]
-                save_data(d)
-                st.rerun()
-
-# ════════════════════════════════════════════════════════════════════════════════
-# ABA: CONTAS FIXAS
-# ════════════════════════════════════════════════════════════════════════════════
-with tab_fix:
+# ═══════════════════════════════════════════════════════════════
+# FIXAS
+# ═══════════════════════════════════════════════════════════════
+with tab_f:
     if not fixas:
         st.info("Nenhuma conta fixa neste mês.")
     else:
-        fixas_ord = sorted(fixas, key=lambda x: x.get("descricao",""))
+        fixas_ord = sorted(fixas, key=lambda x: x["descricao"])
+        pend_f = [f for f in fixas_ord if not f.get("pago")]
+        pago_f = [f for f in fixas_ord if f.get("pago")]
 
-        h1,h2,h3,h4,h5 = st.columns([4,2,2,2,2])
-        for h,t in zip([h1,h2,h3,h4,h5],["Descrição","Valor","Categoria","Status","Ação"]):
-            h.markdown(f"<div style='font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;'>{t}</div>", unsafe_allow_html=True)
-        st.markdown("<hr style='margin:4px 0 8px 0;border-color:#e2e8f0;'>", unsafe_allow_html=True)
+        def _render_fixas(items):
+            rows = ""
+            for item in items:
+                tag_class = "tag-pago" if item["pago"] else "tag-pend"
+                tag_txt   = "✓ pago" if item["pago"] else "pendente"
+                rows += f"""
+<div class='item-row'>
+  <div>
+    <div class='item-desc'>{item['descricao']}</div>
+    <div class='item-sub'>{item.get('categoria','')}</div>
+  </div>
+  <div style='text-align:right;'>
+    <div class='item-val'>{fmt(item['valor'])}</div>
+    <span class='{tag_class}'>{tag_txt}</span>
+  </div>
+</div>"""
+            return f"<div class='card'>{rows}</div>"
 
-        for item in fixas_ord:
-            c1,c2,c3,c4,c5 = st.columns([4,2,2,2,2])
-            c1.markdown(f"**{item['descricao']}**")
-            c2.markdown(f"**{fmt(item['valor'])}**")
-            c3.markdown(item.get("categoria",""))
-            pago = item.get("pago",False)
-            c4.markdown(
-                f"<span class='tag-pago'>✓ pago</span>" if pago else "<span class='tag-pendente'>● pendente</span>",
-                unsafe_allow_html=True
-            )
-            btn_label = "✓ Pagar" if not pago else "↩ Desfazer"
-            if c5.button(btn_label, key=f"fbtn_{item['id']}", use_container_width=True):
-                item["pago"] = not pago
-                save_data(d)
-                st.rerun()
+        tf = sum(i["valor"] for i in fixas)
+        pf = sum(i["valor"] for i in fixas if i["pago"])
+        st.markdown(f"<div class='card' style='text-align:center;'>"
+                    f"<div class='valor-label'>Total fixas</div>"
+                    f"<div class='valor-grande'>{fmt(tf)}</div>"
+                    f"<div style='font-size:12px;color:#a0aec0;margin-top:4px;'>"
+                    f"Pago: {fmt(pf)} · Pendente: {fmt(tf-pf)}</div></div>",
+                    unsafe_allow_html=True)
 
-        st.markdown("---")
-        pago_f = sum(f["valor"] for f in fixas if f["pago"])
-        pend_f = sum(f["valor"] for f in fixas if not f["pago"])
-        cf1, cf2, cf3 = st.columns(3)
-        cf1.metric("Total Fixas", fmt(total_fixas))
-        cf2.metric("Pagas", fmt(pago_f))
-        cf3.metric("Pendentes", fmt(pend_f))
+        if pend_f:
+            st.markdown("<div class='sec'>● A pagar</div>", unsafe_allow_html=True)
+            st.markdown(_render_fixas(pend_f), unsafe_allow_html=True)
+            for item in pend_f:
+                if st.button(f"✓ {item['descricao']} ({fmt(item['valor'])})",
+                             key=f"fpg_{item['id']}", use_container_width=True):
+                    item["pago"] = True
+                    save_data(d)
+                    st.rerun()
 
-    # ── Editar template de fixas ──────────────────────────────────────────────
-    with st.expander("⚙️ Editar modelo de contas fixas (template para novos meses)"):
-        st.caption("Essas são as contas que aparecem automaticamente ao criar um novo mês.")
-        template = d.get("template_fixas", [])
-        for i, t in enumerate(template):
-            tc1, tc2, tc3, tc4 = st.columns([4, 2, 3, 1])
-            nd = tc1.text_input("", t["descricao"], key=f"td_{i}", label_visibility="collapsed")
-            nv = tc2.number_input("", value=float(t["valor"]), min_value=0.0, step=0.01, key=f"tv_{i}", label_visibility="collapsed", format="%.2f")
-            nc = tc3.selectbox("", CATEGORIAS, index=CATEGORIAS.index(t["categoria"]) if t["categoria"] in CATEGORIAS else 0, key=f"tc_{i}", label_visibility="collapsed")
-            if tc4.button("🗑️", key=f"tdel_{i}"):
-                template.pop(i)
-                d["template_fixas"] = template
-                save_data(d)
-                st.rerun()
-            template[i] = {"descricao": nd, "valor": nv, "categoria": nc}
-        if st.button("💾 Salvar template", key="save_template"):
-            d["template_fixas"] = template
-            save_data(d)
-            st.success("Template salvo!")
-        if st.button("➕ Adicionar ao template", key="add_template"):
-            template.append({"descricao": "Nova conta", "valor": 0.0, "categoria": "🎯 Outros"})
-            d["template_fixas"] = template
-            save_data(d)
-            st.rerun()
+        if pago_f:
+            with st.expander(f"✓ Pagas ({len(pago_f)})"):
+                st.markdown(_render_fixas(pago_f), unsafe_allow_html=True)
+                for item in pago_f:
+                    if st.button(f"↩ Desfazer: {item['descricao']}",
+                                 key=f"fdpg_{item['id']}", use_container_width=True):
+                        item["pago"] = False
+                        save_data(d)
+                        st.rerun()
 
-# ════════════════════════════════════════════════════════════════════════════════
-# ABA: PARCELAS
-# ════════════════════════════════════════════════════════════════════════════════
-with tab_parc:
-    st.markdown("<div class='secao-titulo'>Parcelas ativas – todos os meses</div>", unsafe_allow_html=True)
-
-    # Coleta todos os itens parcelados de todos os meses
-    parcelas_vistas = {}  # descricao -> {total, atual, valor_mensal, ultima_parc}
+# ═══════════════════════════════════════════════════════════════
+# PARCELAS
+# ═══════════════════════════════════════════════════════════════
+with tab_p:
+    st.markdown("<div class='sec'>Parcelas ativas (todos os meses)</div>", unsafe_allow_html=True)
+    parcelas_map = {}
     for mk in sorted(d["meses"].keys()):
         for l in d["meses"][mk].get("lancamentos", []):
-            parc_str = l.get("parcela", "")
-            if not parc_str or "/" not in parc_str: continue
+            ps = l.get("parcela","")
+            if not ps or "/" not in ps: continue
             try:
-                atual_str, total_str = parc_str.strip().split("/")
-                atual = int("".join(c for c in atual_str if c.isdigit()))
-                total = int("".join(c for c in total_str if c.isdigit()))
+                a_s, t_s = ps.strip().split("/")
+                atual = int("".join(c for c in a_s if c.isdigit()))
+                total_p = int("".join(c for c in t_s if c.isdigit()))
             except: continue
             key = l["descricao"]
-            if key not in parcelas_vistas or atual > parcelas_vistas[key]["atual"]:
-                parcelas_vistas[key] = {
-                    "atual": atual, "total": total,
-                    "valor_mensal": l["valor"],
-                    "categoria": l.get("categoria",""),
-                    "ultimo_mes": mk,
+            if key not in parcelas_map or atual > parcelas_map[key]["atual"]:
+                parcelas_map[key] = {
+                    "atual":atual,"total":total_p,
+                    "valor":l["valor"],"cat":l.get("categoria",""),
                 }
 
-    if not parcelas_vistas:
-        st.info("Nenhuma parcela registrada.")
+    if not parcelas_map:
+        st.markdown("<div class='card' style='text-align:center;color:#a0aec0;padding:24px;'>"
+                    "Nenhuma parcela registrada.</div>", unsafe_allow_html=True)
     else:
-        for desc, info in sorted(parcelas_vistas.items()):
-            atual = info["atual"]
-            total = info["total"]
-            restam = total - atual
-            pct = atual / total * 100
-            valor_restante = restam * info["valor_mensal"]
+        for desc, info in sorted(parcelas_map.items()):
+            a, t = info["atual"], info["total"]
+            restam = t - a
+            pct = a / t * 100
+            val_rest = restam * info["valor"]
+            st.markdown(f"""
+<div class='card-sm'>
+  <div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'>
+    <div>
+      <div style='font-weight:700;color:#2D3748;font-size:14px;'>{desc}</div>
+      <div style='font-size:11px;color:#a0aec0;'>{info['cat']}</div>
+    </div>
+    <div style='text-align:right;'>
+      <div style='font-weight:700;color:#2D3748;'>{fmt(info['valor'])}/mês</div>
+      <div style='font-size:11px;color:#e53e3e;'>Restam {restam}x = {fmt(val_rest)}</div>
+    </div>
+  </div>
+  <div style='display:flex;align-items:center;gap:8px;'>
+    <div class='prog-bg' style='flex:1;'>
+      <div class='prog-fill' style='width:{pct:.0f}%;'></div>
+    </div>
+    <div style='font-size:11px;color:#718096;white-space:nowrap;'>{a}/{t}</div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
-            c_a, c_b = st.columns([4, 6])
-            with c_a:
-                st.markdown(f"**{desc}**")
-                st.markdown(f"<span style='font-size:12px;color:#718096;'>{info['categoria']}</span>", unsafe_allow_html=True)
-                st.markdown(f"<span class='tag-parcela'>{atual}/{total} parcelas</span> "
-                            f"<span style='font-size:12px;color:#4a5568;margin-left:8px;'>{fmt(info['valor_mensal'])}/mês</span>",
-                            unsafe_allow_html=True)
-                st.markdown(f"<span style='font-size:12px;color:#e53e3e;'>Restam {restam}x = {fmt(valor_restante)}</span>",
-                            unsafe_allow_html=True)
-            with c_b:
-                st.markdown(
-                    f"<div style='margin-top:12px;'><div class='barra-bg'>"
-                    f"<div class='barra-fill' style='width:{pct:.0f}%;'></div></div>"
-                    f"<div style='text-align:right;font-size:11px;color:#718096;margin-top:2px;'>{pct:.0f}% pago</div></div>",
-                    unsafe_allow_html=True
-                )
-            st.markdown("<hr style='margin:8px 0;border-color:#f0f0f0;'>", unsafe_allow_html=True)
-
-# ════════════════════════════════════════════════════════════════════════════════
-# ABA: NOVO GASTO
-# ════════════════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
+# NOVO GASTO
+# ═══════════════════════════════════════════════════════════════
 with tab_add:
-    tipo = st.radio("Tipo de gasto", ["📋 Lançamento (variável)", "🔁 Conta fixa"], horizontal=True)
+    tipo = st.radio("", ["💸 Gasto variável","🔁 Conta fixa"], horizontal=True,
+                    label_visibility="collapsed")
 
-    if tipo == "📋 Lançamento (variável)":
-        with st.form("form_lanc", clear_on_submit=True):
-            fc1, fc2 = st.columns(2)
-            desc_n = fc1.text_input("Descrição *", placeholder="Ex: Nubank, Academia...")
-            val_n  = fc2.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
-            fd1, fd2, fd3 = st.columns(3)
-            dia_n  = fd1.number_input("Dia do mês", min_value=1, max_value=31, value=1)
-            parc_n = fd2.text_input("Parcela", placeholder="Ex: 2/6")
-            cat_n  = fd3.selectbox("Categoria", CATEGORIAS)
+    if tipo == "💸 Gasto variável":
+        with st.form("f_lanc", clear_on_submit=True):
+            desc_n = st.text_input("Descrição *", placeholder="Ex: Mercado, Farmácia...")
+            val_n  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
+            c_a, c_b = st.columns(2)
+            dia_n  = c_a.number_input("Dia", min_value=1, max_value=31, value=_date.today().day)
+            parc_n = c_b.text_input("Parcela", placeholder="Ex: 1/12")
+            cat_n  = st.selectbox("Categoria", CATEGORIAS)
             obs_n  = st.text_input("Observação", placeholder="opcional")
-            pago_n = st.checkbox("Já pago?")
-
-            if st.form_submit_button("💾 Adicionar lançamento", use_container_width=True, type="primary"):
-                if desc_n and val_n > 0:
+            pago_n = st.checkbox("Já pago?", value=False)
+            ok = st.form_submit_button("✓ Adicionar", use_container_width=True, type="primary")
+            if ok:
+                if desc_n.strip() and val_n > 0:
                     mes["lancamentos"].append({
-                        "id": str(uuid.uuid4()), "data": int(dia_n),
-                        "descricao": desc_n.strip(), "valor": float(val_n),
-                        "parcela": parc_n.strip(), "categoria": cat_n,
-                        "pago": pago_n, "obs": obs_n.strip(),
+                        "id":str(uuid.uuid4()),"data":int(dia_n),
+                        "descricao":desc_n.strip(),"valor":float(val_n),
+                        "parcela":parc_n.strip(),"categoria":cat_n,
+                        "pago":pago_n,"obs":obs_n.strip(),
                     })
                     save_data(d)
                     st.success(f"✅ {desc_n} adicionado!")
@@ -636,18 +659,17 @@ with tab_add:
                 else:
                     st.error("Preencha descrição e valor.")
     else:
-        with st.form("form_fixa", clear_on_submit=True):
-            ff1, ff2, ff3 = st.columns(3)
-            desc_f = ff1.text_input("Descrição *", placeholder="Ex: Seguro...")
-            val_f  = ff2.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
-            cat_f  = ff3.selectbox("Categoria", CATEGORIAS)
-            pago_f = st.checkbox("Já pago?")
-
-            if st.form_submit_button("💾 Adicionar conta fixa", use_container_width=True, type="primary"):
-                if desc_f and val_f > 0:
+        with st.form("f_fixa", clear_on_submit=True):
+            desc_f = st.text_input("Descrição *", placeholder="Ex: Seguro, Streaming...")
+            val_f  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
+            cat_f  = st.selectbox("Categoria", CATEGORIAS)
+            pago_f = st.checkbox("Já pago?", value=False)
+            ok_f = st.form_submit_button("✓ Adicionar", use_container_width=True, type="primary")
+            if ok_f:
+                if desc_f.strip() and val_f > 0:
                     mes["fixas"].append({
-                        "id": str(uuid.uuid4()), "descricao": desc_f.strip(),
-                        "valor": float(val_f), "categoria": cat_f, "pago": pago_f,
+                        "id":str(uuid.uuid4()),"descricao":desc_f.strip(),
+                        "valor":float(val_f),"categoria":cat_f,"pago":pago_f,
                     })
                     save_data(d)
                     st.success(f"✅ {desc_f} adicionado!")
@@ -656,4 +678,76 @@ with tab_add:
                     st.error("Preencha descrição e valor.")
 
     st.markdown("---")
-    st.caption("💡 Para marcar gastos como pagos, use as abas **Lançamentos** ou **Contas Fixas**.")
+    # Criar próximo mês
+    uy, um = int(mes_key.split("-")[0]), int(mes_key.split("-")[1])
+    nm, ny = (um % 12) + 1, uy + (1 if um == 12 else 0)
+    prox_key  = f"{ny}-{nm:02d}"
+    prox_nome = nome_mes(prox_key)
+    if prox_key not in d["meses"]:
+        st.markdown("<div class='sec'>Novo mês</div>", unsafe_allow_html=True)
+        if st.button(f"📅 Criar {prox_nome} (copia fixas automaticamente)",
+                     use_container_width=True):
+            d["meses"][prox_key] = {
+                "lancamentos": [],
+                "fixas": [{"id":str(uuid.uuid4()),"descricao":t["descricao"],
+                           "valor":t["valor"],"categoria":t["categoria"],"pago":False}
+                          for t in d.get("template_fixas", [])],
+            }
+            save_data(d)
+            st.rerun()
+
+# ═══════════════════════════════════════════════════════════════
+# RESUMO / CATEGORIAS
+# ═══════════════════════════════════════════════════════════════
+with tab_r:
+    cat_totais = {}
+    for item in todos:
+        c = item.get("categoria","🎯 Outros")
+        cat_totais[c] = cat_totais.get(c, 0) + item["valor"]
+    cat_ord = sorted(cat_totais.items(), key=lambda x: x[1], reverse=True)
+
+    st.markdown("<div class='sec'>Por categoria</div>", unsafe_allow_html=True)
+    if total > 0:
+        rows = ""
+        for cat, val in cat_ord:
+            if val <= 0: continue
+            pct = val / total * 100
+            rows += f"""
+<div class='item-row'>
+  <div style='flex:1;'>
+    <div style='font-weight:600;font-size:14px;color:#2D3748;'>{cat}</div>
+    <div style='margin-top:4px;'>
+      <div class='prog-bg'><div class='prog-fill' style='width:{pct:.0f}%;'></div></div>
+    </div>
+  </div>
+  <div style='text-align:right;margin-left:16px;'>
+    <div style='font-weight:700;color:#2D3748;'>{fmt(val)}</div>
+    <div style='font-size:11px;color:#a0aec0;'>{pct:.0f}%</div>
+  </div>
+</div>"""
+        st.markdown(f"<div class='card'>{rows}</div>", unsafe_allow_html=True)
+
+    # Comparativo
+    if len(meses_keys) > 1:
+        st.markdown("<div class='sec'>Histórico</div>", unsafe_allow_html=True)
+        rows_h = ""
+        for mk in sorted(meses_keys)[-5:]:
+            ml = d["meses"][mk].get("lancamentos",[])
+            mf = d["meses"][mk].get("fixas",[])
+            mt = sum(x["valor"] for x in ml) + sum(x["valor"] for x in mf)
+            bold = "font-weight:700;color:#2D6A4F;" if mk == mes_key else ""
+            rows_h += f"""
+<div class='item-row'>
+  <div style='font-size:14px;{bold}'>{nome_mes(mk)}</div>
+  <div style='font-weight:700;font-size:15px;{bold}'>{fmt(mt)}</div>
+</div>"""
+        st.markdown(f"<div class='card'>{rows_h}</div>", unsafe_allow_html=True)
+
+# ─── Rodapé ───────────────────────────────────────────────────────────────────
+st.markdown("""
+<div style='text-align:center;padding:24px 0 8px;'>
+  <p style='color:#CBD5E0;font-size:11px;margin:0;'>
+    "Honra ao Senhor com os teus bens" · Pv 3:9
+  </p>
+</div>
+""", unsafe_allow_html=True)
