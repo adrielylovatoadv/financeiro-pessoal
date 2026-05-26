@@ -345,6 +345,11 @@ INITIAL_DATA = {
             ],
         },
     },
+    "poupanca": {
+        "objetivo": "",
+        "meta_total": 0.0,
+        "depositos": [],
+    },
     "template_fixas": [
         {"descricao":"Seguro","valor":258.18,"categoria":"🛡️ Seguro"},
         {"descricao":"Apple","valor":19.90,"categoria":"📱 Serviços"},
@@ -414,13 +419,17 @@ d = st.session_state["dados"]
 for _mk in d["meses"]:
     d["meses"][_mk].setdefault("receitas", [])
     d["meses"][_mk].setdefault("meta_poupanca", 0.0)
+# Garante estrutura de poupança
+d.setdefault("poupanca", {"objetivo": "", "meta_total": 0.0, "depositos": []})
 
 # ─── Cabeçalho ────────────────────────────────────────────────────────────────
 meses_keys = sorted(d["meses"].keys())
 mes_labels = [nome_mes(k) for k in meses_keys]
 
 st.markdown("<p style='margin:8px 0 2px;font-size:22px;font-weight:700;color:#2D6A4F;'>🌿 Meu Dinheiro</p>", unsafe_allow_html=True)
-mes_sel = st.selectbox("", mes_labels, index=len(mes_labels)-1, label_visibility="collapsed")
+_hoje_key   = _date.today().strftime("%Y-%m")
+_default_idx = meses_keys.index(_hoje_key) if _hoje_key in meses_keys else len(meses_keys) - 1
+mes_sel = st.selectbox("", mes_labels, index=_default_idx, label_visibility="collapsed")
 mes_key = meses_keys[mes_labels.index(mes_sel)]
 
 # ─── Versículo + Dica do dia ──────────────────────────────────────────────────
@@ -468,8 +477,8 @@ c3.markdown(f"""<div class='card' style='text-align:center;'>
 </div>""", unsafe_allow_html=True)
 
 # ─── Abas ─────────────────────────────────────────────────────────────────────
-tab_g, tab_f, tab_rec, tab_p, tab_add, tab_r = st.tabs([
-    "💸 Gastos", "🔁 Fixas", "💰 Receita", "📅 Parcelas", "➕ Novo", "📊 Resumo"
+tab_g, tab_f, tab_rec, tab_poupa, tab_p, tab_r = st.tabs([
+    "💸 Gastos", "🔁 Fixas", "💰 Receita", "🐷 Poupar", "📅 Parcelas", "📊 Resumo"
 ])
 
 # ═══════════════════════════════════════════════════════════════
@@ -954,75 +963,167 @@ with tab_p:
 """, unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
-# NOVO GASTO
+# POUPANÇA
 # ═══════════════════════════════════════════════════════════════
-with tab_add:
-    tipo = st.radio("", ["💸 Gasto variável","🔁 Conta fixa"], horizontal=True,
-                    label_visibility="collapsed")
+with tab_poupa:
+    poupa = d.get("poupanca", {"objetivo": "", "meta_total": 0.0, "depositos": []})
+    deps  = poupa.get("depositos", [])
+    total_poupado = sum(dep["valor"] for dep in deps)
+    meta_total    = poupa.get("meta_total", 0.0)
+    objetivo      = poupa.get("objetivo", "")
+    pct_meta      = min((total_poupado / meta_total * 100) if meta_total > 0 else 0, 100)
+    pct_meta      = max(pct_meta, 0)
 
-    if tipo == "💸 Gasto variável":
-        with st.form("f_lanc", clear_on_submit=True):
-            desc_n = st.text_input("Descrição *", placeholder="Ex: Mercado, Farmácia...")
-            val_n  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
-            c_a, c_b = st.columns(2)
-            dia_n  = c_a.number_input("Dia", min_value=1, max_value=31, value=_date.today().day)
-            parc_n = c_b.text_input("Parcela", placeholder="Ex: 1/12")
-            cat_n  = st.selectbox("Categoria", CATEGORIAS)
-            obs_n  = st.text_input("Observação", placeholder="opcional")
-            pago_n = st.checkbox("Já pago?", value=False)
-            ok = st.form_submit_button("✓ Adicionar", use_container_width=True, type="primary")
-            if ok:
-                if desc_n.strip() and val_n > 0:
-                    mes["lancamentos"].append({
-                        "id":str(uuid.uuid4()),"data":int(dia_n),
-                        "descricao":desc_n.strip(),"valor":float(val_n),
-                        "parcela":parc_n.strip(),"categoria":cat_n,
-                        "pago":pago_n,"obs":obs_n.strip(),
-                    })
-                    save_data(d)
-                    st.success(f"✅ {desc_n} adicionado!")
-                    st.rerun()
-                else:
-                    st.error("Preencha descrição e valor.")
+    # ── Card principal ───────────────────────────────────────────
+    _mt_label = fmt(meta_total) if meta_total > 0 else "Não definida"
+    _obj_label = objetivo if objetivo else "Sem objetivo definido"
+    _pct_cor   = "#276749" if pct_meta >= 100 else "#2D6A4F"
+    st.markdown(f"""
+<div class='card'>
+  <div style='font-size:11px;font-weight:700;color:#A0AEC0;text-transform:uppercase;
+              letter-spacing:1px;margin-bottom:4px;'>🎯 Objetivo</div>
+  <div style='font-weight:700;font-size:17px;color:#2D3748;margin-bottom:14px;'>{_obj_label}</div>
+  <div style='display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px;'>
+    <div>
+      <div class='valor-label'>Total poupado</div>
+      <div class='valor-grande valor-verde'>{fmt(total_poupado)}</div>
+    </div>
+    <div style='text-align:right;'>
+      <div class='valor-label'>Meta</div>
+      <div style='font-weight:700;font-size:18px;color:#D4A853;'>{_mt_label}</div>
+    </div>
+  </div>
+  <div class='prog-bg'><div class='prog-fill' style='width:{pct_meta:.0f}%;'></div></div>
+  <div style='font-size:12px;color:#718096;margin-top:6px;text-align:right;'>{pct_meta:.0f}% da meta</div>
+</div>""", unsafe_allow_html=True)
+
+    # Editar objetivo / meta
+    if st.session_state.get("editing_poupa_cfg"):
+        with st.form("f_poupa_cfg"):
+            n_obj  = st.text_input("Objetivo (ex: viagem, reserva...)", value=objetivo)
+            n_meta = st.number_input("Meta total (R$)", value=float(meta_total),
+                                     min_value=0.0, step=500.0, format="%.2f")
+            pc1, pc2 = st.columns(2)
+            if pc1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                poupa["objetivo"]   = n_obj.strip()
+                poupa["meta_total"] = float(n_meta)
+                d["poupanca"] = poupa
+                st.session_state.pop("editing_poupa_cfg", None)
+                save_data(d); st.rerun()
+            if pc2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state.pop("editing_poupa_cfg", None); st.rerun()
     else:
-        with st.form("f_fixa", clear_on_submit=True):
-            desc_f = st.text_input("Descrição *", placeholder="Ex: Seguro, Streaming...")
-            val_f  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
-            cat_f  = st.selectbox("Categoria", CATEGORIAS)
-            pago_f = st.checkbox("Já pago?", value=False)
-            ok_f = st.form_submit_button("✓ Adicionar", use_container_width=True, type="primary")
-            if ok_f:
-                if desc_f.strip() and val_f > 0:
-                    mes["fixas"].append({
-                        "id":str(uuid.uuid4()),"descricao":desc_f.strip(),
-                        "valor":float(val_f),"categoria":cat_f,"pago":pago_f,
-                    })
-                    save_data(d)
-                    st.success(f"✅ {desc_f} adicionado!")
-                    st.rerun()
-                else:
-                    st.error("Preencha descrição e valor.")
+        if st.button("✏️ Editar objetivo e meta", key="btn_poupa_cfg", use_container_width=True):
+            st.session_state["editing_poupa_cfg"] = True; st.rerun()
 
-    st.markdown("---")
-    # Criar próximo mês
-    uy, um = int(mes_key.split("-")[0]), int(mes_key.split("-")[1])
-    nm, ny = (um % 12) + 1, uy + (1 if um == 12 else 0)
-    prox_key  = f"{ny}-{nm:02d}"
-    prox_nome = nome_mes(prox_key)
-    if prox_key not in d["meses"]:
-        st.markdown("<div class='sec'>Novo mês</div>", unsafe_allow_html=True)
-        if st.button(f"📅 Criar {prox_nome} (copia fixas automaticamente)",
-                     use_container_width=True):
-            d["meses"][prox_key] = {
-                "receitas": [],
-                "meta_poupanca": mes.get("meta_poupanca", 0.0),
-                "lancamentos": [],
-                "fixas": [{"id":str(uuid.uuid4()),"descricao":t["descricao"],
-                           "valor":t["valor"],"categoria":t["categoria"],"pago":False}
-                          for t in d.get("template_fixas", [])],
-            }
-            save_data(d)
-            st.rerun()
+    # ── Depósitos ────────────────────────────────────────────────
+    st.markdown("<div class='sec'>Depósitos registrados</div>", unsafe_allow_html=True)
+    cadep, _ = st.columns([2, 3])
+    if cadep.button("➕ Novo depósito", key="add_dep_top", use_container_width=True):
+        st.session_state["show_add_dep"] = not st.session_state.get("show_add_dep", False)
+
+    if st.session_state.get("show_add_dep"):
+        with st.form("f_dep_g", clear_on_submit=True):
+            val_dq  = st.number_input("Valor (R$) *", min_value=0.01, step=50.0, format="%.2f")
+            # Mês de referência: lista de meses disponíveis
+            dep_meses = sorted(d["meses"].keys(), reverse=True)
+            dep_meses_labels = [nome_mes(k) for k in dep_meses]
+            sel_dep_mes = st.selectbox("Mês de referência", dep_meses_labels)
+            dep_mes_key = dep_meses[dep_meses_labels.index(sel_dep_mes)]
+            obs_dq  = st.text_input("Observação", placeholder="Ex: poupança do mês, bônus...")
+            ds1, ds2 = st.columns(2)
+            if ds1.form_submit_button("✓ Adicionar", use_container_width=True, type="primary"):
+                if val_dq > 0:
+                    poupa["depositos"].append({
+                        "id": str(uuid.uuid4()), "mes": dep_mes_key,
+                        "valor": float(val_dq), "obs": obs_dq.strip(),
+                    })
+                    d["poupanca"] = poupa
+                    st.session_state["show_add_dep"] = False
+                    save_data(d); st.rerun()
+                else:
+                    st.error("Informe um valor.")
+            if ds2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state["show_add_dep"] = False; st.rerun()
+
+    if not deps:
+        st.markdown("<div style='text-align:center;color:#a0aec0;padding:24px 0;'>Nenhum depósito ainda.<br>Registre quanto guardou cada mês.</div>",
+                    unsafe_allow_html=True)
+    else:
+        deps_ord = sorted(deps, key=lambda x: x.get("mes",""), reverse=True)
+        for dep in deps_ord:
+            did    = dep["id"]
+            obs_d  = dep.get("obs","")
+            sub_d  = " · ".join(filter(None, [nome_mes(dep.get("mes","")), obs_d]))
+
+            if st.session_state.get("editing_dep") == did:
+                st.markdown("<div style='background:white;border-radius:14px;padding:16px;"
+                            "margin-bottom:4px;box-shadow:0 1px 6px rgba(0,0,0,0.1);'>",
+                            unsafe_allow_html=True)
+                with st.form(f"ef_dep_{did}"):
+                    dnv  = st.number_input("Valor (R$)", value=float(dep["valor"]), step=50.0, format="%.2f")
+                    dep_meses2 = sorted(d["meses"].keys(), reverse=True)
+                    dep_ml2    = [nome_mes(k) for k in dep_meses2]
+                    cur_idx    = dep_meses2.index(dep.get("mes","")) if dep.get("mes") in dep_meses2 else 0
+                    sel_dm2    = st.selectbox("Mês", dep_ml2, index=cur_idx)
+                    dnm        = dep_meses2[dep_ml2.index(sel_dm2)]
+                    dnobs      = st.text_input("Observação", value=dep.get("obs",""))
+                    de1, de2   = st.columns(2)
+                    if de1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                        dep.update({"valor": float(dnv), "mes": dnm, "obs": dnobs})
+                        st.session_state.pop("editing_dep", None)
+                        save_data(d); st.rerun()
+                    if de2.form_submit_button("Cancelar", use_container_width=True):
+                        st.session_state.pop("editing_dep", None); st.rerun()
+                st.markdown("</div>", unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+<div style='background:white;border-radius:14px;padding:14px 16px;
+     border-left:4px solid #68d391;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2px;'>
+  <div style='display:flex;justify-content:space-between;align-items:center;'>
+    <div style='flex:1;'>
+      <div style='font-weight:700;font-size:16px;color:#2D3748;'>💰 Depósito</div>
+      <div style='font-size:12px;color:#a0aec0;margin-top:3px;'>{sub_d}</div>
+    </div>
+    <div style='text-align:right;margin-left:12px;'>
+      <div style='font-weight:700;font-size:18px;color:#276749;'>{fmt(dep['valor'])}</div>
+    </div>
+  </div>
+</div>""", unsafe_allow_html=True)
+                da, db = st.columns([3, 1])
+                if da.button("✏️ Editar", key=f"dedit_{did}", use_container_width=True):
+                    st.session_state["editing_dep"] = did; st.rerun()
+                if db.button("🗑️", key=f"ddel_{did}", use_container_width=True):
+                    st.session_state[f"cddel_{did}"] = True; st.rerun()
+                if st.session_state.get(f"cddel_{did}"):
+                    st.warning("Excluir este depósito?")
+                    dd1, dd2 = st.columns(2)
+                    if dd1.button("Sim, excluir", key=f"yddel_{did}", type="primary", use_container_width=True):
+                        poupa["depositos"] = [x for x in deps if x["id"] != did]
+                        d["poupanca"] = poupa
+                        st.session_state.pop(f"cddel_{did}", None)
+                        save_data(d); st.rerun()
+                    if dd2.button("Cancelar", key=f"nddel_{did}", use_container_width=True):
+                        st.session_state.pop(f"cddel_{did}", None); st.rerun()
+            st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
+
+    # ── Saldo disponível por mês (referência) ────────────────────
+    st.markdown("<div class='sec'>Quanto sobrou por mês (referência)</div>", unsafe_allow_html=True)
+    rows_s = ""
+    for mk in sorted(d["meses"].keys(), reverse=True)[-6:]:
+        mv   = d["meses"][mk]
+        mr   = sum(x["valor"] for x in mv.get("receitas", []))
+        mt   = sum(x["valor"] for x in mv.get("lancamentos", [])) + sum(x["valor"] for x in mv.get("fixas", []))
+        msd  = mr - mt
+        sc   = "#276749" if msd >= 0 else "#9B2C2C"
+        ss   = fmt(abs(msd)) if msd >= 0 else "- " + fmt(abs(msd))
+        bold = "font-weight:700;" if mk == mes_key else ""
+        rows_s += f"""
+<div class='item-row'>
+  <div style='font-size:14px;{bold}'>{nome_mes(mk)}</div>
+  <div style='font-weight:700;font-size:14px;color:{sc};'>{ss}</div>
+</div>"""
+    st.markdown(f"<div class='card'>{rows_s}</div>", unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
 # RESUMO / CATEGORIAS
@@ -1078,6 +1179,25 @@ with tab_r:
   </div>
 </div>"""
         st.markdown(f"<div class='card'>{rows_h}</div>", unsafe_allow_html=True)
+
+    # Criar próximo mês
+    uy, um = int(mes_key.split("-")[0]), int(mes_key.split("-")[1])
+    nm, ny = (um % 12) + 1, uy + (1 if um == 12 else 0)
+    prox_key  = f"{ny}-{nm:02d}"
+    prox_nome = nome_mes(prox_key)
+    if prox_key not in d["meses"]:
+        st.markdown("<div class='sec'>Novo mês</div>", unsafe_allow_html=True)
+        if st.button(f"📅 Criar {prox_nome} (copia fixas automaticamente)",
+                     use_container_width=True):
+            d["meses"][prox_key] = {
+                "receitas": [],
+                "meta_poupanca": mes.get("meta_poupanca", 0.0),
+                "lancamentos": [],
+                "fixas": [{"id": str(uuid.uuid4()), "descricao": t["descricao"],
+                           "valor": t["valor"], "categoria": t["categoria"], "pago": False}
+                          for t in d.get("template_fixas", [])],
+            }
+            save_data(d); st.rerun()
 
 # ─── Rodapé ───────────────────────────────────────────────────────────────────
 st.markdown("""
