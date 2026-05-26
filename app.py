@@ -390,9 +390,17 @@ def _gh_put(data, sha):
     try:
         content = base64.b64encode(
             json.dumps(data,ensure_ascii=False,indent=2).encode()).decode()
-        payload = json.dumps({"message":"atualiza dados","content":content,"sha":sha}).encode()
+        body = {"message":"atualiza dados","content":content}
+        if sha:  # SHA só vai no payload se o arquivo já existir
+            body["sha"] = sha
+        payload = json.dumps(body).encode()
         req = urllib.request.Request(_GH_API,data=payload,headers=_gh_headers(),method="PUT")
-        urllib.request.urlopen(req,timeout=15)
+        with urllib.request.urlopen(req,timeout=15) as resp:
+            # Atualiza SHA local para o próximo save
+            resp_body = json.loads(resp.read())
+            new_sha = resp_body.get("content",{}).get("sha","")
+            if new_sha:
+                st.session_state["gh_sha"] = new_sha
     except: pass
 
 def load_data():
