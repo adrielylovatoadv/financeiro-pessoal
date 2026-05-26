@@ -372,7 +372,7 @@
           "valor": 79.2,
           "parcela": "5/12",
           "categoria": "⚖️ Profissional",
-          "pago": true,
+          "pago": false,
           "obs": ""
         }
       ],
