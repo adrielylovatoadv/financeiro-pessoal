@@ -346,16 +346,6 @@
           "obs": ""
         },
         {
-          "id": "m5l2",
-          "data": 5,
-          "descricao": "Academia",
-          "valor": 135.0,
-          "parcela": "",
-          "categoria": "💪 Academia/Esporte",
-          "pago": false,
-          "obs": ""
-        },
-        {
           "id": "m5l3",
           "data": 9,
           "descricao": "Mercado Pago",
