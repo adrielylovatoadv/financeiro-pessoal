@@ -1,0 +1,649 @@
+{
+  "meses": {
+    "2025-03": {
+      "receitas": [],
+      "meta_poupanca": 0.0,
+      "lancamentos": [
+        {
+          "id": "m3l1",
+          "data": 5,
+          "descricao": "Nubank",
+          "valor": 426.97,
+          "parcela": "3/5",
+          "categoria": "💳 Cartão",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l2",
+          "data": 5,
+          "descricao": "Nubank",
+          "valor": 979.84,
+          "parcela": "1/3",
+          "categoria": "💳 Cartão",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l3",
+          "data": 5,
+          "descricao": "Academia",
+          "valor": 135.0,
+          "parcela": "",
+          "categoria": "💪 Academia/Esporte",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l4",
+          "data": 9,
+          "descricao": "Mercado Pago",
+          "valor": 424.99,
+          "parcela": "1/2",
+          "categoria": "🛒 Compras",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l5",
+          "data": 10,
+          "descricao": "Aluguel e net Escritório",
+          "valor": 382.75,
+          "parcela": "",
+          "categoria": "🏠 Moradia",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l6",
+          "data": 11,
+          "descricao": "Sicoob",
+          "valor": 2630.69,
+          "parcela": "",
+          "categoria": "🏦 Banco/Financ.",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l7",
+          "data": 23,
+          "descricao": "Parcela Carro",
+          "valor": 2553.45,
+          "parcela": "6/48",
+          "categoria": "🚗 Carro",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l8",
+          "data": 28,
+          "descricao": "Cabelo casamento",
+          "valor": 120.0,
+          "parcela": "",
+          "categoria": "💄 Beleza",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l9",
+          "data": 28,
+          "descricao": "Maquiagem casamento",
+          "valor": 150.0,
+          "parcela": "",
+          "categoria": "💄 Beleza",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m3l10",
+          "data": 30,
+          "descricao": "OAB MG",
+          "valor": 79.2,
+          "parcela": "3/12",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
+        }
+      ],
+      "fixas": [
+        {
+          "id": "m3f1",
+          "descricao": "Seguro",
+          "valor": 258.18,
+          "categoria": "🛡️ Seguro",
+          "pago": true
+        },
+        {
+          "id": "m3f2",
+          "descricao": "Apple",
+          "valor": 19.9,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m3f3",
+          "descricao": "Google",
+          "valor": 9.99,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m3f4",
+          "descricao": "Tarifa bancária",
+          "valor": 20.0,
+          "categoria": "🏦 Banco/Financ.",
+          "pago": true
+        },
+        {
+          "id": "m3f5",
+          "descricao": "Vivo",
+          "valor": 89.9,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m3f6",
+          "descricao": "Remédio",
+          "valor": 100.0,
+          "categoria": "💊 Saúde",
+          "pago": true
+        },
+        {
+          "id": "m3f7",
+          "descricao": "Jusbrasil",
+          "valor": 58.9,
+          "categoria": "⚖️ Profissional",
+          "pago": true
+        }
+      ]
+    },
+    "2025-04": {
+      "receitas": [],
+      "meta_poupanca": 0.0,
+      "lancamentos": [
+        {
+          "id": "m4l1",
+          "data": 5,
+          "descricao": "Nubank",
+          "valor": 430.11,
+          "parcela": "4/5",
+          "categoria": "💳 Cartão",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m4l2",
+          "data": 5,
+          "descricao": "Nubank",
+          "valor": 532.77,
+          "parcela": "2/3",
+          "categoria": "💳 Cartão",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m4l3",
+          "data": 5,
+          "descricao": "Academia",
+          "valor": 135.0,
+          "parcela": "",
+          "categoria": "💪 Academia/Esporte",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m4l4",
+          "data": 9,
+          "descricao": "Mercado Pago",
+          "valor": 424.99,
+          "parcela": "2/2",
+          "categoria": "🛒 Compras",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m4l5",
+          "data": 10,
+          "descricao": "Aluguel e net Escritório",
+          "valor": 339.95,
+          "parcela": "",
+          "categoria": "🏠 Moradia",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m4l6",
+          "data": 11,
+          "descricao": "Sicoob",
+          "valor": 3979.1,
+          "parcela": "",
+          "categoria": "🏦 Banco/Financ.",
+          "pago": true,
+          "obs": "370 Lucas"
+        },
+        {
+          "id": "m4l7",
+          "data": 23,
+          "descricao": "Parcela Carro",
+          "valor": 2573.2,
+          "parcela": "7/48",
+          "categoria": "🚗 Carro",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m4l8",
+          "data": 30,
+          "descricao": "OAB MG",
+          "valor": 79.2,
+          "parcela": "4/12",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
+        }
+      ],
+      "fixas": [
+        {
+          "id": "m4f1",
+          "descricao": "Seguro",
+          "valor": 258.18,
+          "categoria": "🛡️ Seguro",
+          "pago": true
+        },
+        {
+          "id": "m4f2",
+          "descricao": "Apple",
+          "valor": 19.9,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m4f3",
+          "descricao": "Google",
+          "valor": 9.99,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m4f4",
+          "descricao": "Tarifa bancária",
+          "valor": 20.75,
+          "categoria": "🏦 Banco/Financ.",
+          "pago": true
+        },
+        {
+          "id": "m4f5",
+          "descricao": "Vivo",
+          "valor": 62.0,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m4f6",
+          "descricao": "Remédio",
+          "valor": 100.0,
+          "categoria": "💊 Saúde",
+          "pago": true
+        },
+        {
+          "id": "m4f7",
+          "descricao": "Aula de tênis",
+          "valor": 150.0,
+          "categoria": "💪 Academia/Esporte",
+          "pago": true
+        },
+        {
+          "id": "m4f8",
+          "descricao": "Jusbrasil",
+          "valor": 58.9,
+          "categoria": "⚖️ Profissional",
+          "pago": true
+        }
+      ]
+    },
+    "2025-05": {
+      "receitas": [],
+      "meta_poupanca": 0.0,
+      "lancamentos": [
+        {
+          "id": "m5l1",
+          "data": 5,
+          "descricao": "OAB SP",
+          "valor": 361.23,
+          "parcela": "1/3",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m5l2",
+          "data": 5,
+          "descricao": "Academia",
+          "valor": 135.0,
+          "parcela": "",
+          "categoria": "💪 Academia/Esporte",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "m5l3",
+          "data": 9,
+          "descricao": "Mercado Pago",
+          "valor": 87.24,
+          "parcela": "1/3",
+          "categoria": "🛒 Compras",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m5l4",
+          "data": 10,
+          "descricao": "Aluguel e net Escritório",
+          "valor": 300.0,
+          "parcela": "",
+          "categoria": "🏠 Moradia",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m5l5",
+          "data": 11,
+          "descricao": "Sicoob",
+          "valor": 3995.55,
+          "parcela": "",
+          "categoria": "🏦 Banco/Financ.",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m5l6",
+          "data": 23,
+          "descricao": "Parcela Carro",
+          "valor": 2573.2,
+          "parcela": "8/48",
+          "categoria": "🚗 Carro",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m5l7",
+          "data": 30,
+          "descricao": "OAB MG",
+          "valor": 79.2,
+          "parcela": "5/12",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
+        }
+      ],
+      "fixas": [
+        {
+          "id": "m5f1",
+          "descricao": "Seguro",
+          "valor": 258.18,
+          "categoria": "🛡️ Seguro",
+          "pago": true
+        },
+        {
+          "id": "m5f2",
+          "descricao": "Apple",
+          "valor": 19.9,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m5f3",
+          "descricao": "Google",
+          "valor": 9.99,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m5f4",
+          "descricao": "Tarifa bancária",
+          "valor": 20.75,
+          "categoria": "🏦 Banco/Financ.",
+          "pago": true
+        },
+        {
+          "id": "m5f5",
+          "descricao": "Vivo",
+          "valor": 89.9,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m5f6",
+          "descricao": "Remédio",
+          "valor": 100.0,
+          "categoria": "💊 Saúde",
+          "pago": true
+        },
+        {
+          "id": "m5f7",
+          "descricao": "Claude",
+          "valor": 110.0,
+          "categoria": "📱 Serviços",
+          "pago": true
+        },
+        {
+          "id": "m5f8",
+          "descricao": "Aula de tênis",
+          "valor": 200.0,
+          "categoria": "💪 Academia/Esporte",
+          "pago": true
+        },
+        {
+          "id": "m5f9",
+          "descricao": "Jusbrasil",
+          "valor": 58.9,
+          "categoria": "⚖️ Profissional",
+          "pago": true
+        }
+      ]
+    },
+    "2025-06": {
+      "receitas": [],
+      "meta_poupanca": 0.0,
+      "lancamentos": [
+        {
+          "id": "m6l1",
+          "data": 5,
+          "descricao": "OAB SP",
+          "valor": 361.23,
+          "parcela": "2/3",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "m6l2",
+          "data": 5,
+          "descricao": "Academia",
+          "valor": 135.0,
+          "parcela": "",
+          "categoria": "💪 Academia/Esporte",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "m6l3",
+          "data": 9,
+          "descricao": "Mercado Pago",
+          "valor": 87.24,
+          "parcela": "2/3",
+          "categoria": "🛒 Compras",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "m6l4",
+          "data": 10,
+          "descricao": "Aluguel e net Escritório",
+          "valor": 339.95,
+          "parcela": "",
+          "categoria": "🏠 Moradia",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "m6l5",
+          "data": 11,
+          "descricao": "Sicoob",
+          "valor": 0.0,
+          "parcela": "",
+          "categoria": "🏦 Banco/Financ.",
+          "pago": false,
+          "obs": "valor a confirmar"
+        },
+        {
+          "id": "m6l6",
+          "data": 15,
+          "descricao": "C&A",
+          "valor": 199.99,
+          "parcela": "1/2",
+          "categoria": "🛒 Compras",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "m6l7",
+          "data": 23,
+          "descricao": "Parcela Carro",
+          "valor": 2573.2,
+          "parcela": "9/48",
+          "categoria": "🚗 Carro",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "m6l8",
+          "data": 30,
+          "descricao": "OAB MG",
+          "valor": 79.2,
+          "parcela": "6/12",
+          "categoria": "⚖️ Profissional",
+          "pago": false,
+          "obs": ""
+        }
+      ],
+      "fixas": [
+        {
+          "id": "m6f1",
+          "descricao": "Seguro",
+          "valor": 258.18,
+          "categoria": "🛡️ Seguro",
+          "pago": false
+        },
+        {
+          "id": "m6f2",
+          "descricao": "Apple",
+          "valor": 19.9,
+          "categoria": "📱 Serviços",
+          "pago": false
+        },
+        {
+          "id": "m6f3",
+          "descricao": "Google",
+          "valor": 9.99,
+          "categoria": "📱 Serviços",
+          "pago": false
+        },
+        {
+          "id": "m6f4",
+          "descricao": "Tarifa bancária",
+          "valor": 20.75,
+          "categoria": "🏦 Banco/Financ.",
+          "pago": false
+        },
+        {
+          "id": "m6f5",
+          "descricao": "Vivo",
+          "valor": 89.9,
+          "categoria": "📱 Serviços",
+          "pago": false
+        },
+        {
+          "id": "m6f6",
+          "descricao": "Remédio",
+          "valor": 100.0,
+          "categoria": "💊 Saúde",
+          "pago": false
+        },
+        {
+          "id": "m6f7",
+          "descricao": "Claude",
+          "valor": 110.0,
+          "categoria": "📱 Serviços",
+          "pago": false
+        },
+        {
+          "id": "m6f8",
+          "descricao": "Aula de tênis",
+          "valor": 200.0,
+          "categoria": "💪 Academia/Esporte",
+          "pago": false
+        },
+        {
+          "id": "m6f9",
+          "descricao": "Jusbrasil",
+          "valor": 58.9,
+          "categoria": "⚖️ Profissional",
+          "pago": false
+        }
+      ]
+    }
+  },
+  "template_fixas": [
+    {
+      "descricao": "Seguro",
+      "valor": 258.18,
+      "categoria": "🛡️ Seguro"
+    },
+    {
+      "descricao": "Apple",
+      "valor": 19.9,
+      "categoria": "📱 Serviços"
+    },
+    {
+      "descricao": "Google",
+      "valor": 9.99,
+      "categoria": "📱 Serviços"
+    },
+    {
+      "descricao": "Tarifa bancária",
+      "valor": 20.75,
+      "categoria": "🏦 Banco/Financ."
+    },
+    {
+      "descricao": "Vivo",
+      "valor": 89.9,
+      "categoria": "📱 Serviços"
+    },
+    {
+      "descricao": "Remédio",
+      "valor": 100.0,
+      "categoria": "💊 Saúde"
+    },
+    {
+      "descricao": "Claude",
+      "valor": 110.0,
+      "categoria": "📱 Serviços"
+    },
+    {
+      "descricao": "Aula de tênis",
+      "valor": 200.0,
+      "categoria": "💪 Academia/Esporte"
+    },
+    {
+      "descricao": "Jusbrasil",
+      "valor": 58.9,
+      "categoria": "⚖️ Profissional"
+    }
+  ],
+  "poupanca": {
+    "objetivo": "",
+    "meta_total": 0.0,
+    "depositos": []
+  }
+}
