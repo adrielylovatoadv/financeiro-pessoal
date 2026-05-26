@@ -452,125 +452,251 @@ tab_g, tab_f, tab_p, tab_add, tab_r = st.tabs([
 # GASTOS (lançamentos variáveis)
 # ═══════════════════════════════════════════════════════════════
 with tab_g:
+    # Mês de referência + botão adicionar
+    cref, cadd = st.columns([3, 2])
+    cref.markdown(f"<div style='font-size:13px;color:#718096;padding-top:8px;'>📅 {nome_mes(mes_key)}</div>",
+                  unsafe_allow_html=True)
+    if cadd.button("➕ Novo gasto", key="add_lanc_top", use_container_width=True):
+        st.session_state["show_add_lanc"] = not st.session_state.get("show_add_lanc", False)
+
+    # Formulário de adição rápida
+    if st.session_state.get("show_add_lanc"):
+        with st.form("f_lanc_g", clear_on_submit=True):
+            desc_q = st.text_input("Descrição *", placeholder="Ex: Farmácia, Mercado...")
+            val_q  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
+            cq1, cq2 = st.columns(2)
+            dia_q  = cq1.number_input("Dia", min_value=1, max_value=31, value=_date.today().day)
+            parc_q = cq2.text_input("Parcela", placeholder="Ex: 1/6")
+            cat_q  = st.selectbox("Categoria", CATEGORIAS)
+            obs_q  = st.text_input("Observação", placeholder="opcional")
+            pago_q = st.checkbox("Já pago?")
+            cs1, cs2 = st.columns(2)
+            if cs1.form_submit_button("✓ Adicionar", use_container_width=True, type="primary"):
+                if desc_q.strip() and val_q > 0:
+                    mes["lancamentos"].append({
+                        "id": str(uuid.uuid4()), "data": int(dia_q),
+                        "descricao": desc_q.strip(), "valor": float(val_q),
+                        "parcela": parc_q.strip(), "categoria": cat_q,
+                        "pago": pago_q, "obs": obs_q.strip(),
+                    })
+                    st.session_state["show_add_lanc"] = False
+                    save_data(d)
+                    st.rerun()
+                else:
+                    st.error("Preencha descrição e valor.")
+            if cs2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state["show_add_lanc"] = False
+                st.rerun()
+
     if not lanc:
-        st.markdown("<div class='card' style='text-align:center;color:#a0aec0;padding:30px;'>"
-                    "Nenhum gasto registrado.<br>Use a aba <b>➕ Novo</b> para adicionar.</div>",
+        st.markdown("<div style='text-align:center;color:#a0aec0;padding:30px 0;'>Nenhum gasto. Toque em ➕ Novo gasto.</div>",
                     unsafe_allow_html=True)
     else:
         lanc_ord = sorted(lanc, key=lambda x: x.get("data", 0))
-        pend_lanc = [l for l in lanc_ord if not l.get("pago")]
-        pago_lanc = [l for l in lanc_ord if l.get("pago")]
+        for item in lanc_ord:
+            iid     = item["id"]
+            pago_i  = item.get("pago", False)
+            parc    = item.get("parcela", "")
+            obs     = item.get("obs", "")
+            sub     = " · ".join(filter(None, [
+                f"Dia {int(item['data'])}" if item.get("data") else "",
+                parc, obs
+            ]))
+            borda   = "#68d391" if pago_i else "#fc8181"
+            tag     = "<span class='tag-pago'>✓ pago</span>" if pago_i else "<span class='tag-pend'>pendente</span>"
 
-        def _render_lanc(items, collapsed=False):
-            rows_html = ""
-            for item in items:
-                parc = item.get("parcela","")
-                obs  = item.get("obs","")
-                sub  = " · ".join(filter(None, [
-                    f"Dia {int(item['data'])}" if item.get('data') else "",
-                    parc, obs
-                ]))
-                tag_class = "tag-pago" if item["pago"] else "tag-pend"
-                tag_txt   = "✓ pago" if item["pago"] else "pendente"
-                rows_html += f"""
-<div class='item-row'>
-  <div>
-    <div class='item-desc'>{item['descricao']}</div>
-    <div class='item-sub'>{sub}</div>
-  </div>
-  <div style='text-align:right;'>
-    <div class='item-val'>{fmt(item['valor'])}</div>
-    <span class='{tag_class}'>{tag_txt}</span>
-  </div>
-</div>"""
-            return f"<div class='card'>{rows_html}</div>"
-
-        if pend_lanc:
-            st.markdown("<div class='sec'>● A pagar</div>", unsafe_allow_html=True)
-            st.markdown(_render_lanc(pend_lanc), unsafe_allow_html=True)
-            for item in pend_lanc:
-                if st.button(f"✓ Marcar pago: {item['descricao']} ({fmt(item['valor'])})",
-                             key=f"pg_{item['id']}", use_container_width=True):
-                    item["pago"] = True
-                    save_data(d)
-                    st.rerun()
-
-        if pago_lanc:
-            with st.expander(f"✓ Pagos ({len(pago_lanc)})"):
-                st.markdown(_render_lanc(pago_lanc), unsafe_allow_html=True)
-                for item in pago_lanc:
-                    if st.button(f"↩ Desfazer: {item['descricao']}",
-                                 key=f"dpg_{item['id']}", use_container_width=True):
-                        item["pago"] = False
+            # ── Modo edição ──
+            if st.session_state.get("editing_lanc") == iid:
+                st.markdown("<div style='background:white;border-radius:14px;padding:16px;"
+                            "margin-bottom:4px;box-shadow:0 1px 6px rgba(0,0,0,0.1);'>",
+                            unsafe_allow_html=True)
+                st.markdown(f"**✏️ Editando: {item['descricao']}**")
+                with st.form(f"ef_lanc_{iid}"):
+                    nd = st.text_input("Descrição", value=item["descricao"])
+                    nv = st.number_input("Valor (R$)", value=float(item["valor"]), step=0.01, format="%.2f")
+                    ec1, ec2 = st.columns(2)
+                    ndia  = ec1.number_input("Dia", value=int(item.get("data", 1)), min_value=1, max_value=31)
+                    nparc = ec2.text_input("Parcela", value=item.get("parcela", ""))
+                    ncat  = st.selectbox("Categoria", CATEGORIAS,
+                                         index=CATEGORIAS.index(item["categoria"]) if item.get("categoria") in CATEGORIAS else 0)
+                    nobs  = st.text_input("Observação", value=item.get("obs", ""))
+                    es1, es2 = st.columns(2)
+                    if es1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                        item.update({"descricao": nd, "valor": float(nv), "data": int(ndia),
+                                     "parcela": nparc, "categoria": ncat, "obs": nobs})
+                        st.session_state.pop("editing_lanc", None)
                         save_data(d)
                         st.rerun()
+                    if es2.form_submit_button("Cancelar", use_container_width=True):
+                        st.session_state.pop("editing_lanc", None)
+                        st.rerun()
+                st.markdown("</div>", unsafe_allow_html=True)
 
-        with st.expander("🗑️ Excluir gasto"):
-            opcoes = {f"Dia {l.get('data','?')} – {l['descricao']} ({fmt(l['valor'])})": l["id"]
-                      for l in lanc_ord}
-            sel = st.selectbox("", list(opcoes.keys()), label_visibility="collapsed")
-            if st.button("Excluir", key="del_l", type="primary"):
-                mes["lancamentos"] = [l for l in lanc if l["id"] != opcoes[sel]]
-                save_data(d)
-                st.rerun()
+            # ── Modo normal ──
+            else:
+                st.markdown(f"""
+<div style='background:white;border-radius:14px;padding:14px 16px;
+     border-left:4px solid {borda};box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2px;'>
+  <div style='display:flex;justify-content:space-between;align-items:flex-start;'>
+    <div style='flex:1;'>
+      <div style='font-weight:700;font-size:16px;color:#2D3748;'>{item['descricao']}</div>
+      <div style='font-size:12px;color:#a0aec0;margin-top:3px;'>{sub}</div>
+    </div>
+    <div style='text-align:right;margin-left:12px;flex-shrink:0;'>
+      <div style='font-weight:700;font-size:18px;color:#2D3748;'>{fmt(item['valor'])}</div>
+      {tag}
+    </div>
+  </div>
+</div>""", unsafe_allow_html=True)
+
+                # Ações inline
+                ba, bb, bc = st.columns([5, 3, 2])
+                lbl_pay = "↩ Desfazer" if pago_i else "✓ Pago"
+                if ba.button(lbl_pay, key=f"pay_{iid}", use_container_width=True, type="primary"):
+                    item["pago"] = not pago_i
+                    save_data(d)
+                    st.rerun()
+                if bb.button("✏️ Editar", key=f"edit_{iid}", use_container_width=True):
+                    st.session_state["editing_lanc"] = iid
+                    st.rerun()
+                if bc.button("🗑️", key=f"del_{iid}", use_container_width=True):
+                    st.session_state[f"cdel_{iid}"] = True
+                    st.rerun()
+
+                # Confirmação exclusão
+                if st.session_state.get(f"cdel_{iid}"):
+                    st.warning(f"Excluir **{item['descricao']}**?")
+                    dc1, dc2 = st.columns(2)
+                    if dc1.button("Sim, excluir", key=f"ydel_{iid}", type="primary", use_container_width=True):
+                        mes["lancamentos"] = [l for l in lanc if l["id"] != iid]
+                        st.session_state.pop(f"cdel_{iid}", None)
+                        save_data(d)
+                        st.rerun()
+                    if dc2.button("Cancelar", key=f"ndel_{iid}", use_container_width=True):
+                        st.session_state.pop(f"cdel_{iid}", None)
+                        st.rerun()
+
+            st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
 # FIXAS
 # ═══════════════════════════════════════════════════════════════
 with tab_f:
-    if not fixas:
-        st.info("Nenhuma conta fixa neste mês.")
-    else:
-        fixas_ord = sorted(fixas, key=lambda x: x["descricao"])
-        pend_f = [f for f in fixas_ord if not f.get("pago")]
-        pago_f = [f for f in fixas_ord if f.get("pago")]
+    # Mês de referência + totais
+    tf = sum(i["valor"] for i in fixas)
+    pf = sum(i["valor"] for i in fixas if i.get("pago"))
+    crf, cadf = st.columns([3, 2])
+    crf.markdown(f"<div style='font-size:13px;color:#718096;padding-top:8px;'>📅 {nome_mes(mes_key)}</div>",
+                 unsafe_allow_html=True)
+    if cadf.button("➕ Nova fixa", key="add_fixa_top", use_container_width=True):
+        st.session_state["show_add_fixa"] = not st.session_state.get("show_add_fixa", False)
 
-        def _render_fixas(items):
-            rows = ""
-            for item in items:
-                tag_class = "tag-pago" if item["pago"] else "tag-pend"
-                tag_txt   = "✓ pago" if item["pago"] else "pendente"
-                rows += f"""
-<div class='item-row'>
-  <div>
-    <div class='item-desc'>{item['descricao']}</div>
-    <div class='item-sub'>{item.get('categoria','')}</div>
-  </div>
-  <div style='text-align:right;'>
-    <div class='item-val'>{fmt(item['valor'])}</div>
-    <span class='{tag_class}'>{tag_txt}</span>
-  </div>
-</div>"""
-            return f"<div class='card'>{rows}</div>"
+    # Total compacto
+    st.markdown(f"<div style='display:flex;gap:16px;margin:8px 0;'>"
+                f"<span style='font-size:13px;color:#718096;'>Total: <b style='color:#2D3748;'>{fmt(tf)}</b></span>"
+                f"<span style='font-size:13px;color:#38a169;'>Pago: <b>{fmt(pf)}</b></span>"
+                f"<span style='font-size:13px;color:#e53e3e;'>Falta: <b>{fmt(tf-pf)}</b></span>"
+                f"</div>", unsafe_allow_html=True)
 
-        tf = sum(i["valor"] for i in fixas)
-        pf = sum(i["valor"] for i in fixas if i["pago"])
-        st.markdown(f"<div class='card' style='text-align:center;'>"
-                    f"<div class='valor-label'>Total fixas</div>"
-                    f"<div class='valor-grande'>{fmt(tf)}</div>"
-                    f"<div style='font-size:12px;color:#a0aec0;margin-top:4px;'>"
-                    f"Pago: {fmt(pf)} · Pendente: {fmt(tf-pf)}</div></div>",
-                    unsafe_allow_html=True)
-
-        if pend_f:
-            st.markdown("<div class='sec'>● A pagar</div>", unsafe_allow_html=True)
-            st.markdown(_render_fixas(pend_f), unsafe_allow_html=True)
-            for item in pend_f:
-                if st.button(f"✓ {item['descricao']} ({fmt(item['valor'])})",
-                             key=f"fpg_{item['id']}", use_container_width=True):
-                    item["pago"] = True
+    # Formulário de adição rápida
+    if st.session_state.get("show_add_fixa"):
+        with st.form("f_fixa_g", clear_on_submit=True):
+            desc_fq = st.text_input("Descrição *", placeholder="Ex: Streaming, Plano...")
+            val_fq  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
+            cat_fq  = st.selectbox("Categoria", CATEGORIAS)
+            pago_fq = st.checkbox("Já pago?")
+            fs1, fs2 = st.columns(2)
+            if fs1.form_submit_button("✓ Adicionar", use_container_width=True, type="primary"):
+                if desc_fq.strip() and val_fq > 0:
+                    mes["fixas"].append({
+                        "id": str(uuid.uuid4()), "descricao": desc_fq.strip(),
+                        "valor": float(val_fq), "categoria": cat_fq, "pago": pago_fq,
+                    })
+                    st.session_state["show_add_fixa"] = False
                     save_data(d)
                     st.rerun()
+                else:
+                    st.error("Preencha descrição e valor.")
+            if fs2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state["show_add_fixa"] = False
+                st.rerun()
 
-        if pago_f:
-            with st.expander(f"✓ Pagas ({len(pago_f)})"):
-                st.markdown(_render_fixas(pago_f), unsafe_allow_html=True)
-                for item in pago_f:
-                    if st.button(f"↩ Desfazer: {item['descricao']}",
-                                 key=f"fdpg_{item['id']}", use_container_width=True):
-                        item["pago"] = False
+    if not fixas:
+        st.markdown("<div style='text-align:center;color:#a0aec0;padding:30px 0;'>Nenhuma conta fixa.</div>",
+                    unsafe_allow_html=True)
+    else:
+        fixas_ord = sorted(fixas, key=lambda x: (x.get("pago", False), x["descricao"]))
+        for item in fixas_ord:
+            fid    = item["id"]
+            pago_f = item.get("pago", False)
+            borda  = "#68d391" if pago_f else "#fc8181"
+            tag    = "<span class='tag-pago'>✓ pago</span>" if pago_f else "<span class='tag-pend'>pendente</span>"
+
+            # ── Modo edição ──
+            if st.session_state.get("editing_fixa") == fid:
+                st.markdown("<div style='background:white;border-radius:14px;padding:16px;"
+                            "margin-bottom:4px;box-shadow:0 1px 6px rgba(0,0,0,0.1);'>",
+                            unsafe_allow_html=True)
+                st.markdown(f"**✏️ Editando: {item['descricao']}**")
+                with st.form(f"ef_fixa_{fid}"):
+                    fnd  = st.text_input("Descrição", value=item["descricao"])
+                    fnv  = st.number_input("Valor (R$)", value=float(item["valor"]), step=0.01, format="%.2f")
+                    fnc  = st.selectbox("Categoria", CATEGORIAS,
+                                        index=CATEGORIAS.index(item["categoria"]) if item.get("categoria") in CATEGORIAS else 0)
+                    fes1, fes2 = st.columns(2)
+                    if fes1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                        item.update({"descricao": fnd, "valor": float(fnv), "categoria": fnc})
+                        st.session_state.pop("editing_fixa", None)
                         save_data(d)
                         st.rerun()
+                    if fes2.form_submit_button("Cancelar", use_container_width=True):
+                        st.session_state.pop("editing_fixa", None)
+                        st.rerun()
+                st.markdown("</div>", unsafe_allow_html=True)
+
+            # ── Modo normal ──
+            else:
+                st.markdown(f"""
+<div style='background:white;border-radius:14px;padding:14px 16px;
+     border-left:4px solid {borda};box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2px;'>
+  <div style='display:flex;justify-content:space-between;align-items:center;'>
+    <div>
+      <div style='font-weight:700;font-size:16px;color:#2D3748;'>{item['descricao']}</div>
+      <div style='font-size:12px;color:#a0aec0;margin-top:3px;'>{item.get('categoria','')}</div>
+    </div>
+    <div style='text-align:right;'>
+      <div style='font-weight:700;font-size:18px;color:#2D3748;'>{fmt(item['valor'])}</div>
+      {tag}
+    </div>
+  </div>
+</div>""", unsafe_allow_html=True)
+
+                fa, fb, fc = st.columns([5, 3, 2])
+                lbl_fp = "↩ Desfazer" if pago_f else "✓ Pago"
+                if fa.button(lbl_fp, key=f"fpay_{fid}", use_container_width=True, type="primary"):
+                    item["pago"] = not pago_f
+                    save_data(d)
+                    st.rerun()
+                if fb.button("✏️ Editar", key=f"fedit_{fid}", use_container_width=True):
+                    st.session_state["editing_fixa"] = fid
+                    st.rerun()
+                if fc.button("🗑️", key=f"fdel_{fid}", use_container_width=True):
+                    st.session_state[f"cfdel_{fid}"] = True
+                    st.rerun()
+
+                if st.session_state.get(f"cfdel_{fid}"):
+                    st.warning(f"Excluir **{item['descricao']}**?")
+                    fc1, fc2 = st.columns(2)
+                    if fc1.button("Sim, excluir", key=f"yfdel_{fid}", type="primary", use_container_width=True):
+                        mes["fixas"] = [f for f in fixas if f["id"] != fid]
+                        st.session_state.pop(f"cfdel_{fid}", None)
+                        save_data(d)
+                        st.rerun()
+                    if fc2.button("Cancelar", key=f"nfdel_{fid}", use_container_width=True):
+                        st.session_state.pop(f"cfdel_{fid}", None)
+                        st.rerun()
+
+            st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
 # PARCELAS
