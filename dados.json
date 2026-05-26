@@ -1,7 +1,17 @@
 {
   "meses": {
     "2025-03": {
-      "receitas": [],
+      "receitas": [
+        {
+          "id": "a57d6546-768b-4618-8c22-4e37f466c5b9",
+          "data": 18,
+          "descricao": "Honorários",
+          "valor": 9832.2,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        }
+      ],
       "meta_poupanca": 0.0,
       "lancamentos": [
         {
