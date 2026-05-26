@@ -48,29 +48,6 @@ _comp.html("""<script>
 })();
 </script>""", height=0)
 
-# ─── Login ────────────────────────────────────────────────────────────────────
-_senha_ok = st.secrets.get("SENHA","adriely2025") if hasattr(st,"secrets") else "adriely2025"
-if "logado" not in st.session_state:
-    st.session_state["logado"] = False
-if not st.session_state["logado"]:
-    st.markdown("""
-<div style="max-width:340px;margin:60px auto 0;text-align:center;">
-  <div style="font-size:52px;margin-bottom:8px;">🌿</div>
-  <h2 style="color:#2D6A4F;font-weight:700;margin:0;">Meu Dinheiro</h2>
-  <p style="color:#718096;margin:6px 0 28px;font-size:14px;">Controle pessoal com propósito</p>
-</div>""", unsafe_allow_html=True)
-    with st.form("login_p"):
-        senha_i = st.text_input("Senha", type="password", placeholder="Digite sua senha")
-        if st.form_submit_button("Entrar →", use_container_width=True):
-            if senha_i == _senha_ok:
-                st.session_state["logado"] = True
-                st.rerun()
-            else:
-                st.error("Senha incorreta.")
-    st.markdown("""<p style="text-align:center;color:#a0aec0;font-size:12px;margin-top:40px;">
-    "Porque onde estiver o seu tesouro, aí estará também o seu coração." — Mt 6:21</p>""",
-    unsafe_allow_html=True)
-    st.stop()
 
 # ─── CSS ─────────────────────────────────────────────────────────────────────
 st.markdown("""
@@ -78,25 +55,32 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 html,body,[class*="css"]{font-family:'Inter',sans-serif;}
 .stApp { background:#F7F3EE !important; }
-.block-container { padding-top:1rem !important; max-width:640px; }
+.block-container {
+    padding-top:0.5rem !important;
+    padding-left:1rem !important;
+    padding-right:1rem !important;
+    max-width:480px;
+}
+/* esconde sidebar no mobile */
+section[data-testid="stSidebar"] { display:none !important; }
+button[data-testid="collapsedControl"] { display:none !important; }
 
 /* Cards */
 .card {
     background:white; border-radius:16px;
-    padding:20px; margin-bottom:14px;
+    padding:18px; margin-bottom:12px;
     box-shadow:0 1px 6px rgba(0,0,0,0.07);
 }
 .card-sm {
     background:white; border-radius:12px;
-    padding:14px 18px; margin-bottom:10px;
+    padding:14px 16px; margin-bottom:10px;
     box-shadow:0 1px 4px rgba(0,0,0,0.06);
 }
 
 /* Versículo */
 .versiculo {
     background:linear-gradient(135deg,#2D6A4F 0%,#40916C 100%);
-    border-radius:16px; padding:22px 24px; margin-bottom:14px;
-    color:white;
+    border-radius:16px; padding:20px; margin-bottom:12px; color:white;
 }
 .versiculo-texto {
     font-size:15px; line-height:1.65; font-style:italic;
@@ -111,27 +95,24 @@ html,body,[class*="css"]{font-family:'Inter',sans-serif;}
 .dica {
     background:#FFFBF0; border:1px solid #F6D860;
     border-left:4px solid #D4A853;
-    border-radius:12px; padding:14px 18px; margin-bottom:14px;
+    border-radius:12px; padding:14px 16px; margin-bottom:12px;
 }
 .dica-titulo { font-size:11px; font-weight:700; color:#B7791F;
     text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
 .dica-texto { font-size:13px; color:#744210; line-height:1.5; margin:0; }
 
 /* Valores */
-.valor-grande { font-size:32px; font-weight:700; color:#1A202C; line-height:1; }
-.valor-label  { font-size:11px; color:#A0AEC0; text-transform:uppercase;
+.valor-grande { font-size:26px; font-weight:700; color:#1A202C; line-height:1; }
+.valor-label  { font-size:10px; color:#A0AEC0; text-transform:uppercase;
     letter-spacing:1px; margin-bottom:4px; }
-.valor-verde  { color:#276749; }
+.valor-verde    { color:#276749; }
 .valor-vermelho { color:#9B2C2C; }
-.valor-azul   { color:#2B6CB0; }
 
 /* Tags */
-.tag-pago    { background:#C6F6D5; color:#276749; border-radius:20px;
+.tag-pago { background:#C6F6D5; color:#276749; border-radius:20px;
     padding:3px 10px; font-size:11px; font-weight:700; }
-.tag-pend    { background:#FED7D7; color:#9B2C2C; border-radius:20px;
+.tag-pend { background:#FED7D7; color:#9B2C2C; border-radius:20px;
     padding:3px 10px; font-size:11px; font-weight:700; }
-.tag-cat     { background:#EBF4FF; color:#2B6CB0; border-radius:20px;
-    padding:3px 8px; font-size:11px; font-weight:600; }
 
 /* Barra de progresso */
 .prog-bg   { background:#EDF2F7; border-radius:8px; height:8px; overflow:hidden; }
@@ -141,31 +122,49 @@ html,body,[class*="css"]{font-family:'Inter',sans-serif;}
 /* Linha de item */
 .item-row {
     display:flex; justify-content:space-between; align-items:flex-start;
-    padding:12px 0; border-bottom:1px solid #F0EDE8;
+    padding:13px 0; border-bottom:1px solid #F0EDE8;
 }
 .item-row:last-child { border-bottom:none; }
-.item-desc { font-weight:600; color:#2D3748; font-size:14px; }
-.item-sub  { font-size:11px; color:#A0AEC0; margin-top:2px; }
-.item-val  { font-weight:700; font-size:15px; color:#2D3748; white-space:nowrap; }
+.item-desc { font-weight:600; color:#2D3748; font-size:15px; }
+.item-sub  { font-size:12px; color:#A0AEC0; margin-top:3px; }
+.item-val  { font-weight:700; font-size:16px; color:#2D3748; white-space:nowrap; }
 
 /* Seção título */
-.sec { font-size:12px; font-weight:700; color:#A0AEC0;
-    text-transform:uppercase; letter-spacing:1.5px; margin:20px 0 10px; }
+.sec { font-size:11px; font-weight:700; color:#A0AEC0;
+    text-transform:uppercase; letter-spacing:1.5px; margin:18px 0 8px; }
 
-/* Botões */
+/* Botões — grandes para toque */
 .stButton>button {
-    border-radius:12px !important; font-weight:600 !important;
-    border:none !important; padding:10px 20px !important;
+    border-radius:14px !important; font-weight:600 !important;
+    border:none !important;
+    min-height:48px !important;
+    font-size:15px !important;
+    width:100% !important;
 }
+
+/* Abas estilo pill */
 div[data-testid="stTabs"] [data-baseweb="tab-list"] {
-    background:#ECDDC8; border-radius:12px; padding:4px; gap:2px;
+    background:#E8E0D5; border-radius:14px; padding:4px; gap:2px;
+    position:sticky; top:0; z-index:10;
 }
 div[data-testid="stTabs"] [data-baseweb="tab"] {
-    border-radius:10px; font-size:13px; font-weight:500; color:#744210;
+    border-radius:11px; font-size:13px; font-weight:500;
+    color:#8B6F47; padding:8px 4px !important;
 }
 div[data-testid="stTabs"] [aria-selected="true"] {
     background:white !important; color:#2D6A4F !important;
-    font-weight:700 !important; box-shadow:0 1px 4px rgba(0,0,0,0.1) !important;
+    font-weight:700 !important; box-shadow:0 1px 4px rgba(0,0,0,0.12) !important;
+}
+
+/* Inputs maiores no mobile */
+.stTextInput input, .stNumberInput input {
+    font-size:16px !important; /* evita zoom automático no iOS */
+    min-height:46px !important;
+    border-radius:12px !important;
+}
+.stSelectbox > div > div {
+    border-radius:12px !important;
+    font-size:15px !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -399,13 +398,11 @@ if "dados" not in st.session_state:
 d = st.session_state["dados"]
 
 # ─── Cabeçalho ────────────────────────────────────────────────────────────────
-meses_keys  = sorted(d["meses"].keys())
-mes_labels  = [nome_mes(k) for k in meses_keys]
+meses_keys = sorted(d["meses"].keys())
+mes_labels = [nome_mes(k) for k in meses_keys]
 
-col_t, col_s = st.columns([3, 2])
-col_t.markdown("### 🌿 Meu Dinheiro")
-mes_sel = col_s.selectbox("", mes_labels,
-    index=len(mes_labels)-1, label_visibility="collapsed")
+st.markdown("<p style='margin:8px 0 2px;font-size:22px;font-weight:700;color:#2D6A4F;'>🌿 Meu Dinheiro</p>", unsafe_allow_html=True)
+mes_sel = st.selectbox("", mes_labels, index=len(mes_labels)-1, label_visibility="collapsed")
 mes_key = meses_keys[mes_labels.index(mes_sel)]
 
 # ─── Versículo + Dica do dia ──────────────────────────────────────────────────
