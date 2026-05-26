@@ -652,8 +652,8 @@
     }
   ],
   "poupanca": {
-    "objetivo": "",
-    "meta_total": 0.0,
+    "objetivo": "Meta 2026",
+    "meta_total": 50000.0,
     "depositos": [
       {
         "id": "4ec44605-1049-4014-99bb-b74ccb7f28eb",
