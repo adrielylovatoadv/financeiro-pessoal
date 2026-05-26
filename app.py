@@ -95,16 +95,6 @@ button[data-testid="collapsedControl"] { display:none !important; }
     text-transform:uppercase; color:rgba(255,255,255,0.65);
 }
 
-/* Dica */
-.dica {
-    background:#FFFBF0; border:1px solid #F6D860;
-    border-left:4px solid #D4A853;
-    border-radius:12px; padding:14px 16px; margin-bottom:12px;
-}
-.dica-titulo { font-size:11px; font-weight:700; color:#B7791F;
-    text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
-.dica-texto { font-size:13px; color:#744210; line-height:1.5; margin:0; }
-
 /* Valores */
 .valor-grande { font-size:26px; font-weight:700; color:#1A202C; line-height:1; }
 .valor-label  { font-size:10px; color:#A0AEC0; text-transform:uppercase;
@@ -206,29 +196,9 @@ VERSICULO = [
     ("Provérbios 11:24", "Há quem distribua, e ainda lhe aumenta a riqueza; e há quem retenha mais do que é justo, mas empobrecerá."),
 ]
 
-DICAS = [
-    ("Regra dos 50/30/20", "Destine 50% para necessidades, 30% para desejos e 20% para poupança e dívidas. Automatize essa separação todo mês."),
-    ("Pague-se primeiro", "Assim que receber, transfira o valor de poupança antes de pagar qualquer outra conta. Guarde o que sobrar."),
-    ("Fundo de emergência", "Construa uma reserva de 3 a 6 meses de despesas. Ela evita que imprevistos virem dívidas."),
-    ("Cuidado com parcelamentos", "Parcelas pequenas parecem inofensivas, mas somadas podem comprometer boa parte da renda. Revise os seus compromissos futuros."),
-    ("Liste antes de comprar", "Antes de ir ao mercado ou abrir um app de compras, escreva o que precisa. Evita impulso."),
-    ("Espere 48h", "Sentiu vontade de comprar algo não essencial? Espere 48 horas. Muitas compras por impulso não sobrevivem à reflexão."),
-    ("Negocie com fornecedores", "Planos de telefone, internet, seguros — renegocie anualmente. Empresas têm ofertas especiais para quem pede."),
-    ("Revise assinaturas", "Confira todos os débitos automáticos. Serviços esquecidos são dinheiro desperdiçado todo mês."),
-    ("Cozinhe mais em casa", "Reduzir pedidos de delivery em 2x por semana pode economizar centenas de reais por mês."),
-    ("Compare preços", "Antes de comprar qualquer item acima de R$ 100, compare em pelo menos 3 lugares. Minutos de pesquisa economizam muito."),
-    ("Anote todo gasto", "Pequenos gastos invisíveis (cafés, lanches, aplicativos) somam mais do que parece. Registre tudo."),
-    ("Defina uma meta visual", "Quer fazer uma viagem? Reformar um cômodo? Cole uma imagem que inspire. Objetivos concretos motivam mais."),
-    ("Dívidas: bola de neve ou avalanche?", "Na bola de neve, quite a menor primeiro. Na avalanche, a de maior juros. Escolha uma estratégia e seja consistente."),
-    ("Evite o mínimo do cartão", "Pagar o mínimo da fatura é o caminho mais caro. Se não consegue pagar o total, revise os gastos urgentemente."),
-    ("Um ano depois...", "Antes de uma compra grande, pergunte-se: em um ano, vou me arrepender de ter comprado? Ou de não ter poupado esse dinheiro?"),
-]
-
-def conteudo_do_dia():
-    hoje = _date.today()
-    idx_v = hoje.timetuple().tm_yday % len(VERSICULO)
-    idx_d = (hoje.timetuple().tm_yday + 7) % len(DICAS)
-    return VERSICULO[idx_v], DICAS[idx_d]
+def versiculo_do_dia():
+    idx = _date.today().timetuple().tm_yday % len(VERSICULO)
+    return VERSICULO[idx]
 
 # ─── Constantes ───────────────────────────────────────────────────────────────
 CATEGORIAS = [
@@ -456,16 +426,12 @@ mes_sel = st.selectbox("", mes_labels, index=_default_idx,
                         label_visibility="collapsed")
 mes_key = meses_keys[mes_labels.index(mes_sel)]
 
-# ─── Versículo + Dica do dia ──────────────────────────────────────────────────
-ver, dic = conteudo_do_dia()
+# ─── Versículo do dia ─────────────────────────────────────────────────────────
+ver = versiculo_do_dia()
 st.markdown(f"""
 <div class="versiculo">
   <p class="versiculo-texto">"{ver[1]}"</p>
   <div class="versiculo-ref">📖 {ver[0]}</div>
-</div>
-<div class="dica">
-  <div class="dica-titulo">💡 Dica · {dic[0]}</div>
-  <p class="dica-texto">{dic[1]}</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -938,22 +904,55 @@ with tab_rec:
 # PARCELAS
 # ═══════════════════════════════════════════════════════════════
 with tab_p:
-    st.markdown("<div class='sec'>Parcelas ativas (todos os meses)</div>", unsafe_allow_html=True)
+    cp_hd, cp_add = st.columns([3, 2])
+    cp_hd.markdown("<div class='sec' style='margin-top:8px;'>Parcelas ativas</div>",
+                   unsafe_allow_html=True)
+    if cp_add.button("➕ Nova parcela", key="add_parc_top", use_container_width=True):
+        st.session_state["show_add_parc"] = not st.session_state.get("show_add_parc", False)
+
+    if st.session_state.get("show_add_parc"):
+        with st.form("f_parc_add", clear_on_submit=True):
+            pa_desc = st.text_input("Descrição *", placeholder="Ex: Financiamento, Cartão...")
+            pa_val  = st.number_input("Valor da parcela (R$) *", min_value=0.0, step=0.01, format="%.2f")
+            pac1, pac2 = st.columns(2)
+            pa_dia  = pac1.number_input("Dia vencimento", min_value=1, max_value=31, value=_date.today().day)
+            pa_parc = pac2.text_input("Parcela (ex: 1/12)")
+            pa_cat  = st.selectbox("Categoria", CATEGORIAS)
+            pa_obs  = st.text_input("Observação", placeholder="opcional")
+            pa_pago = st.checkbox("Já pago?")
+            pas1, pas2 = st.columns(2)
+            if pas1.form_submit_button("✓ Adicionar", use_container_width=True, type="primary"):
+                if pa_desc.strip() and pa_val > 0:
+                    mes["lancamentos"].append({
+                        "id": str(uuid.uuid4()), "data": int(pa_dia),
+                        "descricao": pa_desc.strip(), "valor": float(pa_val),
+                        "parcela": pa_parc.strip(), "categoria": pa_cat,
+                        "pago": pa_pago, "obs": pa_obs.strip(),
+                    })
+                    st.session_state["show_add_parc"] = False
+                    save_data(d); st.rerun()
+                else:
+                    st.error("Preencha descrição e valor.")
+            if pas2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state["show_add_parc"] = False; st.rerun()
+
+    # Monta mapa com referência ao lancamento original para edição
     parcelas_map = {}
     for mk in sorted(d["meses"].keys()):
         for l in d["meses"][mk].get("lancamentos", []):
-            ps = l.get("parcela","")
+            ps = l.get("parcela", "")
             if not ps or "/" not in ps: continue
             try:
                 a_s, t_s = ps.strip().split("/")
-                atual = int("".join(c for c in a_s if c.isdigit()))
+                atual   = int("".join(c for c in a_s if c.isdigit()))
                 total_p = int("".join(c for c in t_s if c.isdigit()))
             except: continue
             key = l["descricao"]
             if key not in parcelas_map or atual > parcelas_map[key]["atual"]:
                 parcelas_map[key] = {
-                    "atual":atual,"total":total_p,
-                    "valor":l["valor"],"cat":l.get("categoria",""),
+                    "atual": atual, "total": total_p,
+                    "valor": l["valor"], "cat": l.get("categoria", ""),
+                    "obs": l.get("obs", ""), "mes_key": mk, "id": l["id"],
                 }
 
     if not parcelas_map:
@@ -961,11 +960,46 @@ with tab_p:
                     "Nenhuma parcela registrada.</div>", unsafe_allow_html=True)
     else:
         for desc, info in sorted(parcelas_map.items()):
-            a, t = info["atual"], info["total"]
+            a, t   = info["atual"], info["total"]
             restam = t - a
-            pct = a / t * 100
+            pct    = a / t * 100
             val_rest = restam * info["valor"]
-            st.markdown(f"""
+            pid    = info["id"]
+
+            # ── Modo edição ──
+            if st.session_state.get("editing_parc") == pid:
+                st.markdown("<div style='background:white;border-radius:14px;padding:16px;"
+                            "margin-bottom:4px;box-shadow:0 1px 6px rgba(0,0,0,0.1);'>",
+                            unsafe_allow_html=True)
+                st.markdown(f"**✏️ Editando: {desc}**")
+                with st.form(f"ef_parc_{pid}"):
+                    pnd  = st.text_input("Descrição", value=desc)
+                    pnv  = st.number_input("Valor/parcela (R$)", value=float(info["valor"]), step=0.01, format="%.2f")
+                    pec1, pec2 = st.columns(2)
+                    pna  = pec1.number_input("Parcela atual", value=int(a), min_value=1)
+                    pnt  = pec2.number_input("Total de parcelas", value=int(t), min_value=1)
+                    pncat = st.selectbox("Categoria", CATEGORIAS,
+                                         index=CATEGORIAS.index(info["cat"]) if info["cat"] in CATEGORIAS else 0)
+                    pnobs = st.text_input("Observação", value=info.get("obs", ""))
+                    pes1, pes2 = st.columns(2)
+                    if pes1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                        mk_edit = info["mes_key"]
+                        for l in d["meses"][mk_edit].get("lancamentos", []):
+                            if l["id"] == pid:
+                                l.update({
+                                    "descricao": pnd.strip(), "valor": float(pnv),
+                                    "parcela": f"{pna}/{pnt}", "categoria": pncat, "obs": pnobs,
+                                })
+                                break
+                        st.session_state.pop("editing_parc", None)
+                        save_data(d); st.rerun()
+                    if pes2.form_submit_button("Cancelar", use_container_width=True):
+                        st.session_state.pop("editing_parc", None); st.rerun()
+                st.markdown("</div>", unsafe_allow_html=True)
+
+            # ── Modo normal ──
+            else:
+                st.markdown(f"""
 <div class='card-sm'>
   <div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'>
     <div>
@@ -983,8 +1017,28 @@ with tab_p:
     </div>
     <div style='font-size:11px;color:#718096;white-space:nowrap;'>{a}/{t}</div>
   </div>
-</div>
-""", unsafe_allow_html=True)
+</div>""", unsafe_allow_html=True)
+
+                pa_a, pa_b = st.columns([1, 1])
+                if pa_a.button("✏️ Editar", key=f"pedit_{pid}", use_container_width=True):
+                    st.session_state["editing_parc"] = pid; st.rerun()
+                if pa_b.button("✕ Excluir", key=f"pdel_{pid}", use_container_width=True):
+                    st.session_state[f"cpdel_{pid}"] = True; st.rerun()
+
+                if st.session_state.get(f"cpdel_{pid}"):
+                    st.warning(f"Excluir **{desc}** ({nome_mes(info['mes_key'])})?")
+                    pd1, pd2 = st.columns(2)
+                    if pd1.button("Sim, excluir", key=f"ypdel_{pid}", type="primary", use_container_width=True):
+                        mk_del = info["mes_key"]
+                        d["meses"][mk_del]["lancamentos"] = [
+                            l for l in d["meses"][mk_del].get("lancamentos", []) if l["id"] != pid
+                        ]
+                        st.session_state.pop(f"cpdel_{pid}", None)
+                        save_data(d); st.rerun()
+                    if pd2.button("Cancelar", key=f"npdel_{pid}", use_container_width=True):
+                        st.session_state.pop(f"cpdel_{pid}", None); st.rerun()
+
+            st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
 # POUPANÇA
