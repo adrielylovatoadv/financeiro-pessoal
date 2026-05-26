@@ -459,12 +459,12 @@ c1.markdown(f"""<div class='card' style='text-align:center;'>
   <div class='valor-grande valor-verde'>{fmt(total_rec)}</div>
 </div>""", unsafe_allow_html=True)
 c2.markdown(f"""<div class='card' style='text-align:center;'>
-  <div class='valor-label'>Gastos</div>
+  <div class='valor-label'>Débitos</div>
   <div class='valor-grande valor-vermelho'>{fmt(total)}</div>
 </div>""", unsafe_allow_html=True)
 c3.markdown(f"""<div class='card' style='text-align:center;'>
-  <div class='valor-label'>Saldo</div>
-  <div class='valor-grande' style='color:{_saldo_cor};'>{_saldo_disp}</div>
+  <div class='valor-label'>A pagar</div>
+  <div class='valor-grande valor-vermelho'>{fmt(pend)}</div>
 </div>""", unsafe_allow_html=True)
 
 # ─── Abas ─────────────────────────────────────────────────────────────────────
