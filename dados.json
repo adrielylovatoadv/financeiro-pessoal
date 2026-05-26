@@ -182,16 +182,6 @@
       "meta_poupanca": 0.0,
       "lancamentos": [
         {
-          "id": "m4l1",
-          "data": 5,
-          "descricao": "Nubank",
-          "valor": 430.11,
-          "parcela": "5/5",
-          "categoria": "💳 Cartão",
-          "pago": true,
-          "obs": ""
-        },
-        {
           "id": "m4l2",
           "data": 5,
           "descricao": "Nubank",
