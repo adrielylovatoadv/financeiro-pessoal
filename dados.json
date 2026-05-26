@@ -362,7 +362,7 @@
           "valor": 2573.2,
           "parcela": "8/48",
           "categoria": "🚗 Carro",
-          "pago": true,
+          "pago": false,
           "obs": ""
         },
         {
