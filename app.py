@@ -224,6 +224,11 @@ CATEGORIAS = [
     "🛡️ Seguro","🛒 Compras","💄 Beleza","🎾 Lazer","🎯 Outros",
 ]
 
+CATEGORIAS_RECEITA = [
+    "⚖️ Honorários","💼 Salário","🏠 Aluguel recebido",
+    "🤝 Acordo/Êxito","💰 Reembolso","🎁 Presente","📈 Investimento","🎯 Outros",
+]
+
 MESES_PT = {
     "01":"Janeiro","02":"Fevereiro","03":"Março","04":"Abril",
     "05":"Maio","06":"Junho","07":"Julho","08":"Agosto",
@@ -242,6 +247,8 @@ def fmt(v):
 INITIAL_DATA = {
     "meses": {
         "2025-03": {
+            "receitas": [],
+            "meta_poupanca": 0.0,
             "lancamentos": [
                 {"id":"m3l1","data":5,"descricao":"Nubank","valor":426.97,"parcela":"3/5","categoria":"💳 Cartão","pago":True,"obs":""},
                 {"id":"m3l2","data":5,"descricao":"Nubank","valor":979.84,"parcela":"1/3","categoria":"💳 Cartão","pago":True,"obs":""},
@@ -265,6 +272,8 @@ INITIAL_DATA = {
             ],
         },
         "2025-04": {
+            "receitas": [],
+            "meta_poupanca": 0.0,
             "lancamentos": [
                 {"id":"m4l1","data":5,"descricao":"Nubank","valor":430.11,"parcela":"4/5","categoria":"💳 Cartão","pago":True,"obs":""},
                 {"id":"m4l2","data":5,"descricao":"Nubank","valor":532.77,"parcela":"2/3","categoria":"💳 Cartão","pago":True,"obs":""},
@@ -287,6 +296,8 @@ INITIAL_DATA = {
             ],
         },
         "2025-05": {
+            "receitas": [],
+            "meta_poupanca": 0.0,
             "lancamentos": [
                 {"id":"m5l1","data":5,"descricao":"OAB SP","valor":361.23,"parcela":"1/3","categoria":"⚖️ Profissional","pago":True,"obs":""},
                 {"id":"m5l2","data":5,"descricao":"Academia","valor":135.00,"parcela":"","categoria":"💪 Academia/Esporte","pago":True,"obs":""},
@@ -309,6 +320,8 @@ INITIAL_DATA = {
             ],
         },
         "2025-06": {
+            "receitas": [],
+            "meta_poupanca": 0.0,
             "lancamentos": [
                 {"id":"m6l1","data":5,"descricao":"OAB SP","valor":361.23,"parcela":"2/3","categoria":"⚖️ Profissional","pago":False,"obs":""},
                 {"id":"m6l2","data":5,"descricao":"Academia","valor":135.00,"parcela":"","categoria":"💪 Academia/Esporte","pago":False,"obs":""},
@@ -397,6 +410,11 @@ if "dados" not in st.session_state:
 
 d = st.session_state["dados"]
 
+# Garante chaves de receita em todos os meses (retrocompatibilidade)
+for _mk in d["meses"]:
+    d["meses"][_mk].setdefault("receitas", [])
+    d["meses"][_mk].setdefault("meta_poupanca", 0.0)
+
 # ─── Cabeçalho ────────────────────────────────────────────────────────────────
 meses_keys = sorted(d["meses"].keys())
 mes_labels = [nome_mes(k) for k in meses_keys]
@@ -419,33 +437,39 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ─── Dados do mês ─────────────────────────────────────────────────────────────
-mes    = d["meses"][mes_key]
-lanc   = mes.get("lancamentos", [])
-fixas  = mes.get("fixas", [])
-todos  = lanc + fixas
+mes         = d["meses"][mes_key]
+lanc        = mes.get("lancamentos", [])
+fixas       = mes.get("fixas", [])
+todos       = lanc + fixas
+receitas_m  = mes.get("receitas", [])
+meta_poupc  = mes.get("meta_poupanca", 0.0)
 
-total  = sum(i["valor"] for i in todos)
-pago   = sum(i["valor"] for i in todos if i.get("pago"))
-pend   = total - pago
+total       = sum(i["valor"] for i in todos)
+pago        = sum(i["valor"] for i in todos if i.get("pago"))
+pend        = total - pago
+total_rec   = sum(r["valor"] for r in receitas_m)
+saldo_mes   = total_rec - total
+_saldo_cor  = "#276749" if saldo_mes >= 0 else "#9B2C2C"
+_saldo_disp = fmt(abs(saldo_mes)) if saldo_mes >= 0 else "- " + fmt(abs(saldo_mes))
 
 # ─── Cards de resumo ──────────────────────────────────────────────────────────
 c1, c2, c3 = st.columns(3)
 c1.markdown(f"""<div class='card' style='text-align:center;'>
-  <div class='valor-label'>Total</div>
-  <div class='valor-grande'>{fmt(total)}</div>
+  <div class='valor-label'>Receitas</div>
+  <div class='valor-grande valor-verde'>{fmt(total_rec)}</div>
 </div>""", unsafe_allow_html=True)
 c2.markdown(f"""<div class='card' style='text-align:center;'>
-  <div class='valor-label'>Pago</div>
-  <div class='valor-grande valor-verde'>{fmt(pago)}</div>
+  <div class='valor-label'>Gastos</div>
+  <div class='valor-grande valor-vermelho'>{fmt(total)}</div>
 </div>""", unsafe_allow_html=True)
 c3.markdown(f"""<div class='card' style='text-align:center;'>
-  <div class='valor-label'>A pagar</div>
-  <div class='valor-grande valor-vermelho'>{fmt(pend)}</div>
+  <div class='valor-label'>Saldo</div>
+  <div class='valor-grande' style='color:{_saldo_cor};'>{_saldo_disp}</div>
 </div>""", unsafe_allow_html=True)
 
 # ─── Abas ─────────────────────────────────────────────────────────────────────
-tab_g, tab_f, tab_p, tab_add, tab_r = st.tabs([
-    "💸 Gastos", "🔁 Fixas", "📅 Parcelas", "➕ Novo", "📊 Resumo"
+tab_g, tab_f, tab_rec, tab_p, tab_add, tab_r = st.tabs([
+    "💸 Gastos", "🔁 Fixas", "💰 Receita", "📅 Parcelas", "➕ Novo", "📊 Resumo"
 ])
 
 # ═══════════════════════════════════════════════════════════════
@@ -699,6 +723,185 @@ with tab_f:
             st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
+# RECEITA
+# ═══════════════════════════════════════════════════════════════
+with tab_rec:
+    rec_list = mes.get("receitas", [])
+
+    # Cabeçalho do mês + botão adicionar
+    crec, cadrec = st.columns([3, 2])
+    crec.markdown(f"<div style='font-size:13px;color:#718096;padding-top:8px;'>📅 {nome_mes(mes_key)}</div>",
+                  unsafe_allow_html=True)
+    if cadrec.button("➕ Nova receita", key="add_rec_top", use_container_width=True):
+        st.session_state["show_add_rec"] = not st.session_state.get("show_add_rec", False)
+
+    # Formulário de adição rápida
+    if st.session_state.get("show_add_rec"):
+        with st.form("f_rec_g", clear_on_submit=True):
+            desc_rq = st.text_input("Descrição *", placeholder="Ex: Honorários, Salário...")
+            val_rq  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
+            dia_rq  = st.number_input("Dia", min_value=1, max_value=31, value=_date.today().day)
+            cat_rq  = st.selectbox("Categoria", CATEGORIAS_RECEITA)
+            obs_rq  = st.text_input("Observação", placeholder="opcional")
+            rec_rq  = st.checkbox("Já recebido?", value=True)
+            rs1, rs2 = st.columns(2)
+            if rs1.form_submit_button("✓ Adicionar", use_container_width=True, type="primary"):
+                if desc_rq.strip() and val_rq > 0:
+                    mes["receitas"].append({
+                        "id": str(uuid.uuid4()), "data": int(dia_rq),
+                        "descricao": desc_rq.strip(), "valor": float(val_rq),
+                        "categoria": cat_rq, "recebido": rec_rq, "obs": obs_rq.strip(),
+                    })
+                    st.session_state["show_add_rec"] = False
+                    save_data(d)
+                    st.rerun()
+                else:
+                    st.error("Preencha descrição e valor.")
+            if rs2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state["show_add_rec"] = False
+                st.rerun()
+
+    # ── Card: Saldo e Meta de Poupança ──────────────────────────
+    st.markdown("<div class='sec'>Saldo & Meta de poupança</div>", unsafe_allow_html=True)
+    if st.session_state.get("editing_meta"):
+        with st.form("f_meta"):
+            nova_meta = st.number_input("Meta mensal (R$)", value=float(meta_poupc),
+                                        min_value=0.0, step=100.0, format="%.2f")
+            mm1, mm2 = st.columns(2)
+            if mm1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                mes["meta_poupanca"] = float(nova_meta)
+                st.session_state.pop("editing_meta", None)
+                save_data(d)
+                st.rerun()
+            if mm2.form_submit_button("Cancelar", use_container_width=True):
+                st.session_state.pop("editing_meta", None)
+                st.rerun()
+    else:
+        _meta_pct = min((saldo_mes / meta_poupc * 100) if meta_poupc > 0 else 0, 100)
+        _meta_pct = max(_meta_pct, 0)
+        _meta_label = fmt(meta_poupc) if meta_poupc > 0 else "Não definida"
+        _saldo_icon = "✅" if saldo_mes >= 0 else "⚠️"
+        st.markdown(f"""
+<div class='card'>
+  <div style='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;'>
+    <div>
+      <div class='valor-label'>Saldo do mês</div>
+      <div class='valor-grande' style='color:{_saldo_cor};'>{_saldo_disp} {_saldo_icon}</div>
+    </div>
+    <div style='text-align:right;'>
+      <div class='valor-label'>Meta poupar</div>
+      <div style='font-weight:700;font-size:18px;color:#D4A853;'>{_meta_label}</div>
+    </div>
+  </div>
+  <div class='prog-bg'><div class='prog-fill' style='width:{_meta_pct:.0f}%;'></div></div>
+  <div style='font-size:12px;color:#718096;margin-top:6px;text-align:right;'>{_meta_pct:.0f}% da meta atingido</div>
+</div>""", unsafe_allow_html=True)
+        if st.button("✏️ Definir meta de poupança", key="btn_meta", use_container_width=True):
+            st.session_state["editing_meta"] = True
+            st.rerun()
+
+    # ── Lista de receitas ────────────────────────────────────────
+    st.markdown("<div class='sec'>Receitas do mês</div>", unsafe_allow_html=True)
+    if not rec_list:
+        st.markdown("<div style='text-align:center;color:#a0aec0;padding:30px 0;'>Nenhuma receita. Toque em ➕ Nova receita.</div>",
+                    unsafe_allow_html=True)
+    else:
+        # Totalizador compacto
+        total_rec_l  = sum(r["valor"] for r in rec_list)
+        recebido_l   = sum(r["valor"] for r in rec_list if r.get("recebido"))
+        aguardando_l = total_rec_l - recebido_l
+        st.markdown(
+            f"<div style='display:flex;gap:16px;margin:8px 0;'>"
+            f"<span style='font-size:13px;color:#718096;'>Total: <b style='color:#2D3748;'>{fmt(total_rec_l)}</b></span>"
+            f"<span style='font-size:13px;color:#38a169;'>Recebido: <b>{fmt(recebido_l)}</b></span>"
+            f"<span style='font-size:13px;color:#d97706;'>Aguardando: <b>{fmt(aguardando_l)}</b></span>"
+            f"</div>", unsafe_allow_html=True)
+
+        rec_ord = sorted(rec_list, key=lambda x: x.get("data", 0))
+        for item in rec_ord:
+            rid   = item["id"]
+            rec_i = item.get("recebido", False)
+            sub_r = " · ".join(filter(None, [
+                f"Dia {int(item['data'])}" if item.get("data") else "",
+                item.get("categoria", ""),
+                item.get("obs", ""),
+            ]))
+            borda_r = "#68d391" if rec_i else "#f6ad55"
+            tag_r   = ("<span class='tag-pago'>✓ recebido</span>" if rec_i
+                       else "<span style='background:#FEFCBF;color:#B7791F;border-radius:20px;"
+                            "padding:3px 10px;font-size:11px;font-weight:700;'>aguardando</span>")
+
+            # ── Modo edição ──
+            if st.session_state.get("editing_rec") == rid:
+                st.markdown("<div style='background:white;border-radius:14px;padding:16px;"
+                            "margin-bottom:4px;box-shadow:0 1px 6px rgba(0,0,0,0.1);'>",
+                            unsafe_allow_html=True)
+                st.markdown(f"**✏️ Editando: {item['descricao']}**")
+                with st.form(f"ef_rec_{rid}"):
+                    rnd  = st.text_input("Descrição", value=item["descricao"])
+                    rnv  = st.number_input("Valor (R$)", value=float(item["valor"]), step=0.01, format="%.2f")
+                    rndia = st.number_input("Dia", value=int(item.get("data", 1)), min_value=1, max_value=31)
+                    rncat = st.selectbox("Categoria", CATEGORIAS_RECEITA,
+                                         index=CATEGORIAS_RECEITA.index(item["categoria"])
+                                         if item.get("categoria") in CATEGORIAS_RECEITA else 0)
+                    rnobs = st.text_input("Observação", value=item.get("obs", ""))
+                    res1, res2 = st.columns(2)
+                    if res1.form_submit_button("💾 Salvar", use_container_width=True, type="primary"):
+                        item.update({"descricao": rnd, "valor": float(rnv),
+                                     "data": int(rndia), "categoria": rncat, "obs": rnobs})
+                        st.session_state.pop("editing_rec", None)
+                        save_data(d)
+                        st.rerun()
+                    if res2.form_submit_button("Cancelar", use_container_width=True):
+                        st.session_state.pop("editing_rec", None)
+                        st.rerun()
+                st.markdown("</div>", unsafe_allow_html=True)
+
+            # ── Modo normal ──
+            else:
+                st.markdown(f"""
+<div style='background:white;border-radius:14px;padding:14px 16px;
+     border-left:4px solid {borda_r};box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2px;'>
+  <div style='display:flex;justify-content:space-between;align-items:flex-start;'>
+    <div style='flex:1;'>
+      <div style='font-weight:700;font-size:16px;color:#2D3748;'>{item['descricao']}</div>
+      <div style='font-size:12px;color:#a0aec0;margin-top:3px;'>{sub_r}</div>
+    </div>
+    <div style='text-align:right;margin-left:12px;flex-shrink:0;'>
+      <div style='font-weight:700;font-size:18px;color:#276749;'>{fmt(item['valor'])}</div>
+      {tag_r}
+    </div>
+  </div>
+</div>""", unsafe_allow_html=True)
+
+                ra, rb, rc_btn = st.columns([5, 3, 2])
+                lbl_rec = "↩ Desfazer" if rec_i else "✓ Recebido"
+                if ra.button(lbl_rec, key=f"rpay_{rid}", use_container_width=True, type="primary"):
+                    item["recebido"] = not rec_i
+                    save_data(d)
+                    st.rerun()
+                if rb.button("✏️ Editar", key=f"redit_{rid}", use_container_width=True):
+                    st.session_state["editing_rec"] = rid
+                    st.rerun()
+                if rc_btn.button("🗑️", key=f"rdel_{rid}", use_container_width=True):
+                    st.session_state[f"crdel_{rid}"] = True
+                    st.rerun()
+
+                if st.session_state.get(f"crdel_{rid}"):
+                    st.warning(f"Excluir **{item['descricao']}**?")
+                    rd1, rd2 = st.columns(2)
+                    if rd1.button("Sim, excluir", key=f"yrdel_{rid}", type="primary", use_container_width=True):
+                        mes["receitas"] = [r for r in rec_list if r["id"] != rid]
+                        st.session_state.pop(f"crdel_{rid}", None)
+                        save_data(d)
+                        st.rerun()
+                    if rd2.button("Cancelar", key=f"nrdel_{rid}", use_container_width=True):
+                        st.session_state.pop(f"crdel_{rid}", None)
+                        st.rerun()
+
+            st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
+
+# ═══════════════════════════════════════════════════════════════
 # PARCELAS
 # ═══════════════════════════════════════════════════════════════
 with tab_p:
@@ -811,6 +1014,8 @@ with tab_add:
         if st.button(f"📅 Criar {prox_nome} (copia fixas automaticamente)",
                      use_container_width=True):
             d["meses"][prox_key] = {
+                "receitas": [],
+                "meta_poupanca": mes.get("meta_poupanca", 0.0),
                 "lancamentos": [],
                 "fixas": [{"id":str(uuid.uuid4()),"descricao":t["descricao"],
                            "valor":t["valor"],"categoria":t["categoria"],"pago":False}
@@ -855,14 +1060,22 @@ with tab_r:
         st.markdown("<div class='sec'>Histórico</div>", unsafe_allow_html=True)
         rows_h = ""
         for mk in sorted(meses_keys)[-5:]:
-            ml = d["meses"][mk].get("lancamentos",[])
-            mf = d["meses"][mk].get("fixas",[])
-            mt = sum(x["valor"] for x in ml) + sum(x["valor"] for x in mf)
+            ml  = d["meses"][mk].get("lancamentos", [])
+            mf  = d["meses"][mk].get("fixas", [])
+            mr  = d["meses"][mk].get("receitas", [])
+            mt  = sum(x["valor"] for x in ml) + sum(x["valor"] for x in mf)
+            mtr = sum(x["valor"] for x in mr)
+            msd = mtr - mt
             bold = "font-weight:700;color:#2D6A4F;" if mk == mes_key else ""
+            saldo_c = "#276749" if msd >= 0 else "#9B2C2C"
+            saldo_s = fmt(abs(msd)) if msd >= 0 else "- " + fmt(abs(msd))
             rows_h += f"""
 <div class='item-row'>
   <div style='font-size:14px;{bold}'>{nome_mes(mk)}</div>
-  <div style='font-weight:700;font-size:15px;{bold}'>{fmt(mt)}</div>
+  <div style='text-align:right;'>
+    <div style='font-weight:700;font-size:14px;color:#9B2C2C;'>{fmt(mt)}</div>
+    <div style='font-size:11px;color:{saldo_c};font-weight:600;'>saldo {saldo_s}</div>
+  </div>
 </div>"""
         st.markdown(f"<div class='card'>{rows_h}</div>", unsafe_allow_html=True)
 
