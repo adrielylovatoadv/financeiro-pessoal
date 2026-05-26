@@ -55,8 +55,12 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 html,body,[class*="css"]{font-family:'Inter',sans-serif;}
 .stApp { background:#F7F3EE !important; }
+/* Esconde barra preta do Streamlit */
+header[data-testid="stHeader"] { display:none !important; }
+div[data-testid="stToolbar"] { display:none !important; }
+#MainMenu { display:none !important; }
 .block-container {
-    padding-top:0.5rem !important;
+    padding-top:1.2rem !important;
     padding-left:1rem !important;
     padding-right:1rem !important;
     max-width:480px;
