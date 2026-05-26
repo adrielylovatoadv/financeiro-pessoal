@@ -654,6 +654,13 @@
   "poupanca": {
     "objetivo": "",
     "meta_total": 0.0,
-    "depositos": []
+    "depositos": [
+      {
+        "id": "4ec44605-1049-4014-99bb-b74ccb7f28eb",
+        "mes": "2025-05",
+        "valor": 250.0,
+        "obs": "Poupança"
+      }
+    ]
   }
 }
