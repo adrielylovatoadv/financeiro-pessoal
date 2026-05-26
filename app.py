@@ -976,7 +976,7 @@ with tab_p:
                     pnd  = st.text_input("Descrição", value=desc)
                     pnv  = st.number_input("Valor/parcela (R$)", value=float(info["valor"]), step=0.01, format="%.2f")
                     pec1, pec2 = st.columns(2)
-                    pna  = pec1.number_input("Parcela atual", value=int(a), min_value=1)
+                    pna  = pec1.number_input("Parcela atual", value=int(a), min_value=0)
                     pnt  = pec2.number_input("Total de parcelas", value=int(t), min_value=1)
                     pncat = st.selectbox("Categoria", CATEGORIAS,
                                          index=CATEGORIAS.index(info["cat"]) if info["cat"] in CATEGORIAS else 0)
