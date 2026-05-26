@@ -137,13 +137,22 @@ button[data-testid="collapsedControl"] { display:none !important; }
 .sec { font-size:11px; font-weight:700; color:#A0AEC0;
     text-transform:uppercase; letter-spacing:1.5px; margin:18px 0 8px; }
 
-/* Botões — grandes para toque */
+/* Botões primários — grandes para toque */
 .stButton>button {
-    border-radius:14px !important; font-weight:600 !important;
+    border-radius:12px !important; font-weight:600 !important;
     border:none !important;
-    min-height:48px !important;
+    min-height:44px !important;
     font-size:15px !important;
     width:100% !important;
+}
+/* Botões secundários (ações de item) — compactos e discretos */
+button[data-testid="baseButton-secondary"] {
+    min-height:34px !important;
+    font-size:16px !important;
+    background:rgba(0,0,0,0.04) !important;
+    color:#718096 !important;
+    border-radius:10px !important;
+    padding:4px !important;
 }
 
 /* Abas estilo pill */
@@ -439,9 +448,12 @@ meses_keys = sorted(d["meses"].keys())
 mes_labels = [nome_mes(k) for k in meses_keys]
 
 st.markdown("<p style='margin:8px 0 2px;font-size:22px;font-weight:700;color:#2D6A4F;'>🌿 Meu Dinheiro</p>", unsafe_allow_html=True)
-_hoje_key   = _date.today().strftime("%Y-%m")
+_hoje_key    = _date.today().strftime("%Y-%m")
 _default_idx = meses_keys.index(_hoje_key) if _hoje_key in meses_keys else len(meses_keys) - 1
-mes_sel = st.selectbox("", mes_labels, index=_default_idx, label_visibility="collapsed")
+# key com mês/ano garante que volta ao mês atual a cada novo mês (e nova sessão)
+mes_sel = st.selectbox("", mes_labels, index=_default_idx,
+                        key=f"ms_{_date.today().strftime('%Y%m')}",
+                        label_visibility="collapsed")
 mes_key = meses_keys[mes_labels.index(mes_sel)]
 
 # ─── Versículo + Dica do dia ──────────────────────────────────────────────────
@@ -595,16 +607,16 @@ with tab_g:
 </div>""", unsafe_allow_html=True)
 
                 # Ações inline
-                ba, bb, bc = st.columns([5, 3, 2])
-                lbl_pay = "↩ Desfazer" if pago_i else "✓ Pago"
+                ba, bb, bc = st.columns([7, 1, 1])
+                lbl_pay = "↩ Pago" if pago_i else "✓ Pagar"
                 if ba.button(lbl_pay, key=f"pay_{iid}", use_container_width=True, type="primary"):
                     item["pago"] = not pago_i
                     save_data(d)
                     st.rerun()
-                if bb.button("✏️ Editar", key=f"edit_{iid}", use_container_width=True):
+                if bb.button("✏️", key=f"edit_{iid}", use_container_width=True):
                     st.session_state["editing_lanc"] = iid
                     st.rerun()
-                if bc.button("🗑️", key=f"del_{iid}", use_container_width=True):
+                if bc.button("✕", key=f"del_{iid}", use_container_width=True):
                     st.session_state[f"cdel_{iid}"] = True
                     st.rerun()
 
@@ -716,16 +728,16 @@ with tab_f:
   </div>
 </div>""", unsafe_allow_html=True)
 
-                fa, fb, fc = st.columns([5, 3, 2])
-                lbl_fp = "↩ Desfazer" if pago_f else "✓ Pago"
+                fa, fb, fc = st.columns([7, 1, 1])
+                lbl_fp = "↩ Pago" if pago_f else "✓ Pagar"
                 if fa.button(lbl_fp, key=f"fpay_{fid}", use_container_width=True, type="primary"):
                     item["pago"] = not pago_f
                     save_data(d)
                     st.rerun()
-                if fb.button("✏️ Editar", key=f"fedit_{fid}", use_container_width=True):
+                if fb.button("✏️", key=f"fedit_{fid}", use_container_width=True):
                     st.session_state["editing_fixa"] = fid
                     st.rerun()
-                if fc.button("🗑️", key=f"fdel_{fid}", use_container_width=True):
+                if fc.button("✕", key=f"fdel_{fid}", use_container_width=True):
                     st.session_state[f"cfdel_{fid}"] = True
                     st.rerun()
 
@@ -895,16 +907,16 @@ with tab_rec:
   </div>
 </div>""", unsafe_allow_html=True)
 
-                ra, rb, rc_btn = st.columns([5, 3, 2])
-                lbl_rec = "↩ Desfazer" if rec_i else "✓ Recebido"
+                ra, rb, rc_btn = st.columns([7, 1, 1])
+                lbl_rec = "↩ Recebido" if rec_i else "✓ Receber"
                 if ra.button(lbl_rec, key=f"rpay_{rid}", use_container_width=True, type="primary"):
                     item["recebido"] = not rec_i
                     save_data(d)
                     st.rerun()
-                if rb.button("✏️ Editar", key=f"redit_{rid}", use_container_width=True):
+                if rb.button("✏️", key=f"redit_{rid}", use_container_width=True):
                     st.session_state["editing_rec"] = rid
                     st.rerun()
-                if rc_btn.button("🗑️", key=f"rdel_{rid}", use_container_width=True):
+                if rc_btn.button("✕", key=f"rdel_{rid}", use_container_width=True):
                     st.session_state[f"crdel_{rid}"] = True
                     st.rerun()
 
