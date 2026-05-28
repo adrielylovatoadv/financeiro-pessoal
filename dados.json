@@ -311,6 +311,15 @@
           "categoria": "⚖️ Honorários",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "d9cc7325-c86e-4488-b572-0e9b00f89605",
+          "data": 28,
+          "descricao": "Processo trab",
+          "valor": 3500.0,
+          "categoria": "🎯 Outros",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
