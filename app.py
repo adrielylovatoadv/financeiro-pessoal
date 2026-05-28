@@ -439,7 +439,7 @@ st.markdown(f"""
 mes         = d["meses"][mes_key]
 lanc        = mes.get("lancamentos", [])
 fixas       = mes.get("fixas", [])
-todos       = lanc + fixas
+todos       = lanc          # fixas são parte da fatura Sicoob — só exibição, não somam no total
 receitas_m  = mes.get("receitas", [])
 meta_poupc  = mes.get("meta_poupanca", 0.0)
 
@@ -1187,7 +1187,7 @@ with tab_poupa:
     for mk in sorted(d["meses"].keys(), reverse=True)[-6:]:
         mv   = d["meses"][mk]
         mr   = sum(x["valor"] for x in mv.get("receitas", []))
-        mt   = sum(x["valor"] for x in mv.get("lancamentos", [])) + sum(x["valor"] for x in mv.get("fixas", []))
+        mt   = sum(x["valor"] for x in mv.get("lancamentos", []))  # fixas não somam (já estão na fatura Sicoob)
         msd  = mr - mt
         sc   = "#276749" if msd >= 0 else "#9B2C2C"
         ss   = fmt(abs(msd)) if msd >= 0 else "- " + fmt(abs(msd))
@@ -1238,7 +1238,7 @@ with tab_r:
             ml  = d["meses"][mk].get("lancamentos", [])
             mf  = d["meses"][mk].get("fixas", [])
             mr  = d["meses"][mk].get("receitas", [])
-            mt  = sum(x["valor"] for x in ml) + sum(x["valor"] for x in mf)
+            mt  = sum(x["valor"] for x in ml)  # fixas não somam (já estão na fatura Sicoob)
             mtr = sum(x["valor"] for x in mr)
             msd = mtr - mt
             bold = "font-weight:700;color:#2D6A4F;" if mk == mes_key else ""
