@@ -383,6 +383,16 @@
           "categoria": "⚖️ Profissional",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "ccdf6525-64f0-4dfb-a760-cea586f559e3",
+          "data": 28,
+          "descricao": "Kelen",
+          "valor": 300.0,
+          "parcela": "",
+          "categoria": "🎯 Outros",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
