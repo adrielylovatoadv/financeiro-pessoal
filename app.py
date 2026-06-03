@@ -164,10 +164,30 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     font-size:16px !important; /* evita zoom automático no iOS */
     min-height:46px !important;
     border-radius:12px !important;
+    color:#1A202C !important;
+    background:white !important;
+}
+.stTextInput input::placeholder, .stNumberInput input::placeholder {
+    color:#A0AEC0 !important;
 }
 .stSelectbox > div > div {
     border-radius:12px !important;
     font-size:15px !important;
+    color:#1A202C !important;
+    background:white !important;
+}
+/* Labels dos inputs */
+.stTextInput label, .stNumberInput label, .stSelectbox label,
+.stDateInput label, .stCheckbox label {
+    color:#2D3748 !important;
+}
+/* Dropdown de opções do selectbox */
+div[data-baseweb="popover"] * {
+    color:#1A202C !important;
+    background:white !important;
+}
+div[data-baseweb="menu"] [role="option"]:hover {
+    background:#F7F3EE !important;
 }
 </style>
 """, unsafe_allow_html=True)
