@@ -462,7 +462,17 @@
       ]
     },
     "2025-06": {
-      "receitas": [],
+      "receitas": [
+        {
+          "id": "3d6adc36-60b3-449e-bee1-07f2582c0d4b",
+          "data": 3,
+          "descricao": "Trabalhos breno",
+          "valor": 350.0,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        }
+      ],
       "meta_poupanca": 0.0,
       "lancamentos": [
         {
