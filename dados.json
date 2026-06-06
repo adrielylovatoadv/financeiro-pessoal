@@ -489,6 +489,15 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "30115ffe-6c42-430c-ba19-090639ad7ef3",
+          "data": 6,
+          "descricao": "Seguros",
+          "valor": 2544.33,
+          "categoria": "💰 Reembolso",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
