@@ -490,14 +490,30 @@ receitas_m = mes.get("receitas", [])
 meta_poupc = mes.get("meta_poupanca", 0.0)
 
 total_rec  = sum(r["valor"] for r in receitas_m)
-total      = sum(i["valor"] for i in lanc)   # fixas não somam (já na fatura bancária)
+total      = sum(i["valor"] for i in lanc)
 pago       = sum(i["valor"] for i in lanc if i.get("pago"))
 pend       = total - pago
-disponivel = total_rec - pago   # quanto sobra da receita após o que já foi pago
+
+# Saldo residual acumulado de meses anteriores (receitas recebidas − pagos)
+def calcular_residual(d, mes_key):
+    acum = 0.0
+    for mk in sorted(d["meses"].keys()):
+        if mk >= mes_key:
+            break
+        mv = d["meses"][mk]
+        rec_mk  = sum(r["valor"] for r in mv.get("receitas", []) if r.get("recebido", True))
+        pago_mk = sum(l["valor"] for l in mv.get("lancamentos", []) if l.get("pago"))
+        acum += rec_mk - pago_mk
+    return acum
+
+residual   = calcular_residual(d, mes_key)
+disponivel = total_rec - pago + max(residual, 0)  # residual negativo não subtrai (já está nos débitos)
 
 # ─── 4 cards de resumo ────────────────────────────────────────────────────────
-_disp_cor = "#16A34A" if disponivel >= 0 else "#DC2626"
+_disp_cor = "#4ADE80" if disponivel >= 0 else "#F87171"
 _disp_txt = fmt(disponivel) if disponivel >= 0 else "- " + fmt(abs(disponivel))
+_res_txt  = (f"<div style='font-size:9px;color:#888;margin-top:3px;'>+{fmt(residual)} anterior</div>"
+             if residual > 0.01 else "")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
@@ -515,6 +531,7 @@ c3.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
 c4.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Disponível</div>
   <div style='font-size:14px;font-weight:700;color:{_disp_cor};'>{_disp_txt}</div>
+  {_res_txt}
 </div>""", unsafe_allow_html=True)
 
 # ─── Abas ─────────────────────────────────────────────────────────────────────
@@ -790,8 +807,9 @@ with tab_rec:
 <div class='card'>
   <div style='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;'>
     <div>
-      <div class='valor-label'>Receita total</div>
+      <div class='valor-label'>Receita do mês</div>
       <div style='font-size:18px;font-weight:700;color:#4ADE80;'>{fmt(total_rec)}</div>
+      {'<div style="font-size:11px;color:#888;margin-top:2px;">+ ' + fmt(residual) + ' residual anterior</div>' if residual > 0.01 else ''}
     </div>
     <div style='text-align:right;'>
       <div class='valor-label'>Saldo projetado</div>
