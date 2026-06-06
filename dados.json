@@ -500,7 +500,7 @@
           "valor": 361.23,
           "parcela": "1/3",
           "categoria": "⚖️ Profissional",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
