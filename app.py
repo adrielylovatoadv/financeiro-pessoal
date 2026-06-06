@@ -461,7 +461,14 @@ if set(d["meses"].keys()) != _antes:
 meses_keys  = sorted(d["meses"].keys())
 mes_labels  = [nome_mes(k) for k in meses_keys]
 _hoje_key   = _date.today().strftime("%Y-%m")
-_default_idx = meses_keys.index(_hoje_key) if _hoje_key in meses_keys else len(meses_keys) - 1
+
+# Padrão: mês mais recente com receitas registradas (evita cair em mês futuro auto-gerado vazio)
+_default_key = _hoje_key
+for _mk in sorted(d["meses"].keys(), reverse=True):
+    if d["meses"][_mk].get("receitas"):
+        _default_key = _mk
+        break
+_default_idx = meses_keys.index(_default_key) if _default_key in meses_keys else len(meses_keys) - 1
 
 st.markdown(
     "<p style='margin:8px 0 10px;font-size:20px;font-weight:700;color:#E8E8E8;letter-spacing:-0.5px;'>"
