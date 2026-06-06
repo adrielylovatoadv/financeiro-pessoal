@@ -538,26 +538,19 @@ def calcular_residual(d, mes_key):
         acum += rec_mk - pago_mk
     return acum
 
-residual    = calcular_residual(d, mes_key)
-res_pos     = max(residual, 0)
+residual = calcular_residual(d, mes_key)
 
-# Tudo que entra = receita do mês + saldo inicial/residual de meses anteriores
-tudo_que_entra = total_rec + res_pos
-
-# Disponível = tudo que entra − o que já foi pago (atualiza conforme você marca)
-disponivel = tudo_que_entra - pago
+# Disponível = receita do mês − gastos já pagos (simples e direto)
+disponivel = total_rec - pago
 
 # ─── 4 cards de resumo ────────────────────────────────────────────────────────
 _disp_cor = "#4ADE80" if disponivel >= 0 else "#F87171"
 _disp_txt = fmt(disponivel) if disponivel >= 0 else "- " + fmt(abs(disponivel))
-_si_label = (f'<div style="font-size:9px;color:#888;margin-top:2px;">+{fmt(res_pos)} anterior</div>'
-             if res_pos > 0.01 else "")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Receita</div>
   <div style='font-size:14px;font-weight:700;color:#4ADE80;'>{fmt(total_rec)}</div>
-  {_si_label}
 </div>""", unsafe_allow_html=True)
 c2.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Débitos</div>
@@ -613,16 +606,15 @@ with tab_g:
             if cs2.form_submit_button("Cancelar", use_container_width=True):
                 st.session_state["show_add_lanc"] = False; st.rerun()
 
-    # Disponível dinâmico: conforme você marca gastos como pagos, o valor diminui
-    if tudo_que_entra > 0:
-        _cx_cor = "#4ADE80" if disponivel >= 0 else "#F87171"
-        _cx_sub = fmt(tudo_que_entra) + " recebido − " + fmt(pago) + " pagos"
+    # Disponível dinâmico: diminui conforme você marca como pago
+    if total_rec > 0:
+        _cx_sub = fmt(total_rec) + " de receita − " + fmt(pago) + " pagos"
         st.markdown(f"""
 <div style='background:#242424;border:1px solid #2E2E2E;border-radius:8px;
      padding:12px 16px;margin-bottom:10px;'>
   <div style='display:flex;justify-content:space-between;align-items:center;'>
     <div style='font-size:12px;color:#888;'>Disponível agora</div>
-    <div style='font-size:17px;font-weight:700;color:{_cx_cor};'>{_disp_txt}</div>
+    <div style='font-size:17px;font-weight:700;color:{_disp_cor};'>{_disp_txt}</div>
   </div>
   <div style='font-size:10px;color:#666;margin-top:4px;'>{_cx_sub}</div>
 </div>""", unsafe_allow_html=True)
