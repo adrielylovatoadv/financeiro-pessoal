@@ -45,16 +45,6 @@
           "obs": ""
         },
         {
-          "id": "m3l4",
-          "data": 9,
-          "descricao": "Mercado Pago",
-          "valor": 424.99,
-          "parcela": "2/2",
-          "categoria": "🛒 Compras",
-          "pago": true,
-          "obs": ""
-        },
-        {
           "id": "m3l5",
           "data": 10,
           "descricao": "Aluguel e net Escritório",
