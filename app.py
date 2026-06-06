@@ -541,23 +541,23 @@ def calcular_residual(d, mes_key):
 residual    = calcular_residual(d, mes_key)
 res_pos     = max(residual, 0)
 
-# Disponível = (receita + residual positivo) − débitos totais  → saldo real do mês
-disponivel  = (total_rec + res_pos) - total
-# Caixa agora = receita + residual − o que já foi pago  → dinheiro no bolso enquanto paga
-caixa_agora = total_rec + res_pos - pago
+# Tudo que entra = receita do mês + saldo inicial/residual de meses anteriores
+tudo_que_entra = total_rec + res_pos
+
+# Disponível = tudo que entra − o que já foi pago (atualiza conforme você marca)
+disponivel = tudo_que_entra - pago
 
 # ─── 4 cards de resumo ────────────────────────────────────────────────────────
 _disp_cor = "#4ADE80" if disponivel >= 0 else "#F87171"
-_disp_sinal = "+" if disponivel >= 0 else "-"
-_disp_txt = (_disp_sinal if disponivel < 0 else "") + fmt(abs(disponivel))
-_res_txt  = (f"<div style='font-size:9px;color:#888;margin-top:3px;'>+{fmt(res_pos)} anterior</div>"
+_disp_txt = fmt(disponivel) if disponivel >= 0 else "- " + fmt(abs(disponivel))
+_si_label = (f'<div style="font-size:9px;color:#888;margin-top:2px;">+{fmt(res_pos)} anterior</div>'
              if res_pos > 0.01 else "")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Receita</div>
   <div style='font-size:14px;font-weight:700;color:#4ADE80;'>{fmt(total_rec)}</div>
-  {('<div style="font-size:9px;color:#888;margin-top:2px;">+' + fmt(res_pos) + ' anterior</div>') if res_pos > 0.01 else ''}
+  {_si_label}
 </div>""", unsafe_allow_html=True)
 c2.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Débitos</div>
@@ -613,17 +613,16 @@ with tab_g:
             if cs2.form_submit_button("Cancelar", use_container_width=True):
                 st.session_state["show_add_lanc"] = False; st.rerun()
 
-    # Caixa dinâmico: receita + residual − o que já foi pago (atualiza conforme você dá ok)
-    if total_rec > 0 or res_pos > 0:
-        _cx_cor = "#4ADE80" if caixa_agora >= 0 else "#F87171"
-        _cx_txt = fmt(caixa_agora) if caixa_agora >= 0 else "- " + fmt(abs(caixa_agora))
-        _cx_sub = f"receita {fmt(total_rec)}" + (f" + {fmt(res_pos)} anterior" if res_pos > 0.01 else "") + f" − pagos {fmt(pago)}"
+    # Disponível dinâmico: conforme você marca gastos como pagos, o valor diminui
+    if tudo_que_entra > 0:
+        _cx_cor = "#4ADE80" if disponivel >= 0 else "#F87171"
+        _cx_sub = fmt(tudo_que_entra) + " recebido − " + fmt(pago) + " pagos"
         st.markdown(f"""
 <div style='background:#242424;border:1px solid #2E2E2E;border-radius:8px;
      padding:12px 16px;margin-bottom:10px;'>
   <div style='display:flex;justify-content:space-between;align-items:center;'>
-    <div style='font-size:12px;color:#888;'>Caixa disponível agora</div>
-    <div style='font-size:16px;font-weight:700;color:{_cx_cor};'>{_cx_txt}</div>
+    <div style='font-size:12px;color:#888;'>Disponível agora</div>
+    <div style='font-size:17px;font-weight:700;color:{_cx_cor};'>{_disp_txt}</div>
   </div>
   <div style='font-size:10px;color:#666;margin-top:4px;'>{_cx_sub}</div>
 </div>""", unsafe_allow_html=True)
