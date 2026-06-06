@@ -508,7 +508,7 @@
           "data": 9,
           "descricao": "Mercado Pago",
           "valor": 87.22,
-          "parcela": "1/3",
+          "parcela": "1/2",
           "categoria": "🛒 Compras",
           "pago": false,
           "obs": ""
