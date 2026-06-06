@@ -218,7 +218,11 @@ hr { border:none; border-top:1px solid #2E2E2E; margin:12px 0; }
 
 /* Selectbox arrow / dropdown text */
 .stSelectbox svg { fill:#888 !important; }
-p, span, div { color:#C8C8C8; }
+p, span, div { color:#E8E8E8; }
+/* Força texto claro em todo conteúdo */
+.stMarkdown, .stMarkdown p, .stMarkdown span { color:#E8E8E8 !important; }
+[data-testid="stMarkdownContainer"] p { color:#E8E8E8 !important; }
+[data-testid="stMarkdownContainer"] b, [data-testid="stMarkdownContainer"] strong { color:#FFFFFF !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -640,35 +644,32 @@ with tab_g:
             st.markdown("<div style='height:4px;'></div>", unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════
-# FIXAS
+# FIXAS — referência de custos fixos na fatura Sicoob (sem pago/pendente)
 # ═══════════════════════════════════════════════════════════════
 with tab_f:
     tf = sum(i["valor"] for i in fixas)
-    pf = sum(i["valor"] for i in fixas if i.get("pago"))
     crf, cadf = st.columns([3, 2])
-    crf.markdown(f"<div style='font-size:12px;color:#666;padding-top:10px;'>{nome_mes(mes_key)}</div>",
+    crf.markdown(f"<div style='font-size:12px;color:#888;padding-top:10px;'>{nome_mes(mes_key)}</div>",
                  unsafe_allow_html=True)
     if cadf.button("+ Nova fixa", key="add_fixa_top", use_container_width=True):
         st.session_state["show_add_fixa"] = not st.session_state.get("show_add_fixa", False)
 
-    st.markdown(f"<div style='display:flex;gap:16px;margin:8px 0 10px;'>"
-                f"<span style='font-size:12px;color:#666;'>Total: <b style='color:#E8E8E8;'>{fmt(tf)}</b></span>"
-                f"<span style='font-size:12px;color:#4ADE80;'>Pago: <b>{fmt(pf)}</b></span>"
-                f"<span style='font-size:12px;color:#F87171;'>Falta: <b>{fmt(tf-pf)}</b></span>"
-                f"</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"<div style='font-size:12px;color:#888;margin:8px 0 10px;'>"
+        f"Total na fatura: <b style='color:#E8E8E8;font-size:15px;'>{fmt(tf)}</b></div>",
+        unsafe_allow_html=True)
 
     if st.session_state.get("show_add_fixa"):
         with st.form("f_fixa_g", clear_on_submit=True):
             desc_fq = st.text_input("Descrição *", placeholder="Ex: Streaming, Plano...")
             val_fq  = st.number_input("Valor (R$) *", min_value=0.0, step=0.01, format="%.2f")
             cat_fq  = st.selectbox("Categoria", CATEGORIAS)
-            pago_fq = st.checkbox("Já pago?")
             fs1, fs2 = st.columns(2)
             if fs1.form_submit_button("Adicionar", use_container_width=True, type="primary"):
                 if desc_fq.strip() and val_fq > 0:
                     mes["fixas"].append({
                         "id": str(uuid.uuid4()), "descricao": desc_fq.strip(),
-                        "valor": float(val_fq), "categoria": cat_fq, "pago": pago_fq,
+                        "valor": float(val_fq), "categoria": cat_fq,
                     })
                     st.session_state["show_add_fixa"] = False
                     save_data(d); st.rerun()
@@ -678,15 +679,12 @@ with tab_f:
                 st.session_state["show_add_fixa"] = False; st.rerun()
 
     if not fixas:
-        st.markdown("<div style='text-align:center;color:#bbb;padding:30px 0;font-size:13px;'>Nenhuma conta fixa.</div>",
+        st.markdown("<div style='text-align:center;color:#666;padding:30px 0;font-size:13px;'>Nenhuma conta fixa.</div>",
                     unsafe_allow_html=True)
     else:
-        fixas_ord = sorted(fixas, key=lambda x: (x.get("pago", False), x["descricao"]))
+        fixas_ord = sorted(fixas, key=lambda x: x["descricao"])
         for item in fixas_ord:
-            fid    = item["id"]
-            pago_f = item.get("pago", False)
-            borda  = "#BBF7D0" if pago_f else "#FECACA"
-            tag    = "<span class='tag-pago'>pago</span>" if pago_f else "<span class='tag-pend'>pendente</span>"
+            fid = item["id"]
 
             if st.session_state.get("editing_fixa") == fid:
                 with st.form(f"ef_fixa_{fid}"):
@@ -705,28 +703,20 @@ with tab_f:
             else:
                 st.markdown(f"""
 <div style='background:#242424;border-radius:8px;padding:12px 14px;
-     border-left:3px solid {borda};border:1px solid #2E2E2E;border-left:3px solid {borda};
-     margin-bottom:4px;'>
+     border:1px solid #2E2E2E;margin-bottom:4px;'>
   <div style='display:flex;justify-content:space-between;align-items:center;'>
     <div>
       <div style='font-weight:600;font-size:14px;color:#E8E8E8;'>{item['descricao']}</div>
-      <div style='font-size:11px;color:#666;margin-top:2px;'>{item.get('categoria','')}</div>
+      <div style='font-size:11px;color:#888;margin-top:2px;'>{item.get('categoria','')}</div>
     </div>
-    <div style='text-align:right;'>
-      <div style='font-weight:700;font-size:15px;color:#E8E8E8;'>{fmt(item['valor'])}</div>
-      <div style='margin-top:2px;'>{tag}</div>
-    </div>
+    <div style='font-weight:700;font-size:15px;color:#E8E8E8;'>{fmt(item['valor'])}</div>
   </div>
 </div>""", unsafe_allow_html=True)
 
-                fa, fb, fc = st.columns([7, 1, 1])
-                lbl_fp = "↩ Desfazer" if pago_f else "✓ Pagar"
-                if fa.button(lbl_fp, key=f"fpay_{fid}", use_container_width=True, type="primary"):
-                    item["pago"] = not pago_f
-                    save_data(d); st.rerun()
-                if fb.button("✏", key=f"fedit_{fid}", use_container_width=True):
+                fb, fc = st.columns([1, 1])
+                if fb.button("✏ Editar", key=f"fedit_{fid}", use_container_width=True):
                     st.session_state["editing_fixa"] = fid; st.rerun()
-                if fc.button("✕", key=f"fdel_{fid}", use_container_width=True):
+                if fc.button("✕ Excluir", key=f"fdel_{fid}", use_container_width=True):
                     st.session_state[f"cfdel_{fid}"] = True; st.rerun()
 
                 if st.session_state.get(f"cfdel_{fid}"):
@@ -946,9 +936,12 @@ with tab_p:
             if pas2.form_submit_button("Cancelar", use_container_width=True):
                 st.session_state["show_add_parc"] = False; st.rerun()
 
-    # Consolida parcelas: pega a entrada mais recente de cada descricao
+    # Consolida parcelas: considera apenas meses até o mês selecionado
+    # Isso evita mostrar parcelas futuras (auto-geradas) como se já tivessem avançado
     parcelas_map = {}
     for mk in sorted(d["meses"].keys()):
+        if mk > mes_key:
+            break  # não considera meses futuros ao selecionado
         for l in d["meses"][mk].get("lancamentos", []):
             nums = _parcela_nums(l.get("parcela", ""))
             if nums is None:
