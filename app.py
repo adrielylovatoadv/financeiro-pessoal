@@ -476,34 +476,10 @@ st.markdown(
     "Meu Dinheiro</p>",
     unsafe_allow_html=True,
 )
-_col_mes, _col_si = st.columns([3, 2])
-mes_sel = _col_mes.selectbox("", mes_labels, index=_default_idx,
-                              key=f"ms_{_date.today().strftime('%Y%m')}",
-                              label_visibility="collapsed")
+mes_sel = st.selectbox("", mes_labels, index=_default_idx,
+                        key=f"ms_{_date.today().strftime('%Y%m')}",
+                        label_visibility="collapsed")
 mes_key = meses_keys[mes_labels.index(mes_sel)]
-
-# Saldo inicial em conta (editável inline)
-_si_atual = d.get("saldo_inicial", 0.0)
-if st.session_state.get("editing_saldo_inicial"):
-    with _col_si:
-        with st.form("f_si", clear_on_submit=False):
-            _si_novo = st.number_input("Saldo em conta (R$)", value=float(_si_atual),
-                                       step=0.01, format="%.2f", label_visibility="collapsed")
-            _si1, _si2 = st.columns(2)
-            if _si1.form_submit_button("Salvar", use_container_width=True, type="primary"):
-                d["saldo_inicial"] = float(_si_novo)
-                st.session_state.pop("editing_saldo_inicial", None)
-                save_data(d); st.rerun()
-            if _si2.form_submit_button("Cancelar", use_container_width=True):
-                st.session_state.pop("editing_saldo_inicial", None); st.rerun()
-else:
-    _si_label = fmt(_si_atual) if _si_atual > 0 else "Definir saldo"
-    _col_si.markdown(
-        f"<div style='font-size:11px;color:#888;padding-top:4px;'>Saldo em conta</div>"
-        f"<div style='font-size:13px;font-weight:700;color:#4ADE80;'>{_si_label}</div>",
-        unsafe_allow_html=True)
-    if _col_si.button("✏ Editar", key="btn_si", use_container_width=True):
-        st.session_state["editing_saldo_inicial"] = True; st.rerun()
 
 # ─── Versículo ────────────────────────────────────────────────────────────────
 ver = versiculo_do_dia()
