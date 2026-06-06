@@ -49,12 +49,12 @@ _comp.html("""<script>
 </script>""", height=0)
 
 
-# ─── CSS minimalista clássico ────────────────────────────────────────────────
+# ─── CSS tema escuro confortável ─────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 html,body,[class*="css"]{font-family:'Inter',sans-serif;}
-.stApp { background:#F8F7F5 !important; }
+.stApp { background:#1A1A1A !important; }
 header[data-testid="stHeader"] { display:none !important; }
 div[data-testid="stToolbar"] { display:none !important; }
 #MainMenu { display:none !important; }
@@ -69,36 +69,36 @@ button[data-testid="collapsedControl"] { display:none !important; }
 
 /* Cards */
 .card {
-    background:white;
+    background:#242424;
     border-radius:10px;
     padding:16px;
     margin-bottom:10px;
-    border:1px solid #E8E5E0;
+    border:1px solid #2E2E2E;
 }
 .card-sm {
-    background:white;
+    background:#242424;
     border-radius:8px;
     padding:13px 15px;
     margin-bottom:8px;
-    border:1px solid #E8E5E0;
+    border:1px solid #2E2E2E;
 }
 
 /* Versículo */
 .versiculo {
-    border-left:3px solid #1C1C1E;
+    border-left:3px solid #4A4A4A;
     padding:14px 16px;
     margin-bottom:14px;
-    background:white;
+    background:#242424;
     border-radius:0 8px 8px 0;
-    border-top:1px solid #E8E5E0;
-    border-right:1px solid #E8E5E0;
-    border-bottom:1px solid #E8E5E0;
+    border-top:1px solid #2E2E2E;
+    border-right:1px solid #2E2E2E;
+    border-bottom:1px solid #2E2E2E;
 }
 .versiculo-texto {
     font-size:13px;
     line-height:1.6;
     font-style:italic;
-    color:#444;
+    color:#A0A0A0;
     margin:0 0 6px 0;
 }
 .versiculo-ref {
@@ -106,73 +106,74 @@ button[data-testid="collapsedControl"] { display:none !important; }
     font-weight:700;
     letter-spacing:1.2px;
     text-transform:uppercase;
-    color:#999;
+    color:#888;
 }
 
 /* Valores */
-.valor-grande { font-size:20px; font-weight:700; color:#1C1C1E; line-height:1; }
-.valor-label  { font-size:9px; color:#999; text-transform:uppercase;
+.valor-grande { font-size:20px; font-weight:700; color:#E8E8E8; line-height:1; }
+.valor-label  { font-size:9px; color:#888; text-transform:uppercase;
     letter-spacing:1px; margin-bottom:3px; }
-.valor-verde    { color:#16A34A; }
-.valor-vermelho { color:#DC2626; }
-.valor-cinza    { color:#555; }
+.valor-verde    { color:#4ADE80; }
+.valor-vermelho { color:#F87171; }
+.valor-cinza    { color:#888; }
 
 /* Tags */
-.tag-pago { background:#F0FDF4; color:#16A34A; border:1px solid #BBF7D0;
+.tag-pago { background:#14532D; color:#4ADE80; border:1px solid #166534;
     border-radius:4px; padding:2px 8px; font-size:10px; font-weight:700; }
-.tag-pend { background:#FEF2F2; color:#DC2626; border:1px solid #FECACA;
+.tag-pend { background:#450A0A; color:#F87171; border:1px solid #7F1D1D;
     border-radius:4px; padding:2px 8px; font-size:10px; font-weight:700; }
 
 /* Barra de progresso */
-.prog-bg   { background:#E8E5E0; border-radius:4px; height:4px; overflow:hidden; }
-.prog-fill { background:#1C1C1E; height:100%; border-radius:4px; }
+.prog-bg   { background:#2E2E2E; border-radius:4px; height:4px; overflow:hidden; }
+.prog-fill { background:#5A5A5A; height:100%; border-radius:4px; }
 
 /* Linha de item */
 .item-row {
     display:flex; justify-content:space-between; align-items:flex-start;
-    padding:12px 0; border-bottom:1px solid #F0EDE8;
+    padding:12px 0; border-bottom:1px solid #2A2A2A;
 }
 .item-row:last-child { border-bottom:none; }
-.item-desc { font-weight:600; color:#1C1C1E; font-size:14px; }
-.item-sub  { font-size:11px; color:#999; margin-top:2px; }
-.item-val  { font-weight:700; font-size:15px; color:#1C1C1E; white-space:nowrap; }
+.item-desc { font-weight:600; color:#E8E8E8; font-size:14px; }
+.item-sub  { font-size:11px; color:#888; margin-top:2px; }
+.item-val  { font-weight:700; font-size:15px; color:#E8E8E8; white-space:nowrap; }
 
 /* Seção título */
-.sec { font-size:10px; font-weight:700; color:#999;
+.sec { font-size:10px; font-weight:700; color:#888;
     text-transform:uppercase; letter-spacing:1.5px; margin:16px 0 8px; }
 
 /* Botões */
 .stButton>button {
     border-radius:8px !important;
     font-weight:600 !important;
-    border:1px solid #D1CFC9 !important;
+    border:1px solid #333 !important;
     min-height:42px !important;
     font-size:14px !important;
     width:100% !important;
-    background:white !important;
-    color:#1C1C1E !important;
+    background:#242424 !important;
+    color:#C8C8C8 !important;
 }
 .stButton>button[kind="primary"] {
-    background:#1C1C1E !important;
-    color:white !important;
-    border:none !important;
+    background:#333 !important;
+    color:#E8E8E8 !important;
+    border:1px solid #444 !important;
 }
 button[data-testid="baseButton-secondary"] {
     min-height:34px !important;
     font-size:14px !important;
-    background:white !important;
-    color:#555 !important;
+    background:#242424 !important;
+    color:#888 !important;
     border-radius:8px !important;
-    border:1px solid #E8E5E0 !important;
+    border:1px solid #333 !important;
     padding:4px !important;
 }
 
 /* Abas */
 div[data-testid="stTabs"] [data-baseweb="tab-list"] {
-    background:#EDEBE7;
+    background:#242424;
     border-radius:8px;
     padding:3px;
     gap:2px;
+    border:1px solid #2E2E2E;
 }
 div[data-testid="stTabs"] [data-baseweb="tab"] {
     border-radius:6px;
@@ -182,10 +183,10 @@ div[data-testid="stTabs"] [data-baseweb="tab"] {
     padding:7px 4px !important;
 }
 div[data-testid="stTabs"] [aria-selected="true"] {
-    background:white !important;
-    color:#1C1C1E !important;
+    background:#333 !important;
+    color:#E8E8E8 !important;
     font-weight:700 !important;
-    box-shadow:0 1px 3px rgba(0,0,0,0.10) !important;
+    box-shadow:0 1px 3px rgba(0,0,0,0.40) !important;
 }
 
 /* Inputs */
@@ -193,25 +194,31 @@ div[data-testid="stTabs"] [aria-selected="true"] {
     font-size:16px !important;
     min-height:44px !important;
     border-radius:8px !important;
-    color:#1C1C1E !important;
-    background:white !important;
-    border:1px solid #D1CFC9 !important;
+    color:#E8E8E8 !important;
+    background:#2A2A2A !important;
+    border:1px solid #3A3A3A !important;
 }
-.stTextInput input::placeholder, .stNumberInput input::placeholder { color:#BBB !important; }
+.stTextInput input::placeholder, .stNumberInput input::placeholder { color:#555 !important; }
 .stSelectbox > div > div {
     border-radius:8px !important;
     font-size:14px !important;
-    color:#1C1C1E !important;
-    background:white !important;
-    border:1px solid #D1CFC9 !important;
+    color:#E8E8E8 !important;
+    background:#2A2A2A !important;
+    border:1px solid #3A3A3A !important;
 }
 .stTextInput label, .stNumberInput label, .stSelectbox label,
-.stDateInput label, .stCheckbox label { color:#444 !important; font-size:13px !important; }
-div[data-baseweb="popover"] * { color:#1C1C1E !important; background:white !important; }
-div[data-baseweb="menu"] [role="option"]:hover { background:#F8F7F5 !important; }
+.stDateInput label, .stCheckbox label { color:#888 !important; font-size:13px !important; }
+div[data-baseweb="popover"] * { color:#E8E8E8 !important; background:#2A2A2A !important; }
+div[data-baseweb="menu"] [role="option"]:hover { background:#333 !important; }
+/* Checkbox */
+.stCheckbox label span { color:#C0C0C0 !important; }
 
 /* Divider */
-hr { border:none; border-top:1px solid #E8E5E0; margin:12px 0; }
+hr { border:none; border-top:1px solid #2E2E2E; margin:12px 0; }
+
+/* Selectbox arrow / dropdown text */
+.stSelectbox svg { fill:#888 !important; }
+p, span, div { color:#C8C8C8; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -453,7 +460,7 @@ _hoje_key   = _date.today().strftime("%Y-%m")
 _default_idx = meses_keys.index(_hoje_key) if _hoje_key in meses_keys else len(meses_keys) - 1
 
 st.markdown(
-    "<p style='margin:8px 0 10px;font-size:20px;font-weight:700;color:#1C1C1E;letter-spacing:-0.5px;'>"
+    "<p style='margin:8px 0 10px;font-size:20px;font-weight:700;color:#E8E8E8;letter-spacing:-0.5px;'>"
     "Meu Dinheiro</p>",
     unsafe_allow_html=True,
 )
@@ -491,15 +498,15 @@ _disp_txt = fmt(disponivel) if disponivel >= 0 else "- " + fmt(abs(disponivel))
 c1, c2, c3, c4 = st.columns(4)
 c1.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Receita</div>
-  <div style='font-size:14px;font-weight:700;color:#16A34A;'>{fmt(total_rec)}</div>
+  <div style='font-size:14px;font-weight:700;color:#4ADE80;'>{fmt(total_rec)}</div>
 </div>""", unsafe_allow_html=True)
 c2.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Débitos</div>
-  <div style='font-size:14px;font-weight:700;color:#DC2626;'>{fmt(total)}</div>
+  <div style='font-size:14px;font-weight:700;color:#F87171;'>{fmt(total)}</div>
 </div>""", unsafe_allow_html=True)
 c3.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>A pagar</div>
-  <div style='font-size:14px;font-weight:700;color:#DC2626;'>{fmt(pend)}</div>
+  <div style='font-size:14px;font-weight:700;color:#F87171;'>{fmt(pend)}</div>
 </div>""", unsafe_allow_html=True)
 c4.markdown(f"""<div class='card' style='text-align:center;padding:12px 8px;'>
   <div class='valor-label'>Disponível</div>
@@ -516,7 +523,7 @@ tab_g, tab_f, tab_rec, tab_poupa, tab_p, tab_r = st.tabs([
 # ═══════════════════════════════════════════════════════════════
 with tab_g:
     cref, cadd = st.columns([3, 2])
-    cref.markdown(f"<div style='font-size:12px;color:#999;padding-top:10px;'>{nome_mes(mes_key)}</div>",
+    cref.markdown(f"<div style='font-size:12px;color:#666;padding-top:10px;'>{nome_mes(mes_key)}</div>",
                   unsafe_allow_html=True)
     if cadd.button("+ Novo gasto", key="add_lanc_top", use_container_width=True):
         st.session_state["show_add_lanc"] = not st.session_state.get("show_add_lanc", False)
@@ -551,9 +558,9 @@ with tab_g:
     if total_rec > 0:
         _saldo_cor2 = "#16A34A" if disponivel >= 0 else "#DC2626"
         st.markdown(f"""
-<div style='background:white;border:1px solid #E8E5E0;border-radius:8px;
+<div style='background:#242424;border:1px solid #2E2E2E;border-radius:8px;
      padding:12px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;'>
-  <div style='font-size:12px;color:#999;'>Disponível após pagos</div>
+  <div style='font-size:12px;color:#666;'>Disponível após pagos</div>
   <div style='font-size:16px;font-weight:700;color:{_saldo_cor2};'>{_disp_txt}</div>
 </div>""", unsafe_allow_html=True)
 
@@ -595,16 +602,16 @@ with tab_g:
                         st.session_state.pop("editing_lanc", None); st.rerun()
             else:
                 st.markdown(f"""
-<div style='background:white;border-radius:8px;padding:12px 14px;
-     border-left:3px solid {borda};border:1px solid #E8E5E0;border-left:3px solid {borda};
+<div style='background:#242424;border-radius:8px;padding:12px 14px;
+     border-left:3px solid {borda};border:1px solid #2E2E2E;border-left:3px solid {borda};
      margin-bottom:4px;'>
   <div style='display:flex;justify-content:space-between;align-items:flex-start;'>
     <div style='flex:1;'>
-      <div style='font-weight:600;font-size:14px;color:#1C1C1E;'>{item['descricao']}</div>
-      <div style='font-size:11px;color:#999;margin-top:2px;'>{sub}</div>
+      <div style='font-weight:600;font-size:14px;color:#E8E8E8;'>{item['descricao']}</div>
+      <div style='font-size:11px;color:#666;margin-top:2px;'>{sub}</div>
     </div>
     <div style='text-align:right;margin-left:12px;flex-shrink:0;'>
-      <div style='font-weight:700;font-size:15px;color:#1C1C1E;'>{fmt(item['valor'])}</div>
+      <div style='font-weight:700;font-size:15px;color:#E8E8E8;'>{fmt(item['valor'])}</div>
       <div style='margin-top:2px;'>{tag}</div>
     </div>
   </div>
@@ -639,15 +646,15 @@ with tab_f:
     tf = sum(i["valor"] for i in fixas)
     pf = sum(i["valor"] for i in fixas if i.get("pago"))
     crf, cadf = st.columns([3, 2])
-    crf.markdown(f"<div style='font-size:12px;color:#999;padding-top:10px;'>{nome_mes(mes_key)}</div>",
+    crf.markdown(f"<div style='font-size:12px;color:#666;padding-top:10px;'>{nome_mes(mes_key)}</div>",
                  unsafe_allow_html=True)
     if cadf.button("+ Nova fixa", key="add_fixa_top", use_container_width=True):
         st.session_state["show_add_fixa"] = not st.session_state.get("show_add_fixa", False)
 
     st.markdown(f"<div style='display:flex;gap:16px;margin:8px 0 10px;'>"
-                f"<span style='font-size:12px;color:#999;'>Total: <b style='color:#1C1C1E;'>{fmt(tf)}</b></span>"
-                f"<span style='font-size:12px;color:#16A34A;'>Pago: <b>{fmt(pf)}</b></span>"
-                f"<span style='font-size:12px;color:#DC2626;'>Falta: <b>{fmt(tf-pf)}</b></span>"
+                f"<span style='font-size:12px;color:#666;'>Total: <b style='color:#E8E8E8;'>{fmt(tf)}</b></span>"
+                f"<span style='font-size:12px;color:#4ADE80;'>Pago: <b>{fmt(pf)}</b></span>"
+                f"<span style='font-size:12px;color:#F87171;'>Falta: <b>{fmt(tf-pf)}</b></span>"
                 f"</div>", unsafe_allow_html=True)
 
     if st.session_state.get("show_add_fixa"):
@@ -697,16 +704,16 @@ with tab_f:
                         st.session_state.pop("editing_fixa", None); st.rerun()
             else:
                 st.markdown(f"""
-<div style='background:white;border-radius:8px;padding:12px 14px;
-     border-left:3px solid {borda};border:1px solid #E8E5E0;border-left:3px solid {borda};
+<div style='background:#242424;border-radius:8px;padding:12px 14px;
+     border-left:3px solid {borda};border:1px solid #2E2E2E;border-left:3px solid {borda};
      margin-bottom:4px;'>
   <div style='display:flex;justify-content:space-between;align-items:center;'>
     <div>
-      <div style='font-weight:600;font-size:14px;color:#1C1C1E;'>{item['descricao']}</div>
-      <div style='font-size:11px;color:#999;margin-top:2px;'>{item.get('categoria','')}</div>
+      <div style='font-weight:600;font-size:14px;color:#E8E8E8;'>{item['descricao']}</div>
+      <div style='font-size:11px;color:#666;margin-top:2px;'>{item.get('categoria','')}</div>
     </div>
     <div style='text-align:right;'>
-      <div style='font-weight:700;font-size:15px;color:#1C1C1E;'>{fmt(item['valor'])}</div>
+      <div style='font-weight:700;font-size:15px;color:#E8E8E8;'>{fmt(item['valor'])}</div>
       <div style='margin-top:2px;'>{tag}</div>
     </div>
   </div>
@@ -740,7 +747,7 @@ with tab_f:
 with tab_rec:
     rec_list = mes.get("receitas", [])
     crec, cadrec = st.columns([3, 2])
-    crec.markdown(f"<div style='font-size:12px;color:#999;padding-top:10px;'>{nome_mes(mes_key)}</div>",
+    crec.markdown(f"<div style='font-size:12px;color:#666;padding-top:10px;'>{nome_mes(mes_key)}</div>",
                   unsafe_allow_html=True)
     if cadrec.button("+ Nova receita", key="add_rec_top", use_container_width=True):
         st.session_state["show_add_rec"] = not st.session_state.get("show_add_rec", False)
@@ -794,7 +801,7 @@ with tab_rec:
   <div style='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;'>
     <div>
       <div class='valor-label'>Receita total</div>
-      <div style='font-size:18px;font-weight:700;color:#16A34A;'>{fmt(total_rec)}</div>
+      <div style='font-size:18px;font-weight:700;color:#4ADE80;'>{fmt(total_rec)}</div>
     </div>
     <div style='text-align:right;'>
       <div class='valor-label'>Saldo projetado</div>
@@ -808,11 +815,11 @@ with tab_rec:
     </div>
     <div style='text-align:right;'>
       <div class='valor-label'>Meta poupar</div>
-      <div style='font-size:15px;font-weight:700;color:#555;'>{_meta_label}</div>
+      <div style='font-size:15px;font-weight:700;color:#888;'>{_meta_label}</div>
     </div>
   </div>
   <div class='prog-bg'><div class='prog-fill' style='width:{_meta_pct:.0f}%;'></div></div>
-  <div style='font-size:11px;color:#999;margin-top:5px;text-align:right;'>{_meta_pct:.0f}% da meta de poupança</div>
+  <div style='font-size:11px;color:#666;margin-top:5px;text-align:right;'>{_meta_pct:.0f}% da meta de poupança</div>
 </div>""", unsafe_allow_html=True)
         if st.button("Definir meta de poupança", key="btn_meta", use_container_width=True):
             st.session_state["editing_meta"] = True; st.rerun()
@@ -828,9 +835,9 @@ with tab_rec:
         aguardando_l = total_rec_l - recebido_l
         st.markdown(
             f"<div style='display:flex;gap:16px;margin:8px 0 10px;'>"
-            f"<span style='font-size:12px;color:#999;'>Total: <b style='color:#1C1C1E;'>{fmt(total_rec_l)}</b></span>"
-            f"<span style='font-size:12px;color:#16A34A;'>Recebido: <b>{fmt(recebido_l)}</b></span>"
-            f"<span style='font-size:12px;color:#D97706;'>Aguardando: <b>{fmt(aguardando_l)}</b></span>"
+            f"<span style='font-size:12px;color:#666;'>Total: <b style='color:#E8E8E8;'>{fmt(total_rec_l)}</b></span>"
+            f"<span style='font-size:12px;color:#4ADE80;'>Recebido: <b>{fmt(recebido_l)}</b></span>"
+            f"<span style='font-size:12px;color:#FBBF24;'>Aguardando: <b>{fmt(aguardando_l)}</b></span>"
             f"</div>", unsafe_allow_html=True)
 
         rec_ord = sorted(rec_list, key=lambda x: x.get("data", 0))
@@ -843,7 +850,7 @@ with tab_rec:
             ]))
             borda_r = "#BBF7D0" if rec_i else "#FDE68A"
             tag_r   = ("<span class='tag-pago'>recebido</span>" if rec_i
-                       else "<span style='background:#FFFBEB;color:#B45309;border:1px solid #FDE68A;"
+                       else "<span style='background:#FFFBEB;color:#FBBF24;border:1px solid #FDE68A;"
                             "border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;'>aguardando</span>")
 
             if st.session_state.get("editing_rec") == rid:
@@ -866,16 +873,16 @@ with tab_rec:
                         st.session_state.pop("editing_rec", None); st.rerun()
             else:
                 st.markdown(f"""
-<div style='background:white;border-radius:8px;padding:12px 14px;
-     border-left:3px solid {borda_r};border:1px solid #E8E5E0;border-left:3px solid {borda_r};
+<div style='background:#242424;border-radius:8px;padding:12px 14px;
+     border-left:3px solid {borda_r};border:1px solid #2E2E2E;border-left:3px solid {borda_r};
      margin-bottom:4px;'>
   <div style='display:flex;justify-content:space-between;align-items:flex-start;'>
     <div style='flex:1;'>
-      <div style='font-weight:600;font-size:14px;color:#1C1C1E;'>{item['descricao']}</div>
-      <div style='font-size:11px;color:#999;margin-top:2px;'>{sub_r}</div>
+      <div style='font-weight:600;font-size:14px;color:#E8E8E8;'>{item['descricao']}</div>
+      <div style='font-size:11px;color:#666;margin-top:2px;'>{sub_r}</div>
     </div>
     <div style='text-align:right;margin-left:12px;flex-shrink:0;'>
-      <div style='font-weight:700;font-size:15px;color:#16A34A;'>{fmt(item['valor'])}</div>
+      <div style='font-weight:700;font-size:15px;color:#4ADE80;'>{fmt(item['valor'])}</div>
       <div style='margin-top:2px;'>{tag_r}</div>
     </div>
   </div>
@@ -999,15 +1006,15 @@ with tab_p:
                     _prox_mes_label = f" · próxima em {nome_mes(prox_mes(info['mes_key']))}"
 
                 st.markdown(f"""
-<div style='background:white;border-radius:8px;padding:12px 14px;
-     margin-bottom:4px;border:1px solid #E8E5E0;'>
+<div style='background:#242424;border-radius:8px;padding:12px 14px;
+     margin-bottom:4px;border:1px solid #2E2E2E;'>
   <div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;'>
-    <div style='font-weight:600;color:#1C1C1E;font-size:14px;'>{desc}</div>
-    <div style='font-size:11px;color:#999;'>{a}/{t} parcelas</div>
+    <div style='font-weight:600;color:#E8E8E8;font-size:14px;'>{desc}</div>
+    <div style='font-size:11px;color:#666;'>{a}/{t} parcelas</div>
   </div>
   <div class='prog-bg' style='margin:8px 0 6px;'><div class='prog-fill' style='width:{pct:.0f}%;'></div></div>
   <div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;'>
-    <div style='font-size:11px;color:#999;'>{info['cat']} · {fmt(info['valor'])}/mês{_prox_mes_label}</div>
+    <div style='font-size:11px;color:#666;'>{info['cat']} · {fmt(info['valor'])}/mês{_prox_mes_label}</div>
     <div style='font-size:12px;font-weight:700;color:{_falta_cor};'>{_falta_txt}</div>
   </div>
 </div>""", unsafe_allow_html=True)
@@ -1050,20 +1057,20 @@ with tab_poupa:
 
     st.markdown(f"""
 <div class='card'>
-  <div style='font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;'>Objetivo</div>
-  <div style='font-weight:700;font-size:15px;color:#1C1C1E;margin-bottom:12px;'>{_obj_label}</div>
+  <div style='font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;'>Objetivo</div>
+  <div style='font-weight:700;font-size:15px;color:#E8E8E8;margin-bottom:12px;'>{_obj_label}</div>
   <div style='display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px;'>
     <div>
       <div class='valor-label'>Total poupado</div>
-      <div style='font-size:18px;font-weight:700;color:#16A34A;'>{fmt(total_poupado)}</div>
+      <div style='font-size:18px;font-weight:700;color:#4ADE80;'>{fmt(total_poupado)}</div>
     </div>
     <div style='text-align:right;'>
       <div class='valor-label'>Meta</div>
-      <div style='font-size:16px;font-weight:700;color:#555;'>{_mt_label}</div>
+      <div style='font-size:16px;font-weight:700;color:#888;'>{_mt_label}</div>
     </div>
   </div>
   <div class='prog-bg'><div class='prog-fill' style='width:{pct_meta:.0f}%;'></div></div>
-  <div style='font-size:11px;color:#999;margin-top:5px;text-align:right;'>{pct_meta:.0f}% da meta</div>
+  <div style='font-size:11px;color:#666;margin-top:5px;text-align:right;'>{pct_meta:.0f}% da meta</div>
 </div>""", unsafe_allow_html=True)
 
     if st.session_state.get("editing_poupa_cfg"):
@@ -1140,15 +1147,15 @@ with tab_poupa:
                         st.session_state.pop("editing_dep", None); st.rerun()
             else:
                 st.markdown(f"""
-<div style='background:white;border-radius:8px;padding:12px 14px;
-     border-left:3px solid #BBF7D0;border:1px solid #E8E5E0;border-left:3px solid #BBF7D0;
+<div style='background:#242424;border-radius:8px;padding:12px 14px;
+     border-left:3px solid #BBF7D0;border:1px solid #2E2E2E;border-left:3px solid #BBF7D0;
      margin-bottom:4px;'>
   <div style='display:flex;justify-content:space-between;align-items:center;'>
     <div style='flex:1;'>
-      <div style='font-weight:600;font-size:14px;color:#1C1C1E;'>Depósito</div>
-      <div style='font-size:11px;color:#999;margin-top:2px;'>{sub_d}</div>
+      <div style='font-weight:600;font-size:14px;color:#E8E8E8;'>Depósito</div>
+      <div style='font-size:11px;color:#666;margin-top:2px;'>{sub_d}</div>
     </div>
-    <div style='font-weight:700;font-size:15px;color:#16A34A;margin-left:12px;'>{fmt(dep['valor'])}</div>
+    <div style='font-weight:700;font-size:15px;color:#4ADE80;margin-left:12px;'>{fmt(dep['valor'])}</div>
   </div>
 </div>""", unsafe_allow_html=True)
                 da, db = st.columns([3, 1])
@@ -1207,14 +1214,14 @@ with tab_r:
             rows += f"""
 <div class='item-row'>
   <div style='flex:1;'>
-    <div style='font-weight:500;font-size:13px;color:#1C1C1E;'>{cat}</div>
+    <div style='font-weight:500;font-size:13px;color:#E8E8E8;'>{cat}</div>
     <div style='margin-top:4px;'>
       <div class='prog-bg'><div class='prog-fill' style='width:{pct:.0f}%;'></div></div>
     </div>
   </div>
   <div style='text-align:right;margin-left:16px;'>
-    <div style='font-weight:700;color:#1C1C1E;font-size:13px;'>{fmt(val)}</div>
-    <div style='font-size:10px;color:#999;'>{pct:.0f}%</div>
+    <div style='font-weight:700;color:#E8E8E8;font-size:13px;'>{fmt(val)}</div>
+    <div style='font-size:10px;color:#666;'>{pct:.0f}%</div>
   </div>
 </div>"""
         st.markdown(f"<div class='card'>{rows}</div>", unsafe_allow_html=True)
@@ -1232,14 +1239,14 @@ with tab_r:
             mt  = sum(x["valor"] for x in ml)
             mtr = sum(x["valor"] for x in mr)
             msd = mtr - mt
-            bold = "font-weight:700;color:#1C1C1E;" if mk == mes_key else "color:#555;"
+            bold = "font-weight:700;color:#E8E8E8;" if mk == mes_key else "color:#888;"
             saldo_c = "#16A34A" if msd >= 0 else "#DC2626"
             saldo_s = (fmt(msd) if msd >= 0 else "- " + fmt(abs(msd)))
             rows_h += f"""
 <div class='item-row'>
   <div style='font-size:13px;{bold}'>{nome_mes(mk)}</div>
   <div style='text-align:right;'>
-    <div style='font-weight:700;font-size:13px;color:#DC2626;'>{fmt(mt)}</div>
+    <div style='font-weight:700;font-size:13px;color:#F87171;'>{fmt(mt)}</div>
     <div style='font-size:11px;color:{saldo_c};font-weight:600;'>saldo {saldo_s}</div>
   </div>
 </div>"""
@@ -1273,8 +1280,8 @@ with tab_r:
         for tf_item in tf_list:
             rows_tf += f"""
 <div class='item-row'>
-  <div style='font-size:13px;color:#555;'>{tf_item['descricao']}</div>
-  <div style='font-weight:600;font-size:13px;color:#1C1C1E;'>{fmt(tf_item['valor'])}</div>
+  <div style='font-size:13px;color:#888;'>{tf_item['descricao']}</div>
+  <div style='font-weight:600;font-size:13px;color:#E8E8E8;'>{fmt(tf_item['valor'])}</div>
 </div>"""
         if rows_tf:
             st.markdown(f"<div class='card'>{rows_tf}</div>", unsafe_allow_html=True)
@@ -1284,7 +1291,7 @@ with tab_r:
 # ─── Rodapé ───────────────────────────────────────────────────────────────────
 st.markdown("""
 <div style='text-align:center;padding:20px 0 6px;'>
-  <p style='color:#CCC;font-size:10px;margin:0;letter-spacing:0.5px;'>
+  <p style='color:#444;font-size:10px;margin:0;letter-spacing:0.5px;'>
     "Honra ao Senhor com os teus bens" · Pv 3:9
   </p>
 </div>
