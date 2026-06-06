@@ -480,6 +480,15 @@
           "categoria": "⚖️ Honorários",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "7c9348c6-3a0e-45ee-8e67-ddf44e450854",
+          "data": 6,
+          "descricao": "Estorno onofre",
+          "valor": 100.0,
+          "categoria": "💰 Reembolso",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
