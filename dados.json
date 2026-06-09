@@ -560,6 +560,16 @@
           "categoria": "⚖️ Profissional",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "b27bd598-d13e-4907-966e-450bbf094111",
+          "data": 9,
+          "descricao": "Lavagem carro",
+          "valor": 100.0,
+          "parcela": "",
+          "categoria": "🚗 Carro",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
