@@ -487,6 +487,15 @@
           "categoria": "🎯 Outros",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "70b0c8a8-c6ce-4a24-a1cc-eee02c4bf197",
+          "data": 9,
+          "descricao": "Eduarda",
+          "valor": 100.0,
+          "categoria": "🎯 Outros",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
