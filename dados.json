@@ -518,7 +518,7 @@
           "valor": 404.38,
           "parcela": "",
           "categoria": "🏠 Moradia",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
