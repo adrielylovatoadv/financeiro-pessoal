@@ -478,6 +478,15 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "1ed8f36a-548f-4edd-8efb-4ca205739b90",
+          "data": 9,
+          "descricao": "Empréstimo onofre",
+          "valor": 400.0,
+          "categoria": "🎯 Outros",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
