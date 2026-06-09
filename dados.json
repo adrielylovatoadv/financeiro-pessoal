@@ -568,7 +568,7 @@
           "valor": 100.0,
           "parcela": "",
           "categoria": "🚗 Carro",
-          "pago": false,
+          "pago": true,
           "obs": ""
         }
       ],
