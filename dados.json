@@ -570,6 +570,16 @@
           "categoria": "🚗 Carro",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "d801c0ed-43ba-40f6-8c9f-db980d9b2e55",
+          "data": 28,
+          "descricao": "Onofre",
+          "valor": 400.0,
+          "parcela": "",
+          "categoria": "🎯 Outros",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
