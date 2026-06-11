@@ -487,6 +487,15 @@
           "categoria": "🎯 Outros",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "a8d5ca03-c466-4775-b577-b340fdbffc38",
+          "data": 11,
+          "descricao": "Reembolso",
+          "valor": 149.2,
+          "categoria": "🎯 Outros",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
