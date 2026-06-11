@@ -537,7 +537,7 @@
           "valor": 3199.7,
           "parcela": "",
           "categoria": "🏦 Banco/Financ.",
-          "pago": false,
+          "pago": true,
           "obs": "valor a confirmar"
         },
         {
