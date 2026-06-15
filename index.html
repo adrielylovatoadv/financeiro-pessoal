@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Meu Dinheiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#141414;
+  --surface:#1E1E1E;
+  --surface2:#252525;
+  --border:#2A2A2A;
+  --text:#E8E8E8;
+  --text2:#999;
+  --text3:#555;
+  --green:#4ADE80;
+  --red:#F87171;
+  --yellow:#FBBF24;
+  --accent:#3A3A3A;
+  --nav-h:64px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;overscroll-behavior:none;}
+#app{display:flex;flex-direction:column;height:100%;max-width:480px;margin:0 auto;position:relative;}
+
+/* ── Header ── */
+#header{background:var(--bg);padding:14px 16px 10px;border-bottom:1px solid var(--border);z-index:10;flex-shrink:0;}
+.header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.app-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
+.month-nav{display:flex;align-items:center;gap:8px;}
+.month-nav button{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.month-label{font-size:14px;font-weight:600;color:var(--text);min-width:100px;text-align:center;}
+.summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 6px;text-align:center;}
+.s-label{font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px;}
+.s-val{font-size:12px;font-weight:700;}
+.green{color:var(--green);}
+.red{color:var(--red);}
+.yellow{color:var(--yellow);}
+.gray{color:var(--text2);}
+
+/* ── Verse ── */
+.verse{border-left:3px solid var(--border);padding:10px 12px;margin:0 16px 4px;background:var(--surface2);border-radius:0 6px 6px 0;border:1px solid var(--border);border-left:3px solid var(--accent);}
+.verse-text{font-size:11px;font-style:italic;color:var(--text2);line-height:1.5;margin-bottom:3px;}
+.verse-ref{font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+
+/* ── Bottom Nav ── */
+#bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--surface);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:var(--safe-bottom);}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;cursor:pointer;border:none;background:none;color:var(--text3);font-family:'Inter',sans-serif;font-size:9px;font-weight:500;gap:3px;min-height:var(--nav-h);transition:color .15s;}
+.nav-btn.active{color:var(--green);}
+.nav-icon{font-size:20px;line-height:1;}
+
+/* ── Content ── */
+#content{flex:1;overflow-y:auto;padding:12px 16px calc(var(--nav-h) + var(--safe-bottom) + 12px);-webkit-overflow-scrolling:touch;}
+
+/* ── Sections ── */
+.section{display:none;}
+.section.active{display:block;}
+.sec-title{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin:16px 0 8px;}
+.row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+
+/* ── Cards ── */
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;}
+
+/* ── Items ── */
+.item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:6px;position:relative;}
+.item.paid{border-left:3px solid #14532D;}
+.item.unpaid{border-left:3px solid #450A0A;}
+.item.received{border-left:3px solid #14532D;}
+.item.awaiting{border-left:3px solid #78350F;}
+.item-main{display:flex;justify-content:space-between;align-items:flex-start;}
+.item-left{flex:1;min-width:0;}
+.item-desc{font-weight:600;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+.item-right{text-align:right;margin-left:12px;flex-shrink:0;}
+.item-val{font-weight:700;font-size:15px;color:var(--text);}
+.tag{border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700;display:inline-block;margin-top:3px;}
+.tag-paid{background:#14532D;color:var(--green);border:1px solid #166534;}
+.tag-unpaid{background:#450A0A;color:var(--red);border:1px solid #7F1D1D;}
+.tag-received{background:#14532D;color:var(--green);border:1px solid #166534;}
+.tag-awaiting{background:#451a03;color:var(--yellow);border:1px solid #78350F;}
+.item-actions{display:flex;gap:6px;margin-top:8px;}
+.btn{border:1px solid var(--border);background:var(--surface2);color:var(--text2);border-radius:7px;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;}
+.btn:active{background:var(--accent);}
+.btn-primary{background:var(--accent);color:var(--text);border-color:#444;flex:3;}
+.btn-icon{flex:1;padding:7px 6px;}
+.btn-sm{padding:5px 10px;font-size:12px;}
+.btn-full{width:100%;margin-top:8px;padding:11px;font-size:14px;}
+.btn-danger{border-color:#7F1D1D;color:var(--red);}
+.btn-success{border-color:#166534;color:var(--green);}
+
+/* ── Progress bar ── */
+.prog-bg{background:var(--border);border-radius:4px;height:4px;overflow:hidden;margin:8px 0 4px;}
+.prog-fill{background:#5A5A5A;height:100%;border-radius:4px;transition:width .4s ease;}
+.prog-fill.green{background:var(--green);}
+
+/* ── Forms ── */
+.form-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
+.form-sheet{background:var(--surface);border-radius:16px 16px 0 0;padding:20px 16px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding-bottom:calc(20px + var(--safe-bottom));}
+.form-title{font-size:16px;font-weight:700;margin-bottom:16px;}
+.form-group{margin-bottom:12px;}
+.form-label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px 12px;font-size:16px;font-family:'Inter',sans-serif;outline:none;}
+.form-input:focus{border-color:#555;}
+.form-input option{background:var(--surface2);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.form-actions{display:flex;gap:8px;margin-top:16px;}
+.form-check{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.form-check input{width:18px;height:18px;accent-color:var(--green);cursor:pointer;}
+.form-check span{font-size:14px;color:var(--text2);}
+
+/* ── Confirm ── */
+.confirm-bar{background:#450A0A;border:1px solid #7F1D1D;border-radius:8px;padding:10px 14px;margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.confirm-bar p{font-size:13px;color:var(--red);}
+.confirm-actions{display:flex;gap:6px;flex-shrink:0;}
+
+/* ── Empty ── */
+.empty{text-align:center;color:var(--text3);padding:30px 0;font-size:13px;}
+
+/* ── Parcelas progress ── */
+.parc-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+.parc-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-top:4px;}
+
+/* ── Resumo ── */
+.hist-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.hist-row:last-child{border-bottom:none;}
+.cat-row{display:flex;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:12px;}
+.cat-row:last-child{border-bottom:none;}
+.cat-info{flex:1;}
+.cat-name{font-size:13px;font-weight:500;}
+.cat-num{text-align:right;min-width:90px;}
+.cat-val{font-weight:700;font-size:13px;}
+.cat-pct{font-size:10px;color:var(--text3);}
+
+/* ── Saving goal ── */
+.big-val{font-size:22px;font-weight:700;}
+
+/* ── Toast ── */
+#toast{position:fixed;bottom:calc(var(--nav-h) + 16px);left:50%;transform:translateX(-50%);background:#333;color:var(--text);padding:10px 18px;border-radius:8px;font-size:13px;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="header">
+    <div class="header-row">
+      <div class="app-title">💼 Meu Dinheiro</div>
+      <div class="month-nav">
+        <button id="prev-month">‹</button>
+        <span class="month-label" id="month-label">—</span>
+        <button id="next-month">›</button>
+      </div>
+    </div>
+    <div class="summary-row">
+      <div class="summary-card"><div class="s-label">Receita</div><div class="s-val green" id="s-rec">—</div></div>
+      <div class="summary-card"><div class="s-label">Débitos</div><div class="s-val red" id="s-deb">—</div></div>
+      <div class="summary-card"><div class="s-label">A pagar</div><div class="s-val red" id="s-pend">—</div></div>
+      <div class="summary-card"><div class="s-label">Disponível</div><div class="s-val" id="s-disp">—</div></div>
+    </div>
+  </div>
+
+  <div id="content">
+    <!-- Verse -->
+    <div class="verse" id="verse-box"></div>
+
+    <!-- GASTOS -->
+    <div class="section active" id="sec-gastos">
+      <div class="row-between">
+        <div class="sec-title" style="margin:0;">Gastos variáveis</div>
+        <button class="btn btn-sm btn-success" onclick="openForm('gasto')">+ Novo</button>
+      </div>
+      <div id="list-gastos"></div>
+    </div>
+
+    <!-- FIXAS -->
+    <div class="section" id="sec-fixas">
+      <div class="row-between">
+        <div class="sec-title" style="margin:0;">Contas fixas</div>
+        <button class="btn btn-sm btn-success" onclick="openForm('fixa')">+ Nova</button>
+      </div>
+      <div id="total-fixas" style="font-size:12px;color:var(--text2);margin-bottom:10px;"></div>
+      <div id="list-fixas"></div>
+    </div>
+
+    <!-- RECEITA -->
+    <div class="section" id="sec-receita">
+      <div class="row-between">
+        <div class="sec-title" style="margin:0;">Receitas</div>
+        <button class="btn btn-sm btn-success" onclick="openForm('receita')">+ Nova</button>
+      </div>
+      <div id="receita-summary" class="card" style="margin-bottom:10px;display:none;"></div>
+      <div id="list-receita"></div>
+    </div>
+
+    <!-- PARCELAS -->
+    <div class="section" id="sec-parcelas">
+      <div class="row-between">
+        <div class="sec-title" style="margin:0;">Parcelas ativas</div>
+        <button class="btn btn-sm btn-success" onclick="openForm('gasto')">+ Nova</button>
+      </div>
+      <div id="list-parcelas"></div>
+    </div>
+
+    <!-- POUPAR -->
+    <div class="section" id="sec-poupar">
+      <div id="poupanca-card"></div>
+      <div class="row-between">
+        <div class="sec-title" style="margin:0;">Depósitos</div>
+        <button class="btn btn-sm btn-success" onclick="openForm('deposito')">+ Novo</button>
+      </div>
+      <div id="list-depositos"></div>
+      <div class="sec-title">Sobra por mês (últimos 6)</div>
+      <div class="card" id="sobra-meses"></div>
+    </div>
+
+    <!-- RESUMO -->
+    <div class="section" id="sec-resumo">
+      <div class="sec-title">Por categoria</div>
+      <div class="card" id="cat-chart"></div>
+      <div class="sec-title">Histórico (últimos 6 meses)</div>
+      <div class="card" id="historico"></div>
+      <div class="sec-title">Template de fixas</div>
+      <div class="card" id="template-fixas"></div>
+    </div>
+  </div>
+
+  <nav id="bottom-nav">
+    <button class="nav-btn active" data-sec="gastos" onclick="setSection('gastos',this)">
+      <span class="nav-icon">💸</span>Gastos
+    </button>
+    <button class="nav-btn" data-sec="fixas" onclick="setSection('fixas',this)">
+      <span class="nav-icon">📌</span>Fixas
+    </button>
+    <button class="nav-btn" data-sec="receita" onclick="setSection('receita',this)">
+      <span class="nav-icon">💰</span>Receita
+    </button>
+    <button class="nav-btn" data-sec="parcelas" onclick="setSection('parcelas',this)">
+      <span class="nav-icon">🔄</span>Parcelas
+    </button>
+    <button class="nav-btn" data-sec="poupar" onclick="setSection('poupar',this)">
+      <span class="nav-icon">🏦</span>Poupar
+    </button>
+    <button class="nav-btn" data-sec="resumo" onclick="setSection('resumo',this)">
+      <span class="nav-icon">📊</span>Resumo
+    </button>
+  </nav>
+</div>
+
+<!-- Form overlay -->
+<div class="form-overlay" id="form-overlay" style="display:none;" onclick="if(event.target===this)closeForm()">
+  <div class="form-sheet" id="form-sheet"></div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const MESES_PT={
+  '01':'Jan','02':'Fev','03':'Mar','04':'Abr','05':'Mai','06':'Jun',
+  '07':'Jul','08':'Ago','09':'Set','10':'Out','11':'Nov','12':'Dez'
+};
+const MESES_FULL={
+  '01':'Janeiro','02':'Fevereiro','03':'Março','04':'Abril','05':'Maio','06':'Junho',
+  '07':'Julho','08':'Agosto','09':'Setembro','10':'Outubro','11':'Novembro','12':'Dezembro'
+};
+const CATS=['💳 Cartão','🏦 Banco/Financ.','🏠 Moradia','🚗 Carro','💊 Saúde',
+  '💪 Academia/Esporte','⚖️ Profissional','📱 Serviços','🛡️ Seguro','🛒 Compras',
+  '💄 Beleza','🎾 Lazer','🎯 Outros'];
+const CATS_REC=['⚖️ Honorários','💼 Salário','🏠 Aluguel recebido','🤝 Acordo/Êxito',
+  '💰 Reembolso','🎁 Presente','📈 Investimento','🎯 Outros'];
+
+const VERSICULO=[
+  ['Provérbios 21:20','Na casa do sábio há precioso tesouro e azeite, mas o homem tolo os desperdiça.'],
+  ['Provérbios 13:11','A riqueza obtida às pressas diminui, mas quem a ajunta pouco a pouco a aumenta.'],
+  ['Lucas 14:28','Pois qual de vós, desejando edificar uma torre, não se assenta primeiro e calcula a despesa?'],
+  ['Provérbios 22:7','O rico domina os pobres, e o devedor é servo do credor.'],
+  ['Provérbios 3:9-10','Honra ao Senhor com os teus bens e com as primícias de toda a tua renda.'],
+  ['Filipenses 4:19','O meu Deus, segundo as suas riquezas em glória, suprirá todas as vossas necessidades.'],
+  ['Mateus 6:33','Buscai, pois, em primeiro lugar o reino de Deus e a sua justiça.'],
+  ['Eclesiastes 5:10','Quem ama o dinheiro nunca se satisfaz com dinheiro.'],
+  ['Provérbios 6:6-8','Vai ter com a formiga, ó preguiçoso, considera os seus caminhos e sê sábio.'],
+  ['I Timóteo 6:6','A piedade com contentamento é grande ganho.'],
+  ['Provérbios 27:12','O avisado vê o mal e esconde-se, mas os simples passam e sofrem a pena.'],
+  ['Deuteronômio 8:18','Lembra-te do Senhor teu Deus, porque é ele que te dá força para adquirir riqueza.'],
+  ['Eclesiastes 11:2','Reparte com sete, e ainda com oito, pois não sabes que mal poderá vir sobre a terra.'],
+  ['Provérbios 28:20','O homem fiel terá muitas bênçãos, mas o que se apressa a ficar rico não ficará impune.'],
+  ['Mateus 6:21','Porque onde estiver o seu tesouro, aí estará também o seu coração.'],
+  ['Provérbios 13:22','O homem bom deixa herança para os filhos dos seus filhos.'],
+  ['Romanos 13:8','A ninguém devais coisa alguma, exceto o amor mútuo.'],
+  ['Provérbios 11:24','Há quem distribua, e ainda lhe aumenta a riqueza; e há quem retenha mais do que é justo.'],
+  ['I Coríntios 16:2','No primeiro dia da semana, cada um de vós ponha de parte, segundo a sua prosperidade.'],
+  ['Provérbios 22:26-27','Não sejas dos que batem as palmas, nem dos que são fiadores de dívidas.'],
+];
+
+const INITIAL_DATA = {"meses":{"2025-03":{"receitas":[{"id":"a57d6546","data":18,"descricao":"Honorários","valor":9832.2,"categoria":"⚖️ Honorários","recebido":true,"obs":""}],"meta_poupanca":0,"lancamentos":[{"id":"m3l1","data":5,"descricao":"Nubank","valor":426.97,"parcela":"5/5","categoria":"💳 Cartão","pago":true,"obs":""},{"id":"m3l2","data":5,"descricao":"Nubank","valor":979.84,"parcela":"1/3","categoria":"💳 Cartão","pago":true,"obs":""},{"id":"m3l3","data":5,"descricao":"Academia","valor":135,"parcela":"","categoria":"💪 Academia/Esporte","pago":true,"obs":""},{"id":"m3l4","data":9,"descricao":"Mercado Pago","valor":424.99,"parcela":"2/2","categoria":"🛒 Compras","pago":true,"obs":""},{"id":"m3l5","data":10,"descricao":"Aluguel e net Escritório","valor":382.75,"parcela":"","categoria":"🏠 Moradia","pago":true,"obs":""},{"id":"m3l6","data":11,"descricao":"Sicoob","valor":2630.69,"parcela":"","categoria":"🏦 Banco/Financ.","pago":true,"obs":""},{"id":"m3l7","data":23,"descricao":"Parcela Carro","valor":2553.45,"parcela":"6/48","categoria":"🚗 Carro","pago":true,"obs":""},{"id":"m3l8","data":28,"descricao":"Cabelo casamento","valor":120,"parcela":"","categoria":"💄 Beleza","pago":true,"obs":""},{"id":"m3l9","data":28,"descricao":"Maquiagem casamento","valor":150,"parcela":"","categoria":"💄 Beleza","pago":true,"obs":""},{"id":"m3l10","data":30,"descricao":"OAB MG","valor":79.2,"parcela":"3/12","categoria":"⚖️ Profissional","pago":true,"obs":""}],"fixas":[{"id":"m3f1","descricao":"Seguro","valor":258.18,"categoria":"🛡️ Seguro","pago":true},{"id":"m3f2","descricao":"Apple","valor":19.9,"categoria":"📱 Serviços","pago":true},{"id":"m3f3","descricao":"Google","valor":9.99,"categoria":"📱 Serviços","pago":true},{"id":"m3f4","descricao":"Tarifa bancária","valor":20,"categoria":"🏦 Banco/Financ.","pago":true},{"id":"m3f5","descricao":"Vivo","valor":89.9,"categoria":"📱 Serviços","pago":true},{"id":"m3f6","descricao":"Remédio","valor":100,"categoria":"💊 Saúde","pago":true},{"id":"m3f7","descricao":"Jusbrasil","valor":58.9,"categoria":"⚖️ Profissional","pago":true}]},"2025-04":{"receitas":[{"id":"00e20553","data":15,"descricao":"Honorários","valor":7355.89,"categoria":"⚖️ Honorários","recebido":true,"obs":""}],"meta_poupanca":0,"lancamentos":[{"id":"m4l2","data":5,"descricao":"Nubank","valor":532.77,"parcela":"2/3","categoria":"💳 Cartão","pago":true,"obs":""},{"id":"m4l3","data":5,"descricao":"Academia","valor":135,"parcela":"","categoria":"💪 Academia/Esporte","pago":true,"obs":""},{"id":"m4l5","data":10,"descricao":"Aluguel e net Escritório","valor":339.95,"parcela":"","categoria":"🏠 Moradia","pago":true,"obs":""},{"id":"m4l6","data":11,"descricao":"Sicoob","valor":3979.1,"parcela":"","categoria":"🏦 Banco/Financ.","pago":true,"obs":"370 Lucas"},{"id":"m4l7","data":23,"descricao":"Parcela Carro","valor":2573.2,"parcela":"7/48","categoria":"🚗 Carro","pago":true,"obs":""},{"id":"m4l8","data":30,"descricao":"OAB MG","valor":79.2,"parcela":"4/12","categoria":"⚖️ Profissional","pago":true,"obs":""}],"fixas":[{"id":"m4f1","descricao":"Seguro","valor":258.18,"categoria":"🛡️ Seguro","pago":true},{"id":"m4f2","descricao":"Apple","valor":19.9,"categoria":"📱 Serviços","pago":true},{"id":"m4f3","descricao":"Google","valor":9.99,"categoria":"📱 Serviços","pago":true},{"id":"m4f4","descricao":"Tarifa bancária","valor":20.75,"categoria":"🏦 Banco/Financ.","pago":true},{"id":"m4f5","descricao":"Vivo","valor":62,"categoria":"📱 Serviços","pago":true},{"id":"m4f6","descricao":"Remédio","valor":100,"categoria":"💊 Saúde","pago":true},{"id":"m4f7","descricao":"Aula de tênis","valor":150,"categoria":"💪 Academia/Esporte","pago":true},{"id":"m4f8","descricao":"Jusbrasil","valor":58.9,"categoria":"⚖️ Profissional","pago":true}]},"2025-05":{"receitas":[{"id":"9809aef0","data":26,"descricao":"Honorários","valor":1496.54,"categoria":"⚖️ Honorários","recebido":true,"obs":""},{"id":"d9cc7325","data":28,"descricao":"Processo trab","valor":3500,"categoria":"🎯 Outros","recebido":true,"obs":""}],"meta_poupanca":0,"lancamentos":[{"id":"m5l1","data":5,"descricao":"OAB SP","valor":361.23,"parcela":"1/3","categoria":"⚖️ Profissional","pago":true,"obs":""},{"id":"m5l3","data":9,"descricao":"Mercado Pago","valor":87.24,"parcela":"1/3","categoria":"🛒 Compras","pago":true,"obs":""},{"id":"m5l4","data":10,"descricao":"Aluguel e net Escritório","valor":300,"parcela":"","categoria":"🏠 Moradia","pago":true,"obs":""},{"id":"m5l5","data":11,"descricao":"Sicoob","valor":2619,"parcela":"","categoria":"🏦 Banco/Financ.","pago":true,"obs":""},{"id":"m5l6","data":23,"descricao":"Parcela Carro","valor":2573.2,"parcela":"8/48","categoria":"🚗 Carro","pago":true,"obs":""},{"id":"m5l7","data":30,"descricao":"OAB MG","valor":79.2,"parcela":"5/12","categoria":"⚖️ Profissional","pago":true,"obs":""},{"id":"ccdf6525","data":28,"descricao":"Kelen","valor":300,"parcela":"","categoria":"🎯 Outros","pago":true,"obs":""}],"fixas":[{"id":"m5f1","descricao":"Seguro","valor":258.18,"categoria":"🛡️ Seguro","pago":true},{"id":"m5f2","descricao":"Apple","valor":19.9,"categoria":"📱 Serviços","pago":true},{"id":"m5f3","descricao":"Google","valor":9.99,"categoria":"📱 Serviços","pago":true},{"id":"m5f4","descricao":"Tarifa bancária","valor":20.75,"categoria":"🏦 Banco/Financ.","pago":true},{"id":"m5f5","descricao":"Vivo","valor":44,"categoria":"📱 Serviços","pago":true},{"id":"m5f6","descricao":"Remédio","valor":100,"categoria":"💊 Saúde","pago":true},{"id":"m5f7","descricao":"Claude","valor":110,"categoria":"📱 Serviços","pago":true},{"id":"m5f8","descricao":"Aula de tênis","valor":200,"categoria":"💪 Academia/Esporte","pago":true},{"id":"m5f9","descricao":"Jusbrasil","valor":58.9,"categoria":"⚖️ Profissional","pago":true}]},"2025-06":{"receitas":[{"id":"3d6adc36","data":3,"descricao":"Trabalhos breno","valor":350,"categoria":"⚖️ Honorários","recebido":true,"obs":""},{"id":"98e9fd62","data":3,"descricao":"Honorarios","valor":609,"categoria":"⚖️ Honorários","recebido":true,"obs":""},{"id":"7c9348c6","data":6,"descricao":"Estorno onofre","valor":100,"categoria":"💰 Reembolso","recebido":true,"obs":""},{"id":"30115ffe","data":6,"descricao":"Seguros","valor":2544.33,"categoria":"💰 Reembolso","recebido":true,"obs":""}],"meta_poupanca":0,"lancamentos":[{"id":"m6l1","data":5,"descricao":"OAB SP","valor":361.23,"parcela":"2/3","categoria":"⚖️ Profissional","pago":true,"obs":""},{"id":"m6l3","data":9,"descricao":"Mercado Pago","valor":87.22,"parcela":"1/2","categoria":"🛒 Compras","pago":true,"obs":""},{"id":"m6l4","data":10,"descricao":"Aluguel e net Escritório","valor":339.95,"parcela":"","categoria":"🏠 Moradia","pago":false,"obs":""},{"id":"m6l5","data":11,"descricao":"Sicoob","valor":3968.98,"parcela":"","categoria":"🏦 Banco/Financ.","pago":false,"obs":"valor a confirmar"},{"id":"m6l6","data":15,"descricao":"C&A","valor":199.99,"parcela":"1/2","categoria":"🛒 Compras","pago":false,"obs":""},{"id":"m6l7","data":23,"descricao":"Parcela Carro","valor":2573.2,"parcela":"8/48","categoria":"🚗 Carro","pago":false,"obs":""},{"id":"m6l8","data":30,"descricao":"OAB MG","valor":79.2,"parcela":"6/12","categoria":"⚖️ Profissional","pago":false,"obs":""}],"fixas":[{"id":"m6f1","descricao":"Seguro","valor":258.18,"categoria":"🛡️ Seguro","pago":false},{"id":"m6f2","descricao":"Apple","valor":19.9,"categoria":"📱 Serviços","pago":false},{"id":"m6f3","descricao":"Google","valor":9.99,"categoria":"📱 Serviços","pago":false},{"id":"m6f4","descricao":"Tarifa bancária","valor":20.75,"categoria":"🏦 Banco/Financ.","pago":false},{"id":"m6f5","descricao":"Vivo","valor":44,"categoria":"📱 Serviços","pago":false},{"id":"m6f6","descricao":"Remédio","valor":100,"categoria":"💊 Saúde","pago":false},{"id":"m6f7","descricao":"Claude","valor":110,"categoria":"📱 Serviços","pago":false},{"id":"m6f8","descricao":"Aula de tênis","valor":200,"categoria":"💪 Academia/Esporte","pago":false},{"id":"m6f9","descricao":"Jusbrasil","valor":58.9,"categoria":"⚖️ Profissional","pago":false}]}},"template_fixas":[{"descricao":"Seguro","valor":258.18,"categoria":"🛡️ Seguro"},{"descricao":"Apple","valor":19.9,"categoria":"📱 Serviços"},{"descricao":"Google","valor":9.99,"categoria":"📱 Serviços"},{"descricao":"Tarifa bancária","valor":20.75,"categoria":"🏦 Banco/Financ."},{"descricao":"Vivo","valor":89.9,"categoria":"📱 Serviços"},{"descricao":"Remédio","valor":100,"categoria":"💊 Saúde"},{"descricao":"Claude","valor":110,"categoria":"📱 Serviços"},{"descricao":"Aula de tênis","valor":200,"categoria":"💪 Academia/Esporte"},{"descricao":"Jusbrasil","valor":58.9,"categoria":"⚖️ Profissional"}],"poupanca":{"objetivo":"Meta 2026","meta_total":50000,"depositos":[{"id":"4ec44605","mes":"2025-05","valor":250,"obs":"Poupança"}]},"saldo_inicial":3516.11};
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let data = {};
+let currentMes = '';
+let currentSection = 'gastos';
+
+// ═══════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
+function fmt(v){
+  const s=Math.abs(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  const [i,d]=s.split('.');
+  return 'R$ '+(v<0?'-':'')+i+','+(d||'00');
+}
+function nomeMes(key){
+  const[y,m]=key.split('-');
+  return MESES_FULL[m]+'/'+y;
+}
+function nomeMesCurto(key){
+  const[y,m]=key.split('-');
+  return MESES_PT[m]+'/'+y;
+}
+function proxMes(key){
+  let[y,m]=key.split('-').map(Number);
+  m++;if(m>12){m=1;y++;}
+  return y+'-'+String(m).padStart(2,'0');
+}
+function prevMes(key){
+  let[y,m]=key.split('-').map(Number);
+  m--;if(m<1){m=12;y--;}
+  return y+'-'+String(m).padStart(2,'0');
+}
+function parcelaNum(ps){
+  if(!ps||!ps.includes('/'))return null;
+  const[a,t]=ps.split('/');
+  const ai=parseInt(a.replace(/\D/g,'')),ti=parseInt(t.replace(/\D/g,''));
+  if(isNaN(ai)||isNaN(ti))return null;
+  return[ai,ti];
+}
+function versiculoDia(){
+  const d=new Date();
+  const dy=Math.floor((d-new Date(d.getFullYear(),0,0))/(1000*60*60*24));
+  return VERSICULO[dy%VERSICULO.length];
+}
+function today(){
+  return new Date().getDate();
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._tid);t._tid=setTimeout(()=>t.classList.remove('show'),2000);
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ═══════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════
+function saveData(){
+  localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
+  // GitHub sync (fire-and-forget)
+  const token=localStorage.getItem('gh_token');
+  if(token) ghPut(token);
+}
+function loadData(){
+  const s=localStorage.getItem('meu-dinheiro-v2');
+  if(s){try{data=JSON.parse(s);return;}catch(e){}}
+  data=JSON.parse(JSON.stringify(INITIAL_DATA));
+  saveData();
+}
+
+// ═══════════════════════════════════════════
+// GITHUB SYNC
+// ═══════════════════════════════════════════
+const GH_REPO='adrielylovatoadv/financeiro-pessoal';
+const GH_FILE='dados.json';
+const GH_API=`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`;
+
+async function ghGet(token){
+  try{
+    const r=await fetch(GH_API,{headers:{Authorization:'token '+token,Accept:'application/vnd.github.v3+json'}});
+    if(!r.ok)return;
+    const b=await r.json();
+    const content=JSON.parse(atob(b.content.replace(/\n/g,'')));
+    localStorage.setItem('gh_sha',b.sha);
+    data={...content};
+    // merge localStorage changes that happened while offline
+    localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
+    render();
+    showToast('✓ Dados sincronizados do GitHub');
+  }catch(e){console.warn('gh get',e);}
+}
+async function ghPut(token){
+  try{
+    const sha=localStorage.getItem('gh_sha')||'';
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+    const body={message:'atualiza dados',content};
+    if(sha)body.sha=sha;
+    const r=await fetch(GH_API,{
+      method:'PUT',
+      headers:{Authorization:'token '+token,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(r.ok){
+      const b=await r.json();
+      if(b.content?.sha)localStorage.setItem('gh_sha',b.content.sha);
+    }
+  }catch(e){console.warn('gh put',e);}
+}
+
+// ═══════════════════════════════════════════
+// MONTH GENERATION
+// ═══════════════════════════════════════════
+function garantirMeses(){
+  const alvo='2026-12';
+  let chaves=Object.keys(data.meses).sort();
+  if(!chaves.length)return;
+  let ultima=chaves[chaves.length-1];
+  let cur=proxMes(ultima);
+  while(cur<=alvo){
+    const ant=Object.keys(data.meses).filter(k=>k<cur).sort().pop();
+    criarMesNovo(cur,ant);
+    cur=proxMes(cur);
+  }
+}
+function criarMesNovo(novoKey,antKey){
+  const ant=data.meses[antKey];
+  const parcelas=[];
+  for(const l of (ant.lancamentos||[])){
+    const pn=parcelaNum(l.parcela);
+    if(!pn)continue;
+    const[a,t]=pn;
+    if(a<t){
+      parcelas.push({id:uid(),data:l.data||1,descricao:l.descricao,valor:l.valor,
+        parcela:`${a+1}/${t}`,categoria:l.categoria||'🎯 Outros',pago:false,obs:l.obs||''});
+    }
+  }
+  data.meses[novoKey]={
+    receitas:[],meta_poupanca:ant.meta_poupanca||0,
+    lancamentos:parcelas,
+    fixas:(data.template_fixas||[]).map(t=>({id:uid(),descricao:t.descricao,valor:t.valor,categoria:t.categoria,pago:false}))
+  };
+}
+
+// ═══════════════════════════════════════════
+// COMPUTE
+// ═══════════════════════════════════════════
+function getMesData(){return data.meses[currentMes]||{receitas:[],lancamentos:[],fixas:[],meta_poupanca:0};}
+function totalRec(){return getMesData().receitas.reduce((s,r)=>s+(r.recebido?r.valor:0),0);}
+function totalDeb(){return getMesData().lancamentos.reduce((s,l)=>s+l.valor,0);}
+function totalPago(){return getMesData().lancamentos.filter(l=>l.pago).reduce((s,l)=>s+l.valor,0);}
+function totalPend(){return totalDeb()-totalPago();}
+function disponivel(){return totalRec()-totalPago();}
+
+// ═══════════════════════════════════════════
+// SECTION NAV
+// ═══════════════════════════════════════════
+function setSection(sec,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+sec).classList.add('active');
+  btn.classList.add('active');
+  currentSection=sec;
+  renderSection(sec);
+  document.getElementById('content').scrollTop=0;
+}
+
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
+function render(){
+  const keys=Object.keys(data.meses).sort();
+  if(!currentMes||!keys.includes(currentMes)){
+    // default: most recent with receitas, else today's month
+    const todayKey=new Date().toISOString().slice(0,7);
+    let def=todayKey;
+    for(const k of [...keys].reverse()){
+      if((data.meses[k].receitas||[]).length){def=k;break;}
+    }
+    currentMes=keys.includes(def)?def:keys[keys.length-1];
+  }
+  renderHeader();
+  renderVerse();
+  renderSection(currentSection);
+}
+
+function renderHeader(){
+  document.getElementById('month-label').textContent=nomeMesCurto(currentMes);
+  const disp=disponivel();
+  const dispCol=disp>=0?'green':'red';
+  document.getElementById('s-rec').textContent=fmt(totalRec());
+  document.getElementById('s-deb').textContent=fmt(totalDeb());
+  document.getElementById('s-pend').textContent=fmt(totalPend());
+  const sd=document.getElementById('s-disp');
+  sd.textContent=fmt(disp);
+  sd.className='s-val '+dispCol;
+}
+
+function renderVerse(){
+  const[ref,txt]=versiculoDia();
+  document.getElementById('verse-box').innerHTML=
+    `<div class="verse-text">"${esc(txt)}"</div><div class="verse-ref">${esc(ref)}</div>`;
+}
+
+function renderSection(sec){
+  if(sec==='gastos') renderGastos();
+  else if(sec==='fixas') renderFixas();
+  else if(sec==='receita') renderReceita();
+  else if(sec==='parcelas') renderParcelas();
+  else if(sec==='poupar') renderPoupar();
+  else if(sec==='resumo') renderResumo();
+}
+
+// ──────────────────────────────────────────
+// GASTOS
+// ──────────────────────────────────────────
+function renderGastos(){
+  const mes=getMesData();
+  const lanc=mes.lancamentos||[];
+  const sorted=[...lanc].sort((a,b)=>(a.pago?1:-1)-(b.pago?1:-1)||(a.data||0)-(b.data||0));
+  let html='';
+  if(!sorted.length){html='<div class="empty">Nenhum gasto registrado.</div>';}
+  for(const it of sorted){
+    const sub=[it.data?`Dia ${it.data}`:'',it.parcela,it.categoria,it.obs].filter(Boolean).join(' · ');
+    const cls=it.pago?'paid':'unpaid';
+    const tagCls=it.pago?'tag-paid':'tag-unpaid';
+    const tagTxt=it.pago?'pago':'pendente';
+    const lbl=it.pago?'↩ Desfazer':'✓ Pagar';
+    html+=`<div class="item ${cls}" id="item-g-${it.id}">
+      <div class="item-main">
+        <div class="item-left">
+          <div class="item-desc">${esc(it.descricao)}</div>
+          <div class="item-sub">${esc(sub)}</div>
+        </div>
+        <div class="item-right">
+          <div class="item-val">${fmt(it.valor)}</div>
+          <span class="tag ${tagCls}">${tagTxt}</span>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-primary" onclick="togglePago('lanc','${it.id}')">${lbl}</button>
+        <button class="btn btn-icon" onclick="openEditForm('gasto','${it.id}')">✏</button>
+        <button class="btn btn-icon btn-danger" onclick="confirmDelete('lanc','${it.id}','${esc(it.descricao)}')">✕</button>
+      </div>
+      <div id="confirm-g-${it.id}"></div>
+    </div>`;
+  }
+  document.getElementById('list-gastos').innerHTML=html;
+}
+
+// ──────────────────────────────────────────
+// FIXAS
+// ──────────────────────────────────────────
+function renderFixas(){
+  const mes=getMesData();
+  const fixas=[...( mes.fixas||[])].sort((a,b)=>a.descricao.localeCompare(b.descricao));
+  const tf=fixas.reduce((s,f)=>s+f.valor,0);
+  document.getElementById('total-fixas').innerHTML=
+    `Total na fatura: <b style="color:var(--text);font-size:15px;">${fmt(tf)}</b>`;
+  let html='';
+  if(!fixas.length){html='<div class="empty">Nenhuma conta fixa.</div>';}
+  for(const it of fixas){
+    html+=`<div class="item" id="item-f-${it.id}">
+      <div class="item-main">
+        <div class="item-left">
+          <div class="item-desc">${esc(it.descricao)}</div>
+          <div class="item-sub">${esc(it.categoria||'')}</div>
+        </div>
+        <div class="item-right">
+          <div class="item-val">${fmt(it.valor)}</div>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-primary btn-full" style="flex:2;" onclick="openEditForm('fixa','${it.id}')">✏ Editar</button>
+        <button class="btn btn-icon btn-danger" onclick="confirmDelete('fixa','${it.id}','${esc(it.descricao)}')">✕</button>
+      </div>
+      <div id="confirm-f-${it.id}"></div>
+    </div>`;
+  }
+  document.getElementById('list-fixas').innerHTML=html;
+}
+
+// ──────────────────────────────────────────
+// RECEITA
+// ──────────────────────────────────────────
+function renderReceita(){
+  const mes=getMesData();
+  const recs=[...(mes.receitas||[])].sort((a,b)=>(a.data||0)-(b.data||0));
+  const totR=recs.reduce((s,r)=>s+r.valor,0);
+  const recebido=recs.filter(r=>r.recebido).reduce((s,r)=>s+r.valor,0);
+  const aguard=totR-recebido;
+  const saldo=totalRec()-totalDeb();
+  const saldoCor=saldo>=0?'green':'red';
+  const sumEl=document.getElementById('receita-summary');
+  if(recs.length){
+    sumEl.style.display='block';
+    sumEl.innerHTML=`
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+        <div><div class="s-label">Total receita</div><div class="s-val green" style="font-size:16px;">${fmt(totR)}</div></div>
+        <div style="text-align:right;"><div class="s-label">Saldo projetado</div><div class="s-val ${saldoCor}" style="font-size:16px;">${fmt(saldo)}</div></div>
+      </div>
+      <div style="display:flex;gap:16px;font-size:12px;">
+        <span style="color:var(--green);">Recebido: <b>${fmt(recebido)}</b></span>
+        <span style="color:var(--yellow);">Aguardando: <b>${fmt(aguard)}</b></span>
+      </div>`;
+  }else{sumEl.style.display='none';}
+  let html='';
+  if(!recs.length){html='<div class="empty">Nenhuma receita registrada.</div>';}
+  for(const it of recs){
+    const sub=[it.data?`Dia ${it.data}`:'',it.categoria,it.obs].filter(Boolean).join(' · ');
+    const cls=it.recebido?'received':'awaiting';
+    const tagCls=it.recebido?'tag-received':'tag-awaiting';
+    const tagTxt=it.recebido?'recebido':'aguardando';
+    const lbl=it.recebido?'↩ Desfazer':'✓ Receber';
+    html+=`<div class="item ${cls}" id="item-r-${it.id}">
+      <div class="item-main">
+        <div class="item-left">
+          <div class="item-desc">${esc(it.descricao)}</div>
+          <div class="item-sub">${esc(sub)}</div>
+        </div>
+        <div class="item-right">
+          <div class="item-val green">${fmt(it.valor)}</div>
+          <span class="tag ${tagCls}">${tagTxt}</span>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-primary" onclick="togglePago('receita','${it.id}')">${lbl}</button>
+        <button class="btn btn-icon" onclick="openEditForm('receita','${it.id}')">✏</button>
+        <button class="btn btn-icon btn-danger" onclick="confirmDelete('receita','${it.id}','${esc(it.descricao)}')">✕</button>
+      </div>
+      <div id="confirm-r-${it.id}"></div>
+    </div>`;
+  }
+  document.getElementById('list-receita').innerHTML=html;
+}
+
+// ──────────────────────────────────────────
+// PARCELAS
+// ──────────────────────────────────────────
+function renderParcelas(){
+  const parcelasMap={};
+  const allKeys=Object.keys(data.meses).sort();
+  for(const mk of allKeys){
+    if(mk>currentMes)break;
+    for(const l of (data.meses[mk].lancamentos||[])){
+      const pn=parcelaNum(l.parcela);
+      if(!pn)continue;
+      const[a,t]=pn;
+      const key=l.descricao;
+      if(!parcelasMap[key]||a>parcelasMap[key].atual){
+        parcelasMap[key]={atual:a,total:t,valor:l.valor,cat:l.categoria||'',obs:l.obs||'',mesKey:mk,id:l.id};
+      }
+    }
+  }
+  const entries=Object.entries(parcelasMap).sort((a,b)=>a[0].localeCompare(b[0]));
+  let html='';
+  if(!entries.length){html='<div class="empty">Nenhuma parcela registrada.</div>';}
+  for(const[desc,info] of entries){
+    const{atual:a,total:t,valor,cat,mesKey,id}=info;
+    const restam=t-a;
+    const pct=(a/t*100).toFixed(0);
+    const valRest=restam*valor;
+    const faltaTxt=restam>0?`Falta ${fmt(valRest)} (${restam}x)`:'Quitada';
+    const faltaCor=restam>0?'red':'green';
+    html+=`<div class="item" id="item-p-${id}">
+      <div class="parc-header">
+        <div class="item-desc">${esc(desc)}</div>
+        <div class="item-sub">${a}/${t} parcelas</div>
+      </div>
+      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;"></div></div>
+      <div class="parc-footer">
+        <div style="font-size:11px;color:var(--text3);">${esc(cat)} · ${fmt(valor)}/mês</div>
+        <div style="font-size:12px;font-weight:700;" class="${faltaCor}">${faltaTxt}</div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-primary" onclick="openEditParc('${id}','${esc(desc)}')">✏ Editar</button>
+        <button class="btn btn-icon btn-danger" onclick="confirmDeleteParc('${id}','${esc(desc)}','${mesKey}')">✕</button>
+      </div>
+      <div id="confirm-p-${id}"></div>
+    </div>`;
+  }
+  document.getElementById('list-parcelas').innerHTML=html;
+}
+
+// ──────────────────────────────────────────
+// POUPAR
+// ──────────────────────────────────────────
+function renderPoupar(){
+  const p=data.poupanca||{objetivo:'',meta_total:0,depositos:[]};
+  const deps=p.depositos||[];
+  const totalPoupado=deps.reduce((s,d)=>s+d.valor,0);
+  const meta=p.meta_total||0;
+  const pct=meta>0?Math.min(totalPoupado/meta*100,100):0;
+  const obj=p.objetivo||'Sem objetivo definido';
+
+  document.getElementById('poupanca-card').innerHTML=`
+    <div class="card">
+      <div style="font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Objetivo</div>
+      <div style="font-weight:700;font-size:15px;margin-bottom:12px;">${esc(obj)}</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px;">
+        <div><div class="s-label">Total poupado</div><div class="big-val green">${fmt(totalPoupado)}</div></div>
+        <div style="text-align:right;"><div class="s-label">Meta</div><div style="font-size:16px;font-weight:700;color:var(--text2);">${meta>0?fmt(meta):'—'}</div></div>
+      </div>
+      <div class="prog-bg"><div class="prog-fill green" style="width:${pct.toFixed(0)}%;"></div></div>
+      <div style="font-size:11px;color:var(--text3);text-align:right;margin-top:4px;">${pct.toFixed(0)}% da meta</div>
+      <button class="btn btn-full" onclick="openForm('poupanca-cfg')">Editar objetivo e meta</button>
+    </div>`;
+
+  const deOrdenados=[...deps].sort((a,b)=>b.mes.localeCompare(a.mes));
+  let html='';
+  if(!deps.length){html='<div class="empty">Nenhum depósito ainda.</div>';}
+  for(const dep of deOrdenados){
+    const sub=[nomeMesCurto(dep.mes),dep.obs].filter(Boolean).join(' · ');
+    html+=`<div class="item received" id="item-dep-${dep.id}">
+      <div class="item-main">
+        <div class="item-left"><div class="item-desc">Depósito</div><div class="item-sub">${esc(sub)}</div></div>
+        <div class="item-right"><div class="item-val green">${fmt(dep.valor)}</div></div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-primary" onclick="openEditDep('${dep.id}')">✏ Editar</button>
+        <button class="btn btn-icon btn-danger" onclick="confirmDeleteDep('${dep.id}')">✕</button>
+      </div>
+      <div id="confirm-dep-${dep.id}"></div>
+    </div>`;
+  }
+  document.getElementById('list-depositos').innerHTML=html;
+
+  // Sobra por mês
+  const recentKeys=Object.keys(data.meses).sort().slice(-6);
+  let sobraHtml='';
+  for(const mk of recentKeys){
+    const mv=data.meses[mk];
+    const mr=( mv.receitas||[]).reduce((s,r)=>s+r.valor,0);
+    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
+    const sd=mr-mt;
+    const cor=sd>=0?'green':'red';
+    const bold=mk===currentMes?'font-weight:700;':'';
+    sobraHtml+=`<div class="hist-row">
+      <div style="font-size:13px;${bold}">${nomeMesCurto(mk)}</div>
+      <div class="s-val ${cor}">${fmt(sd)}</div>
+    </div>`;
+  }
+  document.getElementById('sobra-meses').innerHTML=sobraHtml||'<div class="empty">Sem dados.</div>';
+}
+
+// ──────────────────────────────────────────
+// RESUMO
+// ──────────────────────────────────────────
+function renderResumo(){
+  const mes=getMesData();
+  const lanc=mes.lancamentos||[];
+  const total=lanc.reduce((s,l)=>s+l.valor,0);
+  // Por categoria
+  const cats={};
+  for(const l of lanc){const c=l.categoria||'🎯 Outros';cats[c]=(cats[c]||0)+l.valor;}
+  const catOrd=Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+  let catHtml='';
+  for(const[c,v] of catOrd){
+    if(v<=0)continue;
+    const pct=total>0?(v/total*100):0;
+    catHtml+=`<div class="cat-row">
+      <div class="cat-info">
+        <div class="cat-name">${esc(c)}</div>
+        <div class="prog-bg"><div class="prog-fill" style="width:${pct.toFixed(0)}%;"></div></div>
+      </div>
+      <div class="cat-num">
+        <div class="cat-val">${fmt(v)}</div>
+        <div class="cat-pct">${pct.toFixed(0)}%</div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('cat-chart').innerHTML=catHtml||'<div class="empty">Sem gastos.</div>';
+
+  // Histórico
+  const histKeys=Object.keys(data.meses).sort().slice(-6);
+  let histHtml='';
+  for(const mk of histKeys){
+    const mv=data.meses[mk];
+    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
+    const mr=( mv.receitas||[]).reduce((s,r)=>s+r.valor,0);
+    const sd=mr-mt;
+    const cor=sd>=0?'green':'red';
+    const bold=mk===currentMes?'font-weight:700;':'color:var(--text2);';
+    histHtml+=`<div class="hist-row">
+      <div style="font-size:13px;${bold}">${nomeMesCurto(mk)}</div>
+      <div style="text-align:right;">
+        <div class="s-val red">${fmt(mt)}</div>
+        <div style="font-size:11px;" class="${cor}">saldo ${fmt(sd)}</div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('historico').innerHTML=histHtml||'<div class="empty">Sem histórico.</div>';
+
+  // Template fixas
+  const tpl=data.template_fixas||[];
+  let tplHtml=tpl.map(t=>`<div class="hist-row">
+    <div style="font-size:13px;color:var(--text2);">${esc(t.descricao)}</div>
+    <div style="font-weight:600;">${fmt(t.valor)}</div>
+  </div>`).join('');
+  tplHtml+=`<button class="btn btn-full" style="margin-top:10px;" onclick="openForm('template')">Editar template</button>`;
+  document.getElementById('template-fixas').innerHTML=tplHtml;
+}
+
+// ═══════════════════════════════════════════
+// TOGGLE PAID / RECEIVED
+// ═══════════════════════════════════════════
+function togglePago(tipo,id){
+  const mes=getMesData();
+  if(tipo==='lanc'){
+    const it=mes.lancamentos.find(l=>l.id===id);
+    if(it){it.pago=!it.pago;}
+  }else if(tipo==='receita'){
+    const it=mes.receitas.find(r=>r.id===id);
+    if(it){it.recebido=!it.recebido;}
+  }
+  saveData();
+  renderHeader();
+  renderSection(currentSection);
+}
+
+// ═══════════════════════════════════════════
+// DELETE CONFIRM
+// ═══════════════════════════════════════════
+function confirmDelete(tipo,id,desc){
+  const pfx=tipo==='lanc'?'g':tipo==='fixa'?'f':'r';
+  const el=document.getElementById(`confirm-${pfx}-${id}`);
+  if(!el)return;
+  el.innerHTML=`<div class="confirm-bar">
+    <p>Excluir "${esc(desc)}"?</p>
+    <div class="confirm-actions">
+      <button class="btn btn-sm btn-danger" onclick="doDelete('${tipo}','${id}')">Excluir</button>
+      <button class="btn btn-sm" onclick="cancelConfirm('${pfx}','${id}')">Cancelar</button>
+    </div>
+  </div>`;
+}
+function cancelConfirm(pfx,id){
+  const el=document.getElementById(`confirm-${pfx}-${id}`);
+  if(el)el.innerHTML='';
+}
+function doDelete(tipo,id){
+  const mes=getMesData();
+  if(tipo==='lanc') mes.lancamentos=mes.lancamentos.filter(l=>l.id!==id);
+  else if(tipo==='fixa') mes.fixas=mes.fixas.filter(f=>f.id!==id);
+  else if(tipo==='receita') mes.receitas=mes.receitas.filter(r=>r.id!==id);
+  saveData();
+  renderHeader();
+  renderSection(currentSection);
+  showToast('Item excluído');
+}
+function confirmDeleteParc(id,desc,mesKey){
+  const el=document.getElementById(`confirm-p-${id}`);
+  if(!el)return;
+  el.innerHTML=`<div class="confirm-bar">
+    <p>Excluir parcela "${esc(desc)}"?</p>
+    <div class="confirm-actions">
+      <button class="btn btn-sm btn-danger" onclick="doDeleteParc('${id}','${mesKey}')">Excluir</button>
+      <button class="btn btn-sm" onclick="document.getElementById('confirm-p-${id}').innerHTML=''">Cancelar</button>
+    </div>
+  </div>`;
+}
+function doDeleteParc(id,mesKey){
+  const mv=data.meses[mesKey];
+  if(mv) mv.lancamentos=mv.lancamentos.filter(l=>l.id!==id);
+  saveData();
+  renderSection('parcelas');
+  showToast('Parcela excluída');
+}
+function confirmDeleteDep(id){
+  const el=document.getElementById(`confirm-dep-${id}`);
+  if(!el)return;
+  el.innerHTML=`<div class="confirm-bar">
+    <p>Excluir depósito?</p>
+    <div class="confirm-actions">
+      <button class="btn btn-sm btn-danger" onclick="doDeleteDep('${id}')">Excluir</button>
+      <button class="btn btn-sm" onclick="document.getElementById('confirm-dep-${id}').innerHTML=''">Cancelar</button>
+    </div>
+  </div>`;
+}
+function doDeleteDep(id){
+  data.poupanca.depositos=data.poupanca.depositos.filter(d=>d.id!==id);
+  saveData();
+  renderPoupar();
+  showToast('Depósito excluído');
+}
+
+// ═══════════════════════════════════════════
+// FORMS
+// ═══════════════════════════════════════════
+function openForm(tipo){
+  const sheet=document.getElementById('form-sheet');
+  sheet.innerHTML=buildForm(tipo,null);
+  document.getElementById('form-overlay').style.display='flex';
+  setTimeout(()=>sheet.querySelector('input,select')?.focus(),100);
+}
+function openEditForm(tipo,id){
+  const mes=getMesData();
+  let item=null;
+  if(tipo==='gasto') item=(mes.lancamentos||[]).find(l=>l.id===id);
+  else if(tipo==='fixa') item=(mes.fixas||[]).find(f=>f.id===id);
+  else if(tipo==='receita') item=(mes.receitas||[]).find(r=>r.id===id);
+  if(!item)return;
+  const sheet=document.getElementById('form-sheet');
+  sheet.innerHTML=buildForm(tipo,item);
+  document.getElementById('form-overlay').style.display='flex';
+}
+function openEditParc(id,desc){
+  // Find item across months
+  let item=null,mesKey=null;
+  for(const mk of Object.keys(data.meses).sort()){
+    item=(data.meses[mk].lancamentos||[]).find(l=>l.id===id);
+    if(item){mesKey=mk;break;}
+  }
+  if(!item)return;
+  const sheet=document.getElementById('form-sheet');
+  sheet.innerHTML=buildFormParc(item,mesKey);
+  document.getElementById('form-overlay').style.display='flex';
+}
+function openEditDep(id){
+  const dep=(data.poupanca.depositos||[]).find(d=>d.id===id);
+  if(!dep)return;
+  const sheet=document.getElementById('form-sheet');
+  sheet.innerHTML=buildFormDep(dep);
+  document.getElementById('form-overlay').style.display='flex';
+}
+function closeForm(){
+  document.getElementById('form-overlay').style.display='none';
+}
+
+function catOptions(cats,selected){
+  return cats.map(c=>`<option value="${esc(c)}"${c===selected?' selected':''}>${esc(c)}</option>`).join('');
+}
+function mesOptions(selected){
+  return Object.keys(data.meses).sort().reverse().map(k=>
+    `<option value="${k}"${k===selected?' selected':''}>${nomeMesCurto(k)}</option>`).join('');
+}
+
+function buildForm(tipo,item){
+  if(tipo==='gasto'){
+    const t=item||{};
+    return `<div class="form-title">${item?'Editar Gasto':'Novo Gasto'}</div>
+    <div class="form-group"><label class="form-label">Descrição *</label>
+      <input class="form-input" id="fi-desc" placeholder="Ex: Farmácia..." value="${esc(t.descricao||'')}">
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Valor (R$) *</label>
+        <input class="form-input" id="fi-val" type="number" min="0" step="0.01" placeholder="0,00" value="${t.valor||''}">
+      </div>
+      <div class="form-group"><label class="form-label">Dia</label>
+        <input class="form-input" id="fi-dia" type="number" min="1" max="31" value="${t.data||today()}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Parcela</label>
+        <input class="form-input" id="fi-parc" placeholder="Ex: 1/6" value="${esc(t.parcela||'')}">
+      </div>
+      <div class="form-group"><label class="form-label">Categoria</label>
+        <select class="form-input" id="fi-cat">${catOptions(CATS,t.categoria||CATS[0])}</select>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Observação</label>
+      <input class="form-input" id="fi-obs" placeholder="opcional" value="${esc(t.obs||'')}">
+    </div>
+    <label class="form-check"><input type="checkbox" id="fi-pago" ${t.pago?'checked':''}><span>Já pago?</span></label>
+    <div class="form-actions">
+      <button class="btn btn-primary" style="flex:2;" onclick="submitForm('gasto','${item?item.id:''}')">Salvar</button>
+      <button class="btn" onclick="closeForm()">Cancelar</button>
+    </div>`;
+  }
+  if(tipo==='fixa'){
+    const t=item||{};
+    return `<div class="form-title">${item?'Editar Fixa':'Nova Fixa'}</div>
+    <div class="form-group"><label class="form-label">Descrição *</label>
+      <input class="form-input" id="fi-desc" placeholder="Ex: Streaming..." value="${esc(t.descricao||'')}">
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Valor (R$) *</label>
+        <input class="form-input" id="fi-val" type="number" min="0" step="0.01" value="${t.valor||''}">
+      </div>
+      <div class="form-group"><label class="form-label">Categoria</label>
+        <select class="form-input" id="fi-cat">${catOptions(CATS,t.categoria||CATS[0])}</select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" style="flex:2;" onclick="submitForm('fixa','${item?item.id:''}')">Salvar</button>
+      <button class="btn" onclick="closeForm()">Cancelar</button>
+    </div>`;
+  }
+  if(tipo==='receita'){
+    const t=item||{};
+    return `<div class="form-title">${item?'Editar Receita':'Nova Receita'}</div>
+    <div class="form-group"><label class="form-label">Descrição *</label>
+      <input class="form-input" id="fi-desc" placeholder="Ex: Honorários..." value="${esc(t.descricao||'')}">
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Valor (R$) *</label>
+        <input class="form-input" id="fi-val" type="number" min="0" step="0.01" value="${t.valor||''}">
+      </div>
+      <div class="form-group"><label class="form-label">Dia</label>
+        <input class="form-input" id="fi-dia" type="number" min="1" max="31" value="${t.data||today()}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Categoria</label>
+        <select class="form-input" id="fi-cat">${catOptions(CATS_REC,t.categoria||CATS_REC[0])}</select>
+      </div>
+      <div class="form-group"><label class="form-label">Observação</label>
+        <input class="form-input" id="fi-obs" placeholder="opcional" value="${esc(t.obs||'')}">
+      </div>
+    </div>
+    <label class="form-check"><input type="checkbox" id="fi-rec" ${t.recebido!==false?'checked':''}><span>Já recebido?</span></label>
+    <div class="form-actions">
+      <button class="btn btn-primary" style="flex:2;" onclick="submitForm('receita','${item?item.id:''}')">Salvar</button>
+      <button class="btn" onclick="closeForm()">Cancelar</button>
+    </div>`;
+  }
+  if(tipo==='deposito'){
+    return buildFormDep(null);
+  }
+  if(tipo==='poupanca-cfg'){
+    const p=data.poupanca||{};
+    return `<div class="form-title">Objetivo de Poupança</div>
+    <div class="form-group"><label class="form-label">Objetivo</label>
+      <input class="form-input" id="fi-obj" placeholder="Ex: Viagem, reserva..." value="${esc(p.objetivo||'')}">
+    </div>
+    <div class="form-group"><label class="form-label">Meta total (R$)</label>
+      <input class="form-input" id="fi-meta" type="number" min="0" step="500" value="${p.meta_total||0}">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" style="flex:2;" onclick="submitPoupancaCfg()">Salvar</button>
+      <button class="btn" onclick="closeForm()">Cancelar</button>
+    </div>`;
+  }
+  if(tipo==='template'){
+    const tpl=data.template_fixas||[];
+    let rows=tpl.map((t,i)=>`
+      <div class="form-row" style="margin-bottom:8px;">
+        <input class="form-input" id="tpl-desc-${i}" value="${esc(t.descricao)}" placeholder="Nome">
+        <input class="form-input" id="tpl-val-${i}" type="number" step="0.01" value="${t.valor}">
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <select class="form-input" id="tpl-cat-${i}">${catOptions(CATS,t.categoria)}</select>
+      </div>`).join('');
+    return `<div class="form-title">Template de Fixas</div>
+    ${rows}
+    <div class="form-actions">
+      <button class="btn btn-primary" style="flex:2;" onclick="submitTemplate(${tpl.length})">Salvar</button>
+      <button class="btn" onclick="closeForm()">Cancelar</button>
+    </div>`;
+  }
+  return '';
+}
+
+function buildFormDep(dep){
+  const t=dep||{};
+  return `<div class="form-title">${dep?'Editar Depósito':'Novo Depósito'}</div>
+  <div class="form-group"><label class="form-label">Valor (R$) *</label>
+    <input class="form-input" id="fi-val" type="number" min="0.01" step="50" value="${t.valor||''}">
+  </div>
+  <div class="form-group"><label class="form-label">Mês de referência</label>
+    <select class="form-input" id="fi-mes">${mesOptions(t.mes||currentMes)}</select>
+  </div>
+  <div class="form-group"><label class="form-label">Observação</label>
+    <input class="form-input" id="fi-obs" placeholder="Ex: poupança do mês..." value="${esc(t.obs||'')}">
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-primary" style="flex:2;" onclick="submitDep('${dep?dep.id:''}')">Salvar</button>
+    <button class="btn" onclick="closeForm()">Cancelar</button>
+  </div>`;
+}
+
+function buildFormParc(item,mesKey){
+  const pn=parcelaNum(item.parcela)||[1,1];
+  return `<div class="form-title">Editar Parcela</div>
+  <div class="form-group"><label class="form-label">Descrição *</label>
+    <input class="form-input" id="fi-desc" value="${esc(item.descricao)}">
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Valor/parcela (R$)</label>
+      <input class="form-input" id="fi-val" type="number" step="0.01" value="${item.valor}">
+    </div>
+    <div class="form-group"><label class="form-label">Categoria</label>
+      <select class="form-input" id="fi-cat">${catOptions(CATS,item.categoria)}</select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label class="form-label">Parcela atual</label>
+      <input class="form-input" id="fi-pat" type="number" min="0" value="${pn[0]}">
+    </div>
+    <div class="form-group"><label class="form-label">Total parcelas</label>
+      <input class="form-input" id="fi-ptot" type="number" min="1" value="${pn[1]}">
+    </div>
+  </div>
+  <div class="form-group"><label class="form-label">Observação</label>
+    <input class="form-input" id="fi-obs" value="${esc(item.obs||'')}">
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-primary" style="flex:2;" onclick="submitParc('${item.id}','${mesKey}')">Salvar</button>
+    <button class="btn" onclick="closeForm()">Cancelar</button>
+  </div>`;
+}
+
+function g(id){return document.getElementById(id);}
+function gv(id,fallback=''){const e=g(id);return e?e.value.trim():fallback;}
+function gn(id){return parseFloat(g(id)?.value||0)||0;}
+function gb(id){return g(id)?.checked||false;}
+
+function submitForm(tipo,editId){
+  const mes=getMesData();
+  const desc=gv('fi-desc');
+  const val=gn('fi-val');
+  if(!desc){showToast('Preencha a descrição');return;}
+  if(val<=0&&tipo!=='fixa'&&tipo!=='gasto'){showToast('Informe um valor');return;}
+
+  if(tipo==='gasto'){
+    const obj={id:editId||uid(),data:parseInt(gv('fi-dia'))||today(),
+      descricao:desc,valor:val,parcela:gv('fi-parc'),
+      categoria:gv('fi-cat'),pago:gb('fi-pago'),obs:gv('fi-obs')};
+    if(editId){const idx=mes.lancamentos.findIndex(l=>l.id===editId);if(idx>=0)mes.lancamentos[idx]=obj;}
+    else mes.lancamentos.push(obj);
+  }else if(tipo==='fixa'){
+    const obj={id:editId||uid(),descricao:desc,valor:val,categoria:gv('fi-cat')};
+    if(editId){const idx=mes.fixas.findIndex(f=>f.id===editId);if(idx>=0)mes.fixas[idx]=obj;}
+    else mes.fixas.push(obj);
+  }else if(tipo==='receita'){
+    const obj={id:editId||uid(),data:parseInt(gv('fi-dia'))||today(),
+      descricao:desc,valor:val,categoria:gv('fi-cat'),recebido:gb('fi-rec'),obs:gv('fi-obs')};
+    if(editId){const idx=mes.receitas.findIndex(r=>r.id===editId);if(idx>=0)mes.receitas[idx]=obj;}
+    else mes.receitas.push(obj);
+  }
+  saveData();closeForm();renderHeader();renderSection(currentSection);
+  showToast(editId?'Salvo!':'Adicionado!');
+}
+
+function submitDep(editId){
+  const val=gn('fi-val');const mes=gv('fi-mes');
+  if(val<=0){showToast('Informe um valor');return;}
+  if(!data.poupanca)data.poupanca={objetivo:'',meta_total:0,depositos:[]};
+  const obj={id:editId||uid(),mes,valor:val,obs:gv('fi-obs')};
+  if(editId){const idx=data.poupanca.depositos.findIndex(d=>d.id===editId);if(idx>=0)data.poupanca.depositos[idx]=obj;}
+  else data.poupanca.depositos.push(obj);
+  saveData();closeForm();renderPoupar();showToast(editId?'Salvo!':'Depósito adicionado!');
+}
+
+function submitPoupancaCfg(){
+  if(!data.poupanca)data.poupanca={objetivo:'',meta_total:0,depositos:[]};
+  data.poupanca.objetivo=gv('fi-obj');
+  data.poupanca.meta_total=gn('fi-meta');
+  saveData();closeForm();renderPoupar();showToast('Objetivo salvo!');
+}
+
+function submitParc(id,mesKey){
+  const mv=data.meses[mesKey];
+  if(!mv)return;
+  const it=mv.lancamentos.find(l=>l.id===id);
+  if(!it)return;
+  it.descricao=gv('fi-desc');
+  it.valor=gn('fi-val');
+  it.parcela=`${gv('fi-pat')}/${gv('fi-ptot')}`;
+  it.categoria=gv('fi-cat');
+  it.obs=gv('fi-obs');
+  saveData();closeForm();renderParcelas();showToast('Parcela salva!');
+}
+
+function submitTemplate(count){
+  const tpl=[];
+  for(let i=0;i<count;i++){
+    const d=gv(`tpl-desc-${i}`);
+    const v=parseFloat(g(`tpl-val-${i}`)?.value||0);
+    if(d&&v>0) tpl.push({descricao:d,valor:v,categoria:gv(`tpl-cat-${i}`)});
+  }
+  data.template_fixas=tpl;
+  saveData();closeForm();renderResumo();showToast('Template salvo!');
+}
+
+// ═══════════════════════════════════════════
+// MONTH NAVIGATION
+// ═══════════════════════════════════════════
+document.getElementById('prev-month').onclick=()=>{
+  const keys=Object.keys(data.meses).sort();
+  const idx=keys.indexOf(currentMes);
+  if(idx>0){currentMes=keys[idx-1];render();}
+};
+document.getElementById('next-month').onclick=()=>{
+  const keys=Object.keys(data.meses).sort();
+  const idx=keys.indexOf(currentMes);
+  if(idx<keys.length-1){currentMes=keys[idx+1];render();}
+};
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+loadData();
+// Ensure retrocompat fields
+if(!data.poupanca) data.poupanca={objetivo:'',meta_total:0,depositos:[]};
+if(!data.template_fixas) data.template_fixas=[];
+if(!data.saldo_inicial) data.saldo_inicial=0;
+Object.values(data.meses).forEach(m=>{
+  if(!m.receitas) m.receitas=[];
+  if(!m.meta_poupanca) m.meta_poupanca=0;
+});
+garantirMeses();
+saveData();
+
+// GitHub sync on load
+const ghToken=localStorage.getItem('gh_token');
+if(ghToken) ghGet(ghToken);
+
+render();
+
+// Keyboard: Escape closes form
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeForm();});
+</script>
+</body>
+</html>
