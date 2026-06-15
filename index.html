@@ -370,9 +370,11 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // ═══════════════════════════════════════════
 // STORAGE
 // ═══════════════════════════════════════════
+let _saveTimer=null;
 function saveData(){
   localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
-  ghPut();
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(()=>ghPut(),1500);
 }
 function loadData(){
   const s=localStorage.getItem('meu-dinheiro-v2');
