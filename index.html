@@ -372,8 +372,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // ═══════════════════════════════════════════
 function saveData(){
   localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
-  const token=localStorage.getItem('gh_token');
-  if(token) ghPut(token);
+  ghPut();
 }
 function loadData(){
   const s=localStorage.getItem('meu-dinheiro-v2');
@@ -383,12 +382,9 @@ function loadData(){
 }
 
 // ═══════════════════════════════════════════
-// GITHUB SYNC
+// GITHUB SYNC via Cloudflare Worker
 // ═══════════════════════════════════════════
-const GH_REPO='adrielylovatoadv/financeiro-pessoal';
-const GH_FILE='dados.json';
-const GH_API=`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`;
-const GH_RAW=`https://raw.githubusercontent.com/${GH_REPO}/main/${GH_FILE}`;
+const WORKER_URL='https://meu-dinheiro.adrielylovatoadv.workers.dev';
 
 function setSyncStatus(msg,color='var(--text3)'){
   const el=document.getElementById('sync-indicator');
@@ -396,10 +392,9 @@ function setSyncStatus(msg,color='var(--text3)'){
 }
 
 async function ghLoadPublic(){
-  // Carrega dados do GitHub sem token (repo público)
   try{
     setSyncStatus('↻ sincronizando…');
-    const r=await fetch(GH_RAW+'?t='+Date.now());
+    const r=await fetch(WORKER_URL+'?t='+Date.now());
     if(!r.ok)throw new Error('fetch failed');
     const content=await r.json();
     data=content;
@@ -413,40 +408,20 @@ async function ghLoadPublic(){
   }
 }
 
-async function ghGetSha(token){
-  try{
-    const r=await fetch(GH_API,{headers:{Authorization:'token '+token,Accept:'application/vnd.github.v3+json'}});
-    if(!r.ok)return '';
-    const b=await r.json();
-    localStorage.setItem('gh_sha',b.sha);
-    return b.sha;
-  }catch(e){return '';}
-}
-
-async function ghPut(token){
+async function ghPut(){
   try{
     setSyncStatus('↻ salvando…');
-    // sempre busca o SHA atual antes de salvar
-    let sha=await ghGetSha(token);
-    if(!sha){
-      setSyncStatus('⚠ sem SHA','var(--yellow)');
-      return;
-    }
-    const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
-    const body={message:'atualiza dados',content,sha};
-    const r=await fetch(GH_API,{
+    const r=await fetch(WORKER_URL,{
       method:'PUT',
-      headers:{Authorization:'token '+token,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify(body)
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
     });
     if(r.ok){
-      const b=await r.json();
-      if(b.content?.sha)localStorage.setItem('gh_sha',b.content.sha);
       setSyncStatus('✓ salvo','var(--green)');
       setTimeout(()=>setSyncStatus(''),3000);
     }else{
-      const err=await r.json().catch(()=>({}));
-      setSyncStatus('⚠ erro: '+(err.message||r.status),'var(--red)');
+      const err=await r.text();
+      setSyncStatus('⚠ erro: '+r.status,'var(--red)');
       console.warn('ghPut error',r.status,err);
     }
   }catch(e){
@@ -459,44 +434,17 @@ async function ghPut(token){
 // SETTINGS
 // ═══════════════════════════════════════════
 function openSettings(){
-  const token=localStorage.getItem('gh_token')||'';
   const sheet=document.getElementById('form-sheet');
   sheet.innerHTML=`<div class="form-title">⚙ Configurações</div>
-  <div class="form-group">
-    <label class="form-label">GitHub Token (para salvar dados)</label>
-    <input class="form-input" id="cfg-token" type="text" placeholder="ghp_..." value="${esc(token)}"
-      style="font-size:13px;" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
-    <div style="font-size:11px;color:var(--text3);margin-top:6px;">
-      Gere em: github.com → Settings → Developer settings → Personal access tokens (classic) → permissão <b>repo</b>
-    </div>
+  <div style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.5;">
+    Sincronização automática ativa.<br>
+    Seus dados são salvos automaticamente na nuvem a cada alteração.
   </div>
-  <div id="cfg-status" style="font-size:12px;margin-bottom:8px;min-height:18px;"></div>
   <div class="form-actions">
-    <button class="btn btn-primary" style="flex:2;" onclick="saveSettings()">Testar e salvar</button>
+    <button class="btn btn-primary" style="flex:2;" onclick="ghLoadPublic().then(()=>closeForm())">↻ Recarregar dados agora</button>
     <button class="btn" onclick="closeForm()">Fechar</button>
-  </div>
-  <button class="btn btn-full" style="margin-top:8px;color:var(--green);" onclick="ghLoadPublic()">↻ Recarregar dados do GitHub agora</button>`;
+  </div>`;
   document.getElementById('form-overlay').style.display='flex';
-}
-
-async function saveSettings(){
-  const t=document.getElementById('cfg-token')?.value?.trim();
-  const statusEl=document.getElementById('cfg-status');
-  if(!t){
-    localStorage.removeItem('gh_token');
-    localStorage.removeItem('gh_sha');
-    if(statusEl) statusEl.innerHTML='<span style="color:var(--yellow);">Token removido.</span>';
-    return;
-  }
-  if(statusEl) statusEl.innerHTML='<span style="color:var(--text2);">Testando conexão…</span>';
-  const sha=await ghGetSha(t);
-  if(sha){
-    localStorage.setItem('gh_token',t);
-    if(statusEl) statusEl.innerHTML='<span style="color:var(--green);">✓ Token válido! Dados serão salvos automaticamente.</span>';
-    setTimeout(()=>closeForm(),1500);
-  }else{
-    if(statusEl) statusEl.innerHTML='<span style="color:var(--red);">⚠ Token inválido ou sem permissão. Verifique e tente de novo.</span>';
-  }
 }
 
 // ═══════════════════════════════════════════
