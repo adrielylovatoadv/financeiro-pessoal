@@ -505,6 +505,15 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "e9cf0d7d-4f93-4e6e-8f37-f520c95709df",
+          "data": 15,
+          "descricao": "Honorario",
+          "valor": 323.0,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0.0,
