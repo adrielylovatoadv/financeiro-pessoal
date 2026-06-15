@@ -5,9 +5,9 @@
         {
           "id": "a57d6546",
           "data": 18,
-          "descricao": "HonorÃ¡rios",
+          "descricao": "HonorÃÂ¡rios",
           "valor": 9832.2,
-          "categoria": "âï¸ HonorÃ¡rios",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â HonorÃÂ¡rios",
           "recebido": true,
           "obs": ""
         }
@@ -20,7 +20,7 @@
           "descricao": "Nubank",
           "valor": 426.97,
           "parcela": "5/5",
-          "categoria": "ð³ CartÃ£o",
+          "categoria": "Ã°ÂÂÂ³ CartÃÂ£o",
           "pago": true,
           "obs": ""
         },
@@ -30,7 +30,7 @@
           "descricao": "Nubank",
           "valor": 979.84,
           "parcela": "1/3",
-          "categoria": "ð³ CartÃ£o",
+          "categoria": "Ã°ÂÂÂ³ CartÃÂ£o",
           "pago": true,
           "obs": ""
         },
@@ -40,7 +40,7 @@
           "descricao": "Academia",
           "valor": 135,
           "parcela": "",
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": true,
           "obs": ""
         },
@@ -50,17 +50,17 @@
           "descricao": "Mercado Pago",
           "valor": 424.99,
           "parcela": "2/2",
-          "categoria": "ð Compras",
+          "categoria": "Ã°ÂÂÂ Compras",
           "pago": true,
           "obs": ""
         },
         {
           "id": "m3l5",
           "data": 10,
-          "descricao": "Aluguel e net EscritÃ³rio",
+          "descricao": "Aluguel e net EscritÃÂ³rio",
           "valor": 382.75,
           "parcela": "",
-          "categoria": "ð  Moradia",
+          "categoria": "Ã°ÂÂÂ  Moradia",
           "pago": true,
           "obs": ""
         },
@@ -70,7 +70,7 @@
           "descricao": "Sicoob",
           "valor": 2630.69,
           "parcela": "",
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": true,
           "obs": ""
         },
@@ -80,7 +80,7 @@
           "descricao": "Parcela Carro",
           "valor": 2553.45,
           "parcela": "6/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": true,
           "obs": ""
         },
@@ -90,7 +90,7 @@
           "descricao": "Cabelo casamento",
           "valor": 120,
           "parcela": "",
-          "categoria": "ð Beleza",
+          "categoria": "Ã°ÂÂÂ Beleza",
           "pago": true,
           "obs": ""
         },
@@ -100,7 +100,7 @@
           "descricao": "Maquiagem casamento",
           "valor": 150,
           "parcela": "",
-          "categoria": "ð Beleza",
+          "categoria": "Ã°ÂÂÂ Beleza",
           "pago": true,
           "obs": ""
         },
@@ -110,7 +110,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "3/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true,
           "obs": ""
         }
@@ -120,49 +120,49 @@
           "id": "m3f1",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": true
         },
         {
           "id": "m3f2",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m3f3",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m3f4",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": true
         },
         {
           "id": "m3f5",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m3f6",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": true
         },
         {
           "id": "m3f7",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true
         }
       ]
@@ -172,9 +172,9 @@
         {
           "id": "00e20553",
           "data": 15,
-          "descricao": "HonorÃ¡rios",
+          "descricao": "HonorÃÂ¡rios",
           "valor": 7355.89,
-          "categoria": "âï¸ HonorÃ¡rios",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â HonorÃÂ¡rios",
           "recebido": true,
           "obs": ""
         }
@@ -187,7 +187,7 @@
           "descricao": "Nubank",
           "valor": 532.77,
           "parcela": "2/3",
-          "categoria": "ð³ CartÃ£o",
+          "categoria": "Ã°ÂÂÂ³ CartÃÂ£o",
           "pago": true,
           "obs": ""
         },
@@ -197,17 +197,17 @@
           "descricao": "Academia",
           "valor": 135,
           "parcela": "",
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": true,
           "obs": ""
         },
         {
           "id": "m4l5",
           "data": 10,
-          "descricao": "Aluguel e net EscritÃ³rio",
+          "descricao": "Aluguel e net EscritÃÂ³rio",
           "valor": 339.95,
           "parcela": "",
-          "categoria": "ð  Moradia",
+          "categoria": "Ã°ÂÂÂ  Moradia",
           "pago": true,
           "obs": ""
         },
@@ -217,7 +217,7 @@
           "descricao": "Sicoob",
           "valor": 3979.1,
           "parcela": "",
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": true,
           "obs": "370 Lucas"
         },
@@ -227,7 +227,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "7/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": true,
           "obs": ""
         },
@@ -237,7 +237,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "4/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true,
           "obs": ""
         }
@@ -247,56 +247,56 @@
           "id": "m4f1",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": true
         },
         {
           "id": "m4f2",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m4f3",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m4f4",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": true
         },
         {
           "id": "m4f5",
           "descricao": "Vivo",
           "valor": 62,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m4f6",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": true
         },
         {
           "id": "m4f7",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 150,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": true
         },
         {
           "id": "m4f8",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true
         }
       ]
@@ -306,9 +306,9 @@
         {
           "id": "9809aef0",
           "data": 26,
-          "descricao": "HonorÃ¡rios",
+          "descricao": "HonorÃÂ¡rios",
           "valor": 1496.54,
-          "categoria": "âï¸ HonorÃ¡rios",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â HonorÃÂ¡rios",
           "recebido": true,
           "obs": ""
         },
@@ -317,7 +317,7 @@
           "data": 28,
           "descricao": "Processo trab",
           "valor": 3500,
-          "categoria": "ð¯ Outros",
+          "categoria": "Ã°ÂÂÂ¯ Outros",
           "recebido": true,
           "obs": ""
         }
@@ -330,7 +330,7 @@
           "descricao": "OAB SP",
           "valor": 361.23,
           "parcela": "1/3",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true,
           "obs": ""
         },
@@ -340,17 +340,17 @@
           "descricao": "Mercado Pago",
           "valor": 87.24,
           "parcela": "1/3",
-          "categoria": "ð Compras",
+          "categoria": "Ã°ÂÂÂ Compras",
           "pago": true,
           "obs": ""
         },
         {
           "id": "m5l4",
           "data": 10,
-          "descricao": "Aluguel e net EscritÃ³rio",
+          "descricao": "Aluguel e net EscritÃÂ³rio",
           "valor": 300,
           "parcela": "",
-          "categoria": "ð  Moradia",
+          "categoria": "Ã°ÂÂÂ  Moradia",
           "pago": true,
           "obs": ""
         },
@@ -360,7 +360,7 @@
           "descricao": "Sicoob",
           "valor": 2619,
           "parcela": "",
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": true,
           "obs": ""
         },
@@ -370,7 +370,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "8/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": true,
           "obs": ""
         },
@@ -380,7 +380,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "5/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true,
           "obs": ""
         },
@@ -390,7 +390,7 @@
           "descricao": "Kelen",
           "valor": 300,
           "parcela": "",
-          "categoria": "ð¯ Outros",
+          "categoria": "Ã°ÂÂÂ¯ Outros",
           "pago": true,
           "obs": ""
         }
@@ -400,63 +400,63 @@
           "id": "m5f1",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": true
         },
         {
           "id": "m5f2",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m5f3",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m5f4",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": true
         },
         {
           "id": "m5f5",
           "descricao": "Vivo",
           "valor": 44,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m5f6",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": true
         },
         {
           "id": "m5f7",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": true
         },
         {
           "id": "m5f8",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": true
         },
         {
           "id": "m5f9",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true
         }
       ]
@@ -468,7 +468,7 @@
           "data": 3,
           "descricao": "Trabalhos breno",
           "valor": 350,
-          "categoria": "âï¸ HonorÃ¡rios",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â HonorÃÂ¡rios",
           "recebido": true,
           "obs": ""
         },
@@ -477,7 +477,7 @@
           "data": 3,
           "descricao": "Honorarios",
           "valor": 609,
-          "categoria": "âï¸ HonorÃ¡rios",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â HonorÃÂ¡rios",
           "recebido": true,
           "obs": ""
         },
@@ -486,7 +486,7 @@
           "data": 6,
           "descricao": "Estorno onofre",
           "valor": 100,
-          "categoria": "ð° Reembolso",
+          "categoria": "Ã°ÂÂÂ° Reembolso",
           "recebido": true,
           "obs": ""
         },
@@ -495,7 +495,7 @@
           "data": 6,
           "descricao": "Seguros",
           "valor": 2544.33,
-          "categoria": "ð° Reembolso",
+          "categoria": "Ã°ÂÂÂ° Reembolso",
           "recebido": true,
           "obs": ""
         }
@@ -508,7 +508,7 @@
           "descricao": "OAB SP",
           "valor": 361.23,
           "parcela": "2/3",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": true,
           "obs": ""
         },
@@ -518,17 +518,17 @@
           "descricao": "Mercado Pago",
           "valor": 87.22,
           "parcela": "1/2",
-          "categoria": "ð Compras",
+          "categoria": "Ã°ÂÂÂ Compras",
           "pago": true,
           "obs": ""
         },
         {
           "id": "m6l4",
           "data": 10,
-          "descricao": "Aluguel e net EscritÃ³rio",
+          "descricao": "Aluguel e net EscritÃÂ³rio",
           "valor": 339.95,
           "parcela": "",
-          "categoria": "ð  Moradia",
+          "categoria": "Ã°ÂÂÂ  Moradia",
           "pago": false,
           "obs": ""
         },
@@ -538,7 +538,7 @@
           "descricao": "Sicoob",
           "valor": 3968.98,
           "parcela": "",
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false,
           "obs": "valor a confirmar"
         },
@@ -548,7 +548,7 @@
           "descricao": "C&A",
           "valor": 199.99,
           "parcela": "1/2",
-          "categoria": "ð Compras",
+          "categoria": "Ã°ÂÂÂ Compras",
           "pago": false,
           "obs": ""
         },
@@ -558,7 +558,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "8/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -568,7 +568,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "6/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -578,63 +578,63 @@
           "id": "m6f1",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "m6f2",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "m6f3",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "m6f4",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "m6f5",
           "descricao": "Vivo",
           "valor": 44,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "m6f6",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "m6f7",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "m6f8",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "m6f9",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -649,7 +649,7 @@
           "descricao": "OAB SP",
           "valor": 361.23,
           "parcela": "3/3",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         },
@@ -659,7 +659,7 @@
           "descricao": "Mercado Pago",
           "valor": 87.22,
           "parcela": "2/2",
-          "categoria": "ð Compras",
+          "categoria": "Ã°ÂÂÂ Compras",
           "pago": false,
           "obs": ""
         },
@@ -669,7 +669,7 @@
           "descricao": "C&A",
           "valor": 199.99,
           "parcela": "2/2",
-          "categoria": "ð Compras",
+          "categoria": "Ã°ÂÂÂ Compras",
           "pago": false,
           "obs": ""
         },
@@ -679,7 +679,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "9/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -689,7 +689,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "7/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -699,63 +699,63 @@
           "id": "mqfpsl7h2ogt1wljtw8",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7hkarqt554kq",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7halhubtywlhb",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h9atebvxgco7",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7h688vn510rjc",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h1r4hw7id0am",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7h1ij5ow0huwl",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h0umj68yy2aqe",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7ho6o9z58p4yh",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -770,7 +770,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "10/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -780,7 +780,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "8/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -790,63 +790,63 @@
           "id": "mqfpsl7h9r90otw240u",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7hnzgqw7vqlu8",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h5xjx7fc5gzc",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7hcknjpauhiuh",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7h1ahta4o4zrp",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7hfp2w8slq0ml",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7h6sjli3ozat8",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h1w28buu0pnh",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7hiyd1opundq",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -861,7 +861,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "11/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -871,7 +871,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "9/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -881,63 +881,63 @@
           "id": "mqfpsl7hilfa7q9th9",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7hkihidqaumgk",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h87o0csxluse",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7hoo03822vq2j",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7hk6ghhk2v8d",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7h4piqc9oef6",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7hhsss8i531cb",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7hn4zkjn5rpc8",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7hg0iizpykr7b",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -952,7 +952,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "12/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -962,7 +962,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "10/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -972,63 +972,63 @@
           "id": "mqfpsl7hd3ilud3cgje",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7h6ypzqs3bb9o",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7hzjcvcbq3n5",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iz8unac2vn9q",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7imlek0cy1g8e",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ijwc4ghr0czq",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7inhdn1oxmr2",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i877iqok570k",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7iyegeculm468",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1043,7 +1043,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "13/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -1053,7 +1053,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "11/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -1063,63 +1063,63 @@
           "id": "mqfpsl7iz3zrvkqfu28",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7iec3v82v78ke",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i191sxvhu1c8",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iqjn0og74rp",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7itvsd1fu46dm",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i6jvwlx05l6a",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7ibe7vt7l818",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7itoplci2x7wf",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7ivad3yhyr07",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1134,7 +1134,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "14/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         },
@@ -1144,7 +1144,7 @@
           "descricao": "OAB MG",
           "valor": 79.2,
           "parcela": "12/12",
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false,
           "obs": ""
         }
@@ -1154,63 +1154,63 @@
           "id": "mqfpsl7idlsub95zr0f",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7is73a5ntknm",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ioho6f5vcj6",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iky7js8pjo7r",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7im20t88fuft",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iq0kjhwzf1j",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7ihq69nsbjrxs",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iehgyix66npl",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7iywxbis8dx8",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1225,7 +1225,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "15/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1235,63 +1235,63 @@
           "id": "mqfpsl7ighi3xrc76u",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7ilybkb5vslwn",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7igqiesmnpin9",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i3owttvs14k",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7imkojx31ye1b",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iytc2y6co47",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7icl24uhidto",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ie9ht6phro9r",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7i3k02u61ugic",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1306,7 +1306,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "16/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1316,63 +1316,63 @@
           "id": "mqfpsl7if4oyrac6bxl",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7ixwtlfvw1axc",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i4s37kphtno3",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ia8knqi2b896",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7iehlral4acl",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i0jmuoq7kpue",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7ilakijfq93m",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ijwp37yb3mtt",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7idef637n7bj6",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1387,7 +1387,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "17/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1397,63 +1397,63 @@
           "id": "mqfpsl7igv0dd40buup",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7i6da11svbtql",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iib9k0vfb2e8",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ihx7dh7dnme",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7i7m02vfl5mlf",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iz7op9t3if2j",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7i4pcxa3k6j3h",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ieco9dyfbman",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7ip7wdm7i04si",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1468,7 +1468,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "18/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1478,63 +1478,63 @@
           "id": "mqfpsl7irz28nds1zeg",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7ia1ueih20xxa",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ix2c3dqwghog",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ikglghuexma",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7ifyscnhuzs9u",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7imnen5he17",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7iv9yiyhjf7da",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iic9x3801bv",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7igcsp3jvkeog",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1549,7 +1549,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "19/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1559,63 +1559,63 @@
           "id": "mqfpsl7icrzufhkiaju",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7idqnkgb6k7bv",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i0wus809g5fso",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iwb31gnvi7am",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7i652kpfep7hk",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ikchtljm802",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7i294f3g7zz8a",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i81zs7zzbbbm",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7i7ok5x1q65y",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1630,7 +1630,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "20/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1640,63 +1640,63 @@
           "id": "mqfpsl7izb3y4sbi2x",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7idm9be8ltznm",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ilte9n0tpea",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iaj08kbrelzt",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7i6qjm18imtb2",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iwmibes3c6er",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7iq8il82wui8",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i3fpcnkg7bgq",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7icsize6jm50h",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1711,7 +1711,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "21/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1721,63 +1721,63 @@
           "id": "mqfpsl7is76oi0kpv5",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7inik3vi2ocqd",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iy3f2q3022e",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ivvfi3k1fdkf",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7i188fh6s1g34",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ippx549m1om",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7ifsefs7wyetk",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ipkdgj8202oi",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7iivmr2jqbkf",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1792,7 +1792,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "22/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1802,63 +1802,63 @@
           "id": "mqfpsl7i0xo1hiek0lk",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7idtrej7l51sp",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iq08b71w0pw",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iegejvkyadqv",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7il9en71y6n5",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ilop582dwmu",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7irmrt0q9a3rs",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i8etrb6swtqn",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7iga7zw72kd5l",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1873,7 +1873,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "23/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1883,63 +1883,63 @@
           "id": "mqfpsl7i5uazkt4d0ql",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7iycpxlzl6vye",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ipus0s0ohdde",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ig0nioa69lo7",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7i1s2y0ff3m5u",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iebbn87khjcl",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7ifrr57zc89o",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7id4mh3wnor4q",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7ivy4k51dnkfl",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -1954,7 +1954,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "24/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -1964,63 +1964,63 @@
           "id": "mqfpsl7irdj509jmnbn",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7ivrajep749k",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i7lche02hjlb",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iwkcdjauu4nb",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7irla1bcakqn",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7icphi0ko6w6p",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7i6zwzqygq6ql",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iwgqcty037",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7i41mdsgjk3ky",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -2035,7 +2035,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "25/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -2045,63 +2045,63 @@
           "id": "mqfpsl7id1oha11t5c",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7itld44bxayqb",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ij7o4fzcn78",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7izwqu688mrea",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7iktky2aaz2eg",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iyrkcprb98cp",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7ib89l3tq2m4s",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iyb3phlmimk",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7i0l53fevcu11f",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -2116,7 +2116,7 @@
           "descricao": "Parcela Carro",
           "valor": 2573.2,
           "parcela": "26/48",
-          "categoria": "ð Carro",
+          "categoria": "Ã°ÂÂÂ Carro",
           "pago": false,
           "obs": ""
         }
@@ -2126,63 +2126,63 @@
           "id": "mqfpsl7iv43nl7xc6ga",
           "descricao": "Seguro",
           "valor": 258.18,
-          "categoria": "ð¡ï¸ Seguro",
+          "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro",
           "pago": false
         },
         {
           "id": "mqfpsl7ixttke81isl",
           "descricao": "Apple",
           "valor": 19.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ir4a0w6p9rj",
           "descricao": "Google",
           "valor": 9.99,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7ifmoc1z9swsp",
-          "descricao": "Tarifa bancÃ¡ria",
+          "descricao": "Tarifa bancÃÂ¡ria",
           "valor": 20.75,
-          "categoria": "ð¦ Banco/Financ.",
+          "categoria": "Ã°ÂÂÂ¦ Banco/Financ.",
           "pago": false
         },
         {
           "id": "mqfpsl7iqctd4cwoxdc",
           "descricao": "Vivo",
           "valor": 89.9,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7iimuc1nsvh6m",
-          "descricao": "RemÃ©dio",
+          "descricao": "RemÃÂ©dio",
           "valor": 100,
-          "categoria": "ð SaÃºde",
+          "categoria": "Ã°ÂÂÂ SaÃÂºde",
           "pago": false
         },
         {
           "id": "mqfpsl7i3gfaeuaknif",
           "descricao": "Claude",
           "valor": 110,
-          "categoria": "ð± ServiÃ§os",
+          "categoria": "Ã°ÂÂÂ± ServiÃÂ§os",
           "pago": false
         },
         {
           "id": "mqfpsl7i4ca6y9zrg5j",
-          "descricao": "Aula de tÃªnis",
+          "descricao": "Aula de tÃÂªnis",
           "valor": 200,
-          "categoria": "ðª Academia/Esporte",
+          "categoria": "Ã°ÂÂÂª Academia/Esporte",
           "pago": false
         },
         {
           "id": "mqfpsl7iqpu5i2k4w8g",
           "descricao": "Jusbrasil",
           "valor": 58.9,
-          "categoria": "âï¸ Profissional",
+          "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional",
           "pago": false
         }
       ]
@@ -2192,47 +2192,47 @@
     {
       "descricao": "Seguro",
       "valor": 258.18,
-      "categoria": "ð¡ï¸ Seguro"
+      "categoria": "Ã°ÂÂÂ¡Ã¯Â¸Â Seguro"
     },
     {
       "descricao": "Apple",
       "valor": 19.9,
-      "categoria": "ð± ServiÃ§os"
+      "categoria": "Ã°ÂÂÂ± ServiÃÂ§os"
     },
     {
       "descricao": "Google",
       "valor": 9.99,
-      "categoria": "ð± ServiÃ§os"
+      "categoria": "Ã°ÂÂÂ± ServiÃÂ§os"
     },
     {
-      "descricao": "Tarifa bancÃ¡ria",
+      "descricao": "Tarifa bancÃÂ¡ria",
       "valor": 20.75,
-      "categoria": "ð¦ Banco/Financ."
+      "categoria": "Ã°ÂÂÂ¦ Banco/Financ."
     },
     {
       "descricao": "Vivo",
       "valor": 89.9,
-      "categoria": "ð± ServiÃ§os"
+      "categoria": "Ã°ÂÂÂ± ServiÃÂ§os"
     },
     {
-      "descricao": "RemÃ©dio",
+      "descricao": "RemÃÂ©dio",
       "valor": 100,
-      "categoria": "ð SaÃºde"
+      "categoria": "Ã°ÂÂÂ SaÃÂºde"
     },
     {
       "descricao": "Claude",
       "valor": 110,
-      "categoria": "ð± ServiÃ§os"
+      "categoria": "Ã°ÂÂÂ± ServiÃÂ§os"
     },
     {
-      "descricao": "Aula de tÃªnis",
+      "descricao": "Aula de tÃÂªnis",
       "valor": 200,
-      "categoria": "ðª Academia/Esporte"
+      "categoria": "Ã°ÂÂÂª Academia/Esporte"
     },
     {
       "descricao": "Jusbrasil",
       "valor": 58.9,
-      "categoria": "âï¸ Profissional"
+      "categoria": "Ã¢ÂÂÃ¯Â¸Â Profissional"
     }
   ],
   "poupanca": {
@@ -2243,7 +2243,7 @@
         "id": "4ec44605",
         "mes": "2025-05",
         "valor": 250,
-        "obs": "PoupanÃ§a"
+        "obs": "PoupanÃÂ§a"
       }
     ]
   },
