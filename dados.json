@@ -498,42 +498,6 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
-        },
-        {
-          "id": "mqfwu27ck89of3omec",
-          "data": 15,
-          "descricao": "Lucas",
-          "valor": 50,
-          "categoria": "💰 Reembolso",
-          "recebido": true,
-          "obs": ""
-        },
-        {
-          "id": "mqfwv0npr21vu1ua0d9",
-          "data": 15,
-          "descricao": "Honorários",
-          "valor": 323,
-          "categoria": "⚖️ Honorários",
-          "recebido": true,
-          "obs": ""
-        },
-        {
-          "id": "mqfwvde88mie1srkar",
-          "data": 15,
-          "descricao": "Reembolso",
-          "valor": 149.2,
-          "categoria": "💰 Reembolso",
-          "recebido": true,
-          "obs": ""
-        },
-        {
-          "id": "mqfwwhembidv51gown6",
-          "data": 15,
-          "descricao": "Onofre",
-          "valor": 400,
-          "categoria": "🎯 Outros",
-          "recebido": true,
-          "obs": ""
         }
       ],
       "meta_poupanca": 0,
@@ -562,21 +526,31 @@
           "id": "m6l4",
           "data": 10,
           "descricao": "Aluguel e net Escritório",
-          "valor": 444.33,
+          "valor": 339.95,
           "parcela": "",
           "categoria": "🏠 Moradia",
-          "pago": true,
+          "pago": false,
           "obs": ""
         },
         {
           "id": "m6l5",
           "data": 11,
           "descricao": "Sicoob",
-          "valor": 3199.7,
+          "valor": 3968.98,
           "parcela": "",
           "categoria": "🏦 Banco/Financ.",
-          "pago": true,
+          "pago": false,
           "obs": "valor a confirmar"
+        },
+        {
+          "id": "m6l6",
+          "data": 15,
+          "descricao": "C&A",
+          "valor": 199.99,
+          "parcela": "1/2",
+          "categoria": "🛒 Compras",
+          "pago": false,
+          "obs": ""
         },
         {
           "id": "m6l7",
@@ -596,36 +570,6 @@
           "parcela": "6/12",
           "categoria": "⚖️ Profissional",
           "pago": false,
-          "obs": ""
-        },
-        {
-          "id": "mqfwtgjus2n4w3hgpc",
-          "data": 28,
-          "descricao": "Onofre",
-          "valor": 400,
-          "parcela": "",
-          "categoria": "🎯 Outros",
-          "pago": false,
-          "obs": ""
-        },
-        {
-          "id": "mqfwwwbdcag7knxtzdk",
-          "data": 15,
-          "descricao": "Lavagem carro",
-          "valor": 100,
-          "parcela": "",
-          "categoria": "🚗 Carro",
-          "pago": true,
-          "obs": ""
-        },
-        {
-          "id": "mqfynezfxt8wkiwub4",
-          "data": 15,
-          "descricao": "Mercado pago",
-          "valor": 48.9,
-          "parcela": "",
-          "categoria": "🛒 Compras",
-          "pago": true,
           "obs": ""
         }
       ],
@@ -700,7 +644,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8tv2jq2ss6l7",
+          "id": "mqfyyq2zu6wcj2akx6c",
           "data": 5,
           "descricao": "OAB SP",
           "valor": 361.23,
@@ -710,7 +654,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8ptxud5g0tye",
+          "id": "mqfyyq2znmcgdzdt77d",
           "data": 9,
           "descricao": "Mercado Pago",
           "valor": 87.22,
@@ -720,7 +664,17 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8ktf7tdcf2yc",
+          "id": "mqfyyq2ziqyngijlz8s",
+          "data": 15,
+          "descricao": "C&A",
+          "valor": 199.99,
+          "parcela": "2/2",
+          "categoria": "🛒 Compras",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "mqfyyq2ztrjjp2c279b",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -730,7 +684,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8bdhskdwnuau",
+          "id": "mqfyyq2zlsmlue8mk4",
           "data": 30,
           "descricao": "OAB MG",
           "valor": 79.2,
@@ -742,63 +696,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8p8vc65347t",
+          "id": "mqfyyq2zzd8frxmbl1",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8pb8yyed0k8r",
+          "id": "mqfyyq2znaqukbn4pk",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8qtotmco3vz",
+          "id": "mqfyyq2zrteluzfq1g",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs852ojtadbtsr",
+          "id": "mqfyyq2z2o8c23xv092",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs82qypdekygtb",
+          "id": "mqfyyq2zk51xvsycuo9",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8suxuo65qqv",
+          "id": "mqfyyq2zv3n7qq81j3k",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8e0yc3a5gvnm",
+          "id": "mqfyyq2zxf5dga136vi",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8qzuwtoagi7f",
+          "id": "mqfyyq2zbgqa8y46r99",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8rb8dqmlbgm",
+          "id": "mqfyyq2zlvjyismafkl",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -811,7 +765,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8v9tg9o8rc2c",
+          "id": "mqfyyq30sf34z34mwoh",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -821,7 +775,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8kkdgqqz6z2q",
+          "id": "mqfyyq30ec6dyp3rh3a",
           "data": 30,
           "descricao": "OAB MG",
           "valor": 79.2,
@@ -833,63 +787,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8ws2ae62zpla",
+          "id": "mqfyyq30ohxdr6icscr",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs89hjpu8n3v9a",
+          "id": "mqfyyq30kpu86aecrl",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8ztifn6wxbus",
+          "id": "mqfyyq300rerfvf83rml",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xyh4osmdn5",
+          "id": "mqfyyq30ttgwnb9pdid",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xlcfqjzskn",
+          "id": "mqfyyq30kuynnd1rruk",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8hnxg1zpm0au",
+          "id": "mqfyyq30kx3dod4mkn",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs884ehhd50emn",
+          "id": "mqfyyq30guyf3aa7bvm",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8f2l2h89rpnl",
+          "id": "mqfyyq30qh9k16q5ul",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs88kdw6xi601f",
+          "id": "mqfyyq30czdqycen4p",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -902,7 +856,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs806ogtrilf3nd",
+          "id": "mqfyyq30e6ymu8p7b3s",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -912,7 +866,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs898ae7n06uvc",
+          "id": "mqfyyq30nboyq98yjci",
           "data": 30,
           "descricao": "OAB MG",
           "valor": 79.2,
@@ -924,63 +878,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8dgwwzl2idyl",
+          "id": "mqfyyq30puxdnboxgg",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8nmv9mpj2p2l",
+          "id": "mqfyyq30bcnwt1fv4cn",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8odvmswv18jf",
+          "id": "mqfyyq303oojv7nx8ma",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xy0kr2ptjve",
+          "id": "mqfyyq304b3wm93u5od",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8ejedx15v1nq",
+          "id": "mqfyyq30ih3iw7x80i9",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs84i3go8ptss9",
+          "id": "mqfyyq30vgx54bl47td",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8p447z8a7i4i",
+          "id": "mqfyyq30wvi3ncdekoq",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8pi4znukxox",
+          "id": "mqfyyq30sg51rjh6vh",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8pkpv781lsm",
+          "id": "mqfyyq30stc44bgzmin",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -993,7 +947,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8cj7eut5xcs",
+          "id": "mqfyyq30tw1n5aynw9k",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1003,7 +957,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8dkiuc5hrd",
+          "id": "mqfyyq30xovqvwak3u8",
           "data": 30,
           "descricao": "OAB MG",
           "valor": 79.2,
@@ -1015,63 +969,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8y1znhi5ar1p",
+          "id": "mqfyyq30wfcobix00gh",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8h299ir2nh67",
+          "id": "mqfyyq30jnaz41ec1o",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8eaw21zujj4b",
+          "id": "mqfyyq30sowhud0p0h",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs86i11mzs9rpb",
+          "id": "mqfyyq309exjm8v17o",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8j848u6swdkh",
+          "id": "mqfyyq30ac79vg66hi9",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs85uode2ncy4c",
+          "id": "mqfyyq30a7w0lcua275",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8y6iw8d3arz",
+          "id": "mqfyyq30yvpqg1y2phk",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8q8gm4yiomq",
+          "id": "mqfyyq30tpjc7gp86zo",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8akpxm2ibo5g",
+          "id": "mqfyyq30tj4wcgwvnen",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1084,7 +1038,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8t1d5l2hyvne",
+          "id": "mqfyyq30qnv6jj8gjr",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1094,7 +1048,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8plj9z335xdh",
+          "id": "mqfyyq30q24my8mzj3",
           "data": 30,
           "descricao": "OAB MG",
           "valor": 79.2,
@@ -1106,63 +1060,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8q5berhg1c9h",
+          "id": "mqfyyq30y4wh0k65t2",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xkamkxs4x9d",
+          "id": "mqfyyq308gh82aqe6el",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8dkq3ye43dfe",
+          "id": "mqfyyq309syc4a4q669",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs80o71wkh4otxl",
+          "id": "mqfyyq30l7dzz8w2f2k",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8evqpy6332sk",
+          "id": "mqfyyq30xppznp01xir",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs851p5ub444q7",
+          "id": "mqfyyq305u5rk25f6",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs84lp2q8kfalh",
+          "id": "mqfyyq30zvsrsei7qvo",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8kxgyatsxgft",
+          "id": "mqfyyq30durlr3gincr",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs88j9dcktmyg",
+          "id": "mqfyyq30sp9efihg64",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1175,7 +1129,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8fuxyip8spbk",
+          "id": "mqfyyq300cxxsjrpx6jp",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1185,7 +1139,7 @@
           "obs": ""
         },
         {
-          "id": "mqfxlrs8011z09qi6fgq",
+          "id": "mqfyyq30yu0m2zfvv8",
           "data": 30,
           "descricao": "OAB MG",
           "valor": 79.2,
@@ -1197,63 +1151,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8kv8d3dhstod",
+          "id": "mqfyyq30a7z5uq7vlrw",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8tr0fh7lbzw",
+          "id": "mqfyyq30v2fnqletv5o",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8tf1scqmjalm",
+          "id": "mqfyyq30ljo4f7z9l4g",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs81f3qvz3r7u8",
+          "id": "mqfyyq30n9v40fp28t",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs82gti1qa64am",
+          "id": "mqfyyq30pkalmjniida",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8auqdldi7flo",
+          "id": "mqfyyq30e1568oyipzt",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8cb5u3b7wxbf",
+          "id": "mqfyyq30gmjip6tgrc8",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8dxyvlyz8xrn",
+          "id": "mqfyyq306r6fgbcvet",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8o21wnwfuix",
+          "id": "mqfyyq30wmvmqq101vq",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1266,7 +1220,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8lz296jaud1n",
+          "id": "mqfyyq30mmaphj6603",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1278,63 +1232,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8iuw4e8rqxke",
+          "id": "mqfyyq30eq651055p0k",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8yea1tm28xz",
+          "id": "mqfyyq30mhz68h6k29j",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs82bs4xthyht",
+          "id": "mqfyyq30nyu7qvsy54m",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8kyz3g7ds4m",
+          "id": "mqfyyq30wccmxppy4fl",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs803kcpjtev9ly",
+          "id": "mqfyyq30mhorm5oiaq",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8mpebz0938t",
+          "id": "mqfyyq30egzvx5b1n8g",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8fisut0y84ye",
+          "id": "mqfyyq30pghaa817yy",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8g3wq5d0l9qw",
+          "id": "mqfyyq30h79cn4lfvvf",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8p304sdddxn",
+          "id": "mqfyyq30i66hoi9bzp",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1347,7 +1301,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs86g8c1utqaon",
+          "id": "mqfyyq30525pfwrdpka",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1359,63 +1313,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8a58xfxrch6n",
+          "id": "mqfyyq30rvf5r9zq2",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8pt5ind2btid",
+          "id": "mqfyyq30g6l1bet8ld9",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8filuj5uzcwb",
+          "id": "mqfyyq30jqu2f8rqw2a",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs83p2bdijhgbm",
+          "id": "mqfyyq30megaq0is81",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xuxp3t66ohm",
+          "id": "mqfyyq304tuaand377",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8im34z31rh4",
+          "id": "mqfyyq30mjtc2lzuv0s",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8pmml7lb5xb",
+          "id": "mqfyyq30bmtnduzcgfm",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8uek9e0y987i",
+          "id": "mqfyyq301g9tyr5d34a",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8kkt8wj2s4w",
+          "id": "mqfyyq300pxwut0rao89",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1428,7 +1382,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs84kz0v1b2ksk",
+          "id": "mqfyyq301wt666hrabs",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1440,63 +1394,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8tpso3gtla",
+          "id": "mqfyyq30z5g4xfl4jw9",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8ryrcfasntx",
+          "id": "mqfyyq30housed0txc",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8o42eui0ef3q",
+          "id": "mqfyyq307fapzcbbuxw",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8m01cig3pe7",
+          "id": "mqfyyq30ad8y3p3k1m",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8y9qedyn41nr",
+          "id": "mqfyyq30ys6psiu1txp",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xup3275vfm",
+          "id": "mqfyyq30xgh1d2xr22",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8u83f3qpxjb8",
+          "id": "mqfyyq30pzyxzhw4sbr",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs892i2820sohc",
+          "id": "mqfyyq30s46p53ya2z",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8fcodnjq2mkw",
+          "id": "mqfyyq30nqmwyp7r9s",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1509,7 +1463,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8dss9zu6wm7d",
+          "id": "mqfyyq30gz0p7o6d9w",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1521,63 +1475,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8l6bku15r0if",
+          "id": "mqfyyq30unn7et5nn",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8i9lwlsu254",
+          "id": "mqfyyq30cibfmwefdu",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8prgeq0xkblp",
+          "id": "mqfyyq30co3xh0jc6yw",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8ld55wi77n8",
+          "id": "mqfyyq301i7c9av1aqr",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8m1j9kna2rml",
+          "id": "mqfyyq30p2vo5whsyvh",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8ljnc3pg73eg",
+          "id": "mqfyyq30ggaxb1mpgho",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8g5odclr0tnw",
+          "id": "mqfyyq3021moy6lv3u1",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8j6t38hfayv",
+          "id": "mqfyyq30aah4kli8t7f",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8i89hrpwe4o",
+          "id": "mqfyyq30qrhwgtgltaf",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1590,7 +1544,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8rpdrcbuyyuc",
+          "id": "mqfyyq30sc27vxh8hja",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1602,63 +1556,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8mysa9ehkxo",
+          "id": "mqfyyq30azjfed0ri6u",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8l7vjhu6lim8",
+          "id": "mqfyyq30sl8hi7fgxvn",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8n9ycaozc4hm",
+          "id": "mqfyyq304tez7c6cyv9",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8e6ae8f4d2ag",
+          "id": "mqfyyq30hjt7w3tmt55",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8nhuz6r8geh",
+          "id": "mqfyyq30zp762zlopmb",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8llp9rb4dt7",
+          "id": "mqfyyq307i8rvqx97bn",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8sklmrkkottg",
+          "id": "mqfyyq30bfmf7cn5kjr",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8wvc8ganr4mf",
+          "id": "mqfyyq30trvthg0eaq",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs80znbdepm0cre",
+          "id": "mqfyyq3008y5z41wrg9j",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1671,7 +1625,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8zflt0lmq4k",
+          "id": "mqfyyq30ektlaqyzr7t",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1683,63 +1637,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8iamk89csr4p",
+          "id": "mqfyyq30geb4vvlfa9",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8yqnjmhzgb6d",
+          "id": "mqfyyq3025umecemhmv",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8qpod60udbc",
+          "id": "mqfyyq304rc6bg65jo3",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs88tlau7qlzpd",
+          "id": "mqfyyq30wi1o2gx5zkj",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs80m0o2xqgdns",
+          "id": "mqfyyq30as4a12hppf",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs84h5lae8icac",
+          "id": "mqfyyq30fenze1fg6rj",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8syg1vtq9va",
+          "id": "mqfyyq30e1dk9rfcx5f",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs803v2yleq9niq",
+          "id": "mqfyyq30dh38dpjipn4",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8161r3fofnjg",
+          "id": "mqfyyq30vf8xp984xif",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1752,7 +1706,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8tcjjy1svyxo",
+          "id": "mqfyyq3086my0pcuf3s",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1764,63 +1718,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8kofjjf9txjb",
+          "id": "mqfyyq303e4591kv8s",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8vhhpol2rjaq",
+          "id": "mqfyyq302lzxe9c68td",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8y1l8ea72esf",
+          "id": "mqfyyq30k9yniunex8l",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8jsb22rfk7oa",
+          "id": "mqfyyq30ybxqjbqdb8",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8xdek32kj65o",
+          "id": "mqfyyq306q0awrp012a",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8uh1x639fwlo",
+          "id": "mqfyyq307grh9j7a7c2",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8j5ui53rgjy",
+          "id": "mqfyyq30ly0t3ahfsgs",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8372gbuce3xm",
+          "id": "mqfyyq30inq8i77raj",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs82cu6wnwg9at",
+          "id": "mqfyyq30tv3rpwhj1zg",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1833,7 +1787,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8xum1269g1bj",
+          "id": "mqfyyq30mi33l57g9tr",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1845,63 +1799,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8x7o6b9y4unq",
+          "id": "mqfyyq30h7zfpmy1ejo",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs81irjtcd8pap",
+          "id": "mqfyyq304uqqs6oxcnn",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8oiw9v8wlc5",
+          "id": "mqfyyq30m7fjil0ser8",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8dvnlicv092v",
+          "id": "mqfyyq30qrzwgf1kxdp",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8dtfgv9589bo",
+          "id": "mqfyyq30mbeugvpfv3a",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8h0w76yneymn",
+          "id": "mqfyyq305080dxx8eiw",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8d35mnnn2ybo",
+          "id": "mqfyyq308p0quwfz2o9",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8shxvnwfu1ip",
+          "id": "mqfyyq30v7hckqkw5bs",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8ryok6exz12a",
+          "id": "mqfyyq30ncvjz41tvaa",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1914,7 +1868,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8qpz0zzncvl",
+          "id": "mqfyyq30qofju054e3",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -1926,63 +1880,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8gcgsa3285fb",
+          "id": "mqfyyq30faox6ufe8n",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8uq9qalr9su",
+          "id": "mqfyyq304onutpg66f2",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs86bizjdwd3eo",
+          "id": "mqfyyq3057k4iv6rnc3",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs83z68fnvrssm",
+          "id": "mqfyyq30vwdop3ij0cc",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs8342jucnxkme",
+          "id": "mqfyyq30p48xdotuz1m",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8hv1buiqrdcj",
+          "id": "mqfyyq30a4jrkrk7xyp",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs8rciqg1fwfok",
+          "id": "mqfyyq3002w306ef27yk",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8t66poeq5jqk",
+          "id": "mqfyyq30z3x4nltak",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8g6p446f571i",
+          "id": "mqfyyq30c76lu9dvyjj",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -1995,7 +1949,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs8orzr7l8fdd",
+          "id": "mqfyyq30cntv8nthpz",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -2007,63 +1961,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs8xc48l0gyfup",
+          "id": "mqfyyq303gnff797jh",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs8bbuax3ct4zg",
+          "id": "mqfyyq30me58zl79xo",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs89srjueyyz5",
+          "id": "mqfyyq30am4wbpcc13p",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8l5ltzhg7hzi",
+          "id": "mqfyyq30u4vwces433g",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs87cpuf0mms2s",
+          "id": "mqfyyq30lz4vkbtzxzi",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8i6qzggdmvk",
+          "id": "mqfyyq307iygz92bzfb",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs84o540gcowdt",
+          "id": "mqfyyq30gy80t03949",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs8g8hp3p8ijxu",
+          "id": "mqfyyq30qo63ehehuta",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs8rnfdqasvr39",
+          "id": "mqfyyq30hxzmwq7xyj",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -2076,7 +2030,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs9ck81mdt4iww",
+          "id": "mqfyyq3032zq6b05mjx",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -2088,63 +2042,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs9z9qg399nk7",
+          "id": "mqfyyq30nme1a0r3vg8",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs9frmsdhgq66",
+          "id": "mqfyyq30uxbtnfro09",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs939q5eo48dky",
+          "id": "mqfyyq30csesgqwgv6",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs9xoy9retzsa",
+          "id": "mqfyyq30euozzj5inv8",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs9z8waekz4oie",
+          "id": "mqfyyq30sl7bgmks1y",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs94czph5brref",
+          "id": "mqfyyq30l8j9p14imej",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs9tne1yjfclq",
+          "id": "mqfyyq30anamkn7rien",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs9feqnu67ci3k",
+          "id": "mqfyyq30sy15fr1mj6t",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs9zw6masctxlo",
+          "id": "mqfyyq30ifvd75ju7c",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
@@ -2157,7 +2111,7 @@
       "meta_poupanca": 0,
       "lancamentos": [
         {
-          "id": "mqfxlrs922j21jgzujh",
+          "id": "mqfyyq30nmou37fq2nb",
           "data": 23,
           "descricao": "Parcela Carro",
           "valor": 2573.2,
@@ -2169,63 +2123,63 @@
       ],
       "fixas": [
         {
-          "id": "mqfxlrs9zn6ugq363r",
+          "id": "mqfyyq30y7sz7b165e",
           "descricao": "Seguro",
           "valor": 258.18,
           "categoria": "🛡️ Seguro",
           "pago": false
         },
         {
-          "id": "mqfxlrs9w2lxjkeemc",
+          "id": "mqfyyq3048q6ew65tor",
           "descricao": "Apple",
           "valor": 19.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs9tywbvazs0bh",
+          "id": "mqfyyq30vq4567z3oyt",
           "descricao": "Google",
           "valor": 9.99,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs9zetg8vkn6c",
+          "id": "mqfyyq30tr8511ro00t",
           "descricao": "Tarifa bancária",
           "valor": 20.75,
           "categoria": "🏦 Banco/Financ.",
           "pago": false
         },
         {
-          "id": "mqfxlrs9mo80t2a341n",
+          "id": "mqfyyq30yr3sz2x2ra",
           "descricao": "Vivo",
           "valor": 89.9,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs966ilco7nleh",
+          "id": "mqfyyq30yx4h10f0ape",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
           "pago": false
         },
         {
-          "id": "mqfxlrs98ir3asp9dqp",
+          "id": "mqfyyq30qpsp4krl14",
           "descricao": "Claude",
           "valor": 110,
           "categoria": "📱 Serviços",
           "pago": false
         },
         {
-          "id": "mqfxlrs9ir6btaylprc",
+          "id": "mqfyyq3090s5nfb6obe",
           "descricao": "Aula de tênis",
           "valor": 200,
           "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
-          "id": "mqfxlrs92wdw8b1zz32",
+          "id": "mqfyyq30jyngnwp9kj",
           "descricao": "Jusbrasil",
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
