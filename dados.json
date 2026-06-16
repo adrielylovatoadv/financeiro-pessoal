@@ -516,6 +516,15 @@
           "categoria": "⚖️ Honorários",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mqfwvde88mie1srkar",
+          "data": 15,
+          "descricao": "Reembolso",
+          "valor": 149.2,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
