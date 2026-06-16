@@ -607,6 +607,16 @@
           "categoria": "🎯 Outros",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "mqfwwwbdcag7knxtzdk",
+          "data": 15,
+          "descricao": "Lavagem carro",
+          "valor": 100,
+          "parcela": "",
+          "categoria": "🚗 Carro",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
