@@ -332,6 +332,7 @@ function nomeMes(key){
   return MESES_FULL[m]+'/'+y;
 }
 function nomeMesCurto(key){
+  if(!key||!key.includes('-'))return '';
   const[y,m]=key.split('-');
   return MESES_PT[m]+'/'+y;
 }
@@ -400,6 +401,7 @@ async function ghLoadPublic(){
     if(!r.ok)throw new Error('fetch failed');
     const content=await r.json();
     data=content;
+    garantirMeses();
     localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
     setSyncStatus('✓ atualizado','var(--green)');
     setTimeout(()=>setSyncStatus(''),3000);
@@ -511,8 +513,8 @@ function setSection(sec,btn){
 // ═══════════════════════════════════════════
 function render(){
   const keys=Object.keys(data.meses).sort();
+  if(!keys.length)return;
   if(!currentMes||!keys.includes(currentMes)){
-    // default: most recent with receitas, else today's month
     const todayKey=new Date().toISOString().slice(0,7);
     let def=todayKey;
     for(const k of [...keys].reverse()){
