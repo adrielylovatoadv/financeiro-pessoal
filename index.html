@@ -380,8 +380,10 @@ function saveData(){
 function loadData(){
   const s=localStorage.getItem('meu-dinheiro-v2');
   if(s){try{data=JSON.parse(s);return;}catch(e){}}
+  // sem dados locais: usa o INITIAL_DATA só como placeholder de tela.
+  // NÃO salva na nuvem aqui — isso criaria uma corrida com ghLoadPublic()
+  // e poderia sobrescrever dados reais do GitHub com este snapshot antigo.
   data=JSON.parse(JSON.stringify(INITIAL_DATA));
-  saveData();
 }
 
 // ═══════════════════════════════════════════
@@ -1242,9 +1244,12 @@ Object.values(data.meses).forEach(m=>{
   if(!m.meta_poupanca) m.meta_poupanca=0;
 });
 garantirMeses();
-saveData();
+localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
 
-// Carrega dados do GitHub (público, sem token) e depois renderiza
+// Renderiza com o que há localmente, depois busca o mais recente do GitHub
+// (ghLoadPublic substitui `data` e re-renderiza; só ENTÃO eventuais saves
+// automáticos do usuário podem ocorrer — sem isso, um save local antigo
+// pode vencer a corrida com o fetch e sobrescrever dados reais na nuvem)
 render();
 ghLoadPublic();
 
