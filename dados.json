@@ -526,10 +526,10 @@
           "id": "m6l4",
           "data": 10,
           "descricao": "Aluguel e net Escritório",
-          "valor": 339.95,
+          "valor": 444.33,
           "parcela": "",
           "categoria": "🏠 Moradia",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
