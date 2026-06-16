@@ -617,6 +617,16 @@
           "categoria": "🚗 Carro",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mqfynezfxt8wkiwub4",
+          "data": 15,
+          "descricao": "Mercado pago",
+          "valor": 48.9,
+          "parcela": "",
+          "categoria": "🛒 Compras",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
