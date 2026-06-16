@@ -507,6 +507,15 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mqfwv0npr21vu1ua0d9",
+          "data": 15,
+          "descricao": "Honorários",
+          "valor": 323,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
