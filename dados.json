@@ -498,6 +498,15 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mqfwu27ck89of3omec",
+          "data": 15,
+          "descricao": "Lucas",
+          "valor": 50,
+          "categoria": "💰 Reembolso",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
