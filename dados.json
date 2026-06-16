@@ -543,16 +543,6 @@
           "obs": "valor a confirmar"
         },
         {
-          "id": "m6l6",
-          "data": 15,
-          "descricao": "C&A",
-          "valor": 199.99,
-          "parcela": "1/2",
-          "categoria": "🛒 Compras",
-          "pago": false,
-          "obs": ""
-        },
-        {
           "id": "m6l7",
           "data": 23,
           "descricao": "Parcela Carro",
