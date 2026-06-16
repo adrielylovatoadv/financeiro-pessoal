@@ -525,6 +525,15 @@
           "categoria": "💰 Reembolso",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mqfwwhembidv51gown6",
+          "data": 15,
+          "descricao": "Onofre",
+          "valor": 400,
+          "categoria": "🎯 Outros",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
