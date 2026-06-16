@@ -561,6 +561,16 @@
           "categoria": "⚖️ Profissional",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "mqfwtgjus2n4w3hgpc",
+          "data": 28,
+          "descricao": "Onofre",
+          "valor": 400,
+          "parcela": "",
+          "categoria": "🎯 Outros",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
