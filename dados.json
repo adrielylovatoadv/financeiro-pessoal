@@ -637,6 +637,16 @@
           "categoria": "📱 Serviços",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mql0vv24svu5ag0g9vm",
+          "data": 19,
+          "descricao": "Bianca",
+          "valor": 50,
+          "parcela": "",
+          "categoria": "🎯 Outros",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
