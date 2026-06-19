@@ -647,6 +647,16 @@
           "categoria": "🎯 Outros",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mqljdh1bn5nljq8uffp",
+          "data": 19,
+          "descricao": "Bianca",
+          "valor": 28,
+          "parcela": "",
+          "categoria": "🎯 Outros",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
