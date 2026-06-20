@@ -657,6 +657,16 @@
           "categoria": "🎯 Outros",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mqmmndaufxkgye2zgb4",
+          "data": 20,
+          "descricao": "Marlene",
+          "valor": 180.09,
+          "parcela": "",
+          "categoria": "🎯 Outros",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
