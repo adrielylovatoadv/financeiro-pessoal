@@ -582,10 +582,10 @@
           "id": "m6l7",
           "data": 23,
           "descricao": "Parcela Carro",
-          "valor": 2573.2,
+          "valor": 2571.68,
           "parcela": "8/48",
           "categoria": "🚗 Carro",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
