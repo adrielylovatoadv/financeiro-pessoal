@@ -534,6 +534,15 @@
           "categoria": "🎯 Outros",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mqphqrun2dty6hqympe",
+          "data": 22,
+          "descricao": "Indenização",
+          "valor": 3500,
+          "categoria": "🤝 Acordo/Êxito",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
