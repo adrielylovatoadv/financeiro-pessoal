@@ -667,6 +667,16 @@
           "categoria": "🎯 Outros",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mqp7q8lyle3hrw70k88",
+          "data": 23,
+          "descricao": "Tênis",
+          "valor": 235,
+          "parcela": "",
+          "categoria": "💪 Academia/Esporte",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
