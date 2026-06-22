@@ -686,6 +686,16 @@
           "categoria": "💪 Academia/Esporte",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "mqphvvdhbmqa51ioang",
+          "data": 22,
+          "descricao": "Academia",
+          "valor": 135,
+          "parcela": "1/6",
+          "categoria": "💪 Academia/Esporte",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
