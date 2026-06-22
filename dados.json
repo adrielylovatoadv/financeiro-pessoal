@@ -682,7 +682,7 @@
           "data": 23,
           "descricao": "Tênis",
           "valor": 235,
-          "parcela": "",
+          "parcela": "1/6",
           "categoria": "💪 Academia/Esporte",
           "pago": false,
           "obs": ""
