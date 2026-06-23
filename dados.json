@@ -2349,6 +2349,12 @@
         "mes": "2025-05",
         "valor": 250,
         "obs": "Poupança"
+      },
+      {
+        "id": "mqqltylyv3hoevijaci",
+        "mes": "2025-06",
+        "valor": 250,
+        "obs": ""
       }
     ]
   },
