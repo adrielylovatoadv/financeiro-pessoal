@@ -684,7 +684,7 @@
           "valor": 235,
           "parcela": "1/6",
           "categoria": "💪 Academia/Esporte",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
