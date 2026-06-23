@@ -686,6 +686,16 @@
           "categoria": "💪 Academia/Esporte",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mqr7lowbi1keoki8gk",
+          "data": 23,
+          "descricao": "Poupança",
+          "valor": 250,
+          "parcela": "",
+          "categoria": "💰 Poupança",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
