@@ -282,7 +282,7 @@ const MESES_FULL={
 };
 const CATS=['💳 Cartão','🏦 Banco/Financ.','🏠 Moradia','🚗 Carro','💊 Saúde',
   '💪 Academia/Esporte','⚖️ Profissional','📱 Serviços','🛡️ Seguro','🛒 Compras',
-  '💄 Beleza','🎾 Lazer','🎯 Outros'];
+  '💄 Beleza','🎾 Lazer','💰 Poupança','🎯 Outros'];
 const CATS_REC=['⚖️ Honorários','💼 Salário','🏠 Aluguel recebido','🤝 Acordo/Êxito',
   '💰 Reembolso','🎁 Presente','📈 Investimento','🎯 Outros'];
 
@@ -733,10 +733,22 @@ function renderParcelas(){
 function renderPoupar(){
   const p=data.poupanca||{objetivo:'',meta_total:0,depositos:[]};
   const deps=p.depositos||[];
-  const totalPoupado=deps.reduce((s,d)=>s+d.valor,0);
   const meta=p.meta_total||0;
-  const pct=meta>0?Math.min(totalPoupado/meta*100,100):0;
   const obj=p.objetivo||'Sem objetivo definido';
+
+  // Lançamentos com categoria Poupança marcados como pagos
+  const lancPoupa=[];
+  for(const mk of Object.keys(data.meses).sort()){
+    for(const l of (data.meses[mk].lancamentos||[])){
+      if(l.categoria==='💰 Poupança'&&l.pago){
+        lancPoupa.push({mes:mk,valor:l.valor,descricao:l.descricao||'Poupança',data:l.data||1});
+      }
+    }
+  }
+  const totalLanc=lancPoupa.reduce((s,l)=>s+l.valor,0);
+  const totalDeps=deps.reduce((s,d)=>s+d.valor,0);
+  const totalPoupado=totalDeps+totalLanc;
+  const pct=meta>0?Math.min(totalPoupado/meta*100,100):0;
 
   document.getElementById('poupanca-card').innerHTML=`
     <div class="card">
@@ -751,23 +763,48 @@ function renderPoupar(){
       <button class="btn btn-full" onclick="openForm('poupanca-cfg')">Editar objetivo e meta</button>
     </div>`;
 
-  const deOrdenados=[...deps].sort((a,b)=>b.mes.localeCompare(a.mes));
   let html='';
-  if(!deps.length){html='<div class="empty">Nenhum depósito ainda.</div>';}
-  for(const dep of deOrdenados){
-    const sub=[nomeMesCurto(dep.mes),dep.obs].filter(Boolean).join(' · ');
-    html+=`<div class="item received" id="item-dep-${dep.id}">
-      <div class="item-main">
-        <div class="item-left"><div class="item-desc">Depósito</div><div class="item-sub">${esc(sub)}</div></div>
-        <div class="item-right"><div class="item-val green">${fmt(dep.valor)}</div></div>
-      </div>
-      <div class="item-actions">
-        <button class="btn btn-primary" onclick="openEditDep('${dep.id}')">✏ Editar</button>
-        <button class="btn btn-icon btn-danger" onclick="confirmDeleteDep('${dep.id}')">✕</button>
-      </div>
-      <div id="confirm-dep-${dep.id}"></div>
-    </div>`;
+
+  // Contribuições automáticas via gastos
+  if(lancPoupa.length){
+    html+=`<div class="sec-title">Contribuições via Gastos</div>`;
+    for(const lp of [...lancPoupa].sort((a,b)=>b.mes.localeCompare(a.mes))){
+      html+=`<div class="item" style="border-left:3px solid var(--green);background:#1A2E1A;">
+        <div class="item-main">
+          <div class="item-left">
+            <div class="item-desc">${esc(lp.descricao)}</div>
+            <div class="item-sub">${nomeMesCurto(lp.mes)} · Dia ${lp.data} · gasto pago</div>
+          </div>
+          <div class="item-right"><div class="item-val green">+${fmt(lp.valor)}</div></div>
+        </div>
+      </div>`;
+    }
   }
+
+  // Depósitos manuais
+  if(deps.length){
+    html+=`<div class="sec-title">Depósitos manuais</div>`;
+    const deOrdenados=[...deps].sort((a,b)=>b.mes.localeCompare(a.mes));
+    for(const dep of deOrdenados){
+      const sub=[nomeMesCurto(dep.mes),dep.obs].filter(Boolean).join(' · ');
+      html+=`<div class="item received" id="item-dep-${dep.id}">
+        <div class="item-main">
+          <div class="item-left"><div class="item-desc">Depósito</div><div class="item-sub">${esc(sub)}</div></div>
+          <div class="item-right"><div class="item-val green">${fmt(dep.valor)}</div></div>
+        </div>
+        <div class="item-actions">
+          <button class="btn btn-primary" onclick="openEditDep('${dep.id}')">✏ Editar</button>
+          <button class="btn btn-icon btn-danger" onclick="confirmDeleteDep('${dep.id}')">✕</button>
+        </div>
+        <div id="confirm-dep-${dep.id}"></div>
+      </div>`;
+    }
+  }
+
+  if(!lancPoupa.length&&!deps.length){
+    html='<div class="empty">Nenhum depósito ainda.</div>';
+  }
+
   document.getElementById('list-depositos').innerHTML=html;
 
   // Sobra por mês
