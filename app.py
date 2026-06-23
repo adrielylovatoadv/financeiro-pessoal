@@ -258,7 +258,7 @@ def versiculo_do_dia():
 CATEGORIAS = [
     "💳 Cartão","🏦 Banco/Financ.","🏠 Moradia","🚗 Carro",
     "💊 Saúde","💪 Academia/Esporte","⚖️ Profissional","📱 Serviços",
-    "🛡️ Seguro","🛒 Compras","💄 Beleza","🎾 Lazer","🎯 Outros",
+    "🛡️ Seguro","🛒 Compras","💄 Beleza","🎾 Lazer","💰 Poupança","🎯 Outros",
 ]
 CATEGORIAS_RECEITA = [
     "⚖️ Honorários","💼 Salário","🏠 Aluguel recebido",
@@ -1067,9 +1067,20 @@ with tab_p:
 with tab_poupa:
     poupa         = d.get("poupanca", {"objetivo": "", "meta_total": 0.0, "depositos": []})
     deps          = poupa.get("depositos", [])
-    total_poupado = sum(dep["valor"] for dep in deps)
     meta_total    = poupa.get("meta_total", 0.0)
     objetivo      = poupa.get("objetivo", "")
+
+    # Lançamentos marcados como poupança e pagos (contribuem automaticamente)
+    lanc_poupanca = [
+        {"mes": mk, "valor": l["valor"], "descricao": l.get("descricao","Poupança"), "data": l.get("data",1)}
+        for mk in sorted(d["meses"].keys())
+        for l in d["meses"][mk].get("lancamentos", [])
+        if l.get("categoria") == "💰 Poupança" and l.get("pago")
+    ]
+    total_poupado_lanc = sum(x["valor"] for x in lanc_poupanca)
+    total_poupado_deps = sum(dep["valor"] for dep in deps)
+    total_poupado = total_poupado_deps + total_poupado_lanc
+
     pct_meta      = min((total_poupado / meta_total * 100) if meta_total > 0 else 0, 100)
     pct_meta      = max(pct_meta, 0)
 
@@ -1112,9 +1123,8 @@ with tab_poupa:
         if st.button("Editar objetivo e meta", key="btn_poupa_cfg", use_container_width=True):
             st.session_state["editing_poupa_cfg"] = True; st.rerun()
 
-    st.markdown("<div class='sec'>Depósitos</div>", unsafe_allow_html=True)
     cadep, _ = st.columns([2, 3])
-    if cadep.button("+ Novo depósito", key="add_dep_top", use_container_width=True):
+    if cadep.button("+ Novo depósito manual", key="add_dep_top", use_container_width=True):
         st.session_state["show_add_dep"] = not st.session_state.get("show_add_dep", False)
 
     if st.session_state.get("show_add_dep"):
@@ -1140,10 +1150,29 @@ with tab_poupa:
             if ds2.form_submit_button("Cancelar", use_container_width=True):
                 st.session_state["show_add_dep"] = False; st.rerun()
 
+    # Lançamentos de poupança pagos aparecem automaticamente como contribuições
+    if lanc_poupanca:
+        st.markdown("<div class='sec'>Contribuições via Gastos</div>", unsafe_allow_html=True)
+        for lp in sorted(lanc_poupanca, key=lambda x: x["mes"], reverse=True):
+            st.markdown(f"""
+<div style='background:#1A2E1A;border-radius:8px;padding:10px 14px;
+     border-left:3px solid #4ADE80;border:1px solid #2E3E2E;
+     margin-bottom:4px;'>
+  <div style='display:flex;justify-content:space-between;align-items:center;'>
+    <div style='flex:1;'>
+      <div style='font-weight:600;font-size:13px;color:#E8E8E8;'>{lp['descricao']}</div>
+      <div style='font-size:11px;color:#666;margin-top:2px;'>{nome_mes(lp['mes'])} · Dia {lp['data']} · gasto marcado como pago</div>
+    </div>
+    <div style='font-weight:700;font-size:15px;color:#4ADE80;margin-left:12px;'>+{fmt(lp['valor'])}</div>
+  </div>
+</div>""", unsafe_allow_html=True)
+
     if not deps:
-        st.markdown("<div style='text-align:center;color:#bbb;padding:24px 0;font-size:13px;'>Nenhum depósito ainda.</div>",
-                    unsafe_allow_html=True)
+        if not lanc_poupanca:
+            st.markdown("<div style='text-align:center;color:#bbb;padding:24px 0;font-size:13px;'>Nenhum depósito ainda.</div>",
+                        unsafe_allow_html=True)
     else:
+        st.markdown("<div class='sec'>Depósitos manuais</div>", unsafe_allow_html=True)
         deps_ord = sorted(deps, key=lambda x: x.get("mes",""), reverse=True)
         for dep in deps_ord:
             did   = dep["id"]
