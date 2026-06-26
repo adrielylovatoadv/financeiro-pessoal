@@ -706,6 +706,16 @@
           "categoria": "💰 Poupança",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mquyosyfgdme7mhrpx",
+          "data": 26,
+          "descricao": "Copasa escritorio",
+          "valor": 23.11,
+          "parcela": "",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
