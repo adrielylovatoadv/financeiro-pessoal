@@ -794,7 +794,17 @@
       ]
     },
     "2025-07": {
-      "receitas": [],
+      "receitas": [
+        {
+          "id": "mr6k1v91xrdyqeb6fh",
+          "data": 4,
+          "descricao": "Honorarios",
+          "valor": 686.51,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        }
+      ],
       "meta_poupanca": 0,
       "lancamentos": [
         {
