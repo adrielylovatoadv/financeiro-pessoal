@@ -2402,14 +2402,7 @@
   "poupanca": {
     "objetivo": "Meta 2026",
     "meta_total": 50000,
-    "depositos": [
-      {
-        "id": "4ec44605",
-        "mes": "2025-05",
-        "valor": 250,
-        "obs": "Poupança"
-      }
-    ]
+    "depositos": []
   },
   "saldo_inicial": 3516.11
 }
