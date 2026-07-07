@@ -809,10 +809,10 @@
           "id": "mqfxlrs8tv2jq2ss6l7",
           "data": 6,
           "descricao": "OAB SP",
-          "valor": 361.23,
+          "valor": 368.61,
           "parcela": "3/3",
           "categoria": "⚖️ Profissional",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
