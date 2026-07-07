@@ -854,6 +854,16 @@
           "categoria": "💳 Cartão",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "mrb3cm6hyfwz5zyqdur",
+          "data": 10,
+          "descricao": "Escritorio",
+          "valor": 252.52,
+          "parcela": "",
+          "categoria": "⚖️ Profissional",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
