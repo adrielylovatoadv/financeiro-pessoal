@@ -801,6 +801,15 @@
           "categoria": "⚖️ Honorários",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mrb9tph50isiqjqwz3x7",
+          "data": 7,
+          "descricao": "Honorarios",
+          "valor": 125,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
