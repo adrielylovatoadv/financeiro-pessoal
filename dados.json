@@ -873,6 +873,16 @@
           "categoria": "⚖️ Profissional",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "mrcclrwnv7msa4lkzw",
+          "data": 8,
+          "descricao": "Milk-shake",
+          "valor": 35.9,
+          "parcela": "",
+          "categoria": "🛒 Compras",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
