@@ -868,10 +868,10 @@
           "id": "mrb3cm6hyfwz5zyqdur",
           "data": 10,
           "descricao": "Escritorio",
-          "valor": 252.52,
+          "valor": 300,
           "parcela": "",
           "categoria": "⚖️ Profissional",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
