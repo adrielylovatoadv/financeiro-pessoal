@@ -831,7 +831,7 @@
           "valor": 87.24,
           "parcela": "2/2",
           "categoria": "🛒 Compras",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
