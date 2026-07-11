@@ -883,6 +883,16 @@
           "categoria": "🛒 Compras",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mrgb7k3qfdloysdihug",
+          "data": 15,
+          "descricao": "Restante sicoob",
+          "valor": 2896.3,
+          "parcela": "",
+          "categoria": "💳 Cartão",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
