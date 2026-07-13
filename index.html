@@ -922,7 +922,11 @@ function cancelConfirm(pfx,id){
 function doDelete(tipo,id){
   const mes=getMesData();
   if(tipo==='lanc') mes.lancamentos=mes.lancamentos.filter(l=>l.id!==id);
-  else if(tipo==='fixa') mes.fixas=mes.fixas.filter(f=>f.id!==id);
+  else if(tipo==='fixa'){
+    const it=mes.fixas.find(f=>f.id===id);
+    mes.fixas=mes.fixas.filter(f=>f.id!==id);
+    if(it)propagarFixaDelete(it.descricao);
+  }
   else if(tipo==='receita') mes.receitas=mes.receitas.filter(r=>r.id!==id);
   saveData();
   renderHeader();
@@ -1186,6 +1190,51 @@ function gv(id,fallback=''){const e=g(id);return e?e.value.trim():fallback;}
 function gn(id){return parseFloat(g(id)?.value||0)||0;}
 function gb(id){return g(id)?.checked||false;}
 
+// ═══════════════════════════════════════════
+// PROPAGAÇÃO DE FIXAS PARA MESES FUTUROS
+// ═══════════════════════════════════════════
+function normDesc(s){return (s||'').trim().toLowerCase();}
+function futureMonthKeys(){return Object.keys(data.meses).filter(k=>k>currentMes).sort();}
+
+function upsertTemplateFixa(desc,valor,categoria,oldDesc){
+  if(!data.template_fixas)data.template_fixas=[];
+  const alvo=normDesc(oldDesc||desc);
+  const idx=data.template_fixas.findIndex(t=>normDesc(t.descricao)===alvo);
+  if(idx>=0)data.template_fixas[idx]={descricao:desc,valor,categoria};
+  else data.template_fixas.push({descricao:desc,valor,categoria});
+}
+
+function propagarFixaAdd(obj){
+  const alvo=normDesc(obj.descricao);
+  for(const mk of futureMonthKeys()){
+    const mv=data.meses[mk];
+    if(!mv.fixas)mv.fixas=[];
+    if(mv.fixas.some(f=>normDesc(f.descricao)===alvo))continue;
+    mv.fixas.push({id:uid(),descricao:obj.descricao,valor:obj.valor,categoria:obj.categoria,pago:false});
+  }
+  upsertTemplateFixa(obj.descricao,obj.valor,obj.categoria);
+}
+
+function propagarFixaEdit(oldDesc,obj){
+  const alvo=normDesc(oldDesc);
+  for(const mk of futureMonthKeys()){
+    const mv=data.meses[mk];
+    const f=(mv.fixas||[]).find(f=>normDesc(f.descricao)===alvo);
+    if(f){f.descricao=obj.descricao;f.valor=obj.valor;f.categoria=obj.categoria;}
+  }
+  upsertTemplateFixa(obj.descricao,obj.valor,obj.categoria,oldDesc);
+}
+
+function propagarFixaDelete(desc){
+  const alvo=normDesc(desc);
+  for(const mk of futureMonthKeys()){
+    const mv=data.meses[mk];
+    if(!mv.fixas)continue;
+    mv.fixas=mv.fixas.filter(f=>normDesc(f.descricao)!==alvo);
+  }
+  if(data.template_fixas)data.template_fixas=data.template_fixas.filter(t=>normDesc(t.descricao)!==alvo);
+}
+
 function submitForm(tipo,editId){
   const mes=getMesData();
   const desc=gv('fi-desc');
@@ -1201,8 +1250,17 @@ function submitForm(tipo,editId){
     else mes.lancamentos.push(obj);
   }else if(tipo==='fixa'){
     const obj={id:editId||uid(),descricao:desc,valor:val,categoria:gv('fi-cat')};
-    if(editId){const idx=mes.fixas.findIndex(f=>f.id===editId);if(idx>=0)mes.fixas[idx]=obj;}
-    else mes.fixas.push(obj);
+    if(editId){
+      const idx=mes.fixas.findIndex(f=>f.id===editId);
+      if(idx>=0){
+        const oldDesc=mes.fixas[idx].descricao;
+        mes.fixas[idx]=obj;
+        propagarFixaEdit(oldDesc,obj);
+      }
+    }else{
+      mes.fixas.push(obj);
+      propagarFixaAdd(obj);
+    }
   }else if(tipo==='receita'){
     const obj={id:editId||uid(),data:parseInt(gv('fi-dia'))||today(),
       descricao:desc,valor:val,categoria:gv('fi-cat'),recebido:gb('fi-rec'),obs:gv('fi-obs')};
