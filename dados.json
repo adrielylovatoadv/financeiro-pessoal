@@ -893,6 +893,16 @@
           "categoria": "💳 Cartão",
           "pago": false,
           "obs": ""
+        },
+        {
+          "id": "mrj7v96sbir2jxsbw3e",
+          "data": 15,
+          "descricao": "C&a",
+          "valor": 199.98,
+          "parcela": "",
+          "categoria": "🛒 Compras",
+          "pago": false,
+          "obs": ""
         }
       ],
       "fixas": [
