@@ -543,6 +543,15 @@
           "categoria": "🤝 Acordo/Êxito",
           "recebido": true,
           "obs": ""
+        },
+        {
+          "id": "mr6k1dxj5yz59qo4b6o",
+          "data": 4,
+          "descricao": "Residual",
+          "valor": 686.51,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
         }
       ],
       "meta_poupanca": 0,
@@ -604,7 +613,7 @@
           "valor": 79.2,
           "parcela": "6/12",
           "categoria": "⚖️ Profissional",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
@@ -686,6 +695,16 @@
           "categoria": "💪 Academia/Esporte",
           "pago": true,
           "obs": ""
+        },
+        {
+          "id": "mquyosyfgdme7mhrpx",
+          "data": 26,
+          "descricao": "Copasa escritorio",
+          "valor": 23.11,
+          "parcela": "",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
         }
       ],
       "fixas": [
@@ -755,17 +774,54 @@
       ]
     },
     "2025-07": {
-      "receitas": [],
+      "receitas": [
+        {
+          "id": "mr6k1v91xrdyqeb6fh",
+          "data": 4,
+          "descricao": "Honorarios",
+          "valor": 686.51,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        },
+        {
+          "id": "mrarwm5vhy69r361487",
+          "data": 7,
+          "descricao": "Honorários",
+          "valor": 830,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        },
+        {
+          "id": "mrarwyxnu1pyut51wbf",
+          "data": 7,
+          "descricao": "Honorários",
+          "valor": 767,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        },
+        {
+          "id": "mrb9tph50isiqjqwz3x7",
+          "data": 7,
+          "descricao": "Honorarios",
+          "valor": 125,
+          "categoria": "⚖️ Honorários",
+          "recebido": true,
+          "obs": ""
+        }
+      ],
       "meta_poupanca": 0,
       "lancamentos": [
         {
           "id": "mqfxlrs8tv2jq2ss6l7",
-          "data": 5,
+          "data": 6,
           "descricao": "OAB SP",
-          "valor": 361.23,
+          "valor": 368.61,
           "parcela": "3/3",
           "categoria": "⚖️ Profissional",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
@@ -775,7 +831,7 @@
           "valor": 87.24,
           "parcela": "2/2",
           "categoria": "🛒 Compras",
-          "pago": false,
+          "pago": true,
           "obs": ""
         },
         {
@@ -795,6 +851,56 @@
           "valor": 79.2,
           "parcela": "7/12",
           "categoria": "⚖️ Profissional",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "mr28h24bco4azejo5hr",
+          "data": 11,
+          "descricao": "Sicoob",
+          "valor": 1616,
+          "parcela": "",
+          "categoria": "💳 Cartão",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "mrb3cm6hyfwz5zyqdur",
+          "data": 10,
+          "descricao": "Escritorio",
+          "valor": 300,
+          "parcela": "",
+          "categoria": "⚖️ Profissional",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "mrcclrwnv7msa4lkzw",
+          "data": 8,
+          "descricao": "Milk-shake",
+          "valor": 35.9,
+          "parcela": "",
+          "categoria": "🛒 Compras",
+          "pago": true,
+          "obs": ""
+        },
+        {
+          "id": "mrgb7k3qfdloysdihug",
+          "data": 20,
+          "descricao": "Restante sicoob",
+          "valor": 2896.3,
+          "parcela": "",
+          "categoria": "💳 Cartão",
+          "pago": false,
+          "obs": ""
+        },
+        {
+          "id": "mrj7v96sbir2jxsbw3e",
+          "data": 15,
+          "descricao": "C&a",
+          "valor": 199.98,
+          "parcela": "",
+          "categoria": "🛒 Compras",
           "pago": false,
           "obs": ""
         }
@@ -831,29 +937,14 @@
         {
           "id": "mqfxlrs82qypdekygtb",
           "descricao": "Vivo",
-          "valor": 89.9,
-          "categoria": "📱 Serviços",
-          "pago": false
+          "valor": 44,
+          "categoria": "📱 Serviços"
         },
         {
           "id": "mqfxlrs8suxuo65qqv",
           "descricao": "Remédio",
           "valor": 100,
           "categoria": "💊 Saúde",
-          "pago": false
-        },
-        {
-          "id": "mqfxlrs8e0yc3a5gvnm",
-          "descricao": "Claude",
-          "valor": 110,
-          "categoria": "📱 Serviços",
-          "pago": false
-        },
-        {
-          "id": "mqfxlrs8qzuwtoagi7f",
-          "descricao": "Aula de tênis",
-          "valor": 200,
-          "categoria": "💪 Academia/Esporte",
           "pago": false
         },
         {
@@ -922,9 +1013,8 @@
         {
           "id": "mqfxlrs8xlcfqjzskn",
           "descricao": "Vivo",
-          "valor": 89.9,
-          "categoria": "📱 Serviços",
-          "pago": false
+          "valor": 44,
+          "categoria": "📱 Serviços"
         },
         {
           "id": "mqfxlrs8hnxg1zpm0au",
@@ -934,18 +1024,10 @@
           "pago": false
         },
         {
-          "id": "mqfxlrs884ehhd50emn",
-          "descricao": "Claude",
-          "valor": 110,
-          "categoria": "📱 Serviços",
-          "pago": false
-        },
-        {
           "id": "mqfxlrs8f2l2h89rpnl",
           "descricao": "Aula de tênis",
-          "valor": 200,
-          "categoria": "💪 Academia/Esporte",
-          "pago": false
+          "valor": 235,
+          "categoria": "💪 Academia/Esporte"
         },
         {
           "id": "mqfxlrs88kdw6xi601f",
@@ -1013,9 +1095,8 @@
         {
           "id": "mqfxlrs8ejedx15v1nq",
           "descricao": "Vivo",
-          "valor": 89.9,
-          "categoria": "📱 Serviços",
-          "pago": false
+          "valor": 44,
+          "categoria": "📱 Serviços"
         },
         {
           "id": "mqfxlrs84i3go8ptss9",
@@ -1025,18 +1106,10 @@
           "pago": false
         },
         {
-          "id": "mqfxlrs8p447z8a7i4i",
-          "descricao": "Claude",
-          "valor": 110,
-          "categoria": "📱 Serviços",
-          "pago": false
-        },
-        {
           "id": "mqfxlrs8pi4znukxox",
           "descricao": "Aula de tênis",
-          "valor": 200,
-          "categoria": "💪 Academia/Esporte",
-          "pago": false
+          "valor": 235,
+          "categoria": "💪 Academia/Esporte"
         },
         {
           "id": "mqfxlrs8pkpv781lsm",
@@ -2343,14 +2416,7 @@
   "poupanca": {
     "objetivo": "Meta 2026",
     "meta_total": 50000,
-    "depositos": [
-      {
-        "id": "4ec44605",
-        "mes": "2025-05",
-        "valor": 250,
-        "obs": "Poupança"
-      }
-    ]
+    "depositos": []
   },
   "saldo_inicial": 3516.11
 }
