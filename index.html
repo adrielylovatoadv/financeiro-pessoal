@@ -518,11 +518,13 @@ function render(){
   if(!keys.length)return;
   if(!currentMes||!keys.includes(currentMes)){
     const todayKey=new Date().toISOString().slice(0,7);
-    let def=todayKey;
-    for(const k of [...keys].reverse()){
-      if((data.meses[k].receitas||[]).length){def=k;break;}
+    if(keys.includes(todayKey)){
+      currentMes=todayKey;
+    }else{
+      let def=keys[keys.length-1];
+      for(const k of keys){if(k>=todayKey){def=k;break;}}
+      currentMes=def;
     }
-    currentMes=keys.includes(def)?def:keys[keys.length-1];
   }
   renderHeader();
   renderVerse();
