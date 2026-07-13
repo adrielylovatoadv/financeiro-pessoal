@@ -953,6 +953,12 @@
           "valor": 58.9,
           "categoria": "⚖️ Profissional",
           "pago": false
+        },
+        {
+          "id": "mrjt455hij5lkxh588q",
+          "descricao": "Claudia",
+          "valor": 55,
+          "categoria": "💳 Cartão"
         }
       ]
     },
