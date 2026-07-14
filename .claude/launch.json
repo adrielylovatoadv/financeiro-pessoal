@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "financeiro",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "/Users/adrielylovato/financeiro_pessoal"],
+      "port": 8765,
+      "autoPort": false
+    },
+    {
+      "name": "financeiro-vercel-dev",
+      "runtimeExecutable": "vercel",
+      "runtimeArgs": ["dev", "--yes", "--listen", "3210"],
+      "cwd": "/Users/adrielylovato/financeiro_pessoal",
+      "port": 3210,
+      "autoPort": false
+    }
+  ]
+}

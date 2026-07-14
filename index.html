@@ -7,163 +7,183 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Meu Dinheiro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital@1&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  --bg:#141414;
-  --surface:#1E1E1E;
-  --surface2:#252525;
-  --border:#2A2A2A;
-  --text:#E8E8E8;
-  --text2:#999;
-  --text3:#555;
-  --green:#4ADE80;
-  --red:#F87171;
+  --bg:#07080B;
+  --bg-elev:#0C0E12;
+  --surface:#0F1115;
+  --surface2:#151820;
+  --border:rgba(255,255,255,.07);
+  --border-strong:rgba(255,255,255,.14);
+  --text:#F1F2F4;
+  --text2:#8A93A3;
+  --text3:#525966;
+  --accent:#5EEAD4;
+  --accent-dim:rgba(94,234,212,.14);
+  --accent-glow:rgba(94,234,212,.35);
+  --green:#34D399;
+  --red:#FB7185;
   --yellow:#FBBF24;
-  --accent:#3A3A3A;
-  --nav-h:64px;
+  --gold:#D9B36A;
+  --nav-h:66px;
   --safe-bottom:env(safe-area-inset-bottom,0px);
+  --radius:14px;
 }
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;overscroll-behavior:none;}
+html,body{height:100%;background:radial-gradient(120% 60% at 50% -10%,#10141c 0%,#07080B 55%) fixed;color:var(--text);font-family:'Inter',sans-serif;font-size:15px;overscroll-behavior:none;font-weight:400;}
 #app{display:flex;flex-direction:column;height:100%;max-width:480px;margin:0 auto;position:relative;}
 
 /* ── Header ── */
-#header{background:var(--bg);padding:14px 16px 10px;border-bottom:1px solid var(--border);z-index:10;flex-shrink:0;}
-.header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.app-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
-.month-nav{display:flex;align-items:center;gap:8px;}
-.month-nav button{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
-.month-label{font-size:14px;font-weight:600;color:var(--text);min-width:100px;text-align:center;}
-.summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
-.summary-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 6px;text-align:center;}
-.s-label{font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px;}
-.s-val{font-size:12px;font-weight:700;}
+#header{position:relative;background:linear-gradient(180deg,rgba(15,17,21,.92),rgba(15,17,21,.55));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:16px 18px 12px;border-bottom:1px solid var(--border);z-index:10;flex-shrink:0;}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;}
+.app-title{font-size:13px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text);display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;}
+.app-title .mark{width:7px;height:7px;border-radius:2px;background:linear-gradient(135deg,var(--accent),#22D3EE);box-shadow:0 0 10px var(--accent-glow);flex-shrink:0;transform:rotate(45deg);}
+.month-nav-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px;}
+#sync-indicator{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;min-width:0;}
+.month-nav{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.month-nav button{background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:9px;width:30px;height:30px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:border-color .15s,color .15s;}
+.month-nav button:active{border-color:var(--accent);color:var(--accent);}
+.month-label{font-size:13px;font-weight:600;color:var(--text);min-width:88px;text-align:center;letter-spacing:.2px;}
+.summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.summary-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:10px 6px 9px;text-align:center;overflow:hidden;}
+.summary-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bar,var(--border-strong));opacity:.85;}
+.summary-card:nth-child(1){--bar:var(--green);}
+.summary-card:nth-child(2){--bar:var(--red);}
+.summary-card:nth-child(3){--bar:var(--yellow);}
+.summary-card:nth-child(4){--bar:var(--accent);}
+.s-label{font-size:8.5px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;font-weight:600;}
+.s-val{font-size:12.5px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:-.2px;}
 .green{color:var(--green);}
 .red{color:var(--red);}
 .yellow{color:var(--yellow);}
 .gray{color:var(--text2);}
 
 /* ── Verse ── */
-.verse{border-left:3px solid var(--border);padding:10px 12px;margin:0 16px 4px;background:var(--surface2);border-radius:0 6px 6px 0;border:1px solid var(--border);border-left:3px solid var(--accent);}
-.verse-text{font-size:11px;font-style:italic;color:var(--text2);line-height:1.5;margin-bottom:3px;}
-.verse-ref{font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+.verse{position:relative;padding:14px 16px 14px 19px;margin:14px 16px 6px;background:linear-gradient(135deg,rgba(217,179,106,.07),rgba(217,179,106,.02));border:1px solid rgba(217,179,106,.18);border-radius:12px;}
+.verse::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--gold),transparent);}
+.verse-text{font-family:'Source Serif 4',Georgia,serif;font-size:12.5px;font-style:italic;color:var(--text2);line-height:1.65;margin-bottom:6px;}
+.verse-ref{font-size:9px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;}
 
 /* ── Bottom Nav ── */
-#bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--surface);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:var(--safe-bottom);}
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;cursor:pointer;border:none;background:none;color:var(--text3);font-family:'Inter',sans-serif;font-size:9px;font-weight:500;gap:3px;min-height:var(--nav-h);transition:color .15s;}
-.nav-btn.active{color:var(--green);}
-.nav-icon{font-size:20px;line-height:1;}
+#bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(12,14,18,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:var(--safe-bottom);}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 8px;cursor:pointer;border:none;background:none;color:var(--text3);font-family:'Inter',sans-serif;font-size:9px;font-weight:500;gap:5px;min-height:var(--nav-h);transition:color .2s;position:relative;letter-spacing:.2px;}
+.nav-btn svg{width:20px;height:20px;transition:stroke .2s;}
+.nav-btn.active{color:var(--accent);}
+.nav-btn.active::before{content:'';position:absolute;top:2px;width:16px;height:2px;border-radius:2px;background:var(--accent);box-shadow:0 0 8px var(--accent-glow);}
 
 /* ── Content ── */
-#content{flex:1;overflow-y:auto;padding:12px 16px calc(var(--nav-h) + var(--safe-bottom) + 12px);-webkit-overflow-scrolling:touch;}
+#content{flex:1;overflow-y:auto;padding:12px 16px calc(var(--nav-h) + var(--safe-bottom) + 16px);-webkit-overflow-scrolling:touch;}
 
 /* ── Sections ── */
 .section{display:none;}
-.section.active{display:block;}
-.sec-title{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin:16px 0 8px;}
-.row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.section.active{display:block;animation:fadeIn .25s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.sec-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1.8px;margin:18px 0 10px;}
+.row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 
 /* ── Cards ── */
-.card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;}
 
 /* ── Items ── */
-.item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:6px;position:relative;}
-.item.paid{border-left:3px solid #14532D;}
-.item.unpaid{border-left:3px solid #450A0A;}
-.item.received{border-left:3px solid #14532D;}
-.item.awaiting{border-left:3px solid #78350F;}
-.item-main{display:flex;justify-content:space-between;align-items:flex-start;}
-.item-left{flex:1;min-width:0;}
-.item-desc{font-weight:600;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.item-sub{font-size:11px;color:var(--text3);margin-top:2px;}
-.item-right{text-align:right;margin-left:12px;flex-shrink:0;}
-.item-val{font-weight:700;font-size:15px;color:var(--text);}
-.tag{border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700;display:inline-block;margin-top:3px;}
-.tag-paid{background:#14532D;color:var(--green);border:1px solid #166534;}
-.tag-unpaid{background:#450A0A;color:var(--red);border:1px solid #7F1D1D;}
-.tag-received{background:#14532D;color:var(--green);border:1px solid #166534;}
-.tag-awaiting{background:#451a03;color:var(--yellow);border:1px solid #78350F;}
-.item-actions{display:flex;gap:6px;margin-top:8px;}
-.btn{border:1px solid var(--border);background:var(--surface2);color:var(--text2);border-radius:7px;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;}
-.btn:active{background:var(--accent);}
-.btn-primary{background:var(--accent);color:var(--text);border-color:#444;flex:3;}
-.btn-icon{flex:1;padding:7px 6px;}
-.btn-sm{padding:5px 10px;font-size:12px;}
-.btn-full{width:100%;margin-top:8px;padding:11px;font-size:14px;}
-.btn-danger{border-color:#7F1D1D;color:var(--red);}
-.btn-success{border-color:#166534;color:var(--green);}
+.item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:8px;position:relative;transition:border-color .15s;}
+.item.paid,.item.received{border-color:rgba(52,211,153,.22);}
+.item.unpaid{border-color:rgba(251,113,133,.2);}
+.item.awaiting{border-color:rgba(251,191,36,.2);}
+.item-main{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.item-left{flex:1;min-width:0;display:flex;align-items:flex-start;gap:10px;}
+.status-dot{width:6px;height:6px;border-radius:50%;margin-top:6px;flex-shrink:0;background:var(--text3);}
+.item.paid .status-dot,.item.received .status-dot{background:var(--green);box-shadow:0 0 6px rgba(52,211,153,.5);}
+.item.unpaid .status-dot{background:var(--red);}
+.item.awaiting .status-dot{background:var(--yellow);}
+.item-desc{font-weight:500;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item-sub{font-size:11px;color:var(--text3);margin-top:3px;letter-spacing:.1px;}
+.item-right{text-align:right;margin-left:8px;flex-shrink:0;}
+.item-val{font-weight:600;font-size:14.5px;color:var(--text);font-family:'JetBrains Mono',monospace;}
+.tag{border-radius:20px;padding:3px 9px;font-size:9.5px;font-weight:600;display:inline-block;margin-top:5px;letter-spacing:.4px;text-transform:uppercase;border:1px solid transparent;}
+.tag-paid,.tag-received{background:rgba(52,211,153,.1);color:var(--green);border-color:rgba(52,211,153,.25);}
+.tag-unpaid{background:rgba(251,113,133,.1);color:var(--red);border-color:rgba(251,113,133,.25);}
+.tag-awaiting{background:rgba(251,191,36,.1);color:var(--yellow);border-color:rgba(251,191,36,.25);}
+.item-actions{display:flex;gap:7px;margin-top:10px;}
+.btn{border:1px solid var(--border-strong);background:transparent;color:var(--text2);border-radius:9px;padding:8px 12px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.btn:active{background:var(--surface2);}
+.btn-primary{background:var(--accent-dim);color:var(--accent);border-color:rgba(94,234,212,.35);flex:3;font-weight:600;}
+.btn-icon{flex:1;padding:8px 6px;}
+.btn-sm{padding:6px 11px;font-size:12px;}
+.btn-full{width:100%;margin-top:10px;padding:12px;font-size:14px;}
+.btn-danger{border-color:rgba(251,113,133,.35);color:var(--red);}
+.btn-success{border-color:rgba(94,234,212,.35);color:var(--accent);}
 
 /* ── Progress bar ── */
-.prog-bg{background:var(--border);border-radius:4px;height:4px;overflow:hidden;margin:8px 0 4px;}
-.prog-fill{background:#5A5A5A;height:100%;border-radius:4px;transition:width .4s ease;}
-.prog-fill.green{background:var(--green);}
+.prog-bg{background:var(--border);border-radius:4px;height:3px;overflow:hidden;margin:10px 0 5px;}
+.prog-fill{background:var(--text3);height:100%;border-radius:4px;transition:width .5s ease;}
+.prog-fill.green{background:linear-gradient(90deg,var(--accent),var(--green));box-shadow:0 0 8px var(--accent-glow);}
 
 /* ── Forms ── */
-.form-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
-.form-sheet{background:var(--surface);border-radius:16px 16px 0 0;padding:20px 16px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding-bottom:calc(20px + var(--safe-bottom));}
-.form-title{font-size:16px;font-weight:700;margin-bottom:16px;}
-.form-group{margin-bottom:12px;}
-.form-label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;}
-.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px 12px;font-size:16px;font-family:'Inter',sans-serif;outline:none;}
-.form-input:focus{border-color:#555;}
+.form-overlay{position:fixed;inset:0;background:rgba(3,4,6,.75);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
+.form-sheet{background:var(--bg-elev);border:1px solid var(--border);border-bottom:none;border-radius:20px 20px 0 0;padding:22px 18px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding-bottom:calc(22px + var(--safe-bottom));}
+.form-title{font-size:16px;font-weight:600;margin-bottom:18px;letter-spacing:.2px;}
+.form-group{margin-bottom:13px;}
+.form-label{font-size:11px;color:var(--text3);margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:.6px;font-weight:600;}
+.form-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:11px 12px;font-size:16px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s,box-shadow .15s;}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim);}
 .form-input option{background:var(--surface2);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.form-actions{display:flex;gap:8px;margin-top:16px;}
+.form-actions{display:flex;gap:8px;margin-top:18px;}
 .form-check{display:flex;align-items:center;gap:8px;cursor:pointer;}
-.form-check input{width:18px;height:18px;accent-color:var(--green);cursor:pointer;}
+.form-check input{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;}
 .form-check span{font-size:14px;color:var(--text2);}
 
 /* ── Confirm ── */
-.confirm-bar{background:#450A0A;border:1px solid #7F1D1D;border-radius:8px;padding:10px 14px;margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.confirm-bar{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.3);border-radius:10px;padding:11px 14px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .confirm-bar p{font-size:13px;color:var(--red);}
 .confirm-actions{display:flex;gap:6px;flex-shrink:0;}
 
 /* ── Empty ── */
-.empty{text-align:center;color:var(--text3);padding:30px 0;font-size:13px;}
+.empty{text-align:center;color:var(--text3);padding:36px 0;font-size:13px;letter-spacing:.2px;}
 
 /* ── Parcelas progress ── */
-.parc-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
-.parc-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.parc-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.parc-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-top:6px;}
 
 /* ── Resumo ── */
-.hist-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.hist-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);}
 .hist-row:last-child{border-bottom:none;}
-.cat-row{display:flex;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:12px;}
+.cat-row{display:flex;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border);gap:12px;}
 .cat-row:last-child{border-bottom:none;}
 .cat-info{flex:1;}
-.cat-name{font-size:13px;font-weight:500;}
+.cat-name{font-size:13px;font-weight:400;color:var(--text2);}
 .cat-num{text-align:right;min-width:90px;}
-.cat-val{font-weight:700;font-size:13px;}
-.cat-pct{font-size:10px;color:var(--text3);}
+.cat-val{font-weight:600;font-size:13px;font-family:'JetBrains Mono',monospace;}
+.cat-pct{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
 
 /* ── Saving goal ── */
-.big-val{font-size:22px;font-weight:700;}
+.big-val{font-size:24px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:-.5px;}
 
 /* ── Toast ── */
-#toast{position:fixed;bottom:calc(var(--nav-h) + 16px);left:50%;transform:translateX(-50%);background:#333;color:var(--text);padding:10px 18px;border-radius:8px;font-size:13px;z-index:300;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap;}
-#toast.show{opacity:1;}
+#toast{position:fixed;bottom:calc(var(--nav-h) + 16px);left:50%;transform:translate(-50%,4px);background:var(--bg-elev);border:1px solid var(--border-strong);color:var(--text);padding:10px 18px;border-radius:10px;font-size:13px;z-index:300;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;transform:translate(-50%,0);}
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:2px;}
 </style>
 </head>
 <body>
 <div id="app">
   <div id="header">
     <div class="header-row">
-      <div class="app-title">💼 Meu Dinheiro</div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span id="sync-indicator" style="font-size:11px;color:var(--text3);"></span>
-        <div class="month-nav">
-          <button id="prev-month">‹</button>
-          <span class="month-label" id="month-label">—</span>
-          <button id="next-month">›</button>
-        </div>
-        <button class="month-nav button" id="btn-settings" onclick="openSettings()" style="font-size:18px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;">⚙</button>
+      <div class="app-title"><span class="mark"></span>Meu Dinheiro</div>
+      <button id="btn-settings" onclick="openSettings()" style="font-size:15px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:9px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">⚙</button>
+    </div>
+    <div class="month-nav-row">
+      <div class="month-nav">
+        <button id="prev-month">‹</button>
+        <span class="month-label" id="month-label">—</span>
+        <button id="next-month">›</button>
       </div>
+      <span id="sync-indicator"></span>
     </div>
     <div class="summary-row">
       <div class="summary-card"><div class="s-label">Receita</div><div class="s-val green" id="s-rec">—</div></div>
@@ -240,22 +260,22 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 
   <nav id="bottom-nav">
     <button class="nav-btn active" data-sec="gastos" onclick="setSection('gastos',this)">
-      <span class="nav-icon">💸</span>Gastos
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Gastos
     </button>
     <button class="nav-btn" data-sec="fixas" onclick="setSection('fixas',this)">
-      <span class="nav-icon">📌</span>Fixas
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Fixas
     </button>
     <button class="nav-btn" data-sec="receita" onclick="setSection('receita',this)">
-      <span class="nav-icon">💰</span>Receita
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6 13.5 15.5l-5-5L1 18"/><path d="M17 6h6v6"/></svg>Receita
     </button>
     <button class="nav-btn" data-sec="parcelas" onclick="setSection('parcelas',this)">
-      <span class="nav-icon">🔄</span>Parcelas
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 12V10a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 12v2a4 4 0 0 1-4 4H3"/></svg>Parcelas
     </button>
     <button class="nav-btn" data-sec="poupar" onclick="setSection('poupar',this)">
-      <span class="nav-icon">🏦</span>Poupar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Poupar
     </button>
     <button class="nav-btn" data-sec="resumo" onclick="setSection('resumo',this)">
-      <span class="nav-icon">📊</span>Resumo
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Resumo
     </button>
   </nav>
 </div>
@@ -369,70 +389,178 @@ function showToast(msg){
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 // ═══════════════════════════════════════════
-// STORAGE
+// STORAGE / SYNC (API própria em /api, Postgres)
 // ═══════════════════════════════════════════
-let _saveTimer=null;
-function saveData(){
-  localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
-  clearTimeout(_saveTimer);
-  _saveTimer=setTimeout(()=>ghPut(),1500);
-}
-function loadData(){
-  const s=localStorage.getItem('meu-dinheiro-v2');
-  if(s){try{data=JSON.parse(s);return;}catch(e){}}
-  // sem dados locais: usa o INITIAL_DATA só como placeholder de tela.
-  // NÃO salva na nuvem aqui — isso criaria uma corrida com ghLoadPublic()
-  // e poderia sobrescrever dados reais do GitHub com este snapshot antigo.
-  data=JSON.parse(JSON.stringify(INITIAL_DATA));
-}
+const PENDING_KEY='meu-dinheiro-pending-v1';
+const CACHE_KEY='meu-dinheiro-cache-v1';
 
-// ═══════════════════════════════════════════
-// GITHUB SYNC via Cloudflare Worker
-// ═══════════════════════════════════════════
-const WORKER_URL='https://meu-dinheiro.adrielylovatoadv.workers.dev';
+let versions={config:null,meses:{}};
+let pending={config:null,meses:{}};
+let flushing=false;
+let retryTimer=null;
 
 function setSyncStatus(msg,color='var(--text3)'){
   const el=document.getElementById('sync-indicator');
   if(el){el.textContent=msg;el.style.color=color;}
 }
 
-async function ghLoadPublic(){
+function configSnapshot(){
+  return{saldo_inicial:data.saldo_inicial,template_fixas:data.template_fixas,poupanca:data.poupanca};
+}
+function hasPending(){return pending.config!=null||Object.keys(pending.meses).length>0;}
+function persistPendingLocal(){localStorage.setItem(PENDING_KEY,JSON.stringify(pending));}
+function restorePendingLocal(){
+  try{const s=localStorage.getItem(PENDING_KEY);if(s)pending=JSON.parse(s);}
+  catch(e){pending={config:null,meses:{}};}
+}
+function persistCacheLocal(){localStorage.setItem(CACHE_KEY,JSON.stringify({data,versions}));}
+function restoreCacheLocal(){
   try{
-    setSyncStatus('↻ sincronizando…');
-    const r=await fetch(WORKER_URL+'?t='+Date.now());
-    if(!r.ok)throw new Error('fetch failed');
-    const content=await r.json();
-    data=content;
-    garantirMeses();
-    localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
-    setSyncStatus('✓ atualizado','var(--green)');
-    setTimeout(()=>setSyncStatus(''),3000);
-    render();
+    const s=localStorage.getItem(CACHE_KEY);
+    if(s){const c=JSON.parse(s);data=c.data;versions=c.versions||{config:null,meses:{}};return true;}
+  }catch(e){}
+  return false;
+}
+
+// Toda mutação chama isto com exatamente as chaves que tocou — sem debounce,
+// tenta salvar na hora e mantém a mudança numa fila local até confirmar.
+function queuePersist(patch){
+  if(patch.config)pending.config=patch.config;
+  if(patch.meses)Object.assign(pending.meses,patch.meses);
+  persistPendingLocal();
+  persistCacheLocal();
+  flush();
+}
+
+function buildSaveBody(p){
+  const body={};
+  if(p.config)body.config={dados:p.config,expectedVersion:versions.config};
+  const mesKeys=Object.keys(p.meses||{});
+  if(mesKeys.length){
+    body.meses={};
+    for(const mk of mesKeys)body.meses[mk]={dados:p.meses[mk],expectedVersion:versions.meses[mk]??null};
+  }
+  return body;
+}
+
+function reconcileConflicts(conflicts){
+  if(conflicts.config){
+    data.saldo_inicial=conflicts.config.dados.saldo_inicial;
+    data.template_fixas=conflicts.config.dados.template_fixas;
+    data.poupanca=conflicts.config.dados.poupanca;
+    versions.config=conflicts.config.version;
+    pending.config=null;
+  }
+  if(conflicts.meses){
+    for(const mk of Object.keys(conflicts.meses)){
+      data.meses[mk]=conflicts.meses[mk].dados;
+      versions.meses[mk]=conflicts.meses[mk].version;
+      delete pending.meses[mk];
+    }
+  }
+  persistPendingLocal();
+  persistCacheLocal();
+  render();
+  showToast('Alguns dados foram atualizados em outro dispositivo');
+}
+
+function scheduleRetry(){
+  clearTimeout(retryTimer);
+  retryTimer=setTimeout(()=>flush(),5000);
+}
+
+// useBeacon=true: usado ao esconder/fechar a aba — dispara via sendBeacon
+// (funciona mesmo durante o unload) e não espera confirmação; a fila local
+// só é limpa quando o servidor confirmar (via um flush normal posterior).
+async function flush(useBeacon){
+  if(!hasPending())return true;
+  if(useBeacon){
+    const body=buildSaveBody(pending);
+    navigator.sendBeacon('/api/save',new Blob([JSON.stringify(body)],{type:'application/json'}));
+    return true;
+  }
+  if(flushing)return false;
+  flushing=true;
+  const toSend={config:pending.config,meses:{...pending.meses}};
+  const body=buildSaveBody(toSend);
+  try{
+    setSyncStatus('↻ salvando…');
+    const r=await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true});
+    if(r.ok){
+      const{versions:v}=await r.json();
+      if(v.config!==undefined)versions.config=v.config;
+      Object.assign(versions.meses,v.meses||{});
+      if(toSend.config&&pending.config===toSend.config)pending.config=null;
+      for(const mk of Object.keys(toSend.meses))if(pending.meses[mk]===toSend.meses[mk])delete pending.meses[mk];
+      persistPendingLocal();
+      persistCacheLocal();
+      setSyncStatus('✓ salvo','var(--green)');
+      setTimeout(()=>setSyncStatus(''),2000);
+      flushing=false;
+      if(hasPending())flush();
+      return true;
+    }
+    if(r.status===409){
+      const{conflicts}=await r.json();
+      flushing=false;
+      reconcileConflicts(conflicts);
+      return false;
+    }
+    throw new Error('save failed '+r.status);
   }catch(e){
-    setSyncStatus('sem sync','var(--text3)');
-    console.warn('gh raw',e);
+    console.warn('flush falhou',e);
+    setSyncStatus('⚠ sem internet — vai tentar de novo','var(--yellow)');
+    flushing=false;
+    scheduleRetry();
+    return false;
   }
 }
 
-async function ghPut(){
-  try{
-    setSyncStatus('↻ salvando…');
-    const r=await fetch(WORKER_URL,{
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
-    });
-    if(r.ok){
-      setSyncStatus('✓ salvo','var(--green)');
-      setTimeout(()=>setSyncStatus(''),3000);
-    }else{
-      const err=await r.text();
-      setSyncStatus('⚠ erro: '+r.status,'var(--red)');
-      console.warn('ghPut error',r.status,err);
+window.addEventListener('online',()=>flush());
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush(true);});
+window.addEventListener('pagehide',()=>flush(true));
+
+async function recarregarAgora(){
+  await loadData();
+  const novos=garantirMeses();
+  if(novos.length){
+    const patch={meses:{}};
+    for(const mk of novos)patch.meses[mk]=data.meses[mk];
+    queuePersist(patch);
+  }
+  render();
+}
+
+// A nuvem é a fonte da verdade, mas só depois de tentar escoar qualquer
+// alteração pendente feita localmente — nunca sobrescreve às cegas.
+async function loadData(){
+  restorePendingLocal();
+  const hadCache=restoreCacheLocal();
+  if(hasPending()){
+    if(hadCache)render();
+    const ok=await flush();
+    if(!ok){
+      setSyncStatus('⚠ alterações não sincronizadas ainda','var(--yellow)');
+      return;
     }
+  }
+  try{
+    setSyncStatus('↻ sincronizando…');
+    const r=await fetch('/api/data?t='+Date.now());
+    if(!r.ok)throw new Error('fetch failed');
+    const cloud=await r.json();
+    data={saldo_inicial:cloud.saldo_inicial,template_fixas:cloud.template_fixas,poupanca:cloud.poupanca,meses:cloud.meses};
+    versions=cloud._versions;
+    persistCacheLocal();
+    setSyncStatus('✓ atualizado','var(--green)');
+    setTimeout(()=>setSyncStatus(''),2000);
   }catch(e){
-    setSyncStatus('⚠ sem internet','var(--yellow)');
-    console.warn('gh put',e);
+    console.warn('load falhou',e);
+    if(!hadCache){
+      data=JSON.parse(JSON.stringify(INITIAL_DATA));
+      versions={config:null,meses:{}};
+    }
+    setSyncStatus('sem sync — usando dados salvos localmente','var(--text3)');
   }
 }
 
@@ -447,7 +575,7 @@ function openSettings(){
     Seus dados são salvos automaticamente na nuvem a cada alteração.
   </div>
   <div class="form-actions">
-    <button class="btn btn-primary" style="flex:2;" onclick="ghLoadPublic().then(()=>closeForm())">↻ Recarregar dados agora</button>
+    <button class="btn btn-primary" style="flex:2;" onclick="recarregarAgora().then(()=>closeForm())">↻ Recarregar dados agora</button>
     <button class="btn" onclick="closeForm()">Fechar</button>
   </div>`;
   document.getElementById('form-overlay').style.display='flex';
@@ -459,14 +587,17 @@ function openSettings(){
 function garantirMeses(){
   const alvo='2026-12';
   let chaves=Object.keys(data.meses).sort();
-  if(!chaves.length)return;
+  if(!chaves.length)return[];
   let ultima=chaves[chaves.length-1];
   let cur=proxMes(ultima);
+  const novos=[];
   while(cur<=alvo){
     const ant=Object.keys(data.meses).filter(k=>k<cur).sort().pop();
     criarMesNovo(cur,ant);
+    novos.push(cur);
     cur=proxMes(cur);
   }
+  return novos;
 }
 function criarMesNovo(novoKey,antKey){
   const ant=data.meses[antKey];
@@ -897,7 +1028,7 @@ function togglePago(tipo,id){
     const it=mes.receitas.find(r=>r.id===id);
     if(it){it.recebido=!it.recebido;}
   }
-  saveData();
+  queuePersist({meses:{[currentMes]:mes}});
   renderHeader();
   renderSection(currentSection);
 }
@@ -923,14 +1054,20 @@ function cancelConfirm(pfx,id){
 }
 function doDelete(tipo,id){
   const mes=getMesData();
-  if(tipo==='lanc') mes.lancamentos=mes.lancamentos.filter(l=>l.id!==id);
-  else if(tipo==='fixa'){
+  if(tipo==='lanc'){
+    mes.lancamentos=mes.lancamentos.filter(l=>l.id!==id);
+    queuePersist({meses:{[currentMes]:mes}});
+  }else if(tipo==='fixa'){
     const it=mes.fixas.find(f=>f.id===id);
     mes.fixas=mes.fixas.filter(f=>f.id!==id);
-    if(it)propagarFixaDelete(it.descricao);
+    const tocados=it?propagarFixaDelete(it.descricao):[];
+    const patch={config:configSnapshot(),meses:{[currentMes]:mes}};
+    for(const mk of tocados)patch.meses[mk]=data.meses[mk];
+    queuePersist(patch);
+  }else if(tipo==='receita'){
+    mes.receitas=mes.receitas.filter(r=>r.id!==id);
+    queuePersist({meses:{[currentMes]:mes}});
   }
-  else if(tipo==='receita') mes.receitas=mes.receitas.filter(r=>r.id!==id);
-  saveData();
   renderHeader();
   renderSection(currentSection);
   showToast('Item excluído');
@@ -948,8 +1085,10 @@ function confirmDeleteParc(id,desc,mesKey){
 }
 function doDeleteParc(id,mesKey){
   const mv=data.meses[mesKey];
-  if(mv) mv.lancamentos=mv.lancamentos.filter(l=>l.id!==id);
-  saveData();
+  if(mv){
+    mv.lancamentos=mv.lancamentos.filter(l=>l.id!==id);
+    queuePersist({meses:{[mesKey]:mv}});
+  }
   renderSection('parcelas');
   showToast('Parcela excluída');
 }
@@ -966,7 +1105,7 @@ function confirmDeleteDep(id){
 }
 function doDeleteDep(id){
   data.poupanca.depositos=data.poupanca.depositos.filter(d=>d.id!==id);
-  saveData();
+  queuePersist({config:configSnapshot()});
   renderPoupar();
   showToast('Depósito excluído');
 }
@@ -1208,33 +1347,42 @@ function upsertTemplateFixa(desc,valor,categoria,oldDesc){
 
 function propagarFixaAdd(obj){
   const alvo=normDesc(obj.descricao);
+  const tocados=[];
   for(const mk of futureMonthKeys()){
     const mv=data.meses[mk];
     if(!mv.fixas)mv.fixas=[];
     if(mv.fixas.some(f=>normDesc(f.descricao)===alvo))continue;
     mv.fixas.push({id:uid(),descricao:obj.descricao,valor:obj.valor,categoria:obj.categoria,pago:false});
+    tocados.push(mk);
   }
   upsertTemplateFixa(obj.descricao,obj.valor,obj.categoria);
+  return tocados;
 }
 
 function propagarFixaEdit(oldDesc,obj){
   const alvo=normDesc(oldDesc);
+  const tocados=[];
   for(const mk of futureMonthKeys()){
     const mv=data.meses[mk];
     const f=(mv.fixas||[]).find(f=>normDesc(f.descricao)===alvo);
-    if(f){f.descricao=obj.descricao;f.valor=obj.valor;f.categoria=obj.categoria;}
+    if(f){f.descricao=obj.descricao;f.valor=obj.valor;f.categoria=obj.categoria;tocados.push(mk);}
   }
   upsertTemplateFixa(obj.descricao,obj.valor,obj.categoria,oldDesc);
+  return tocados;
 }
 
 function propagarFixaDelete(desc){
   const alvo=normDesc(desc);
+  const tocados=[];
   for(const mk of futureMonthKeys()){
     const mv=data.meses[mk];
     if(!mv.fixas)continue;
+    const antes=mv.fixas.length;
     mv.fixas=mv.fixas.filter(f=>normDesc(f.descricao)!==alvo);
+    if(mv.fixas.length!==antes)tocados.push(mk);
   }
   if(data.template_fixas)data.template_fixas=data.template_fixas.filter(t=>normDesc(t.descricao)!==alvo);
+  return tocados;
 }
 
 function submitForm(tipo,editId){
@@ -1250,26 +1398,32 @@ function submitForm(tipo,editId){
       categoria:gv('fi-cat'),pago:gb('fi-pago'),obs:gv('fi-obs')};
     if(editId){const idx=mes.lancamentos.findIndex(l=>l.id===editId);if(idx>=0)mes.lancamentos[idx]=obj;}
     else mes.lancamentos.push(obj);
+    queuePersist({meses:{[currentMes]:mes}});
   }else if(tipo==='fixa'){
     const obj={id:editId||uid(),descricao:desc,valor:val,categoria:gv('fi-cat')};
+    let tocados=[];
     if(editId){
       const idx=mes.fixas.findIndex(f=>f.id===editId);
       if(idx>=0){
         const oldDesc=mes.fixas[idx].descricao;
         mes.fixas[idx]=obj;
-        propagarFixaEdit(oldDesc,obj);
+        tocados=propagarFixaEdit(oldDesc,obj);
       }
     }else{
       mes.fixas.push(obj);
-      propagarFixaAdd(obj);
+      tocados=propagarFixaAdd(obj);
     }
+    const patch={config:configSnapshot(),meses:{[currentMes]:mes}};
+    for(const mk of tocados)patch.meses[mk]=data.meses[mk];
+    queuePersist(patch);
   }else if(tipo==='receita'){
     const obj={id:editId||uid(),data:parseInt(gv('fi-dia'))||today(),
       descricao:desc,valor:val,categoria:gv('fi-cat'),recebido:gb('fi-rec'),obs:gv('fi-obs')};
     if(editId){const idx=mes.receitas.findIndex(r=>r.id===editId);if(idx>=0)mes.receitas[idx]=obj;}
     else mes.receitas.push(obj);
+    queuePersist({meses:{[currentMes]:mes}});
   }
-  saveData();closeForm();renderHeader();renderSection(currentSection);
+  closeForm();renderHeader();renderSection(currentSection);
   showToast(editId?'Salvo!':'Adicionado!');
 }
 
@@ -1280,14 +1434,16 @@ function submitDep(editId){
   const obj={id:editId||uid(),mes,valor:val,obs:gv('fi-obs')};
   if(editId){const idx=data.poupanca.depositos.findIndex(d=>d.id===editId);if(idx>=0)data.poupanca.depositos[idx]=obj;}
   else data.poupanca.depositos.push(obj);
-  saveData();closeForm();renderPoupar();showToast(editId?'Salvo!':'Depósito adicionado!');
+  queuePersist({config:configSnapshot()});
+  closeForm();renderPoupar();showToast(editId?'Salvo!':'Depósito adicionado!');
 }
 
 function submitPoupancaCfg(){
   if(!data.poupanca)data.poupanca={objetivo:'',meta_total:0,depositos:[]};
   data.poupanca.objetivo=gv('fi-obj');
   data.poupanca.meta_total=gn('fi-meta');
-  saveData();closeForm();renderPoupar();showToast('Objetivo salvo!');
+  queuePersist({config:configSnapshot()});
+  closeForm();renderPoupar();showToast('Objetivo salvo!');
 }
 
 function submitParc(id,mesKey){
@@ -1300,7 +1456,8 @@ function submitParc(id,mesKey){
   it.parcela=`${gv('fi-pat')}/${gv('fi-ptot')}`;
   it.categoria=gv('fi-cat');
   it.obs=gv('fi-obs');
-  saveData();closeForm();renderParcelas();showToast('Parcela salva!');
+  queuePersist({meses:{[mesKey]:mv}});
+  closeForm();renderParcelas();showToast('Parcela salva!');
 }
 
 function submitTemplate(count){
@@ -1311,7 +1468,8 @@ function submitTemplate(count){
     if(d&&v>0) tpl.push({descricao:d,valor:v,categoria:gv(`tpl-cat-${i}`)});
   }
   data.template_fixas=tpl;
-  saveData();closeForm();renderResumo();showToast('Template salvo!');
+  queuePersist({config:configSnapshot()});
+  closeForm();renderResumo();showToast('Template salvo!');
 }
 
 // ═══════════════════════════════════════════
@@ -1331,24 +1489,26 @@ document.getElementById('next-month').onclick=()=>{
 // ═══════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════
-loadData();
-// Ensure retrocompat fields
-if(!data.poupanca) data.poupanca={objetivo:'',meta_total:0,depositos:[]};
-if(!data.template_fixas) data.template_fixas=[];
-if(!data.saldo_inicial) data.saldo_inicial=0;
-Object.values(data.meses).forEach(m=>{
-  if(!m.receitas) m.receitas=[];
-  if(!m.meta_poupanca) m.meta_poupanca=0;
-});
-garantirMeses();
-localStorage.setItem('meu-dinheiro-v2',JSON.stringify(data));
-
-// Renderiza com o que há localmente, depois busca o mais recente do GitHub
-// (ghLoadPublic substitui `data` e re-renderiza; só ENTÃO eventuais saves
-// automáticos do usuário podem ocorrer — sem isso, um save local antigo
-// pode vencer a corrida com o fetch e sobrescrever dados reais na nuvem)
-render();
-ghLoadPublic();
+async function init(){
+  await loadData();
+  // Ensure retrocompat fields
+  if(!data.poupanca) data.poupanca={objetivo:'',meta_total:0,depositos:[]};
+  if(!data.template_fixas) data.template_fixas=[];
+  if(!data.saldo_inicial) data.saldo_inicial=0;
+  if(!data.meses) data.meses={};
+  Object.values(data.meses).forEach(m=>{
+    if(!m.receitas) m.receitas=[];
+    if(!m.meta_poupanca) m.meta_poupanca=0;
+  });
+  const novos=garantirMeses();
+  if(novos.length){
+    const patch={meses:{}};
+    for(const mk of novos)patch.meses[mk]=data.meses[mk];
+    queuePersist(patch);
+  }
+  render();
+}
+init();
 
 // Keyboard: Escape closes form
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeForm();});
