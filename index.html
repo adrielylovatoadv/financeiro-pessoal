@@ -622,9 +622,11 @@ function criarMesNovo(novoKey,antKey){
 // COMPUTE
 // ═══════════════════════════════════════════
 function getMesData(){return data.meses[currentMes]||{receitas:[],lancamentos:[],fixas:[],meta_poupanca:0};}
+function totalFixasMes(mv){return (mv.fixas||[]).reduce((s,f)=>s+f.valor,0);}
+function totalFixasPagoMes(mv){return (mv.fixas||[]).filter(f=>f.pago).reduce((s,f)=>s+f.valor,0);}
 function totalRec(){return getMesData().receitas.reduce((s,r)=>s+(r.recebido?r.valor:0),0);}
-function totalDeb(){return getMesData().lancamentos.reduce((s,l)=>s+l.valor,0);}
-function totalPago(){return getMesData().lancamentos.filter(l=>l.pago).reduce((s,l)=>s+l.valor,0);}
+function totalDeb(){const mv=getMesData();return mv.lancamentos.reduce((s,l)=>s+l.valor,0)+totalFixasMes(mv);}
+function totalPago(){const mv=getMesData();return mv.lancamentos.filter(l=>l.pago).reduce((s,l)=>s+l.valor,0)+totalFixasPagoMes(mv);}
 function totalPend(){return totalDeb()-totalPago();}
 function disponivel(){return totalRec()-totalPago();}
 
@@ -943,8 +945,8 @@ function renderPoupar(){
   let sobraHtml='';
   for(const mk of recentKeys){
     const mv=data.meses[mk];
-    const mr=( mv.receitas||[]).reduce((s,r)=>s+r.valor,0);
-    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
+    const mr=( mv.receitas||[]).reduce((s,r)=>s+(r.recebido?r.valor:0),0);
+    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0)+totalFixasMes(mv);
     const sd=mr-mt;
     const cor=sd>=0?'green':'red';
     const bold=mk===currentMes?'font-weight:700;':'';
@@ -962,10 +964,12 @@ function renderPoupar(){
 function renderResumo(){
   const mes=getMesData();
   const lanc=mes.lancamentos||[];
-  const total=lanc.reduce((s,l)=>s+l.valor,0);
+  const fixas=mes.fixas||[];
+  const total=totalDeb();
   // Por categoria
   const cats={};
   for(const l of lanc){const c=l.categoria||'🎯 Outros';cats[c]=(cats[c]||0)+l.valor;}
+  for(const f of fixas){const c=f.categoria||'🎯 Outros';cats[c]=(cats[c]||0)+f.valor;}
   const catOrd=Object.entries(cats).sort((a,b)=>b[1]-a[1]);
   let catHtml='';
   for(const[c,v] of catOrd){
@@ -989,8 +993,8 @@ function renderResumo(){
   let histHtml='';
   for(const mk of histKeys){
     const mv=data.meses[mk];
-    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
-    const mr=( mv.receitas||[]).reduce((s,r)=>s+r.valor,0);
+    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0)+totalFixasMes(mv);
+    const mr=( mv.receitas||[]).reduce((s,r)=>s+(r.recebido?r.valor:0),0);
     const sd=mr-mt;
     const cor=sd>=0?'green':'red';
     const bold=mk===currentMes?'font-weight:700;':'color:var(--text2);';
