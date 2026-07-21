@@ -825,9 +825,7 @@ function renderParcelas(){
       if(!pn)continue;
       const[a,t]=pn;
       const key=l.descricao;
-      if(!parcelasMap[key]||a>parcelasMap[key].atual){
-        parcelasMap[key]={atual:a,total:t,valor:l.valor,cat:l.categoria||'',obs:l.obs||'',mesKey:mk,id:l.id};
-      }
+      parcelasMap[key]={atual:a,total:t,valor:l.valor,cat:l.categoria||'',obs:l.obs||'',mesKey:mk,id:l.id};
     }
   }
   const entries=Object.entries(parcelasMap).sort((a,b)=>a[0].localeCompare(b[0]));
@@ -1385,6 +1383,37 @@ function propagarFixaDelete(desc){
   return tocados;
 }
 
+// ═══════════════════════════════════════════
+// PROPAGAÇÃO DE PARCELAS PARA MESES FUTUROS
+// ═══════════════════════════════════════════
+function monthsAfter(mesKey){return Object.keys(data.meses).filter(k=>k>mesKey).sort();}
+
+function propagarParcela(mesKey,descricao,aBase,tBase,valor,categoria,dia,obs){
+  const alvo=normDesc(descricao);
+  const tocados=[];
+  let a=aBase;
+  for(const mk of monthsAfter(mesKey)){
+    const mv=data.meses[mk];
+    if(!mv)continue;
+    if(!mv.lancamentos)mv.lancamentos=[];
+    a++;
+    const idx=mv.lancamentos.findIndex(l=>normDesc(l.descricao)===alvo&&parcelaNum(l.parcela));
+    if(a>tBase){
+      if(idx>=0){mv.lancamentos.splice(idx,1);tocados.push(mk);}
+      continue;
+    }
+    const parcela=`${a}/${tBase}`;
+    if(idx>=0){
+      const it=mv.lancamentos[idx];
+      mv.lancamentos[idx]={...it,descricao,valor,categoria,parcela};
+    }else{
+      mv.lancamentos.push({id:uid(),data:dia||1,descricao,valor,parcela,categoria,pago:false,obs:obs||''});
+    }
+    tocados.push(mk);
+  }
+  return tocados;
+}
+
 function submitForm(tipo,editId){
   const mes=getMesData();
   const desc=gv('fi-desc');
@@ -1398,7 +1427,13 @@ function submitForm(tipo,editId){
       categoria:gv('fi-cat'),pago:gb('fi-pago'),obs:gv('fi-obs')};
     if(editId){const idx=mes.lancamentos.findIndex(l=>l.id===editId);if(idx>=0)mes.lancamentos[idx]=obj;}
     else mes.lancamentos.push(obj);
-    queuePersist({meses:{[currentMes]:mes}});
+    const patchGasto={meses:{[currentMes]:mes}};
+    const pnGasto=parcelaNum(obj.parcela);
+    if(pnGasto){
+      const tocados=propagarParcela(currentMes,obj.descricao,pnGasto[0],pnGasto[1],obj.valor,obj.categoria,obj.data,obj.obs);
+      for(const mk of tocados)patchGasto.meses[mk]=data.meses[mk];
+    }
+    queuePersist(patchGasto);
   }else if(tipo==='fixa'){
     const obj={id:editId||uid(),descricao:desc,valor:val,categoria:gv('fi-cat')};
     let tocados=[];
@@ -1456,7 +1491,13 @@ function submitParc(id,mesKey){
   it.parcela=`${gv('fi-pat')}/${gv('fi-ptot')}`;
   it.categoria=gv('fi-cat');
   it.obs=gv('fi-obs');
-  queuePersist({meses:{[mesKey]:mv}});
+  const patchParc={meses:{[mesKey]:mv}};
+  const pnParc=parcelaNum(it.parcela);
+  if(pnParc){
+    const tocados=propagarParcela(mesKey,it.descricao,pnParc[0],pnParc[1],it.valor,it.categoria,it.data,it.obs);
+    for(const mk of tocados)patchParc.meses[mk]=data.meses[mk];
+  }
+  queuePersist(patchParc);
   closeForm();renderParcelas();showToast('Parcela salva!');
 }
 
