@@ -286,6 +286,9 @@ button,input,select{font-family:inherit;}
         <div class="chip-row" id="contas-filtros"></div>
       </div>
       <div id="list-contas"></div>
+
+      <div class="sec-title">Fixas <span style="text-transform:none;font-weight:400;color:var(--text3);letter-spacing:0;">· cobradas automaticamente na fatura do cartão</span></div>
+      <div id="list-fixas-ref"></div>
     </div>
 
     <!-- RECEITAS -->
@@ -776,9 +779,7 @@ function renderDashboard(){
   document.getElementById('dash-pend').textContent=fmt(totalPend());
 
   const mes=getMesData();
-  const lanc=(mes.lancamentos||[]).filter(l=>!l.pago).map(l=>({...l,_tipo:'lanc'}));
-  const fixas=(mes.fixas||[]).filter(f=>!f.pago).map(f=>({...f,_tipo:'fixa'}));
-  const pend=[...lanc,...fixas].sort((a,b)=>(a.data||99)-(b.data||99)).slice(0,5);
+  const pend=(mes.lancamentos||[]).filter(l=>!l.pago).sort((a,b)=>(a.data||99)-(b.data||99)).slice(0,5);
   let html='';
   if(!pend.length){html='<div class="empty">Nenhuma conta pendente.</div>';}
   for(const it of pend){
@@ -858,9 +859,7 @@ function renderContas(){
       <option value="status"${CONTAS_STATE.ordenar==='status'?' selected':''}>Status</option>
     </select></span>`;
 
-  const lanc=(mes.lancamentos||[]).map(l=>({...l,_tipo:'lanc'}));
-  const fixas=(mes.fixas||[]).map(f=>({...f,_tipo:'fixa'}));
-  let todos=[...lanc,...fixas].map(it=>({...it,_status:diaStatus(it)}));
+  let todos=(mes.lancamentos||[]).map(l=>({...l,_status:diaStatus(l)}));
 
   const q=CONTAS_STATE.busca.trim().toLowerCase();
   if(q) todos=todos.filter(it=>it.descricao.toLowerCase().includes(q));
@@ -888,20 +887,22 @@ function renderContas(){
   }
   if(!todos.length) html='<div class="empty">Nenhuma conta encontrada.</div>';
   document.getElementById('list-contas').innerHTML=html;
+
+  // Fixas — referência separada, já embutidas na fatura do cartão (não são débito à parte)
+  const fixas=[...(mes.fixas||[])].sort((a,b)=>a.descricao.localeCompare(b.descricao));
+  let fixasHtml='';
+  if(!fixas.length){fixasHtml='<div class="empty">Nenhuma fixa cadastrada.</div>';}
+  for(const f of fixas) fixasHtml+=fixaCardHtml(f);
+  document.getElementById('list-fixas-ref').innerHTML=fixasHtml;
 }
 
 function contaCardHtml(it){
-  const isLanc=it._tipo==='lanc';
-  const pfx=isLanc?'g':'f';
   const badge=BADGE_META[it._status];
   const cls=it.pago?'paid':(it._status==='atrasado'?'late':'');
   const sub=[it.data?`Vence dia ${it.data}`:null,it.parcela||null,catLabel(it.categoria)].filter(Boolean).join(' · ');
-  const editCall=isLanc?`openEditForm('gasto','${it.id}')`:`openEditForm('fixa','${it.id}')`;
-  const toggleCall=isLanc?`togglePago('lanc','${it.id}')`:`toggleFixaPago('${it.id}')`;
-  const deleteCall=isLanc?`confirmDelete('lanc','${it.id}','${esc(it.descricao)}')`:`confirmDelete('fixa','${it.id}','${esc(it.descricao)}')`;
   const lbl=it.pago?'Desfazer':'Pagar';
   const btnCls=it.pago?'btn-primary done':'btn-primary';
-  return `<div class="item ${cls}" id="item-${pfx}-${it.id}">
+  return `<div class="item ${cls}" id="item-g-${it.id}">
     <div class="item-main">
       <div class="item-left">
         <div class="icon-chip">${iconTag(catIcon(it.categoria))}</div>
@@ -916,11 +917,39 @@ function contaCardHtml(it){
       </div>
     </div>
     <div class="item-actions">
-      <button class="btn ${btnCls}" onclick="${toggleCall}">${lbl}</button>
-      <button class="btn btn-icon" onclick="${editCall}">${iconTag('pencil')}</button>
-      <button class="btn btn-icon btn-danger" onclick="${deleteCall}">${iconTag('trash-2')}</button>
+      <button class="btn ${btnCls}" onclick="togglePago('lanc','${it.id}')">${lbl}</button>
+      <button class="btn btn-icon" onclick="openEditForm('gasto','${it.id}')">${iconTag('pencil')}</button>
+      <button class="btn btn-icon btn-danger" onclick="confirmDelete('lanc','${it.id}','${esc(it.descricao)}')">${iconTag('trash-2')}</button>
     </div>
-    <div id="confirm-${pfx}-${it.id}"></div>
+    <div id="confirm-g-${it.id}"></div>
+  </div>`;
+}
+
+function fixaCardHtml(f){
+  const sub=catLabel(f.categoria);
+  const lbl=f.pago?'Desfazer':'Marcar na fatura';
+  const btnCls=f.pago?'btn-primary done':'btn-primary';
+  const cls=f.pago?'paid':'';
+  return `<div class="item ${cls}" id="item-f-${f.id}">
+    <div class="item-main">
+      <div class="item-left">
+        <div class="icon-chip">${iconTag(catIcon(f.categoria))}</div>
+        <div class="item-text">
+          <div class="item-desc">${esc(f.descricao)}</div>
+          <div class="item-sub">${esc(sub)}</div>
+        </div>
+      </div>
+      <div class="item-right">
+        <div class="item-val">${fmt(f.valor)}</div>
+        <span class="tag ${f.pago?'tag-paid':'tag-unpaid'}">${f.pago?'na fatura':'a confirmar'}</span>
+      </div>
+    </div>
+    <div class="item-actions">
+      <button class="btn ${btnCls}" onclick="toggleFixaPago('${f.id}')">${lbl}</button>
+      <button class="btn btn-icon" onclick="openEditForm('fixa','${f.id}')">${iconTag('pencil')}</button>
+      <button class="btn btn-icon btn-danger" onclick="confirmDelete('fixa','${f.id}','${esc(f.descricao)}')">${iconTag('trash-2')}</button>
+    </div>
+    <div id="confirm-f-${f.id}"></div>
   </div>`;
 }
 
