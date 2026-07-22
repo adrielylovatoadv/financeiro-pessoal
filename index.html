@@ -702,10 +702,11 @@ function criarMesNovo(novoKey,antKey){
 // ═══════════════════════════════════════════
 function getMesData(){return data.meses[currentMes]||{receitas:[],lancamentos:[],fixas:[],meta_poupanca:0};}
 function totalFixasMes(mv){return (mv.fixas||[]).reduce((s,f)=>s+f.valor,0);}
-function totalFixasPagoMes(mv){return (mv.fixas||[]).filter(f=>f.pago).reduce((s,f)=>s+f.valor,0);}
 function totalRec(){return getMesData().receitas.reduce((s,r)=>s+(r.recebido?r.valor:0),0);}
-function totalDeb(){const mv=getMesData();return mv.lancamentos.reduce((s,l)=>s+l.valor,0)+totalFixasMes(mv);}
-function totalPago(){const mv=getMesData();return mv.lancamentos.filter(l=>l.pago).reduce((s,l)=>s+l.valor,0)+totalFixasPagoMes(mv);}
+// Fixas (Seguro, Apple, Google, etc.) já estão embutidas na fatura do cartão (lançamento "Sicoob"),
+// então não somam à parte aqui — senão o débito real da conta fica contado em dobro.
+function totalDeb(){return getMesData().lancamentos.reduce((s,l)=>s+l.valor,0);}
+function totalPago(){return getMesData().lancamentos.filter(l=>l.pago).reduce((s,l)=>s+l.valor,0);}
 function totalPend(){return totalDeb()-totalPago();}
 function disponivel(){return totalRec()-totalPago();}
 
@@ -844,9 +845,8 @@ function renderContas(){
   const totalFixasV=totalFixasMes(mes);
   const totalVarV=(mes.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
   document.getElementById('contas-stats').innerHTML=`
-    <div class="mini-stat"><span>Fixas</span><b>${fmt(totalFixasV)}</b></div>
-    <div class="mini-stat"><span>Variáveis</span><b>${fmt(totalVarV)}</b></div>
-    <div class="mini-stat"><span>Total</span><b>${fmt(totalFixasV+totalVarV)}</b></div>`;
+    <div class="mini-stat"><span>Fixas (na fatura)</span><b>${fmt(totalFixasV)}</b></div>
+    <div class="mini-stat"><span>Débito da conta</span><b>${fmt(totalVarV)}</b></div>`;
 
   const FILTROS=[['todos','Todas'],['atrasado','Atrasado'],['hoje','Hoje'],['proximas','Próximas'],['pagas','Pagas']];
   document.getElementById('contas-filtros').innerHTML=FILTROS.map(([k,l])=>
@@ -1120,7 +1120,7 @@ function renderPoupar(){
   for(const mk of recentKeys){
     const mv=data.meses[mk];
     const mr=( mv.receitas||[]).reduce((s,r)=>s+(r.recebido?r.valor:0),0);
-    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0)+totalFixasMes(mv);
+    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
     const sd=mr-mt;
     const cor=sd>=0?'green':'red';
     const bold=mk===currentMes?'font-weight:700;':'';
@@ -1138,12 +1138,10 @@ function renderPoupar(){
 function renderResumo(){
   const mes=getMesData();
   const lanc=mes.lancamentos||[];
-  const fixas=mes.fixas||[];
   const total=totalDeb();
-  // Por categoria
+  // Por categoria (gastos variáveis — fixas já estão embutidas na fatura do cartão)
   const cats={};
   for(const l of lanc){const c=l.categoria||'🎯 Outros';cats[c]=(cats[c]||0)+l.valor;}
-  for(const f of fixas){const c=f.categoria||'🎯 Outros';cats[c]=(cats[c]||0)+f.valor;}
   const catOrd=Object.entries(cats).sort((a,b)=>b[1]-a[1]);
   let catHtml='';
   for(const[c,v] of catOrd){
@@ -1168,7 +1166,7 @@ function renderResumo(){
   let histHtml='';
   for(const mk of histKeys){
     const mv=data.meses[mk];
-    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0)+totalFixasMes(mv);
+    const mt=( mv.lancamentos||[]).reduce((s,l)=>s+l.valor,0);
     const mr=( mv.receitas||[]).reduce((s,r)=>s+(r.recebido?r.valor:0),0);
     const sd=mr-mt;
     const cor=sd>=0?'green':'red';
