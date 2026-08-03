@@ -2,5 +2,8 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "crons": [
+    { "path": "/api/notify-vencimentos", "schedule": "0 11 * * *" }
+  ]
 }
