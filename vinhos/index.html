@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diário de Vinhos</title>
+<meta name="theme-color" content="#7A1F3D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vinhos">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root {
+  --bg: #F6F2F3; --surface: #FFFFFF; --fg: #2A1620; --muted: #7A6670; --line: #E6DCDF;
+  --wine: #7A1F3D; --wine-fg: #FFFFFF; --star: #C58B1B; --star-off: #DCCFD3; --danger: #B3261E;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #170D12; --surface: #241620; --fg: #F3E8EC; --muted: #A793A0; --line: #3A2832;
+    --wine: #D1546F; --wine-fg: #1A0C12; --star: #E3A83A; --star-off: #4A3640; --danger: #FF8A80;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.45;
+  padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 96px max(16px, env(safe-area-inset-left, 0px));
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--wine); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.wrap { max-width: 640px; margin: 0 auto; }
+
+header.top { padding: 22px 0 10px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1.05; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.who-btn { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 13px; white-space: nowrap; }
+
+.toolbar { position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding: 8px 0 10px; z-index: 5; display: grid; gap: 8px; }
+.search { width: 100%; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-size: 16px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; }
+.chip[aria-pressed="true"] { background: var(--wine); color: var(--wine-fg); border-color: var(--wine); }
+.sort { flex: none; padding: 7px 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; max-width: 130px; }
+
+.list { display: grid; gap: 12px; margin-top: 6px; }
+.card { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; text-align: left; width: 100%; }
+.thumb { width: 96px; height: 120px; border-radius: 10px; object-fit: cover; background: var(--line); display: block; }
+.thumb.empty { display: grid; place-items: center; color: var(--muted); font-size: 12px; text-align: center; padding: 6px; }
+.card h2 { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.15; margin: 2px 0; overflow-wrap: anywhere; }
+.meta { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.tag { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--wine); font-weight: 700; }
+.stars { position: relative; display: inline-block; font-size: 18px; line-height: 1; letter-spacing: 1px; color: var(--star-off); white-space: nowrap; vertical-align: middle; }
+.stars > i { position: absolute; left: 0; top: 0; overflow: hidden; color: var(--star); font-style: normal; white-space: nowrap; }
+.note { font-variant-numeric: tabular-nums; font-weight: 700; margin-left: 6px; font-size: 14px; }
+.minis { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.minis b { color: var(--fg); }
+.snippet { margin: 6px 0 0; font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+
+.empty-state { text-align: center; color: var(--muted); padding: 48px 16px; }
+.empty-state h2 { font-family: var(--font-display); color: var(--fg); margin: 0 0 6px; }
+.status { text-align: center; color: var(--muted); font-size: 13px; padding: 8px; }
+.banner { background: var(--surface); border: 1px solid var(--danger); color: var(--danger); border-radius: 12px; padding: 10px 12px; font-size: 14px; margin-top: 8px; }
+
+.fab { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--wine); color: var(--wine-fg); border: 0; border-radius: 999px; padding: 15px 22px; font-weight: 700; box-shadow: 0 6px 20px rgba(0,0,0,.3); z-index: 6; }
+
+.sheet { position: fixed; inset: 0; background: var(--bg); z-index: 20; overflow-y: auto; padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(16px, env(safe-area-inset-left, 0px)); }
+.sheet .wrap { padding: 14px 0 40px; }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.sheet-head h2 { font-family: var(--font-display); margin: 0; font-size: 24px; }
+.link { background: none; border: 0; color: var(--wine); font-weight: 700; padding: 8px 4px; }
+label.f { display: grid; gap: 6px; margin-bottom: 14px; font-size: 13px; color: var(--muted); font-weight: 500; }
+.in { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font-size: 16px; }
+textarea.in { min-height: 100px; resize: vertical; }
+.photo-box { display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 3; max-height: 320px; border: 2px dashed var(--line); border-radius: 16px; background: var(--surface); overflow: hidden; color: var(--muted); margin-bottom: 14px; padding: 0; }
+.photo-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.types { display: flex; gap: 6px; flex-wrap: wrap; }
+.rate { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.rate-pick { touch-action: none; user-select: none; -webkit-user-select: none; padding: 4px 0; }
+.btn { width: 100%; padding: 15px; border-radius: 14px; border: 0; background: var(--wine); color: var(--wine-fg); font-weight: 700; font-size: 16px; }
+.btn.ghost { background: transparent; color: var(--danger); border: 1px solid var(--line); margin-top: 10px; }
+.btn[disabled] { opacity: .5; }
+.err { color: var(--danger); font-size: 14px; margin: 8px 0; }
+.detail-photo { width: 100%; max-height: 420px; object-fit: cover; border-radius: 16px; display: block; margin-bottom: 14px; background: var(--line); min-height: 120px; }
+.detail h2.t { font-family: var(--font-display); font-size: 28px; line-height: 1.1; margin: 4px 0 6px; overflow-wrap: anywhere; }
+.avgbox { display: flex; align-items: center; gap: 10px; margin: 10px 0 4px; }
+.avgbox .big { font-family: var(--font-display); font-size: 36px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+.rev { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-top: 10px; }
+.rev h3 { margin: 0 0 4px; font-size: 14px; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.rev p { margin: 6px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.rev.mine { border-color: var(--wine); }
+.sec { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 22px 0 0; font-weight: 700; }
+.confirm { background: var(--surface); border: 1px solid var(--danger); border-radius: 14px; padding: 14px; margin-top: 12px; }
+.confirm .row { margin-top: 10px; }
+.confirm .btn { padding: 12px; }
+.picker { position: fixed; inset: 0; z-index: 30; background: var(--bg); display: grid; place-items: center; padding: 24px; }
+.picker .box { width: 100%; max-width: 380px; text-align: center; }
+.picker h2 { font-family: var(--font-display); font-size: 28px; margin: 0 0 6px; }
+.picker .btn { margin-top: 12px; }
+.setup { white-space: pre-wrap; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-size: 14px; }
+@media (prefers-reduced-motion: no-preference) { .card { transition: transform .12s; } .card:active { transform: scale(.985); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Diário de Vinhos</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <button class="who-btn" id="whoBtn" hidden></button>
+  </header>
+  <div class="toolbar">
+    <input class="search" id="q" type="search" placeholder="Buscar por nome, produtor ou comentário" aria-label="Buscar">
+    <div class="row">
+      <div class="chips" id="chips"></div>
+      <select class="sort" id="sort" aria-label="Ordenar">
+        <option value="recent">Mais recentes</option>
+        <option value="best">Melhor nota</option>
+        <option value="worst">Menor nota</option>
+        <option value="name">Nome A a Z</option>
+      </select>
+    </div>
+  </div>
+  <div class="status" id="status">Carregando a adega…</div>
+  <div id="banner" class="banner" hidden></div>
+  <div class="list" id="list"></div>
+</div>
+<button class="fab" id="fab" hidden>+ Novo vinho</button>
+<div id="sheet" class="sheet" hidden></div>
+<div id="picker" class="picker" hidden></div>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  var CFG = window.VINHOS_CONFIG || {};
+  var USERS = (CFG.USUARIOS && CFG.USUARIOS.length) ? CFG.USUARIOS : ["Eu", "Namorado"];
+  var TYPES = ["Tinto", "Branco", "Rosé", "Espumante", "Sobremesa", "Outro"];
+  var me = null, wines = [], revs = {}, thumbs = {}, filter = "Todos", loaded = false, openId = null, polling = null, busyWrite = false;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function fmt(n) { return (Math.round(n * 10) / 10).toString().replace(".", ","); }
+  function fmtDate(d) { if (!d) return ""; var p = String(d).split("-"); return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : d; }
+  function today() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function starsHtml(v, size) { return '<span class="stars"' + (size ? ' style="font-size:' + size + 'px"' : '') + ' aria-hidden="true">★★★★★<i style="width:' + (v / 5 * 100) + '%">★★★★★</i></span>'; }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  /* ---------- API (Supabase REST) ---------- */
+  var configured = CFG.SUPABASE_URL && CFG.SUPABASE_KEY && CFG.SUPABASE_URL.indexOf("SEU-PROJETO") < 0 && CFG.SUPABASE_KEY.indexOf("COLE-AQUI") < 0;
+  function api(path, opts) {
+    opts = opts || {};
+    var h = { apikey: CFG.SUPABASE_KEY, "Content-Type": "application/json" };
+    if (CFG.SUPABASE_KEY.indexOf("eyJ") === 0) h.Authorization = "Bearer " + CFG.SUPABASE_KEY;
+    if (opts.prefer) h.Prefer = opts.prefer;
+    return fetch(CFG.SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/" + path, {
+      method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { var e = new Error(t || r.status); e.status = r.status; throw e; });
+      return r.status === 204 ? null : r.text().then(function (t) { return t ? JSON.parse(t) : null; });
+    });
+  }
+
+  async function refresh() {
+    if (busyWrite) return;
+    try {
+      var w = await api("wines?select=id,name,producer,type,tasted_on,created_by,created_at&order=tasted_on.desc.nullslast,created_at.desc&limit=2000");
+      var r = await api("reviews?select=wine_id,who,rating,comment,updated_at&limit=10000");
+      var map = {};
+      r.forEach(function (x) { (map[x.wine_id] = map[x.wine_id] || []).push(x); });
+      wines = w; revs = map; loaded = true;
+      $("banner").hidden = true;
+      render();
+      if (openId) { if (!wines.some(function (x) { return x.id === openId; })) closeSheet(); }
+      loadMissingThumbs();
+    } catch (e) {
+      if (!loaded) $("status").textContent = "Não consegui carregar. Confira a internet e a configuração.";
+      else { $("banner").hidden = false; $("banner").textContent = "Sem conexão agora. Mostrando a última lista carregada."; }
+    }
+  }
+  async function loadMissingThumbs() {
+    var ids = wines.map(function (w) { return w.id; }).filter(function (id) { return !(id in thumbs); });
+    for (var i = 0; i < ids.length; i += 25) {
+      var chunk = ids.slice(i, i + 25);
+      try {
+        var rows = await api("wines?select=id,thumb&id=in.(" + chunk.join(",") + ")");
+        chunk.forEach(function (id) { thumbs[id] = ""; });
+        rows.forEach(function (x) { thumbs[x.id] = x.thumb || ""; });
+        render();
+      } catch (e) { return; }
+    }
+  }
+
+  /* ---------- dados derivados ---------- */
+  function avg(id) { var a = revs[id] || []; if (!a.length) return 0; return a.reduce(function (t, x) { return t + (+x.rating); }, 0) / a.length; }
+  function myRev(id) { return (revs[id] || []).filter(function (x) { return x.who === me; })[0]; }
+
+  function renderChips() {
+    $("chips").innerHTML = ["Todos"].concat(TYPES).map(function (t) {
+      return '<button class="chip" data-t="' + esc(t) + '" aria-pressed="' + (t === filter) + '">' + esc(t) + '</button>';
+    }).join("");
+  }
+  function visible() {
+    var q = $("q").value.trim().toLowerCase(), s = $("sort").value;
+    var out = wines.filter(function (w) {
+      if (filter !== "Todos" && w.type !== filter) return false;
+      if (!q) return true;
+      var txt = [w.name, w.producer].concat((revs[w.id] || []).map(function (r) { return r.comment; })).join(" ").toLowerCase();
+      return txt.indexOf(q) >= 0;
+    });
+    out.sort(function (a, b) {
+      if (s === "best") return (avg(b.id) - avg(a.id));
+      if (s === "worst") return (avg(a.id) - avg(b.id));
+      if (s === "name") return String(a.name).localeCompare(String(b.name), "pt-BR");
+      return 0; /* já vem por data do servidor */
+    });
+    return out;
+  }
+  function render() {
+    $("sub").textContent = wines.length ? wines.length + (wines.length === 1 ? " vinho provado" : " vinhos provados") : "Os vinhos que vocês já provaram";
+    if (!loaded) { $("list").innerHTML = ""; return; }
+    $("status").hidden = true;
+    if (!wines.length) {
+      $("list").innerHTML = '<div class="empty-state"><h2>A adega está vazia</h2><p>Toque em “Novo vinho” para registrar o primeiro, com foto, nota e comentário.</p></div>';
+      return;
+    }
+    var list = visible();
+    if (!list.length) { $("list").innerHTML = '<div class="empty-state"><p>Nenhum vinho encontrado com esse filtro.</p></div>'; return; }
+    $("list").innerHTML = list.map(function (w) {
+      var t = thumbs[w.id];
+      var img = t ? '<img class="thumb" alt="" src="' + esc(t) + '">' : '<div class="thumb empty">' + (w.id in thumbs ? 'sem foto' : '') + '</div>';
+      var a = avg(w.id), rs = revs[w.id] || [];
+      var minis = USERS.map(function (u) {
+        var r = rs.filter(function (x) { return x.who === u; })[0];
+        return '<span>' + esc(u) + ' <b>' + (r ? fmt(+r.rating) : '–') + '</b></span>';
+      }).join("");
+      return '<button class="card" data-id="' + esc(w.id) + '">' + img + '<div style="min-width:0">' +
+        '<span class="tag">' + esc(w.type || "Vinho") + '</span>' +
+        '<h2>' + esc(w.name) + '</h2>' +
+        (w.producer ? '<div class="meta">' + esc(w.producer) + '</div>' : '') +
+        '<div style="margin-top:4px">' + (a ? starsHtml(a) + '<span class="note">' + fmt(a) + '</span>' : '<span class="meta">sem notas</span>') + '</div>' +
+        '<div class="minis">' + minis + '</div>' +
+        '<div class="meta" style="margin-top:4px">' + esc(fmtDate(w.tasted_on)) + '</div>' +
+        '</div></button>';
+    }).join("");
+  }
+
+  /* ---------- foto ---------- */
+  function loadImage(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () { URL.revokeObjectURL(url); res(im); };
+      im.onerror = function () { URL.revokeObjectURL(url); rej(new Error("img")); };
+      im.src = url;
+    });
+  }
+  function scaled(im, max, q) {
+    var r = Math.min(1, max / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement("canvas");
+    c.width = Math.round(im.naturalWidth * r); c.height = Math.round(im.naturalHeight * r);
+    c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+    return c.toDataURL("image/jpeg", q);
+  }
+  async function prepare(file) {
+    var im = await loadImage(file);
+    return { photo: scaled(im, 960, .72), thumb: scaled(im, 240, .6) };
+  }
+
+  /* ---------- folhas ---------- */
+  function openSheet(html) { var s = $("sheet"); s.innerHTML = '<div class="wrap">' + html + '</div>'; s.hidden = false; s.scrollTop = 0; document.body.style.overflow = "hidden"; }
+  function closeSheet() { $("sheet").hidden = true; $("sheet").innerHTML = ""; document.body.style.overflow = ""; openId = null; }
+
+  function ratingPicker(box, initial, onChange) {
+    var v = initial || 0;
+    box.innerHTML = '<div class="rate-pick" tabindex="0" role="slider" aria-label="Nota" aria-valuemin="0.5" aria-valuemax="5"><span class="stars" style="font-size:40px"></span></div><b style="font-size:20px"></b>';
+    var pick = box.firstChild, stars = pick.firstChild, txt = box.lastChild;
+    function paint() { stars.innerHTML = '★★★★★<i style="width:' + (v / 5 * 100) + '%">★★★★★</i>'; txt.textContent = v ? fmt(v) : "–"; pick.setAttribute("aria-valuenow", v); onChange(v); }
+    function fromX(x) { var r = stars.getBoundingClientRect(); v = Math.max(0.5, Math.ceil(Math.max(0, Math.min(1, (x - r.left) / r.width)) * 10) / 2); paint(); }
+    var drag = false;
+    pick.addEventListener("pointerdown", function (e) { drag = true; try { pick.setPointerCapture(e.pointerId); } catch (x) {} fromX(e.clientX); });
+    pick.addEventListener("pointermove", function (e) { if (drag) fromX(e.clientX); });
+    pick.addEventListener("pointerup", function () { drag = false; });
+    pick.addEventListener("pointercancel", function () { drag = false; });
+    pick.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") v = Math.min(5, (v || 0) + .5); else if (e.key === "ArrowLeft") v = Math.max(.5, (v || 1) - .5); else return;
+      e.preventDefault(); paint();
+    });
+    paint();
+  }
+
+  async function showDetail(id) {
+    var w = wines.filter(function (x) { return x.id === id; })[0];
+    if (!w) { closeSheet(); return; }
+    openId = id;
+    var rs = revs[id] || [], a = avg(id), mine = myRev(id);
+    var others = USERS.filter(function (u) { return u !== me; });
+    function revCard(u) {
+      var r = rs.filter(function (x) { return x.who === u; })[0];
+      return '<div class="rev"><h3><span>' + esc(u) + '</span>' + (r ? '<span>' + starsHtml(+r.rating, 16) + '<span class="note">' + fmt(+r.rating) + '</span></span>' : '<span class="meta">ainda não avaliou</span>') + '</h3>' +
+        (r && r.comment ? '<p>' + esc(r.comment) + '</p>' : '') + '</div>';
+    }
+    openSheet(
+      '<div class="sheet-head"><button class="link" id="back">‹ Voltar</button><button class="link" id="edit">Editar vinho</button></div>' +
+      '<div class="detail"><div id="dphoto"></div>' +
+      '<span class="tag">' + esc(w.type || "Vinho") + '</span><h2 class="t">' + esc(w.name) + '</h2>' +
+      (w.producer ? '<div class="meta">' + esc(w.producer) + '</div>' : '') +
+      '<div class="meta">Provado em ' + esc(fmtDate(w.tasted_on)) + (w.created_by ? ' · registrado por ' + esc(w.created_by) : '') + '</div>' +
+      '<div class="avgbox">' + (a ? '<span class="big">' + fmt(a) + '</span>' + starsHtml(a, 22) + '<span class="meta">média de ' + rs.length + (rs.length === 1 ? ' nota' : ' notas') + '</span>' : '<span class="meta">Ainda sem notas</span>') + '</div>' +
+      '<div class="sec">Sua avaliação</div>' +
+      '<div class="rev mine"><div id="rp" class="rate" style="margin:0 0 10px"></div>' +
+      '<label class="f" for="mycomment" style="margin-bottom:10px">Seu comentário<textarea class="in" id="mycomment" maxlength="2000" placeholder="Aroma, sabor, com o que harmonizou…"></textarea></label>' +
+      '<div class="err" id="err" hidden></div><button class="btn" id="saveRev">' + (mine ? 'Atualizar minha avaliação' : 'Salvar minha avaliação') + '</button></div>' +
+      (others.length ? '<div class="sec">' + (others.length === 1 ? 'Avaliação de ' + esc(others[0]) : 'Avaliações dos outros') + '</div>' + others.map(revCard).join("") : '') +
+      '</div>');
+    $("mycomment").value = mine ? (mine.comment || "") : "";
+    var rating = mine ? +mine.rating : 0;
+    ratingPicker($("rp"), rating, function (v) { rating = v; });
+    $("back").onclick = closeSheet;
+    $("edit").onclick = function () { showForm(w); };
+    $("saveRev").onclick = async function () {
+      if (!rating) { $("err").hidden = false; $("err").textContent = "Escolha uma nota."; return; }
+      $("saveRev").disabled = true; $("saveRev").textContent = "Salvando…";
+      busyWrite = true;
+      try {
+        await saveReview(id, rating, $("mycomment").value.trim());
+        busyWrite = false; await refresh(); showDetail(id);
+      } catch (e) { busyWrite = false; $("saveRev").disabled = false; $("saveRev").textContent = "Salvar minha avaliação"; $("err").hidden = false; $("err").textContent = "Não deu para salvar agora. Confira a internet e tente de novo."; }
+    };
+    /* foto grande, carregada sob demanda */
+    try {
+      var rows = await api("wines?select=photo&id=eq." + id);
+      if (openId === id && rows && rows[0] && rows[0].photo) $("dphoto").innerHTML = '<img class="detail-photo" alt="Foto do vinho" src="' + esc(rows[0].photo) + '">';
+    } catch (e) {}
+  }
+  function saveReview(id, rating, comment) {
+    return api("reviews?on_conflict=wine_id,who", { method: "POST", prefer: "resolution=merge-duplicates,return=minimal", body: { wine_id: id, who: me, rating: rating, comment: comment, updated_at: new Date().toISOString() } });
+  }
+
+  async function showForm(w) {
+    var editing = !!w; w = w || { type: "Tinto", tasted_on: today() };
+    var photo = null, thumb = null, hadPhoto = false, rating = 0;
+    openSheet(
+      '<div class="sheet-head"><h2>' + (editing ? 'Editar vinho' : 'Novo vinho') + '</h2><button class="link" id="cancel">Cancelar</button></div>' +
+      '<button class="photo-box" id="photoBox" type="button"></button>' +
+      '<input id="file" type="file" accept="image/*" hidden>' +
+      '<label class="f" for="name">Nome do vinho<input class="in" id="name" maxlength="120" value="' + esc(w.name || "") + '" placeholder="Ex.: Malbec Reserva"></label>' +
+      '<label class="f" for="producer">Vinícola ou país (opcional)<input class="in" id="producer" maxlength="120" value="' + esc(w.producer || "") + '"></label>' +
+      '<div class="f" style="margin-bottom:14px"><span>Tipo</span><div class="types" id="types"></div></div>' +
+      '<label class="f" for="date">Data<input class="in" id="date" type="date" value="' + esc(w.tasted_on || today()) + '"></label>' +
+      (editing ? '' : '<div class="f" style="margin-bottom:6px"><span>Sua nota (arraste ou toque nas estrelas)</span></div><div id="rp" class="rate"></div>' +
+        '<label class="f" for="comment">Seu comentário<textarea class="in" id="comment" maxlength="2000" placeholder="Aroma, sabor, com o que harmonizou, se compraria de novo…"></textarea></label>') +
+      '<div class="err" id="err" hidden></div>' +
+      '<button class="btn" id="save">Salvar</button>' +
+      (editing ? '<button class="btn ghost" id="del">Excluir vinho</button><div id="confirmBox"></div>' : ''));
+    function paintPhoto() {
+      var src = photo || (hadPhoto ? thumbs[w.id] : "");
+      $("photoBox").innerHTML = src ? '<img alt="Foto escolhida" src="' + esc(src) + '">' : '<span>Toque para tirar ou escolher uma foto</span>';
+    }
+    function paintTypes() { $("types").innerHTML = TYPES.map(function (t) { return '<button type="button" class="chip" data-t="' + t + '" aria-pressed="' + (t === w.type) + '">' + t + '</button>'; }).join(""); }
+    hadPhoto = editing && !!thumbs[w.id];
+    paintPhoto(); paintTypes();
+    if (!editing) ratingPicker($("rp"), 0, function (v) { rating = v; });
+    $("cancel").onclick = function () { editing ? showDetail(w.id) : closeSheet(); };
+    $("photoBox").onclick = function () { $("file").click(); };
+    $("file").onchange = async function (e) {
+      var f = e.target.files && e.target.files[0]; if (!f) return;
+      $("photoBox").innerHTML = '<span>Preparando foto…</span>';
+      try { var p = await prepare(f); photo = p.photo; thumb = p.thumb; } catch (x) { $("err").hidden = false; $("err").textContent = "Não consegui usar essa foto. Tente outra."; }
+      paintPhoto();
+    };
+    $("types").onclick = function (e) { var b = e.target.closest("[data-t]"); if (!b) return; w.type = b.getAttribute("data-t"); paintTypes(); };
+    $("save").onclick = async function () {
+      var err = $("err"), name = $("name").value.trim();
+      if (!name) { err.hidden = false; err.textContent = "Escreva o nome do vinho."; return; }
+      if (!editing && !rating) { err.hidden = false; err.textContent = "Escolha a sua nota."; return; }
+      var data = { name: name, producer: $("producer").value.trim() || null, type: w.type || "Tinto", tasted_on: $("date").value || today() };
+      if (photo) { data.photo = photo; data.thumb = thumb; }
+      $("save").disabled = true; $("save").textContent = "Salvando…";
+      busyWrite = true;
+      try {
+        if (editing) {
+          await api("wines?id=eq." + w.id, { method: "PATCH", prefer: "return=minimal", body: data });
+          if (photo) thumbs[w.id] = thumb;
+          busyWrite = false; await refresh(); showDetail(w.id);
+        } else {
+          data.created_by = me;
+          var created = await api("wines", { method: "POST", prefer: "return=representation", body: data });
+          var id = created[0].id;
+          thumbs[id] = thumb || "";
+          await saveReview(id, rating, $("comment").value.trim());
+          busyWrite = false; await refresh(); closeSheet();
+        }
+      } catch (x) {
+        busyWrite = false; $("save").disabled = false; $("save").textContent = "Salvar";
+        err.hidden = false; err.textContent = "Não deu para salvar agora. Confira a internet e tente de novo.";
+      }
+    };
+    if (editing) {
+      $("del").onclick = function () {
+        $("confirmBox").innerHTML = '<div class="confirm"><b>Excluir “' + esc(w.name) + '”?</b><div class="meta">Apaga o vinho e as notas dos dois. Não dá para desfazer.</div><div class="row"><button class="btn" id="yes" style="background:var(--danger);color:var(--bg)">Sim, excluir</button><button class="btn ghost" id="no" style="margin-top:0;color:var(--fg)">Não</button></div></div>';
+        $("no").onclick = function () { $("confirmBox").innerHTML = ""; };
+        $("yes").onclick = async function () {
+          try { await api("wines?id=eq." + w.id, { method: "DELETE", prefer: "return=minimal" }); closeSheet(); await refresh(); }
+          catch (x) { $("err").hidden = false; $("err").textContent = "Não consegui excluir agora. Tente de novo."; }
+        };
+      };
+    }
+  }
+
+  /* ---------- perfil ---------- */
+  function showPicker() {
+    var p = $("picker");
+    p.innerHTML = '<div class="box"><h2>Quem é você?</h2><div class="meta">Assim cada um tem a sua nota e o seu comentário.</div>' +
+      USERS.map(function (u) { return '<button class="btn" data-u="' + esc(u) + '">' + esc(u) + '</button>'; }).join("") + '</div>';
+    p.hidden = false;
+    p.onclick = function (e) { var b = e.target.closest("[data-u]"); if (!b) return; setMe(b.getAttribute("data-u")); p.hidden = true; if (openId) showDetail(openId); };
+  }
+  function setMe(u) { me = u; store("vinhos.me", u); $("whoBtn").hidden = false; $("whoBtn").textContent = "Você: " + u + " · trocar"; }
+
+  /* ---------- eventos ---------- */
+  $("chips").onclick = function (e) { var b = e.target.closest("[data-t]"); if (!b) return; filter = b.getAttribute("data-t"); renderChips(); render(); };
+  $("q").oninput = render; $("sort").onchange = render;
+  $("list").onclick = function (e) { var c = e.target.closest("[data-id]"); if (c) showDetail(c.getAttribute("data-id")); };
+  $("fab").onclick = function () { showForm(null); };
+  $("whoBtn").onclick = showPicker;
+  renderChips();
+
+  if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }
+
+  /* ---------- início ---------- */
+  if (!configured) {
+    $("status").hidden = true;
+    $("list").innerHTML = '<div class="setup">O app ainda não está ligado ao banco de dados.\n\nAbra o arquivo config.js e preencha SUPABASE_URL e SUPABASE_KEY, conforme o LEIA-ME.md.</div>';
+    return;
+  }
+  var saved = store("vinhos.me");
+  if (saved && USERS.indexOf(saved) >= 0) setMe(saved); else showPicker();
+  $("fab").hidden = false;
+  refresh();
+  setInterval(function () { if (!document.hidden && $("sheet").hidden) refresh(); }, 30000);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden && $("sheet").hidden) refresh(); });
+})();
+</script>
+</body>
+</html>
